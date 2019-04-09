@@ -1,0 +1,26 @@
+---
+- hosts: all
+  name: Install GUI-related applications
+  become: yes
+  tasks:
+    - name: Update repos
+      pacman:
+        update_cache: yes
+    - name: Upgrade
+      pacman:
+        upgrade: yes
+    - name: Set up X
+      pacman:
+        name: 
+          - xorg
+          - xorg-xinit 
+          - i3
+          - dunst
+          - scrot 
+          - rofi 
+          - ponymix 
+          - playerctl 
+          - feh
+          - redshift 
+          - compton 
+          - transset-df
