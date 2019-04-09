@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install programming related stuff.
+      pacman:
+        name:
+          - clang
+          - gdb
+          - tk
+          - git
+          - hub
+          - python3
+          - python-pip
+          - ruby
+          - jdk10-openjdk
+          - nodejs
+          - npm
+          - go
+          - rust
+          - ghc
+          - php
+          - postgresql

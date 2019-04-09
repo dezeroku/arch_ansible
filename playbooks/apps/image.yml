@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install image stuff
+      pacman:
+        name:
+          - gimp
+          - imagemagick
+          - sxiv

@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install VPN apps
+      pacman:
+        name:
+          - easy-rsa
+          - openvpn
+          - networkmanager-openvpn

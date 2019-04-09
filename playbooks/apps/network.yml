@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install network-related stuff
+      pacman:
+        name:
+          - nmap
+          - vnstat
+          - networkmanager
+          - arm

@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install application for editing text
+      pacman:
+        name:
+          - gvim
+          - neovim
+          - emacs
+          - vim-spell-en
+          - vim-spell-pl
+          - vim-spell-de

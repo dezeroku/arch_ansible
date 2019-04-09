@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install browser-related stuff
+      pacman:
+        name:
+          - tor
+          - network-manager-applet
+          - firefox
+          - qutebrowser
+          - w3m

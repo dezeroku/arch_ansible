@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install CLI apps
+      pacman:
+        name:
+          - vlock
+          - fbida
+          - ranger

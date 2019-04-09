@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install WINE stuff
+      pacman:
+        name:
+          - wine
+          - winetricks
+          - lutris
