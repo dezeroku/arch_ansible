@@ -3,13 +3,6 @@
 - hosts: all
   become: true
   roles:
-      - { role: gui }
-      - { role: cli }
-      - { role: utils }
-      - { role: python_packages }
-      - { role: js_packages }
-      - { role: go_packages }
-      - { role: editors }
 
       - { role: create_user }
       - { role: sudo }
@@ -24,6 +17,10 @@
       - { role: aur_misc }
       - { role: aur_gui }
 
+      - { role: gui }
+      - { role: cli }
+      - { role: utils }
+      - { role: editors }
       - { role: browsers }
       - { role: editors }
       - { role: image }
@@ -37,3 +34,6 @@
       - { role: vm }
       - { role: vpn }
       - { role: wine }
+      - { role: python_packages }
+      - { role: js_packages }
+      - { role: go_packages }

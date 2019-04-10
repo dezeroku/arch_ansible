@@ -38,8 +38,10 @@
     repo: https://github.com/gmarik/Vundle.vim.git
 
 - name: Download plugins if something changed
+  # TODO: non zero return code, strange behaviour
   command: vim -E -c "PluginInstall" -c "q" -c "q"
   when: result.changed
+  ignore_errors: true
 
 - name: Check if YCM already compiled
   stat:
@@ -61,3 +63,8 @@
   # TODO: non zero return code, strange behaviour
   command: vim -E -c "GoInstallBinaries" -c "q"
   ignore_errors: true
+
+- name: Copy emacs config
+  copy:
+    src: emacs
+    dest: /home/{{ user.name }}/.emacs

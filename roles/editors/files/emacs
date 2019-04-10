@@ -1,0 +1,161 @@
+;; PACKAGES
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
+(custom-set-variables
+  '(inhibit-startup-screen t)
+  '(package-selected-packages
+     (quote
+       (flycheck flycheck-julia flycheck-mypy go-mode company-ycmd ycmd evil-org evil-tutor evil-magit julia-mode julia-repl smooth-scrolling evil zenburn-theme smooth-scrolling powerline fill-column-indicator haskell-mode company-quickhelp go-guru gotest flymd))))
+
+
+;; Auto install missing packages.
+(unless package-archive-contents
+  (package-refresh-contents))
+(package-install-selected-packages)
+
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+  )
+
+;; GENERAL
+;; disable bell on every freakin action
+(setq ring-bell-function 'ignore)
+
+;; display line numbers
+(global-display-line-numbers-mode)
+
+;; UTF-8 as default encoding
+(set-language-environment "UTF-8")
+
+;; display matching parentheses
+(show-paren-mode t)
+
+;; pop up with documentation
+(company-quickhelp-mode)
+
+;; Save whole undo tree, and do it in some nice place.
+(global-undo-tree-mode)
+(setq undo-tree-auto-save-history t)
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+
+
+;; ViM ALIKE
+;; Evil
+
+;; ViM like mode
+(require 'evil)
+(evil-mode 1)
+
+;; vim magit binds
+(require 'evil-magit)
+
+;; vim tutor
+(require 'evil-tutor)
+
+;; vim binds for org-mode
+(require 'evil-org)
+
+;; Powerline look compliant with evil
+(require 'powerline)
+(powerline-center-evil-theme)
+
+;; more vim-like scrolling
+(require 'smooth-scrolling)
+(smooth-scrolling-mode 1)
+(setq smooth-scroll-margin 5)
+
+;; remember position in file after exit
+(setq save-place-file "~/.emacs.d/saveplace")
+(save-place-mode 1) 
+
+;; YCMD and company-ycmd
+(require 'ycmd)
+(add-hook 'after-init-hook #'global-ycmd-mode)
+(set-variable 'ycmd-server-command `("python" ,(file-truename "~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycmd/")))
+(set-variable 'ycmd-global-config (file-truename "~/.ycm_extra_conf.py"))
+
+(require 'company)
+(require 'company-ycmd)
+(add-hook 'ycmd-mode-hook 'company-ycmd-setup)
+
+;; Apply it everywhere.
+(global-company-mode)
+(global-ycmd-mode)
+
+;; AESTEHTICS
+;; Hide UI
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+
+;; Zenburn theme
+(require 'zenburn-theme)
+(load-theme 'zenburn t)
+
+;; Line numbering
+(setq global-linum-mode t)
+
+;; Complete common part on TAB press.
+(eval-after-load 'company
+                 '(progn
+                    (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+                    (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)))
+
+;; FLYCHECK
+;; Enable flycheck globally.
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+;;    (setq flycheck-check-syntax-automatically '(mode-enabled save))
+
+;; Running mypy together with pylint using flycheck.
+;;  (add-to-list 'flycheck-checkers 'python-flake8 t)
+;;(add-to-list 'flycheck-checkers 'python-mypy t)
+;(flycheck-add-next-checker 'python-flake8 'python-mypy)
+
+;; Python
+;; color column
+(require 'fill-column-indicator)
+(add-hook 'python-mode-hook (lambda ()
+                              ;; Draw dark red line on column 79.
+                              (set-fill-column 79)
+                              (setq fci-rule-color "darkred")
+                              (fci-mode 1)
+                              ;; Select mypy as default flycheck checker.
+                              (flycheck-select-checker 'python-mypy)
+                              ))
+;; GO
+;; general mode for Go
+(require 'go-mode)
+(add-hook 'go-mode-hook (lambda ()
+                          ;; run goimports instead of fmt.
+                          (setq gofmt-command "goimports")
+
+                          ;; automatically run goimports on file save.
+                          (add-hook 'before-save-hook 'gofmt-before-save)
+
+                          ;; Customize compile command to run go build
+                          (if (not (string-match "go" compile-command))
+                            (set (make-local-variable 'compile-command)
+                                 "go build -v && go test -v && go vet"))
+
+                          (setq company-tooltip-limit 20)
+                          (setq company-idle-delay .3)
+                          (setq company-echo-delay 0)
+                          (setq company-begin-commands '(self-insert-command))
+
+			  ;; flycheck go tool vet solution
+			  (let ((govet (flycheck-checker-get 'go-vet 'command)))
+			    (when (equal (cadr govet) "tool")
+			        (setf (cdr govet) (cddr govet))))
+                          ))
+;; JULIA
+;; add julia-mode and REPL
+(require 'julia-mode)
+(require 'julia-repl)
+
+;; HASKELL
+(require 'haskell-mode)
