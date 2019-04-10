@@ -16,6 +16,13 @@
     dest: /home/{{ user.name }}/.vimrc
   register: result
 
+- name: Copy neovim config
+  copy:
+    src: vimrc
+    dest: /home/{{ user.name }}/.config/nvim/init.vim
+  register: result
+
+
 - name: Set up Vundle
   git:
     dest: /home/{{ user.name }}/.vim/bundle/Vundle.vim

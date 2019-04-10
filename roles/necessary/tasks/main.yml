@@ -9,3 +9,10 @@
       - zsh
       - keychain
       - exfat-utils
+
+- name: Copy zsh config
+  copy:
+      src: zshrc
+      dest: /home/{{ user.name }}/.zshrc
+
+# TODO: oh my zsh
