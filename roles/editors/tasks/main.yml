@@ -22,6 +22,15 @@
     dest: /home/{{ user.name }}/.config/nvim/init.vim
   register: result
 
+- name: Copy YCM config
+  copy:
+      src: ycm_extra_conf.py
+      dest: /home/{{ user.name }}/.ycm_extra_conf.py
+
+- name: Copy tern config
+  copy:
+      src: tern-config
+      dest: /home/{{ user.name }}/tern-config
 
 - name: Set up Vundle
   git:
