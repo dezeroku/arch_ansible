@@ -3,6 +3,8 @@
 - hosts: all
   become: true
   roles:
+      - { role: editors }
+
       - { role: create_user }
       - { role: sudo }
 

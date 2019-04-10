@@ -1,6 +1,3 @@
-[submodule "aur_library"]
-	path = aur_library
-	url = https://github.com/kewlfft/ansible-aur
 [submodule "library"]
 	path = library
 	url = https://github.com/kewlfft/ansible-aur
