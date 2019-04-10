@@ -21,3 +21,18 @@
           - ghc
           - php
           - postgresql
+
+
+- hosts: all
+  become: yes
+  become_user: "{{ user.name }}"
+  tasks:
+    - git_config:
+       name: user.email
+       scope: global
+       value: "{{ user.email }}"
+
+    - git_config:
+       name: user.name
+       scope: global
+       value: "{{ user.name }}"

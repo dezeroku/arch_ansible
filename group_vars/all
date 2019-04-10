@@ -1,0 +1,7 @@
+user:
+  name: d0ku
+  generate_ssh_key: True
+  ssh_key_bits: 4096
+  ssh_key_type: rsa
+  shell: bash 
+  email: darthtyranus666666@gmail.com
