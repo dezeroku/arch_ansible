@@ -17,3 +17,8 @@
       - tldr
       - zathura
       - zathura-pdf-mupdf
+
+- name: Clone tmux plugin manager
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins/tpm

@@ -3,6 +3,7 @@
 - hosts: all
   become: true
   roles:
+      - { role: utils }
       - { role: python_packages }
       - { role: js_packages }
       - { role: go_packages }
