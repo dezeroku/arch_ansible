@@ -1,0 +1,7 @@
+---
+- name: Install some miscellanous stuff.
+  pacman:
+    name:
+      - sl
+      - cmatrix
+      - cowsay

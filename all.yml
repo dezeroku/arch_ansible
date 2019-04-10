@@ -1,18 +1,20 @@
 ---
 # Install applications
-- import_playbook: playbooks/apps/gui.yml
-- import_playbook: playbooks/apps/browser.yml
-- import_playbook: playbooks/apps/cli.yml
-- import_playbook: playbooks/apps/editors.yml
-- import_playbook: playbooks/apps/necessary.yml
-- import_playbook: playbooks/apps/image.yml
-- import_playbook: playbooks/apps/misc.yml
-- import_playbook: playbooks/apps/network.yml
-- import_playbook: playbooks/apps/office.yml
-- import_playbook: playbooks/apps/programming.yml
-- import_playbook: playbooks/apps/steam.yml
-- import_playbook: playbooks/apps/utils.yml
-- import_playbook: playbooks/apps/video.yml
-- import_playbook: playbooks/apps/vm.yml
-- import_playbook: playbooks/apps/vpn.yml
-- import_playbook: playbooks/apps/wine.yml
+- hosts: all
+  become: true
+  roles:
+      - { role: browsers }
+      - { role: cli }
+      - { role: gui }
+      - { role: editors }
+      - { role: image }
+      - { role: misc }
+      - { role: necessary }
+      - { role: network }
+      - { role: office }
+      - { role: programming }
+      - { role: steam }
+      - { role: video }
+      - { role: vm }
+      - { role: vpn }
+      - { role: wine }

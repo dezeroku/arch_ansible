@@ -1,0 +1,11 @@
+---
+- name: Install some needed utilities
+  pacman:
+    name:
+      - fuse
+      - pacman-contrib
+      - udiskie
+      - ntfs-3g
+      - zsh
+      - keychain
+      - exfat-utils

@@ -1,0 +1,19 @@
+---
+- name: Install some utilities
+  pacman:
+    name:
+      - openssh
+      - youtube-dl
+      - deluge
+      - ncdu
+      - neofetch
+      - gparted
+      - p7zip
+      - xarchiver
+      - pcmanfm
+      - tmux
+      - wget
+      - figlet
+      - tldr
+      - zathura
+      - zathura-pdf-mupdf

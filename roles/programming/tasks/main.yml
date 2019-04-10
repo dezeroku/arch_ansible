@@ -1,0 +1,34 @@
+---
+- name: Install programming related stuff.
+  pacman:
+    name:
+      - clang
+      - gdb
+      - tk
+      - git
+      - hub
+      - python3
+      - python-pip
+      - ruby
+      - jdk10-openjdk
+      - nodejs
+      - npm
+      - go
+      - rust
+      - ghc
+      - php
+      - postgresql
+
+
+- block:
+  - git_config:
+     name: user.email
+     scope: global
+     value: "{{ user.email }}"
+
+  - git_config:
+     name: user.name
+     scope: global
+     value: "{{ user.name }}"
+  become: yes
+  become_user: "{{ user.name }}"

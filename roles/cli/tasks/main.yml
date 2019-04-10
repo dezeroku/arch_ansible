@@ -1,0 +1,7 @@
+---
+- name: Install CLI apps
+  pacman:
+    name:
+      - vlock
+      - fbida
+      - ranger

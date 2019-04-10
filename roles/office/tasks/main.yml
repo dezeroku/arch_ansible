@@ -1,0 +1,7 @@
+---
+- name: Install office stuff
+  pacman:
+    name:
+      - libreoffice
+      - texlive-most
+      - texlive-lang

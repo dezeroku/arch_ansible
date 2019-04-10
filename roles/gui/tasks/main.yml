@@ -1,0 +1,39 @@
+---
+- name: Update repos
+  pacman:
+    update_cache: yes
+
+- name: Upgrade
+  pacman:
+    upgrade: yes
+
+- name: Set up X
+  pacman:
+    name: 
+      - xorg
+      - xorg-xinit 
+      - i3
+      - dunst
+      - scrot 
+      - rofi 
+      - ponymix 
+      - playerctl 
+      - feh
+      - redshift 
+      - compton 
+      - transset-df
+      - ttf-hack
+      - rxvt-unicode
+      - terminator
+      - mesa-demos
+      - ttf-inconsolata
+
+- name: Set up audio
+  pacman:
+    name:
+      - alsa-utils
+      - pulseaudio
+      - pulseaudio-bluetooth
+      - pulseaudio-equalizer
+      - pulseaudio-jack
+      - pavucontrol

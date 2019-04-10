@@ -1,0 +1,6 @@
+---
+- name: Install some miscellanous stuff.
+  pacman:
+    name:
+      - steam
+      - ttf-liberation
