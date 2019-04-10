@@ -3,6 +3,12 @@
 - hosts: all
   become: true
   roles:
+      - { role: create_user }
+      - { role: sudo }
+
+      - { role: aur_builder }
+      - { role: yay }
+
       - { role: browsers }
       - { role: cli }
       - { role: gui }

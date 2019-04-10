@@ -1,0 +1,12 @@
+---
+- name: Install sudo
+  pacman:
+    name: sudo
+    state: latest
+
+- name: Add user to sudo group
+  lineinfile:
+    path: /etc/sudoers.d/10-user-sudo
+    line: '%wheel ALL=(ALL) ALL'
+    create: yes
+    validate: 'visudo -cf %s'
