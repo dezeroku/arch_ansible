@@ -1,0 +1,8 @@
+---
+- name: Install misc from AUR
+  aur:
+    name:
+      - gitflow-avh
+    skip_installed: true
+  become: true
+  become_user: aur_builder

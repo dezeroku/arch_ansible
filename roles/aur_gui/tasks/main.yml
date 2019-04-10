@@ -1,0 +1,13 @@
+---
+- name: Install GUI related stuff from AUR
+  aur:
+    name:
+      - py3status
+      - xss-lock-git
+      - ttf-font-icons
+      - cower
+      - powerline-fonts
+      - indicator-kdeconnect-git
+    skip_installed: true
+  become: true
+  become_user: aur_builder

@@ -1,0 +1,8 @@
+---
+- name: Install Spotify from AUR
+  aur:
+    name:
+      - spotify
+    skip_installed: true
+  become: true
+  become_user: aur_builder

@@ -9,6 +9,13 @@
       - { role: aur_builder }
       - { role: yay }
 
+      - { role: aur_voice }
+      - { role: aur_browsers }
+      - { role: aur_video }
+      - { role: aur_spotify }
+      - { role: aur_misc }
+      - { role: aur_gui }
+
       - { role: browsers }
       - { role: cli }
       - { role: gui }
