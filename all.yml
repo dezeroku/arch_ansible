@@ -3,6 +3,8 @@
 - hosts: all
   become: true
   roles:
+      - { role: gui }
+      - { role: cli }
       - { role: utils }
       - { role: python_packages }
       - { role: js_packages }
@@ -23,8 +25,6 @@
       - { role: aur_gui }
 
       - { role: browsers }
-      - { role: cli }
-      - { role: gui }
       - { role: editors }
       - { role: image }
       - { role: misc }

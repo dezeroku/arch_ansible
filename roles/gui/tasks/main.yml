@@ -28,6 +28,27 @@
       - mesa-demos
       - ttf-inconsolata
 
+- name: Copy compton dotfile
+  copy:
+      src: compton.conf
+      dest: /home/{{ user.name }}/.config/compton.conf
+
+- name: Copy dunst dotfile
+  copy:
+      src: dunstrc
+      dest: /home/{{ user.name }}/.config/dunst/dunstrc
+
+- name: Copy rofi dotfile
+  copy:
+      src: rofi_config
+      dest: /home/{{ user.name }}/.config/rofi/config
+
+- name: Copy Xresources dotfile
+  copy:
+      src: Xresources
+      dest: /home/{{ user.name }}/.Xresources
+
+
 - name: Set up audio
   pacman:
     name:

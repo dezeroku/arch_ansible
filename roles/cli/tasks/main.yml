@@ -5,3 +5,8 @@
       - vlock
       - fbida
       - ranger
+
+- name: Copy ranger config
+  copy:
+      src: rc.conf
+      dest: /home/{{ user.name }}/.config/ranger/rc.conf
