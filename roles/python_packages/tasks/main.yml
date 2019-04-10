@@ -1,0 +1,11 @@
+---
+- name: Install Python3 packages.
+  pip:
+    executable: pip3
+    name:
+      - mypy
+      - pylint
+      - flake8
+      - pytest
+      - powerline-status
+      - neovim

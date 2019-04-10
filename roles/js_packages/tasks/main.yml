@@ -1,0 +1,12 @@
+---
+- npm:
+    name: js-beautify
+    global: yes
+
+- npm:
+    name: sass
+    global: yes
+
+- npm:
+    name: jslint
+    global: yes

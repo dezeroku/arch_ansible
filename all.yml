@@ -3,6 +3,9 @@
 - hosts: all
   become: true
   roles:
+      - { role: python_packages }
+      - { role: js_packages }
+      - { role: go_packages }
       - { role: editors }
 
       - { role: create_user }
