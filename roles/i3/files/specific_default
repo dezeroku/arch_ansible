@@ -12,6 +12,6 @@ bindsym XF86Launch1 exec  terminator -e "echo KOCHAM && echo AKISO  && sleep 6 &
 # finds out, if available)
 bar {
 		font pango:monospace 1, Icons 11
-        status_command resolution.py run --start-py3status
+        status_command py3status
         position top
 }
