@@ -4,9 +4,9 @@
   become: true
   become_user: root
   roles:
-      - { role: create_user }
-
       - { role: pacman }
+
+      - { role: create_user }
 
       - { role: sudo, tags: install }
 
