@@ -5,7 +5,7 @@
       - py3status
       - xss-lock-git
       - ttf-font-icons
-      - cower
+        #- cower
       - powerline-fonts
       - indicator-kdeconnect-git
     skip_installed: true
