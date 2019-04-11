@@ -52,7 +52,7 @@
     - { role: ssh }
     - { role: tmux }
     - { role: git }
-      #- { role: zsh }
+    - { role: zsh }
     - { role: ranger }
     - { role: vim }
     - { role: compton }
