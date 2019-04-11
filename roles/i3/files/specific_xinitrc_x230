@@ -1,0 +1,4 @@
+setxkbmap pl 
+emacs --daemon &
+export SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass
+exec i3

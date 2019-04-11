@@ -49,6 +49,7 @@
   become_user: "{{ user.name }}"
   roles:
     - { role: sudo, tags: configure }
+    - { role: i3 }
     - { role: ssh }
     - { role: tmux }
     - { role: git }

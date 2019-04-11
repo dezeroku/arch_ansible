@@ -6,5 +6,4 @@ user:
   shell: /bin/zsh
   email: darthtyranus666666@gmail.com
 
-pc:
-  name: default
+pc: default

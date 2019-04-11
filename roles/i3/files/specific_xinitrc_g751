@@ -1,0 +1,7 @@
+setxkbmap pl 
+xrandr --setprovideroutputsource modesetting NVIDIA-0 
+xrandr --auto 
+xrandr --dpi 92
+emacs --daemon &
+export SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass
+exec i3

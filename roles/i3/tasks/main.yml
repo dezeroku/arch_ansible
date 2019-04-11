@@ -1,7 +1,7 @@
 ---
 - name: Ensure directory exists
   file:
-    path: /home/{{ user.name }}/.config/i3
+    path: /home/{{ user.name }}/.config/i3/config_temp
     state: directory
     recurse: yes
 
@@ -12,19 +12,29 @@
   delegate_to: "{{ inventory_hostname }}"
 
 - name: Copy base config
-  src: base
-  dest: /home/{{ user.name }}/.config/i3/base
-  result: base_res
+  copy:
+    src: base
+    dest: /home/{{ user.name }}/.config/i3/config_temp/base
+  register: base_res
 
 - name: Copy specific config
-  src: specific_{{ pc.name }}
-  dest: /home/{{ user.name }}/.config/i3/specific
-  result: spec_res
+  copy:
+    src: specific_{{ pc }}
+    dest: /home/{{ user.name }}/.config/i3/config_temp/specific
+  register: spec_res
 
 - name: Merge configs
-  command: chdir=/home/{{ user.name }}/.config/i3 cat base > config; cat specific >> config;
-  when: spec_res.changed or base_res.changed
+  assemble:
+      src: /home/{{ user.name }}/.config/i3/config_temp
+      dest: /home/{{ user.name }}/.config/i3/config
+      delimiter: "#################################################################"
 
 - name: Copy specific status config
-  src: specific_status_{{ pc.name }}
-  dest: /home/{{ user.name }}/.config/i3/i3status.conf
+  copy:
+    src: specific_status_{{ pc }}
+    dest: /home/{{ user.name }}/.config/i3/i3status.conf
+
+- name: Copy specific xinitrc
+  copy:
+    src: specific_xinitrc_{{ pc }}
+    dest: /home/{{ user.name }}/.xinitrc
