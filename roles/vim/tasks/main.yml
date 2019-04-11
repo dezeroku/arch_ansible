@@ -1,10 +1,4 @@
 ---
-- name: Ensure directory exists
-  file:
-    path: /home/{{ user.name }}
-    state: directory
-    recurse: yes
-
 - name: Copy vim config
   copy:
     src: vimrc
@@ -23,12 +17,6 @@
     dest: /home/{{ user.name }}/.config/nvim/init.vim
   register: result
 
-- name: Ensure directory exists
-  file:
-    path: /home/{{ user.name }}
-    state: directory
-    recurse: yes
-
 - name: Copy YCM config
   copy:
       src: ycm_extra_conf.py
@@ -46,7 +34,7 @@
 
 - name: Download plugins if something changed
   # TODO: non zero return code, strange behaviour
-  command: vim -E -c "PluginInstall" -c "q" -c "q"
+  command: vim +PluginInstall +qall
   when: result.changed
   #ignore_errors: true
 
@@ -58,8 +46,6 @@
 - name: Compile YouCompleteMe
   command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe ./install.py --clang-completer --go-completer --rust-completer --java-completer --system-libclang
   when: not result.stat.exists
-  become: true
-  become_user: "{{ user.name }}"
 
 - name: Set YCM as compiled
   lineinfile:
@@ -70,7 +56,7 @@
 
 - name: Install binaries for vim-go
   # TODO: non zero return code, strange behaviour
-  command: vim -E -c "GoInstallBinaries" -c "q"
+  command: vim +GoInstallBinaries +qall
   #ignore_errors: true
 
 

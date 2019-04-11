@@ -2,10 +2,12 @@
 # Install applications
 - hosts: all
   become: true
+  become_user: root
   roles:
+      - { role: create_user }
+
       - { role: pacman }
 
-      - { role: create_user }
       - { role: sudo, tags: install }
 
       - { role: aur_builder }
@@ -38,6 +40,8 @@
       - { role: python_packages }
       - { role: js_packages }
       - { role: go_packages }
+  tags:
+      - install
 
 
 - hosts: all
@@ -48,7 +52,7 @@
     - { role: ssh }
     - { role: tmux }
     - { role: git }
-    - { role: zsh }
+      #- { role: zsh }
     - { role: ranger }
     - { role: vim }
     - { role: compton }
@@ -57,3 +61,5 @@
     - { role: xresources }
     - { role: qutebrowser }
     - { role: emacs }
+  tags:
+      - configure

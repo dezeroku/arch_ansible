@@ -1,0 +1,30 @@
+---
+- name: Ensure directory exists
+  file:
+    path: /home/{{ user.name }}/.config/i3
+    state: directory
+    recurse: yes
+
+- name: Copy scripts directory
+  synchronize:
+    src: scripts
+    dest: /home/{{ user.name }}/.config/i3/scripts
+  delegate_to: "{{ inventory_hostname }}"
+
+- name: Copy base config
+  src: base
+  dest: /home/{{ user.name }}/.config/i3/base
+  result: base_res
+
+- name: Copy specific config
+  src: specific_{{ pc.name }}
+  dest: /home/{{ user.name }}/.config/i3/specific
+  result: spec_res
+
+- name: Merge configs
+  command: chdir=/home/{{ user.name }}/.config/i3 cat base > config; cat specific >> config;
+  when: spec_res.changed or base_res.changed
+
+- name: Copy specific status config
+  src: specific_status_{{ pc.name }}
+  dest: /home/{{ user.name }}/.config/i3/i3status.conf

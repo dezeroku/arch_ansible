@@ -1,0 +1,265 @@
+# This is base config file, put here all settings that are shared between all devices you use.
+# If you specify same things in base and device specific config, device specific overrides base
+
+# There are some special variables that you can use here and are not defined in i3.
+# These will be parsed by resolution.py and replaced with correct values.
+# You can put them inside of strings, mid-text etc. they will all be parsed before config will be read by i3.
+#
+# Variable names ARE CASE-SENSITIVE, so $$base$$ is not same as ~/.config/i3/.
+#
+# Variable names are NOT parsed in comments (lines starting with '#'), so you can write there whatever you want.
+#
+# If there is a variable that can't be parsed, e.g. $$LOCATION$$ and there is no LOCATION defined in resolution.py
+# program will return error and quit, you won't start i3 with incorrect config.
+#
+# ~/.config/i3/     - points to root directory of i3_config e.g. /home/d0ku/i3_config or /home/d0ku/.config/i3_config
+# $$USERNAME$$ - gets username that runs resolution.py
+# $$RESOLUTION$$ - your resolution as a string for example 1280x800 or 1920x1080
+# $$HOME$$ - home directory of user running resolution.py, e.g. /home/d0ku/
+
+# Set main button to Win
+set $mod Mod4
+
+# Use Mouse+$mod to drag floating windows to their wanted position 
+floating_modifier $mod
+
+#Mod1 + x toggles layout
+bindsym $mod+x layout toggle
+
+# volume control up 
+bindsym XF86AudioRaiseVolume exec "ponymix increase 5 && python3 ~/.config/i3/scripts/play_sound.py volume_change.wav "
+
+# volume control down 
+bindsym XF86AudioLowerVolume exec "ponymix decrease 5 && python3 ~/.config/i3/scripts/play_sound.py volume_change.wav "
+
+# volume mute
+bindsym XF86AudioMute exec "ponymix toggle"
+
+# start music
+bindsym XF86AudioPlay exec "playerctl play-pause"
+
+# stop music
+bindsym XF86AudioStop exec "playerctl stop"
+
+# next song
+bindsym XF86AudioNext exec "playerctl next"
+
+# previous song
+bindsym XF86AudioPrev exec "playerctl previous"
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec "rofi -show drun"
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+j move down
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+Shift+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+
+# set workspaces names
+	#monitor F30A
+		set $ws1 "1:" 
+	#web F376	
+		set $ws2 "2:"
+	#notepad F227 
+		set $ws3 "3:"
+	#hash F319 
+		set $ws4 "4:"
+	#note F30C 
+		set $ws5 "5:"
+	#coffee cup F372 
+		set $ws6 "6:"
+	#dots F23F 
+		set $ws7 "7:"
+	#trashbin  F352 
+		set $ws8 "8:"
+	#steam icon F40B OR F23B gamepad icon 
+		set $ws9 "9:"
+	#windows F24E 
+		set $ws10 "10:" 
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r exec "~/.config/i3/scripts/resolution.py run --restart-i3-config"
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+#screenshot whole
+bindsym --release Print exec "scrot -e 'mv $f ~/Pictures/screenshots'"
+
+#screenshot part
+bindsym --release Shift+Print exec "scrot -s -e 'mv $f ~/Pictures/screenshots'"
+
+#applets run codes
+# Network Manager
+exec --no-startup-id "nm-applet &"
+# KDE Connect
+# Daemon and widget. Sleep is not perfect, but should give enough time for daemon to startup
+exec "/usr/lib/kdeconnectd &"
+exec "sleep 60; indicator-kdeconnect &"
+# Dunst
+exec --no-startup-id "dunst &"
+# Redshift
+exec --no-startup-id "redshift-gtk -t 5200:2000 -l 51.10:17.0 &"
+# Udiskie
+exec --no-startup-id "udiskie &"
+# Compton
+exec --no-startup-id "compton -b --config $$HOME$$.config/compton.conf &"
+# Read Xresources
+exec --no-startup-id "xrdb ~/.Xresources"
+
+# Set wallpaper
+# exec "feh --bg-scale ~/.config/i3/configs/$$RESOLUTION$$/wallpapers/0_wallpaper.png"
+
+# Set keyboard to polish.
+exec "setxkbmap pl"
+
+#workspaces back and forth
+workspace_auto_back_and_forth yes
+
+#tab workspaces
+bindsym $mod+Tab workspace next
+
+#tab+shift move to next workspace 
+bindsym $mod+Shift+Tab exec "python3 ~/.config/i3/scripts/i3/i3_next_workspace.py "
+
+# set lock screen
+exec "~/.config/i3/scripts/resolution.py lock --set-up-locker --lock-image-number 1 --lock-timeout 0"
+
+# lock screen 
+bindsym $mod+Control+l exec "~/.config/i3/scripts/resolution.py lock --lock-screen --lock-image-number 1"
+
+# assign programs to workspaces
+
+	#Workspace id's:
+	# $ws1
+	# $ws2 
+	# and so on...
+	# till $ws10
+    # Get class using xprop, run it in terminal and click on window, you want to get class from 
+	
+    assign [class="(?i)Firefox"] $ws2
+    assign [class="(?i)qutebrowser"] $ws2
+    assign [class="(?i)Steam"] $ws8
+    assign [class="(?i)Spotify"] $ws5
+    assign [class="(?i)MellowPlayer"] $ws5
+    assign [class="(?i)jetbrains-idea"] $ws3
+    assign [class="(?i)jetbrains-studio"] $ws3
+    assign [class="(?i)VirtualBox Managerk"] $ws6
+    assign [class="(?i)discord"] $ws8
+
+    # CS GO, and probably more OpenGL games
+    assign [class="(?i)Linux"] $ws9 
+   
+    # Stardew Valley 
+    assign [class="(?i)StardewValley"] $ws9
+    
+    # Spotify
+    #assign [class="(?i)Spotify"] $ws5
+    for_window [class="(?i)spotify"] move to workspace $ws5
+
+default_border pixel 1
+hide_edge_borders both

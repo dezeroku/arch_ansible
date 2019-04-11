@@ -1,0 +1,17 @@
+#This file contains basic FALLBACK config entries
+
+#quite nice for not so big screens
+font pango:monospace 8 
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+bindsym XF86Launch1 exec  terminator -e "echo KOCHAM && echo AKISO  && sleep 6 && echo MOCNO && sleep 3 "
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+		font pango:monospace 1, Icons 11
+        status_command resolution.py run --start-py3status
+        position top
+}

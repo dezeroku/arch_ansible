@@ -1,0 +1,51 @@
+# IMPORTANT NOTICE
+# Currently, that config is really tied to Asus G751JM. You can remove all the stuff about it below, and it should 
+# work nice with different systems. However you won't get scripts for keyboard backlight, hardware screen backlight etc.
+
+
+# This file should contain device or resolution specific fonts, configs or key bindings 1920x1080
+
+# Good for bigger screens. 
+font pango:Inconsolata , Icons 12
+
+# Start console.
+bindsym $mod+Return exec terminator
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command ~/.config/i3/scripts/resolution.py run --start-py3status
+        position top
+        strip_workspace_numbers yes
+}
+
+#prevents screen from dimming, it seems it works
+exec xset s off -dpms 
+
+#asus rog g751jm specific
+        # MANUAL GPU FAN SPEED CONTROL (that should be done by systemd, seriously)
+        exec "sudo ~/.config/i3/scripts/g751/temperature_management.py --gpu"
+
+        #disable touchpad at startup
+	exec "python3 ~/.config/i3/scripts/g751/touchpad_control.py turn_off"
+		
+        # toggle touchpad shortcut
+        bindsym XF86TouchpadToggle exec "python3 ~/.config/i3/scripts/g751/touchpad_control.py toggle"
+
+
+
+        #kbd backlight, this should be pretty universal
+                
+                #kbd backlight up
+                bindsym XF86KbdBrightnessUp exec "python3 ~/.config/i3/scripts/g751/kb-light.py +"
+                
+                #kbd backlight down
+                bindsym XF86KbdBrightnessDown exec "python3 ~/.config/i3/scripts/g751/kb-light.py -"
+
+        #screen backlight, needs changes in /etc/sudoers to work properly (you have to give NOPASSWD sudo acces to change_brightness file)
+
+                #screen backlight up, this path should be ~/.config/i3/scripts/change_brightness but it needs NOPASSWD changes
+                bindsym XF86MonBrightnessUp exec "sudo ~/.config/i3/scripts/g751/change_brightness +" 
+
+                #screen backlight down, this path should be ~/.config/i3/scripts/change_brightness but it needs NOPASSWD changes
+                bindsym XF86MonBrightnessDown exec "sudo ~/.config/i3/scripts/g751/change_brightness -"
