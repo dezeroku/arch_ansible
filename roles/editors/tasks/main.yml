@@ -10,17 +10,36 @@
       - vim-spell-pl
       - vim-spell-de
 
+
+- name: Ensure directory exists
+  file:
+    path: /home/{{ user.name }}
+    state: directory
+    recurse: yes
+
 - name: Copy vim config
   copy:
     src: vimrc
     dest: /home/{{ user.name }}/.vimrc
   register: result
 
+- name: Ensure directory exists
+  file:
+    path: /home/{{ user.name }}/.config/nvim
+    state: directory
+    recurse: yes
+
 - name: Copy neovim config
   copy:
     src: vimrc
     dest: /home/{{ user.name }}/.config/nvim/init.vim
   register: result
+
+- name: Ensure directory exists
+  file:
+    path: /home/{{ user.name }}
+    state: directory
+    recurse: yes
 
 - name: Copy YCM config
   copy:
