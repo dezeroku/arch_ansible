@@ -1,0 +1,19 @@
+---
+- name: Ensure directory exists
+  file:
+    path: /home/{{ user.name }}
+    state: directory
+    recurse: yes
+
+- name: Copy qutebrowser config
+  copy:
+      src: zshrc
+      dest: /home/{{ user.name }}/.zshrc
+
+- name: Enable shell
+  user:
+    name: "{{ user.name }}"
+    shell: '{{ user.shell | default("/bin/bash") }}'
+    state: present
+
+# TODO: oh my zsh

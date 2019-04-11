@@ -3,9 +3,10 @@
 - hosts: all
   become: true
   roles:
+      - { role: pacman }
 
       - { role: create_user }
-      - { role: sudo }
+      - { role: sudo, tags: install }
 
       - { role: aur_builder }
       - { role: yay }
@@ -37,3 +38,22 @@
       - { role: python_packages }
       - { role: js_packages }
       - { role: go_packages }
+
+
+- hosts: all
+  become: true
+  become_user: "{{ user.name }}"
+  roles:
+    - { role: sudo, tags: configure }
+    - { role: ssh }
+    - { role: tmux }
+    - { role: git }
+    - { role: zsh }
+    - { role: ranger }
+    - { role: vim }
+    - { role: compton }
+    - { role: dunst }
+    - { role: rofi }
+    - { role: xresources }
+    - { role: qutebrowser }
+    - { role: emacs }

@@ -1,0 +1,5 @@
+---
+- name: Copy emacs config
+  copy:
+    src: emacs
+    dest: /home/{{ user.name }}/.emacs

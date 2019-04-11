@@ -1,0 +1,8 @@
+---
+- name: Update repos
+  pacman:
+    update_cache: yes
+
+- name: Upgrade
+  pacman:
+    upgrade: yes

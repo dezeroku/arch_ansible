@@ -7,8 +7,3 @@
       - firefox
       - qutebrowser
       - w3m
-
-- name: Copy qutebrowser config
-  copy:
-      src: qute_config.py
-      dest: /home/{{ user.name }}/.config/qutebrowser/config.py

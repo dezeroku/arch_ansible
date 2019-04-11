@@ -19,16 +19,3 @@
       - php
       - postgresql
 
-
-- block:
-  - git_config:
-     name: user.email
-     scope: global
-     value: "{{ user.email }}"
-
-  - git_config:
-     name: user.name
-     scope: global
-     value: "{{ user.name }}"
-  become: yes
-  become_user: "{{ user.name }}"

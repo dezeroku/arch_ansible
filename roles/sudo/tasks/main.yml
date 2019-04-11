@@ -3,6 +3,8 @@
   pacman:
     name: sudo
     state: latest
+  tags:
+      - install
 
 - name: Add user to sudo group
   lineinfile:
@@ -10,3 +12,5 @@
     line: '%wheel ALL=(ALL) ALL'
     create: yes
     validate: 'visudo -cf %s'
+  tags:
+      - configure

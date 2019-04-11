@@ -1,0 +1,5 @@
+---
+- name: Copy ssh config
+  copy:
+      src: ssh_config
+      dest: /home/{{ user.name }}/.ssh/config

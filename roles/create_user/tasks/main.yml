@@ -5,5 +5,4 @@
     generate_ssh_key: '{{ user.generate_ssh_key | default(true) }}'
     ssh_key_bits: '{{ user.ssh_key_bits | default(omit) }}'
     ssh_key_type: '{{ user.ssh_key_type | default(omit) }}'
-    shell: '{{ user.shell | default("/bin/bash") }}'
     state: present
