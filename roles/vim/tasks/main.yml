@@ -3,7 +3,7 @@
   copy:
     src: vimrc
     dest: /home/{{ user.name }}/.vimrc
-  register: vim
+  register: var_vim
 
 - name: Ensure directory exists
   file:
@@ -15,7 +15,7 @@
   copy:
     src: vimrc
     dest: /home/{{ user.name }}/.config/nvim/init.vim
-  register: neovim
+  register: var_neovim
 
 - name: Copy YCM config
   copy:
@@ -33,9 +33,8 @@
     repo: https://github.com/gmarik/Vundle.vim.git
 
 - name: Download plugins if something changed
-  # TODO: non zero return code, strange behaviour
   command: vim +PluginInstall +qall
-  when: vim.changed or neovim.changed
+  when: var_vim.changed or var_neovim.changed
 
 - name: Check if YCM already compiled
   stat:
@@ -54,8 +53,4 @@
   when: not result.stat.exists
 
 - name: Install binaries for vim-go
-  # TODO: non zero return code, strange behaviour
   command: vim +GoInstallBinaries +qall
-  #ignore_errors: true
-
-

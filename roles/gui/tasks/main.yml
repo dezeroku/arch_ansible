@@ -19,6 +19,8 @@
       - terminator
       - mesa-demos
       - ttf-inconsolata
+      - powerline
+      - powerline-fonts
 
 - name: Set up audio
   pacman:
