@@ -19,6 +19,7 @@
       - { role: aur_spotify }
       - { role: aur_misc }
       - { role: aur_gui }
+        #- { role: aur_ide }
 
       - { role: gui }
       - { role: cli }

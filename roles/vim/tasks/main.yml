@@ -3,7 +3,7 @@
   copy:
     src: vimrc
     dest: /home/{{ user.name }}/.vimrc
-  register: result
+  register: vim
 
 - name: Ensure directory exists
   file:
@@ -15,7 +15,7 @@
   copy:
     src: vimrc
     dest: /home/{{ user.name }}/.config/nvim/init.vim
-  register: result
+  register: neovim
 
 - name: Copy YCM config
   copy:
@@ -35,8 +35,7 @@
 - name: Download plugins if something changed
   # TODO: non zero return code, strange behaviour
   command: vim +PluginInstall +qall
-  when: result.changed
-  #ignore_errors: true
+  when: vim.changed or neovim.changed
 
 - name: Check if YCM already compiled
   stat:

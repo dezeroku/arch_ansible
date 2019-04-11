@@ -1,0 +1,10 @@
+---
+- name: Install IDEs from AUR
+  aur:
+    name:
+      - intellij-idea-ultimate-edition
+      - intellij-idea-ultimate-edition-jre
+      - android-studio
+    skip_installed: true
+  become: true
+  become_user: aur_builder

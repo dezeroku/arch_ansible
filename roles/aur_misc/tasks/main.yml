@@ -3,6 +3,7 @@
   aur:
     name:
       - gitflow-avh
+      - heroku-cli
     skip_installed: true
   become: true
   become_user: aur_builder
