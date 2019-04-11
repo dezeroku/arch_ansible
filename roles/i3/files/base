@@ -1,22 +1,6 @@
 # This is base config file, put here all settings that are shared between all devices you use.
 # If you specify same things in base and device specific config, device specific overrides base
 
-# There are some special variables that you can use here and are not defined in i3.
-# These will be parsed by resolution.py and replaced with correct values.
-# You can put them inside of strings, mid-text etc. they will all be parsed before config will be read by i3.
-#
-# Variable names ARE CASE-SENSITIVE, so $$base$$ is not same as ~/.config/i3/.
-#
-# Variable names are NOT parsed in comments (lines starting with '#'), so you can write there whatever you want.
-#
-# If there is a variable that can't be parsed, e.g. $$LOCATION$$ and there is no LOCATION defined in resolution.py
-# program will return error and quit, you won't start i3 with incorrect config.
-#
-# ~/.config/i3/     - points to root directory of i3_config e.g. /home/d0ku/i3_config or /home/d0ku/.config/i3_config
-# $$USERNAME$$ - gets username that runs resolution.py
-# $$RESOLUTION$$ - your resolution as a string for example 1280x800 or 1920x1080
-# $$HOME$$ - home directory of user running resolution.py, e.g. /home/d0ku/
-
 # Set main button to Win
 set $mod Mod4
 
@@ -207,7 +191,7 @@ exec --no-startup-id "redshift-gtk -t 5200:2000 -l 51.10:17.0 &"
 # Udiskie
 exec --no-startup-id "udiskie &"
 # Compton
-exec --no-startup-id "compton -b --config $$HOME$$.config/compton.conf &"
+exec --no-startup-id "compton -b --config ~/.config/compton.conf &"
 # Read Xresources
 exec --no-startup-id "xrdb ~/.Xresources"
 

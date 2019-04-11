@@ -8,7 +8,7 @@
 - name: Copy scripts directory
   synchronize:
     src: scripts
-    dest: /home/{{ user.name }}/.config/i3/scripts
+    dest: /home/{{ user.name }}/.config/i3/
   delegate_to: "{{ inventory_hostname }}"
 
 - name: Copy base config
@@ -38,3 +38,14 @@
   copy:
     src: specific_xinitrc_{{ pc }}
     dest: /home/{{ user.name }}/.xinitrc
+
+- name: NOPASSWD sudo for g751 i3 script
+  become: true
+  become_user: root
+  lineinfile:
+    dest: /etc/sudoers.d/13-g751-scripts
+    line: "{{ user.name }} ALL=(root) NOPASSWD: /home/{{ user.name }}/.config/i3/scripts/g751/*
+"
+    create: yes
+    validate: 'visudo -cf %s'
+  when: pc == "g751"
