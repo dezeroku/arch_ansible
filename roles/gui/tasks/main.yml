@@ -5,6 +5,7 @@
       - xorg
       - xorg-xinit 
       - i3
+      - awesome-terminal-fonts
       - dunst
       - scrot 
       - rofi 
