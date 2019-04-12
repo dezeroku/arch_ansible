@@ -3,3 +3,9 @@
   copy:
       src: ssh_config
       dest: /home/{{ user.name }}/.ssh/config
+
+- name: Start sshd
+  systemd:
+      name: sshd
+      state: started
+      enabled: true

@@ -39,13 +39,13 @@
   copy:
     src: specific_status_{{ pc }}
     dest: /home/{{ user.name }}/.config/i3/i3status.conf
-  when: pc != "x230"
+  when: pc != "x230" and pc != "g751"
 
 - name: Copy specific status config (i3status-rc)
   copy:
     src: specific_status_rc_{{ pc }}
     dest: /home/{{ user.name }}/.config/i3/status_rc.yoml
-  when: pc == "x230"
+  when: pc == "x230" or pc == "g751"
 
 - name: Copy specific xinitrc
   copy:
