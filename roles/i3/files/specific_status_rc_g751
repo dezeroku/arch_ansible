@@ -14,14 +14,14 @@ alert = 10.0
 
 [[block]]
 block = "net"
-device = "wlp3s0"
+device = "wls1"
 speed_up = false
 interval = 5
 
-#[[block]]
-#block = "music"
+[[block]]
+block = "music"
 #player = "spotify"
-#buttons = ["play", "next"]
+buttons = ["play", "next"]
 
 [[block]]
 block = "cpu"
@@ -47,17 +47,14 @@ interval = 10
 [[block]]
 block = "sound"
 
-#[[block]]
-#block = "temperature"
-#collapsed = false
-#interval = 10
-#format = "{min}° min, {max}° max, {average}° avg"
-
+[[block]]
+block = "temperature"
+collapsed = false
+interval = 10
+format = "{min}° min, {max}° max, {average}° avg"
 
 [[block]]
-block = "battery"
-interval = 10
-format = "{percentage}% {time}"
+block = "nvidia_gpu"
 
 [[block]]
 block = "time"
