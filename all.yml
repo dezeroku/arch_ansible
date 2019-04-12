@@ -7,6 +7,7 @@
       - { role: pacman }
 
       - { role: create_user }
+      - { role: networkmanager }
 
       - { role: sudo, tags: install }
 
