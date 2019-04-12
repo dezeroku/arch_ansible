@@ -91,28 +91,27 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-
 # set workspaces names
-	#monitor F30A
-		set $ws1 "1:" 
-	#web F376	
-		set $ws2 "2:"
-	#notepad F227 
-		set $ws3 "3:"
-	#hash F319 
-		set $ws4 "4:"
-	#note F30C 
-		set $ws5 "5:"
-	#coffee cup F372 
-		set $ws6 "6:"
-	#dots F23F 
-		set $ws7 "7:"
-	#trashbin  F352 
-		set $ws8 "8:"
-	#steam icon F40B OR F23B gamepad icon 
-		set $ws9 "9:"
-	#windows F24E 
-		set $ws10 "10:" 
+	# monitor
+		set $ws1 "1:" 
+	# web
+		set $ws2 "2:"
+	# notepad
+		set $ws3 "3:"
+	# hash 
+		set $ws4 "4:"
+	# note
+		set $ws5 "5:"
+	# coffee cup
+		set $ws6 "6:"
+	# circle
+		set $ws7 "7:"
+	# trashbin
+		set $ws8 "8:"
+	# gamepad
+		set $ws9 "9:"
+	# briefcase 
+		set $ws10 "10:" 
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
