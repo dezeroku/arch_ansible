@@ -4,6 +4,7 @@
   become: true
   become_user: root
   roles:
+      - { role: time }
       - { role: pacman }
 
       - { role: create_user }
