@@ -29,20 +29,12 @@ bar {
     strip_workspace_numbers yes
 }
 
-#prevents screen from dimming, it seems it works
+#prevents screen from dimming, it seems to work
 exec xset s off -dpms 
 
 #asus rog g751jm specific
-        # MANUAL GPU FAN SPEED CONTROL (that should be done by systemd, seriously)
-        exec "sudo ~/.config/i3/scripts/g751/temperature_management.py --gpu"
-
-        #disable touchpad at startup
-	exec "python3 ~/.config/i3/scripts/g751/touchpad_control.py turn_off"
-		
         # toggle touchpad shortcut
         bindsym XF86TouchpadToggle exec "python3 ~/.config/i3/scripts/g751/touchpad_control.py toggle"
-
-
 
         #kbd backlight, this should be pretty universal
                 

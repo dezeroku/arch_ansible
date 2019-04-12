@@ -1,0 +1,10 @@
+[Unit]
+Description=Automatically change GPU fan speed
+
+[Service]
+Type=simple
+ExecStart=/home/{{ user.name }}/.config/i3/scripts/g751/temperature_management.py --gpu
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

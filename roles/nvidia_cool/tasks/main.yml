@@ -1,0 +1,22 @@
+---
+- name: Render service file
+  become: true
+  become_user: root
+  template:
+    src: gpu_cool.service
+    dest: /etc/systemd/system/gpu_cool.service
+
+- name: Copy dependency binary
+  become: true
+  become_user: root
+  copy:
+      src: acer_ec.pl
+      dest: /usr/bin/acer_ec.pl
+
+- name: Start and enable service
+  become: true
+  become_user: root
+  systemd:
+      name: gpu_cool
+      state: started
+      enabled: true

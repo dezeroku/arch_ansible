@@ -2,7 +2,7 @@
 
 ## Assumptions
 
-You already have Archlinux base & base-devel installed, and you only want to set up system.
+You already have Archlinux base & base-devel & rsync installed, and you only want to set up system.
 
 ## Basic command
 e.g
