@@ -56,4 +56,4 @@
   when: not result.stat.exists
 
 - name: Install binaries for vim-go
-  command: vim +GoInstallBinaries +qall
+  command: chdir=/home/{{ user.name }}/ vim +GoInstallBinaries +qall
