@@ -9,3 +9,4 @@
       name: sshd
       state: started
       enabled: true
+  when: pc == "g751"
