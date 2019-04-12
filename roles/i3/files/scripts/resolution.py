@@ -69,7 +69,8 @@ class Locker:
     @lock_decorator
     def lock_now(self, image_number=-1, timeout=0.5):
         """Lock screen and blank display."""
-        final_path = self.lock_images_path+str(image_number)+"_lock.png"
+        final_path = os.path.join(self.lock_images_path,
+                                  str(image_number)+"_lock.png")
         command = ["i3lock", "-n", "-c", "000000"]
         print(final_path)
         if (image_number != -1 and
@@ -84,7 +85,8 @@ class Locker:
 
     def enable_lock_daemon(self, image_number=-1, timeout=0):
         """Set screen to lock on user inactivity period or suspend."""
-        final_path = self.lock_images_path+str(image_number)+"_lock.png"
+        final_path = os.path.join(self.lock_images_path,
+                                  str(image_number)+"_lock.png")
         print(final_path)
         base_command = ["xss-lock", "--",
                         get_root_folder()+"scripts/resolution.py", "lock",
@@ -95,6 +97,7 @@ class Locker:
             command = base_command
             command += ["--lock-image-number", str(image_number)]
             command += ["--lock-timeout", str(timeout)]
+            command += ["--lock-images-path", self.lock_images_path]
 
             subprocess.run(command)
         else:
