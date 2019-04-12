@@ -36,6 +36,9 @@
   command: vim +PluginInstall +qall
   when: var_vim.changed or var_neovim.changed
 
+- name: Download dependencies for YCM
+  command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe git submodule update --init --recursive
+
 - name: Check if YCM already compiled
   stat:
     path: /home/{{ user.name }}/.vim/bundle/YouCompleteMe/compiled
