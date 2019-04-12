@@ -1,0 +1,7 @@
+---
+- name: Install GPU and CUDA drivers
+  pacman:
+    name:
+      - nvidia
+      - cuda
+    state: present

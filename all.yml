@@ -40,12 +40,13 @@
       - { role: vpn }
       - { role: wine }
       - { role: python_packages }
+      - { role: nvidia, when: pc == "g751" }
       - { role: js_packages }
       - { role: go_packages }
   tags:
       - install
 
-
+# Set up
 - hosts: all
   become: true
   become_user: "{{ user.name }}"
