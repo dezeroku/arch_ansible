@@ -45,7 +45,7 @@
   register: result
 
 - name: Compile YouCompleteMe
-  command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe ./install.py --clang-completer --go-completer --rust-completer --java-completer --system-libclang
+  command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe ./install.py --clang-completer --go-completer --rust-completer --java-completer
   when: not result.stat.exists
 
 - name: Set YCM as compiled
