@@ -11,6 +11,12 @@
     dest: /home/{{ user.name }}/.config/i3/
   delegate_to: "{{ inventory_hostname }}"
 
+- name: Copy wallpapers
+  synchronize:
+      src: wallpapers/{{ pc }}/
+      dest: /home/{{ user.name }}/.config/i3/wallpapers
+  delegate_to: "{{ inventory_hostname }}"
+
 - name: Copy base config
   copy:
     src: base
