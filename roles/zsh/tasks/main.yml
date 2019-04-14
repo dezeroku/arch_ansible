@@ -13,7 +13,7 @@
       - sh ohmyzsh.sh
 
 - name: Copy zsh config
-  copy:
+  template:
       src: zshrc
       dest: /home/{{ user.name }}/.zshrc
 

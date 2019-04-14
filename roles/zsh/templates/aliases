@@ -1,0 +1,3 @@
+alias ls='ls --color=auto --group-directories-first'
+alias grep='grep --color=auto'
+alias emac='emacsclient -nw'
