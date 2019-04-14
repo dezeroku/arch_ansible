@@ -4,4 +4,5 @@ xrandr --auto
 xrandr --dpi 92
 emacs --daemon &
 export SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass
+xinput disable 26
 exec i3

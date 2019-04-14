@@ -36,13 +36,16 @@
   command: vim +PluginInstall +qall
   when: var_vim.changed or var_neovim.changed
 
+- name: Download dependencies for YCM
+  command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe git submodule update --init --recursive
+
 - name: Check if YCM already compiled
   stat:
     path: /home/{{ user.name }}/.vim/bundle/YouCompleteMe/compiled
   register: result
 
 - name: Compile YouCompleteMe
-  command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe ./install.py --clang-completer --go-completer --rust-completer --java-completer --system-libclang
+  command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe ./install.py --clang-completer --go-completer --rust-completer
   when: not result.stat.exists
 
 - name: Set YCM as compiled
@@ -53,4 +56,4 @@
   when: not result.stat.exists
 
 - name: Install binaries for vim-go
-  command: vim +GoInstallBinaries +qall
+  command: chdir=/home/{{ user.name }}/ vim +GoInstallBinaries +qall

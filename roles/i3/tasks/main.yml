@@ -6,16 +6,14 @@
     recurse: yes
 
 - name: Copy scripts directory
-  synchronize:
+  copy:
     src: scripts
     dest: /home/{{ user.name }}/.config/i3/
-  delegate_to: "{{ inventory_hostname }}"
 
 - name: Copy wallpapers
-  synchronize:
+  copy:
       src: wallpapers/{{ pc }}/
       dest: /home/{{ user.name }}/.config/i3/wallpapers
-  delegate_to: "{{ inventory_hostname }}"
 
 - name: Copy base config
   copy:
