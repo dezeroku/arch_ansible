@@ -92,8 +92,6 @@ export PATH="$PATH:/opt/GNAT/2018-arm-elf/bin"
 fi
 
 
-source ~/i3_config/setup/shell/aliases
-
 # Take care of ssh keys.
 eval $(keychain --eval --quiet id_rsa A4FBD9863016C28A47321074C704E9FFDF4A1717 --agents ssh,gpg)
 
