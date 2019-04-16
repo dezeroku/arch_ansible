@@ -13,6 +13,9 @@
       src: acer_ec.pl
       dest: /usr/bin/acer_ec.pl
 
+- name: Set as executable
+  file: dest=/usr/bin/acer_ec.pl mode=a+x
+
 - name: Start and enable service
   become: true
   become_user: root

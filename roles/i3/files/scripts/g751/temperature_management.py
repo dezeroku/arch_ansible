@@ -43,7 +43,7 @@ def set_cpu_fan(speed):
 
 def set_gpu_fan(speed):
     """Set spped step for GPU fan."""
-    command = "sudo acer_ec.pl writetemp 152 "+str(speed)
+    command = "sudo /usr/bin/acer_ec.pl writetemp 152 "+str(speed)
 
     result = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
     result = str(result.stdout.readline().decode("utf-8"))
