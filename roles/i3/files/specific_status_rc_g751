@@ -29,7 +29,7 @@ interval = 1
 
 [[block]]
 block = "memory"
-format_mem = "{MUg}GB/{MTg}GB"
+format_mem = "{Mug}GB/{MTg}GB"
 format_swap = "{SUm}MB/{STm}MB({SUp}%)"
 display_type = "memory"
 icons = true
