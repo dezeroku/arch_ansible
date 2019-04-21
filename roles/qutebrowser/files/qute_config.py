@@ -12,7 +12,7 @@ config.bind('<Shift-z>', 'spawn -d mpv --ytdl-format=best[height<=?720] {url}')
 config.bind('<Shift-x>', 'spawn -d mpv --ytdl-format=best[height<=?1080] {url}')
 
 # Download Max 720p.
-config.bind('<Shift-Ctrl-x>', 'spawn --userscript ~/i3_config/scripts/qutebrowser/download_video.sh')
+config.bind('<Shift-Ctrl-x>', 'spawn --userscript ~/.config/qutebrowser/scripts/download_video.sh')
 
 # Max available.
 #config.bind('<c>', 'spawn mpv {url}')
