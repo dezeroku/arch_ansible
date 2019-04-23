@@ -56,6 +56,7 @@
     - { role: sudo, tags: configure }
     - { role: i3 }
     - { role: ssh }
+    - { role: gpg }
     - { role: tmux }
     - { role: git }
     - { role: zsh }
