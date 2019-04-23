@@ -42,17 +42,16 @@ critical_swap = 95
 
 [[block]]
 block = "pacman"
-interval = 10
+interval = 600
 
 [[block]]
 block = "sound"
 
-#[[block]]
-#block = "temperature"
-#collapsed = false
-#interval = 10
-#format = "{min}° min, {max}° max, {average}° avg"
-
+[[block]]
+block = "temperature"
+collapsed = false
+interval = 10
+format = "{min}°, {average}°, {max}°"
 
 [[block]]
 block = "battery"
