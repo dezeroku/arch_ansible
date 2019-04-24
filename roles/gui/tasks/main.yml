@@ -17,6 +17,7 @@
       - transset-df
       - ttf-hack
       - rxvt-unicode
+      - kitty
       - terminator
       - mesa-demos
       - ttf-inconsolata
