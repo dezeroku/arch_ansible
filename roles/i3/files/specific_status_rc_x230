@@ -50,8 +50,8 @@ block = "sound"
 [[block]]
 block = "temperature"
 collapsed = false
-interval = 10
-format = "{min}°, {average}°, {max}°"
+interval = 2
+format = "{average}°"
 
 [[block]]
 block = "battery"
