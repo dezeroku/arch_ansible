@@ -13,16 +13,6 @@
       - { role: sudo, tags: install }
 
       - { role: aur_builder }
-      - { role: yay }
-
-      - { role: aur_voice }
-      - { role: aur_browsers }
-      - { role: aur_video }
-      - { role: aur_spotify }
-      - { role: aur_misc }
-      - { role: aur_gui }
-        #- { role: aur_ide }
-
       - { role: gui }
       - { role: cli }
       - { role: utils }
@@ -48,7 +38,26 @@
   tags:
       - install
 
-# Set up
+# Install stuff AUR related.
+- hosts: all
+  become: true
+  become_user: aur_builder
+  roles:
+    - { role: yay }
+    - { role: st, tags: st }
+
+    - { role: aur_voice }
+    - { role: aur_browsers }
+    - { role: aur_video }
+    - { role: aur_spotify }
+    - { role: aur_misc }
+    - { role: aur_gui }
+    #- { role: aur_ide }
+  tags:
+    - setup
+
+
+# Configure everything
 - hosts: all
   become: true
   become_user: "{{ user.name }}"
@@ -69,4 +78,4 @@
     - { role: qutebrowser }
     - { role: emacs }
   tags:
-      - configure
+    - configure
