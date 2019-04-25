@@ -6,7 +6,4 @@ user:
   shell: /bin/zsh
   email: darthtyranus666666@gmail.com
 
-builder:
-  name: aur_builder
-
 pc: default

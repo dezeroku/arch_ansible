@@ -1,19 +1,19 @@
 ---
 - name: Ensure builds/st folder exists
   file:
-    path: /home/{{ builder.name }}/builds/st
+    path: /home/aur_builder/builds/st
     state: directory
     recurse: yes
 
 - name: Copy config
   copy:
     src: config.h
-    dest: /home/{{ builder.name }}/builds/st
+    dest: /home/aur_builder/builds/st
 
 - name: Copy PKGBUILD
   copy:
     src: PKGBUILD
-    dest: /home/{{ builder.name }}/builds/st
+    dest: /home/aur_builder/builds/st
 
 - name: Build and install
-  command: chdir=/home/{{ builder.name }}/builds/st makepkg -si --noconfirm
+  command: chdir=/home/aur_builder/builds/st makepkg -si --noconfirm

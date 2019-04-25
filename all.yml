@@ -4,37 +4,37 @@
   become: true
   become_user: root
   roles:
-      - { role: time }
-      - { role: pacman }
+      - { role: time, tags: ['time'] }
+      - { role: pacman, tags: ['pacman'] }
 
-      - { role: create_user }
-      - { role: networkmanager }
+      - { role: create_user, tags: ['create_user'] }
+      - { role: networkmanager, tags: ['networkmanager'] }
 
-      - { role: sudo, tags: install }
+      - { role: sudo, tags: ['install', 'sudo'] }
 
-      - { role: aur_builder }
-      - { role: gui }
-      - { role: cli }
-      - { role: utils }
-      - { role: editors }
-      - { role: browsers }
-      - { role: editors }
-      - { role: image }
-      - { role: misc }
-      - { role: necessary }
-      - { role: network }
-      - { role: office }
-      - { role: programming }
-      - { role: steam }
-      - { role: video }
-      - { role: vm }
-      - { role: vpn }
-      - { role: wine }
-      - { role: python_packages }
-      - { role: nvidia, when: pc == "g751" }
-      - { role: nvidia_cool, when: pc == "g751" }
-      - { role: js_packages }
-      - { role: go_packages }
+      - { role: aur_builder, tags: ['aur_builder'] }
+      - { role: gui, tags: ['gui'] }
+      - { role: cli, tags: ['cli'] }
+      - { role: utils, tags: ['utils'] }
+      - { role: editors, tags: ['editors'] }
+      - { role: browsers, tags: ['browsers'] }
+      - { role: editors, tags: ['editors'] }
+      - { role: image, tags: ['image'] }
+      - { role: misc, tags: ['misc'] }
+      - { role: necessary, tags: ['necessary'] }
+      - { role: network, tags: ['network'] }
+      - { role: office, tags: ['office'] }
+      - { role: programming, tags: ['programming'] }
+      - { role: steam, tags: ['steam'] }
+      - { role: video, tags: ['video'] }
+      - { role: vm, tags: ['vm'] }
+      - { role: vpn, tags: ['vpn'] }
+      - { role: wine, tags: ['wine'] }
+      - { role: python_packages, tags: ['python_packages'] }
+      - { role: nvidia, tags: ['nvidia'], when: pc == "g751" }
+      - { role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751" }
+      - { role: js_packages, tags: ['js_packages'] }
+      - { role: go_packages, tags: ['go_packages'] }
   tags:
       - install
 
@@ -43,16 +43,16 @@
   become: true
   become_user: aur_builder
   roles:
-    - { role: yay }
-    - { role: st, tags: st }
+    - { role: yay, tags: ['yay'] }
+    - { role: st, tags: ['st'] }
 
-    - { role: aur_voice }
-    - { role: aur_browsers }
-    - { role: aur_video }
-    - { role: aur_spotify }
-    - { role: aur_misc }
-    - { role: aur_gui }
-    #- { role: aur_ide }
+    - { role: aur_voice, tags: ['aur_voice'] }
+    - { role: aur_browsers, tags: ['aur_browsers'] }
+    - { role: aur_video, tags: ['aur_video'] }
+    - { role: aur_spotify, tags: ['aur_spotify'] }
+    - { role: aur_misc, tags: ['aur_misc'] }
+    - { role: aur_gui, tags: ['aur_gui'] }
+      #- { role: aur_ide, tags: ['aur_ide'] }
   tags:
     - setup
 
@@ -62,20 +62,20 @@
   become: true
   become_user: "{{ user.name }}"
   roles:
-    - { role: sudo, tags: configure }
-    - { role: i3 }
-    - { role: ssh }
-    - { role: gpg }
-    - { role: tmux }
-    - { role: git }
-    - { role: zsh }
-    - { role: ranger }
-    - { role: vim }
-    - { role: compton }
-    - { role: dunst }
-    - { role: rofi }
-    - { role: xresources }
-    - { role: qutebrowser }
-    - { role: emacs }
+    - { role: sudo, tags: ['sudo'] }
+    - { role: i3, tags: ['i3'] }
+    - { role: ssh, tags: ['ssh'] }
+    - { role: gpg, tags: ['gpg'] }
+    - { role: tmux, tags: ['tmux'] }
+    - { role: git, tags: ['git'] }
+    - { role: zsh, tags: ['zsh'] }
+    - { role: ranger, tags: ['ranger'] }
+    - { role: vim, tags: ['vim'] }
+    - { role: compton, tags: ['compton'] }
+    - { role: dunst, tags: ['dunst'] }
+    - { role: rofi, tags: ['rofi'] }
+    - { role: xresources, tags: ['xresources'] }
+    - { role: qutebrowser, tags: ['qutebrowser'] }
+    - { role: emacs, tags: ['emacs'] }
   tags:
     - configure
