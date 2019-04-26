@@ -1,0 +1,25 @@
+---
+- name: Install i3lock
+  pacman:
+    name: i3lock
+    state: present
+
+- name: Copy suspend service file
+  copy:
+    src: suspend@.service
+    dest: /etc/systemd/system/
+
+- name: Copy resume service file
+  copy:
+    src: suspend@.service
+    dest: /etc/systemd/system/
+
+- name: Enable suspend service file
+  systemd:
+      name: suspend@{{ user.name }}
+      enabled: true
+
+- name: Enable resume service file
+  systemd:
+      name: resume@{{ user.name }}
+      enabled: true
