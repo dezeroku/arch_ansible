@@ -4,7 +4,6 @@
     name:
       - py3status
       - i3status-rust-git
-      - xss-lock-git
       - ttf-font-icons
         #- cower
       - powerline-fonts
