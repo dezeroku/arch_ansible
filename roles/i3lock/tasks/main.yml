@@ -11,7 +11,7 @@
 
 - name: Copy resume service file
   copy:
-    src: suspend@.service
+    src: resume@.service
     dest: /etc/systemd/system/
 
 - name: Enable suspend service file
