@@ -134,6 +134,8 @@
                           ;; run goimports instead of fmt.
                           (setq gofmt-command "goimports")
 
+                          ;; documentation read
+                          (local-set-key (kbd "C-c C-k") 'godoc)
                           ;; automatically run goimports on file save.
                           (add-hook 'before-save-hook 'gofmt-before-save)
 
