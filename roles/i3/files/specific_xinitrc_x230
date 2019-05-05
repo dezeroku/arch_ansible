@@ -2,4 +2,5 @@ setxkbmap pl
 emacs --daemon &
 export SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass
 xinput disable 10
+xrandr --dpi 125.37
 exec i3
