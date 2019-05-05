@@ -246,5 +246,8 @@ bindsym $mod+Control+l exec "~/.config/i3/scripts/resolution.py lock --lock-scre
     #assign [class="(?i)Spotify"] $ws5
     for_window [class="(?i)spotify"] move to workspace $ws5
 
+    # Floating workspace for Steam and applications, that don't really like tilling.
+    for_window [workspace=$ws8] floating enable
+
 default_border pixel 1
 hide_edge_borders both
