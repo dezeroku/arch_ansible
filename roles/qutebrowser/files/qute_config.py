@@ -44,4 +44,17 @@ translate_english_polish = "https://translate.google.com/#en/pl/{}"
 c.url.searchengines = {"DEFAULT":duckstr, "ddg":duckstr,  "google":googlestr,
                        "translate":translate_english_polish}
 
-# open-editor
+# Fonts
+basic_size = "8pt"
+c.fonts.completion.entry = "{} monospace".format(basic_size)
+c.fonts.completion.category = "bold {} monospace".format(basic_size)
+c.fonts.debug_console = "{} monospace".format(basic_size)
+c.fonts.downloads = "{} monospace".format(basic_size)
+c.fonts.hints = "bold 13px monospace"
+c.fonts.keyhint = "{} monospace".format(basic_size)
+c.fonts.messages.error = "{} monospace".format(basic_size)
+c.fonts.messages.info = "{} monospace".format(basic_size)
+c.fonts.messages.warning = "{} monospace".format(basic_size)
+c.fonts.prompts = "{} monospace".format(basic_size)
+c.fonts.statusbar = "{} monospace".format(basic_size)
+c.fonts.tabs = "{} monospace".format(basic_size)
