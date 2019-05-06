@@ -211,6 +211,10 @@ bindsym $mod+Shift+Tab exec "python3 ~/.config/i3/scripts/i3/i3_next_workspace.p
 # Set wallpaper
 exec "feh --bg-scale ~/.config/i3/wallpapers/0_wallpaper.png"
 
+# Set custom wallpaper, if exists.
+# That's pretty hacky way to enable users to use wallpapers that are not version controled.
+exec "feh --bg-scale ~/.config/i3/wallpapers/custom.png"
+
 # set lock screen
 # exec "~/.config/i3/scripts/resolution.py lock --set-up-locker --lock-image-number 1 --lock-timeout 0 --lock-images-path ~/.config/i3/wallpapers"
 
