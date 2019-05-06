@@ -45,7 +45,7 @@ c.url.searchengines = {"DEFAULT":duckstr, "ddg":duckstr,  "google":googlestr,
                        "translate":translate_english_polish}
 
 # Fonts
-basic_size = "8pt"
+basic_size = "8"
 c.fonts.completion.entry = "{} monospace".format(basic_size)
 c.fonts.completion.category = "bold {} monospace".format(basic_size)
 c.fonts.debug_console = "{} monospace".format(basic_size)
