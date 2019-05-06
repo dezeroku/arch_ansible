@@ -1,8 +1,15 @@
 ---
-- name: Install i3lock
+- name: Install scrot
   pacman:
-    name: i3lock
+    name: scrot
     state: present
+
+- name: Install i3lock-fancy
+  aur:
+    use: yay
+    name: i3lock-fancy-git
+  become: yes
+  become_user: aur_builder
 
 - name: Copy suspend service file
   copy:
