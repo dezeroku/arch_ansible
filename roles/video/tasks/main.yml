@@ -3,6 +3,5 @@
   pacman:
     name:
       - vlc
-      - qt4
       - qmmp
       - mpv
