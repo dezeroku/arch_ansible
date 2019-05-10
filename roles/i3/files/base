@@ -220,7 +220,7 @@ exec "feh --bg-scale ~/.config/i3/wallpapers/custom.png"
 
 # lock screen 
 #bindsym $mod+Control+l exec "~/.config/i3/scripts/resolution.py lock --lock-screen --lock-image-number 1 --lock-images-path ~/.config/i3/wallpapers"
-bindsym $mod+Control+l exec "/usr/bin/i3lock-fancy -- scrot"
+bindsym $mod+Control+l exec "/usr/bin/i3lock-fancy -- scrot && sleep 1 && /usr/bin/xset dpms force standby"
 
 # assign programs to workspaces
 
