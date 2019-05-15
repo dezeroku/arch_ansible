@@ -4,3 +4,12 @@
     repo: https://github.com/tmux-plugins/tpm
     dest: ~/.tmux/plugins/tpm
 
+- name: Ensure directory exists
+  file:
+    path: /home/{{ user.name }}
+    state: directory
+
+- name: Copy tmux.conf
+  copy:
+    src: tmux.conf
+    dest: /home/{{ user.name }}/.tmux.conf
