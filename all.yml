@@ -66,9 +66,9 @@
     - { role: sudo, tags: ['sudo'] }
     - { role: i3, tags: ['i3'] }
     - { role: ssh, tags: ['ssh'] }
-    - { role: gpg, tags: ['gpg'] }
     - { role: tmux, tags: ['tmux'] }
     - { role: git, tags: ['git'] }
+    - { role: gpg, tags: ['gpg'] }
     - { role: zsh, tags: ['zsh'] }
     - { role: ranger, tags: ['ranger'] }
     - { role: vim, tags: ['vim'] }

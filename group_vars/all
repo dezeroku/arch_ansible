@@ -5,5 +5,7 @@ user:
   ssh_key_type: rsa
   shell: /bin/zsh
   email: darthtyranus666666@gmail.com
+  gpg_key: C704E9FFDF4A1717
+  always_git_gpg: true
 
 pc: default
