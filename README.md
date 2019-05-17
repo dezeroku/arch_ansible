@@ -2,6 +2,8 @@
 
 Heavily inspired by (spark)[https://github.com/pigmonkey/spark] .
 
+Individual tags for each role.
+
 ## Assumptions
 
 You already have Archlinux base & base-devel installed, and you only want to set up system.
@@ -9,7 +11,10 @@ You already have Archlinux base & base-devel installed, and you only want to set
 
 All roles prefixed with 'aur' depend on aur_builder user with sudo rights (aur_builder role).
 ## Basic command
-e.g
+Run all roles for g751 pc on localhost.
 ```
-ansible-playbook all.yml -i inventory -e pc:g751 --tags configure
+ansible-playbook all.yml -i inventory -e pc=g751
 ```
+
+### TODO
+Dependencies should be solved more explicitly.
