@@ -76,8 +76,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$PATH:/opt/GNAT/2018/bin"
-export PATH="$PATH:/opt/GNAT/2018-arm-elf/bin"
+export PATH="$PATH:/opt/GNAT/2019/bin"
+export PATH="$PATH:/opt/GNAT/2019-arm-elf/bin"
 # export PATH="$PATH:/opt/gps/bin"
 
 # You may need to manually set your language environment
