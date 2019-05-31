@@ -15,3 +15,10 @@
   systemd:
       enabled: yes
       name: docker
+
+- name: Add user to docker group
+  user:
+    name: "{{ user.name }}"
+    groups: docker
+    state: present
+    append: true
