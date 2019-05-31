@@ -10,6 +10,14 @@ You already have Archlinux base & base-devel installed, and you only want to set
 
 
 All roles prefixed with 'aur' depend on aur_builder user with sudo rights (aur_builder role).
+
+## Base 'profiles'
+
+| Name | Resolution |
+| ---- | ---------- |
+| x230 | 1366x768   |
+| g751 | 1920x1080  |
+
 ## Basic command
 Run all roles for g751 pc on localhost.
 ```
