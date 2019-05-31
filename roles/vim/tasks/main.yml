@@ -45,6 +45,11 @@
     path: /home/{{ user.name }}/.vim/bundle/YouCompleteMe/compiled
   register: result
 
+- name: Ensure CMake is installed
+  pacman:
+    name: cmake
+    state: present
+
 - name: Compile YouCompleteMe
   command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe ./install.py --clang-completer --go-completer --rust-completer
   when: not result.stat.exists
