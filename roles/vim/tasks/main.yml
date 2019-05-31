@@ -32,6 +32,7 @@
     dest: /home/{{ user.name }}/.vim/bundle/Vundle.vim
     repo: https://github.com/gmarik/Vundle.vim.git
 
+    # TODO: Error message in vim about zenburn, just skip ahead.
 - name: Download plugins if something changed
   command: vim +PluginInstall +qall
   when: var_vim.changed or var_neovim.changed
