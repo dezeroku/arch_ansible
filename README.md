@@ -6,7 +6,7 @@ Individual tags for each role.
 
 ## Assumptions
 
-You already have Archlinux base & base-devel installed, and you only want to set up system.
+You already have Archlinux base & base-devel installed, and you only want to set up system for daily-usage.
 
 
 All roles prefixed with 'aur' depend on aur_builder user with sudo rights (aur_builder role).
@@ -15,6 +15,7 @@ All roles prefixed with 'aur' depend on aur_builder user with sudo rights (aur_b
 
 | Name | Resolution |
 | ---- | ---------- |
+| x200 | 1280x800   |
 | x230 | 1366x768   |
 | g751 | 1920x1080  |
 
@@ -25,4 +26,7 @@ ansible-playbook all.yml -i inventory -e pc=g751
 ```
 
 ### TODO
-Dependencies should be solved more explicitly.
+
+1. Better handling of dependencies.
+2. README for specific roles
+3. Fix some roles which deadlock (e.g. vim related)
