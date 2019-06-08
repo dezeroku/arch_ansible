@@ -16,6 +16,8 @@
       - go
       - rust
       - ghc
+      - ghc-static
+      - cabal-install
       - php
       - postgresql
 
