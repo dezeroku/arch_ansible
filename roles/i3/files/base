@@ -255,7 +255,7 @@ bindsym $mod+Control+l exec "/usr/bin/i3lock-fancy -- scrot && sleep 1 && /usr/b
     for_window [class="(?i)spotify"] move to workspace $ws5
 
     # Floating workspace for Steam and applications, that don't really like tilling.
-    for_window [workspace=$ws8] floating enable
+    # for_window [workspace=$ws8] floating enable
 
 default_border pixel 1
 hide_edge_borders both

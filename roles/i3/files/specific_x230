@@ -4,7 +4,7 @@
 font pango:monospace 8 
 
 # start a terminal
-bindsym $mod+Return exec st
+bindsym $mod+Return exec "st -e tmux"
 
 bindsym XF86Launch1 exec terminator -e "echo KOCHAM && echo AKISO  && sleep 6 && echo MOCNO && sleep 3 "
 
