@@ -1,6 +1,6 @@
 ## Ansible version of i3\_config
 
-Heavily inspired by (spark)[https://github.com/pigmonkey/spark] .
+Heavily inspired by [spark](https://github.com/pigmonkey/spark) .
 
 Individual tags for each role.
 

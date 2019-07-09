@@ -82,6 +82,9 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
+/* bg opacity */
+unsigned int alpha = 0xef;
+
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
     "#3f3f3f",
@@ -159,11 +162,11 @@ static MouseShortcut mshortcuts[] = {
         { Button5,              XK_NO_MOD,      "\005" },
         };
 
-MouseKey mkeys[] = {
+//MouseKey mkeys[] = {
        /* button               mask            function        argument */
-       { Button4,              XK_NO_MOD,      kscrollup,      {.i =  1} },
-       { Button5,              XK_NO_MOD,      kscrolldown,    {.i =  1} },
-};
+//       { Button4,              XK_NO_MOD,      kscrollup,      {.i =  1} },
+//       { Button5,              XK_NO_MOD,      kscrolldown,    {.i =  1} },
+//};
 
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
@@ -183,8 +186,8 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-        { ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
-        { ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
+       // { ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
+       // { ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 };
 
 /*
