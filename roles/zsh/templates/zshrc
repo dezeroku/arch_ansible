@@ -70,6 +70,7 @@ plugins=(
   pylint
   archlinux
   vi-mode
+  kubectl
 )
 
 source $ZSH/oh-my-zsh.sh
