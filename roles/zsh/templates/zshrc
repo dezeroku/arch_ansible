@@ -109,3 +109,5 @@ unsetopt share_history
 
 # PATH
 {% include 'path' %}
+
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
