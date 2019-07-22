@@ -30,3 +30,8 @@ ansible-playbook all.yml -i inventory -e pc=g751
 1. Better handling of dependencies.
 2. README for specific roles
 3. Fix some roles which deadlock (e.g. vim related)
+
+
+### Credits
+
+Take a look at [dotfiles repo](https://github.com/tojatos/dotfiles) from @tojatos (especially ZSH theme).

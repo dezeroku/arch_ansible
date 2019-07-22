@@ -1,6 +1,17 @@
 ---
 # Get zsh install script, and modify it for automation.
 
+- name: Ensure directory exists
+  file:
+    path: /home/{{ user.name }}/.oh-my-zsh/themes
+    state: directory
+    recurse: yes
+
+- name: Copy theme
+  copy:
+    src: tosAgnoster.zsh-theme
+    dest: /home/{{ user.name }}/.oh-my-zsh/themes/tosAgnoster.zsh-theme
+
 - name: Install zsh and suggestions
   become: true
   become_user: root
