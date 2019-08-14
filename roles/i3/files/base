@@ -179,7 +179,7 @@ bindsym $mod+r mode "resize"
 bindsym --release Print exec "scrot -e 'mv $f ~/Pictures/screenshots'"
 
 #screenshot part
-bindsym --release Shift+Print exec "scrot -s -e 'mv $f ~/Pictures/screenshots'"
+bindsym --release Shift+Print exec "flameshot gui"
 
 #applets run codes
 # Network Manager
