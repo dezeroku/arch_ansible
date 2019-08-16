@@ -196,6 +196,8 @@ exec --no-startup-id "redshift-gtk -t 5200:2000 -l 51.10:17.0 &"
 exec --no-startup-id "udiskie &"
 # Compton
 exec --no-startup-id "compton -b --config ~/.config/compton.conf &"
+# Flameshot daemon
+exec --no-startup-id "flameshot &"
 # Read Xresources
 exec --no-startup-id "xrdb ~/.Xresources"
 
