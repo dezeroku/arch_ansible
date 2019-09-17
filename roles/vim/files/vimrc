@@ -183,7 +183,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Julia support.
 Plugin 'JuliaEditorSupport/julia-vim'
 " Syntax for many languages
-Plugin "sheerun/vim-polyglot"
+Plugin 'sheerun/vim-polyglot'
 " Markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
