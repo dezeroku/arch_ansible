@@ -10,6 +10,7 @@ floating_modifier $mod
 #Mod1 + x toggles layout
 bindsym $mod+x layout toggle
 
+# XF86 music binds
 # volume control up 
 bindsym XF86AudioRaiseVolume exec "ponymix increase 5 && python3 ~/.config/i3/scripts/play_sound.py volume_change.wav "
 
@@ -19,7 +20,7 @@ bindsym XF86AudioLowerVolume exec "ponymix decrease 5 && python3 ~/.config/i3/sc
 # volume mute
 bindsym XF86AudioMute exec "ponymix toggle"
 
-# start music
+# start/pause music
 bindsym XF86AudioPlay exec "playerctl play-pause"
 
 # stop music
@@ -30,6 +31,25 @@ bindsym XF86AudioNext exec "playerctl next"
 
 # previous song
 bindsym XF86AudioPrev exec "playerctl previous"
+
+# Keyboard shortcuts music binds
+# volume control up 
+bindsym $mod+End exec "ponymix increase 5 && python3 ~/.config/i3/scripts/play_sound.py volume_change.wav "
+
+# volume control down 
+bindsym $mod+Delete exec "ponymix decrease 5 && python3 ~/.config/i3/scripts/play_sound.py volume_change.wav "
+
+# volume mute
+bindsym $mod+Up exec "ponymix toggle"
+
+# start/pause music
+bindsym $mod+Down exec "playerctl play-pause"
+
+# next song
+bindsym $mod+Right exec "playerctl next"
+
+# previous song
+bindsym $mod+Left exec "playerctl previous"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -49,12 +69,6 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
