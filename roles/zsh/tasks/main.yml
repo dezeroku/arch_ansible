@@ -1,17 +1,6 @@
 ---
 # Get zsh install script, and modify it for automation.
 
-- name: Ensure directory exists
-  file:
-    path: /home/{{ user.name }}/.oh-my-zsh/themes
-    state: directory
-    recurse: yes
-
-- name: Copy theme
-  copy:
-    src: tosAgnoster.zsh-theme
-    dest: /home/{{ user.name }}/.oh-my-zsh/themes/tosAgnoster.zsh-theme
-
 - name: Install zsh and suggestions
   become: true
   become_user: root
@@ -28,13 +17,24 @@
 - name: Get zsh
   command: chdir=/tmp {{ item }}
   with_items:
-      - sed -i.tmp 's:env zsh -l::g' ohmyzsh.sh
+      #      - sed -i.tmp 's:env zsh -l::g' ohmyzsh.sh
       - sh ohmyzsh.sh
 
 - name: Copy zsh config
   template:
       src: zshrc
       dest: /home/{{ user.name }}/.zshrc
+
+- name: Ensure directory exists
+  file:
+    path: /home/{{ user.name }}/.oh-my-zsh/themes
+    state: directory
+    recurse: yes
+
+- name: Copy theme
+  copy:
+    src: tosAgnoster.zsh-theme
+    dest: /home/{{ user.name }}/.oh-my-zsh/themes/tosAgnoster.zsh-theme
 
 - name: Enable shell
   become: true
