@@ -1,9 +1,14 @@
 ---
-- name: Copy vim config
+- name: Copy vim vundle bootstrap
+  copy:
+    src: vundler.vim
+    dest: /home/{{ user.name }}/.vundler.vim
+  register: var_vim
+
+- name: Copy vim .vimrc
   copy:
     src: vimrc
     dest: /home/{{ user.name }}/.vimrc
-  register: var_vim
 
 - name: Ensure directory exists
   file:
@@ -32,9 +37,8 @@
     dest: /home/{{ user.name }}/.vim/bundle/Vundle.vim
     repo: https://github.com/gmarik/Vundle.vim.git
 
-    # TODO: Error message in vim about zenburn, just skip ahead.
 - name: Download plugins if something changed
-  command: vim +PluginInstall +qall
+  command: vim +PluginInstall +qall -u ~/.vundler.vim
   when: var_vim.changed or var_neovim.changed
 
 - name: Download dependencies for YCM
