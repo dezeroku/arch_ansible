@@ -49,6 +49,8 @@ Plugin 'JuliaEditorSupport/julia-vim'
 " Markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+" Coloring/Indendation for many languages
+Plugin 'sheerun/vim-polyglot'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
