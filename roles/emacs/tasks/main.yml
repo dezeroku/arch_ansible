@@ -1,5 +1,15 @@
 ---
-- name: Copy emacs config
+- name: Install Emacs
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - emacs
+
+- name: Copy Emacs config
   copy:
     src: emacs
     dest: /home/{{ user.name }}/.emacs
+
+- name: Set up Emacs
+  shell: yes | emacs --script /home/{{ user.name }}/.emacs
