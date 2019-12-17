@@ -161,3 +161,9 @@
 
 ;; HASKELL
 (require 'haskell-mode)
+
+;; JS/JSX/TS
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . js-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . js-jsx-mode))
