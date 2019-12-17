@@ -1,18 +1,24 @@
 ---
 # Get zsh install script, and modify it for automation.
 
-- name: Install zsh and suggestions
+- name: Install zsh, suggestions and fzf
   become: true
   become_user: root
   pacman:
     name:
       - zsh
       - zsh-autosuggestions
+      - fzf
 
 - name: Download zsh script
   get_url:
     url: https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
     dest: /tmp/ohmyzsh.sh
+
+- name: Remove old zsh (if exists)
+  file:
+    path: /home/{{ user.name }}/.oh-my-zsh
+    state: absent
 
 - name: Get zsh
   command: chdir=/tmp {{ item }}
