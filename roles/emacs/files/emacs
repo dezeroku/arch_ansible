@@ -22,6 +22,10 @@
   )
 
 ;; GENERAL
+
+;; wrap lines
+(global-visual-line-mode t)
+
 ;; disable bell on every freakin action
 (setq ring-bell-function 'ignore)
 
