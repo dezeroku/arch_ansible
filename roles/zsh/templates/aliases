@@ -2,6 +2,9 @@ alias ls='ls --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias emac='emacsclient -nw'
 
+alias e='emacsclient -nw'
+alias v='vim'
+
 alias gp="git log --pretty --oneline --all --graph"
 alias gl="git log --graph --pretty=format:'%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) %C(cyan)<%an>%Creset' --abbrev-commit"
 alias gs="git show"

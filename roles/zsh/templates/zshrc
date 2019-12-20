@@ -94,10 +94,6 @@ export PATH="$PATH:/opt/GNAT/2019-arm-elf/bin"
    export EDITOR='vim'
 fi
 
-
-# Take care of ssh/gpg keys.
-eval $(keychain --eval --quiet id_rsa A4FBD9863016C28A47321074C704E9FFDF4A1717 --agents ssh,gpg)
-
 # Take care of gpg passwords through ssh.
 export GPG_TTY=$(tty)
 
@@ -114,3 +110,7 @@ unsetopt share_history
 
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 [ -f "${HOME}/.zshrc_custom" ] && source "${HOME}/.zshrc_custom"
+
+# This should be done in ${HOME}/.zshrc_custom
+# Take care of ssh/gpg keys.
+#eval $(keychain --eval --quiet id_rsa A4FBD9863016C28A47321074C704E9FFDF4A1717 --agents ssh,gpg)
