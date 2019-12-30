@@ -196,7 +196,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #screenshot whole
-bindsym --release Print exec "scrot -e 'mv $f ~/Pictures/screenshots'"
+bindsym --release Print exec "flameshot full -p ~/Pictures/screenshots"
 
 #screenshot part
 bindsym --release Shift+Print exec "flameshot gui"
