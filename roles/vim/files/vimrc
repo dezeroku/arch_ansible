@@ -297,7 +297,8 @@ let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'javascript': ['jslint'],
 \   'python'    : ['mypy', 'flake8'],
-\   'go'        : ['go', 'golint', 'govet', 'errcheck']
+\   'go'        : ['go', 'golint', 'govet', 'errcheck'],
+\   'sh'        : ['shellcheck']
 \}
 
 let g:ale_lint_on_text_changed = 'never'
