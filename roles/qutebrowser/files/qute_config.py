@@ -58,3 +58,7 @@ c.fonts.messages.warning = "{} monospace".format(basic_size)
 c.fonts.prompts = "{} monospace".format(basic_size)
 c.fonts.statusbar = "{} monospace".format(basic_size)
 c.fonts.tabs = "{} monospace".format(basic_size)
+
+# Password manager
+config.bind(',p', 'spawn --userscript qute-pass --dmenu-invocation dmenu')
+config.bind(',P', 'spawn --userscript qute-pass --dmenu-invocation dmenu --password-only')

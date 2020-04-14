@@ -20,3 +20,9 @@
   copy:
       src: download_video.sh
       dest: /home/{{ user.name }}/.config/qutebrowser/scripts/download_video.sh
+
+- name: Install password manager and dependency
+  pacman:
+    name:
+    - pass
+    - python-tldextract
