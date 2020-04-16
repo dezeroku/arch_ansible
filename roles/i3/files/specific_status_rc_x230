@@ -51,7 +51,7 @@ block = "sound"
 block = "temperature"
 collapsed = false
 interval = 2
-format = "{average}°"
+format = "{max}°"
 
 [[block]]
 block = "battery"
