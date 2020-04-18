@@ -60,5 +60,5 @@ c.fonts.statusbar = "{} monospace".format(basic_size)
 c.fonts.tabs = "{} monospace".format(basic_size)
 
 # Password manager
-config.bind(',p', 'spawn --userscript qute-pass --dmenu-invocation dmenu')
-config.bind(',P', 'spawn --userscript qute-pass --dmenu-invocation dmenu --password-only')
+config.bind(',p', 'spawn --userscript qute-bitwarden')
+config.bind(',P', 'spawn --userscript qute-bitwarden --password-only')
