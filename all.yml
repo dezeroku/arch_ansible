@@ -69,7 +69,8 @@
     - { role: tmux, tags: ['tmux'] }
     - { role: git, tags: ['git'] }
     - { role: gpg, tags: ['gpg'] }
-    - { role: zsh, tags: ['zsh'] }
+    #- { role: zsh, tags: ['zsh'] }
+    - { role: fish, tags: ['fish'] }
     - { role: ranger, tags: ['ranger'] }
     - { role: vim, tags: ['vim'] }
     - { role: compton, tags: ['compton'] }
