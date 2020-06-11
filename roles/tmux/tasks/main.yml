@@ -1,7 +1,7 @@
 ---
 - name: Ensure directory exists
   file:
-    path: /home/{{ user.name }}/.tmux/plugin
+    path: /home/{{ user.name }}/.tmux/plugins
     state: directory
     recurse: yes
 
