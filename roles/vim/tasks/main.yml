@@ -42,6 +42,12 @@
       src: tern-config
       dest: /home/{{ user.name }}/tern-config
 
+- name: Ensure directory exists
+  file:
+    path: /home/{{ user.name }}/.vim/bundle
+    state: directory
+    recurse: yes
+
 - name: Set up Vundle
   git:
     dest: /home/{{ user.name }}/.vim/bundle/Vundle.vim
