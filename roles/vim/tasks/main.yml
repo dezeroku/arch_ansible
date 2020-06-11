@@ -1,4 +1,14 @@
 ---
+- name: Install gvim and spelling packages
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - gvim
+      - vim-spell-en
+      - vim-spell-pl
+      - vim-spell-de
+
 - name: Copy vim vundle bootstrap
   copy:
     src: vundler.vim
