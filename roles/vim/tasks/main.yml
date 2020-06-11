@@ -60,6 +60,8 @@
   register: result
 
 - name: Ensure CMake is installed
+  become: true
+  become_user: root
   pacman:
     name: cmake
     state: present

@@ -1,4 +1,11 @@
 ---
+- name: Install git
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - git
+
 - block:
   - git_config:
      name: user.email
