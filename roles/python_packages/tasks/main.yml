@@ -1,4 +1,12 @@
 ---
+- name: Install Python3 and pip
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - python3
+      - python-pip
+
 - name: Install Python3 packages.
   pip:
     executable: pip3
