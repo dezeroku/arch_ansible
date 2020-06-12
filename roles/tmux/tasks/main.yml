@@ -1,4 +1,11 @@
 ---
+- name: Install tmux
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - tmux
+
 - name: Ensure directory exists
   file:
     path: /home/{{ user.name }}/.tmux/plugins
