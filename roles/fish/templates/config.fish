@@ -38,6 +38,9 @@ set -x PATH $HOME/npm_global/bin $PATH
 set -x PATH $HOME/bin $PATH
 set -x PATH $HOME/.local/bin $PATH
 
+# MISC
+set -x EDITOR vim
+
 # Allow node specific customizations.
 if test -e ~/.config/fish/custom.fish
     source ~/.config/fish/custom.fish
