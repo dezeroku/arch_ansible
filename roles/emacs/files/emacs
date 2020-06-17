@@ -6,7 +6,7 @@
   '(inhibit-startup-screen t)
   '(package-selected-packages
      (quote
-       (flycheck flycheck-julia flycheck-mypy go-mode company-ycmd ycmd evil-org evil-tutor evil-magit julia-mode julia-repl smooth-scrolling evil zenburn-theme smooth-scrolling powerline fill-column-indicator haskell-mode company-quickhelp go-guru gotest flymd))))
+       (flycheck flycheck-julia flycheck-mypy go-mode company-ycmd ycmd evil-org evil-tutor evil-magit julia-mode julia-repl smooth-scrolling evil zenburn-theme smooth-scrolling powerline fill-column-indicator haskell-mode company-quickhelp go-guru gotest flymd yaml-mode))))
 
 
 ;; Auto install missing packages.
@@ -22,6 +22,9 @@
   )
 
 ;; GENERAL
+
+;; insert spaces when <Tab> is entered
+(setq-default indent-tabs-mode nil)
 
 ;; wrap lines
 (global-visual-line-mode t)
@@ -145,7 +148,7 @@
 
                           ;; Customize compile command to run go build
                           (if (not (string-match "go" compile-command))
-                            (set (make-local-variable 'compile-command)
+			      (set (make-local-variable 'compile-command)
                                  "go build -v && go test -v && go vet"))
 
                           (setq company-tooltip-limit 20)
@@ -156,7 +159,7 @@
 			  ;; flycheck go tool vet solution
 			  (let ((govet (flycheck-checker-get 'go-vet 'command)))
 			    (when (equal (cadr govet) "tool")
-			        (setf (cdr govet) (cddr govet))))
+			      (setf (cdr govet) (cddr govet))))
                           ))
 ;; JULIA
 ;; add julia-mode and REPL
@@ -171,3 +174,14 @@
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . js-jsx-mode))
+
+;; YAML
+;; Automatically use for common file types
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+
+;; Automatically indent when newline is issued
+(add-hook 'yaml-mode-hook
+	  (lambda ()
+	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
