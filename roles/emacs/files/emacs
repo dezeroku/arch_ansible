@@ -26,6 +26,9 @@
 ;; insert spaces when <Tab> is entered
 (setq-default indent-tabs-mode nil)
 
+;; set tab to 4 spaces
+(setq-default tab-width 4)
+
 ;; wrap lines
 (global-visual-line-mode t)
 
