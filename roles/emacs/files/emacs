@@ -6,7 +6,7 @@
   '(inhibit-startup-screen t)
   '(package-selected-packages
      (quote
-       (flycheck flycheck-julia flycheck-mypy go-mode company-ycmd ycmd evil-org evil-tutor evil-magit julia-mode julia-repl smooth-scrolling evil zenburn-theme smooth-scrolling powerline fill-column-indicator haskell-mode company-quickhelp go-guru gotest flymd yaml-mode))))
+       (flycheck flycheck-julia flycheck-rust flycheck-mypy go-mode company-ycmd ycmd evil-org evil-tutor evil-magit julia-mode julia-repl smooth-scrolling evil zenburn-theme smooth-scrolling powerline fill-column-indicator haskell-mode company-quickhelp go-guru gotest flymd yaml-mode rust-mode))))
 
 
 ;; Auto install missing packages.
@@ -188,3 +188,12 @@
 (add-hook 'yaml-mode-hook
 	  (lambda ()
 	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+;; RUST
+(require 'rust-mode)
+(add-hook 'rust-mode-hook (lambda ()
+                            ;; Automatically format on buffer save
+                            (setq rust-format-on-save t)
+                            ;; Properly understand cargo layout for flycheck.
+                            (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+                            ))
