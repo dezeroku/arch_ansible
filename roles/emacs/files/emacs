@@ -6,7 +6,7 @@
   '(inhibit-startup-screen t)
   '(package-selected-packages
      (quote
-       (flycheck flycheck-julia flycheck-rust flycheck-mypy go-mode company-ycmd ycmd evil-org evil-tutor evil-magit julia-mode julia-repl smooth-scrolling evil zenburn-theme smooth-scrolling powerline fill-column-indicator haskell-mode company-quickhelp go-guru gotest flymd yaml-mode rust-mode))))
+       (flycheck flycheck-julia flycheck-rust flycheck-mypy go-mode company-ycmd ycmd evil-org evil-tutor evil-magit julia-mode julia-repl smooth-scrolling evil zenburn-theme smooth-scrolling powerline fill-column-indicator haskell-mode company-quickhelp go-guru gotest flymd yaml-mode rust-mode lsp-mode use-package lsp-ui company-lsp))))
 
 
 ;; Auto install missing packages.
@@ -22,6 +22,8 @@
   )
 
 ;; GENERAL
+
+(require 'use-package)
 
 ;; insert spaces when <Tab> is entered
 (setq-default indent-tabs-mode nil)
@@ -80,21 +82,36 @@
 
 ;; remember position in file after exit
 (setq save-place-file "~/.emacs.d/saveplace")
-(save-place-mode 1) 
+(save-place-mode 1)
 
 ;; YCMD and company-ycmd
-(require 'ycmd)
-(add-hook 'after-init-hook #'global-ycmd-mode)
-(set-variable 'ycmd-server-command `("python" ,(file-truename "~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycmd/")))
-(set-variable 'ycmd-global-config (file-truename "~/.ycm_extra_conf.py"))
+;;(require 'ycmd)
+;;(add-hook 'after-init-hook #'global-ycmd-mode)
+;;(set-variable 'ycmd-server-command `("python" ,(file-truename "~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycmd/")))
+;;(set-variable 'ycmd-global-config (file-truename "~/.ycm_extra_conf.py"))
+;;
+;;(require 'company)
+;;(require 'company-ycmd)
+;;(add-hook 'ycmd-mode-hook 'company-ycmd-setup)
 
-(require 'company)
-(require 'company-ycmd)
-(add-hook 'ycmd-mode-hook 'company-ycmd-setup)
+(use-package company
+  :hook (prog-mode . company-mode)
+  :config (setq company-tooltip-align-annotations t)
+  (setq company-minimum-prefix-length 1))
+
+(use-package lsp-mode
+  :hook (
+         (rust-mode . lsp)
+         )
+  :commands lsp)
+
+(use-package lsp-ui)
+
+(use-package company-lsp)
 
 ;; Apply it everywhere.
 (global-company-mode)
-(global-ycmd-mode)
+;;(global-ycmd-mode)
 
 ;; AESTEHTICS
 ;; Hide UI
@@ -111,9 +128,9 @@
 
 ;; Complete common part on TAB press.
 (eval-after-load 'company
-                 '(progn
-                    (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
-                    (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)))
+  '(progn
+     (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+     (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)))
 
 ;; FLYCHECK
 ;; Enable flycheck globally.
@@ -151,18 +168,18 @@
 
                           ;; Customize compile command to run go build
                           (if (not (string-match "go" compile-command))
-			      (set (make-local-variable 'compile-command)
-                                 "go build -v && go test -v && go vet"))
+                              (set (make-local-variable 'compile-command)
+                                   "go build -v && go test -v && go vet"))
 
                           (setq company-tooltip-limit 20)
                           (setq company-idle-delay .3)
                           (setq company-echo-delay 0)
                           (setq company-begin-commands '(self-insert-command))
 
-			  ;; flycheck go tool vet solution
-			  (let ((govet (flycheck-checker-get 'go-vet 'command)))
-			    (when (equal (cadr govet) "tool")
-			      (setf (cdr govet) (cddr govet))))
+                          ;; flycheck go tool vet solution
+                          (let ((govet (flycheck-checker-get 'go-vet 'command)))
+                            (when (equal (cadr govet) "tool")
+                              (setf (cdr govet) (cddr govet))))
                           ))
 ;; JULIA
 ;; add julia-mode and REPL
@@ -186,14 +203,16 @@
 
 ;; Automatically indent when newline is issued
 (add-hook 'yaml-mode-hook
-	  (lambda ()
+          (lambda ()
 	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; RUST
 (require 'rust-mode)
+(add-hook 'rust-mode-hook-lsp #'lsp)
+
 (add-hook 'rust-mode-hook (lambda ()
                             ;; Automatically format on buffer save
                             (setq rust-format-on-save t)
                             ;; Properly understand cargo layout for flycheck.
-                            (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+                            (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
                             ))
