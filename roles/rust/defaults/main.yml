@@ -1,0 +1,4 @@
+---
+rust_install_toolchain: True
+rust_install_rls: True
+rust_toolchain_type: "stable"
