@@ -20,7 +20,6 @@
       - { role: imagemagick, tags: ['imagemagick'] }
       - { role: gimp, tags: ['gimp'] }
       - { role: misc, tags: ['misc'] }
-      - { role: necessary, tags: ['necessary'] }
       - { role: nmap, tags: ['nmap'] }
       - { role: libreoffice, tags: ['libreoffice'] }
       - { role: latex, tags: ['latex'] }

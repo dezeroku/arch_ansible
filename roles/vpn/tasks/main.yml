@@ -4,4 +4,9 @@
     name:
       - easy-rsa
       - openvpn
+
+- name: Install networkmanager openvpn addon
+  pacman:
+    name:
       - networkmanager-openvpn
+  when: openvpn_install_networkmanager_addon
