@@ -1,0 +1,7 @@
+---
+- name: Install nmap
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - nmap

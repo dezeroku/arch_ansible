@@ -21,7 +21,7 @@
       - { role: gimp, tags: ['gimp'] }
       - { role: misc, tags: ['misc'] }
       - { role: necessary, tags: ['necessary'] }
-      - { role: network, tags: ['network'] }
+      - { role: nmap, tags: ['nmap'] }
       - { role: office, tags: ['office'] }
       - { role: programming, tags: ['programming'] }
       - { role: steam, tags: ['steam'] }
