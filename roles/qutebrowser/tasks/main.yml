@@ -33,3 +33,12 @@
   pacman:
     name:
     - python-tldextract
+
+- name: Install decoding for DRM sites (e.g. Netflix)
+  aur:
+    name:
+      - chromium-widevine
+    skip_installed: true
+  become: true
+  become_user: aur_builder
+  when: qutebrowser_install_widevine

@@ -1,8 +1,0 @@
----
-- name: Install video related stuff from AUR
-  aur:
-    name:
-      - chromium-widevine
-    skip_installed: true
-  become: true
-  become_user: aur_builder
