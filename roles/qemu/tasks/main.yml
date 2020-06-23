@@ -1,5 +1,7 @@
 ---
 - name: Install qemu
+  become: true
+  become_user: root
   pacman:
     name:
       - qemu

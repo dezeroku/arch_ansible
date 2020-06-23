@@ -1,5 +1,7 @@
 ---
 - name: Install vagrant
+  become: true
+  become_user: root
   pacman:
     name:
       - vagrant

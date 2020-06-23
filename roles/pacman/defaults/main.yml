@@ -1,0 +1,3 @@
+---
+pacman_update: True
+pacman_upgrade: True

@@ -1,5 +1,7 @@
 ---
 - name: Install Firefox
+  become: true
+  become_user: root
   pacman:
     name:
       - firefox

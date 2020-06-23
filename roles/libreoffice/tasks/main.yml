@@ -1,5 +1,7 @@
 ---
 - name: Install LibreOffice
+  become: true
+  become_user: root
   pacman:
     name:
       - libreoffice

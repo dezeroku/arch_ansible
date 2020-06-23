@@ -6,66 +6,54 @@
   roles:
       - { role: ntp, tags: ['ntp'] }
       - { role: pacman, tags: ['pacman'] }
-
       - { role: create_user, tags: ['create_user'] }
-      - { role: networkmanager, tags: ['networkmanager'] }
-
-      - { role: sudo, tags: ['install', 'sudo'] }
-
-      - { role: aur_builder, tags: ['aur_builder'] }
-      - { role: gui, tags: ['gui'] }
-      - { role: utils, tags: ['utils'] }
-      - { role: firefox, tags: ['firefox'] }
-      - { role: sxiv, tags: ['sxiv'] }
-      - { role: imagemagick, tags: ['imagemagick'] }
-      - { role: gimp, tags: ['gimp'] }
-      - { role: misc, tags: ['misc'] }
-      - { role: nmap, tags: ['nmap'] }
-      - { role: libreoffice, tags: ['libreoffice'] }
-      - { role: latex, tags: ['latex'] }
-      - { role: steam, tags: ['steam'] }
-      - { role: vlc, tags: ['vlc'] }
-      - { role: mpv, tags: ['mpv'] }
-      - { role: qemu, tags: ['qemu'] }
-      - { role: docker, tags: ['docker'] }
-      - { role: vagrant, tags: ['vagrant'] }
-      - { role: virtualbox, tags: ['virtualbox'] }
-      - { role: fzf, tags: ['fzf'] }
-      - { role: vpn, tags: ['vpn'] }
-      - { role: wine, tags: ['wine'] }
-      - { role: python3, tags: ['python3'] }
-      - { role: nvidia, tags: ['nvidia'], when: pc == "g751" }
-      - { role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751" }
-      - { role: npm, tags: ['npm'] }
-      - { role: go, tags: ['go'] }
-      - { role: i3lock, tags: ['i3lock'] }
   tags:
       - install
-
-# Install stuff AUR related.
-- hosts: all
-  become: true
-  become_user: aur_builder
-  roles:
-    - { role: yay, tags: ['yay'] }
-    - { role: st, tags: ['st'] }
-
-    - { role: discord, tags: ['discord'] }
-    - { role: teamspeak3, tags: ['teamspeak3'] }
-    - { role: spotify, tags: ['spotify'] }
-    - { role: aur_gui, tags: ['aur_gui'] }
-    #- { role: intellij-idea, tags: ['intellij-idea'] }
-    #- { role: android-studio, tags: ['android-studio'] }
-  tags:
-    - setup
-
 
 # Configure everything
 - hosts: all
   become: true
   become_user: "{{ user.name }}"
   roles:
-    - { role: sudo, tags: ['sudo'] }
+    - { role: networkmanager, tags: ['networkmanager'] }
+    - { role: sudo, tags: ['install', 'sudo'] }
+
+    - { role: gui, tags: ['gui'] }
+    - { role: utils, tags: ['utils'] }
+    - { role: firefox, tags: ['firefox'] }
+    - { role: sxiv, tags: ['sxiv'] }
+    - { role: imagemagick, tags: ['imagemagick'] }
+    - { role: gimp, tags: ['gimp'] }
+    - { role: misc, tags: ['misc'] }
+    - { role: nmap, tags: ['nmap'] }
+    - { role: libreoffice, tags: ['libreoffice'] }
+    - { role: latex, tags: ['latex'] }
+    - { role: steam, tags: ['steam'] }
+    - { role: vlc, tags: ['vlc'] }
+    - { role: mpv, tags: ['mpv'] }
+    - { role: qemu, tags: ['qemu'] }
+    - { role: docker, tags: ['docker'] }
+    - { role: vagrant, tags: ['vagrant'] }
+    - { role: virtualbox, tags: ['virtualbox'] }
+    - { role: fzf, tags: ['fzf'] }
+    - { role: vpn, tags: ['vpn'] }
+    - { role: wine, tags: ['wine'] }
+    - { role: python3, tags: ['python3'] }
+    - { role: nvidia, tags: ['nvidia'], when: pc == "g751" }
+    - { role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751" }
+    - { role: npm, tags: ['npm'] }
+    - { role: go, tags: ['go'] }
+    - { role: i3lock, tags: ['i3lock'] }
+
+    - { role: yay, tags: ['yay'] }
+    - { role: st, tags: ['st'] }
+    - { role: discord, tags: ['discord'] }
+    - { role: teamspeak3, tags: ['teamspeak3'] }
+    - { role: spotify, tags: ['spotify'] }
+    - { role: aur_gui, tags: ['aur_gui'] }
+    #- { role: intellij-idea, tags: ['intellij-idea'] }
+    #- { role: android-studio, tags: ['android-studio'] }
+
     - { role: rust, tags: ['rust'] }
     - { role: i3, tags: ['i3'] }
     - { role: ssh, tags: ['ssh'] }

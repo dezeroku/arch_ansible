@@ -1,5 +1,7 @@
 ---
 - name: Install LaTeX packages
+  become: true
+  become_user: root
   pacman:
     name:
       - texlive-most

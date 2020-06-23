@@ -1,19 +1,34 @@
 ---
-- name: Ensure builds/st folder exists
-  file:
-    path: /home/aur_builder/builds/st
+- name: create temporary build directory
+  tempfile:
     state: directory
-    recurse: yes
+    suffix: st-build
+  register: build_dir
 
 - name: Copy config
   copy:
     src: config.h
-    dest: /home/aur_builder/builds/st
+    dest: "{{ build_dir.path }}"
 
 - name: Copy PKGBUILD
   copy:
     src: PKGBUILD
-    dest: /home/aur_builder/builds/st
+    dest: "{{ build_dir.path }}"
+
+- name: Copy patch (hidecursor)
+  copy:
+    src: st-hidecursor-0.8.1.diff
+    dest: "{{ build_dir.path }}"
+
+- name: Copy patch (alpha)
+  copy:
+    src: st-alpha-0.8.1.diff
+    dest: "{{ build_dir.path }}"
+
+- name: Copy patch (anysize)
+  copy:
+    src: st-anysize-0.8.1.diff
+    dest: "{{ build_dir.path }}"
 
 - name: Build and install
-  command: chdir=/home/aur_builder/builds/st makepkg -si --noconfirm
+  command: chdir="{{ build_dir.path  }}" makepkg -si --noconfirm

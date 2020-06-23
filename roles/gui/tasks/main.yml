@@ -1,5 +1,7 @@
 ---
 - name: Set up X
+  become: true
+  become_user: root
   pacman:
     name: 
       - xorg
@@ -26,6 +28,8 @@
       - powerline-fonts
 
 - name: Set up audio
+  become: true
+  become_user: root
   pacman:
     name:
       - alsa-utils

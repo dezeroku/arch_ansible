@@ -1,5 +1,7 @@
 ---
 - name: Install sudo
+  become: true
+  become_user: root
   pacman:
     name: sudo
     state: latest

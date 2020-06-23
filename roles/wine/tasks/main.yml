@@ -1,5 +1,7 @@
 ---
 - name: Install WINE stuff
+  become: true
+  become_user: root
   pacman:
     name:
       - wine

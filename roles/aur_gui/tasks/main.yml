@@ -2,10 +2,8 @@
 - name: Install GUI related stuff from AUR
   aur:
     name:
-      - py3status
       - i3status-rust-git
       - ttf-font-icons
-        #- cower
       - powerline-fonts
       - indicator-kdeconnect-git
     skip_installed: true

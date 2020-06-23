@@ -1,5 +1,7 @@
 ---
 - name: Install some utilities
+  become: true
+  become_user: root
   pacman:
     name:
       - openssh

@@ -31,9 +31,15 @@
     regexp: "Include = /etc/pacman.d/mirrorlist"
 
 - name: Update repos
+  become: true
+  become_user: root
   pacman:
     update_cache: yes
+  when: pacman_update
 
-- name: Upgrade
+- name: Upgrade packages
+  become: true
+  become_user: root
   pacman:
     upgrade: yes
+  when: pacman_upgrade

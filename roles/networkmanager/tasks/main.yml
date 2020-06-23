@@ -1,5 +1,7 @@
 ---
 - name: Install NetworkManager
+  become: true
+  become_user: root
   pacman:
     name: networkmanager
     state: present 

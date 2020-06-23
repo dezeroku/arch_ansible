@@ -1,5 +1,7 @@
 ---
 - name: Install virtualbox
+  become: true
+  become_user: root
   pacman:
     name:
       - virtualbox
