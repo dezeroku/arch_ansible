@@ -14,7 +14,6 @@
 
       - { role: aur_builder, tags: ['aur_builder'] }
       - { role: gui, tags: ['gui'] }
-      - { role: cli, tags: ['cli'] }
       - { role: utils, tags: ['utils'] }
       - { role: firefox, tags: ['firefox'] }
       - { role: editors, tags: ['editors'] }
