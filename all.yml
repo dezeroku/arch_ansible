@@ -51,7 +51,6 @@
     - { role: teamspeak3, tags: ['teamspeak3'] }
     - { role: aur_video, tags: ['aur_video'] }
     - { role: spotify, tags: ['spotify'] }
-    - { role: aur_misc, tags: ['aur_misc'] }
     - { role: aur_gui, tags: ['aur_gui'] }
     #- { role: intellij-idea, tags: ['intellij-idea'] }
     #- { role: android-studio, tags: ['android-studio'] }
