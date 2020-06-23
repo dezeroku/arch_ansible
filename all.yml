@@ -47,10 +47,10 @@
     - { role: yay, tags: ['yay'] }
     - { role: st, tags: ['st'] }
 
-    - { role: aur_voice, tags: ['aur_voice'] }
-    - { role: aur_browsers, tags: ['aur_browsers'] }
+    - { role: discord, tags: ['discord'] }
+    - { role: teamspeak3, tags: ['teamspeak3'] }
     - { role: aur_video, tags: ['aur_video'] }
-    - { role: aur_spotify, tags: ['aur_spotify'] }
+    - { role: spotify, tags: ['spotify'] }
     - { role: aur_misc, tags: ['aur_misc'] }
     - { role: aur_gui, tags: ['aur_gui'] }
       #- { role: aur_ide, tags: ['aur_ide'] }

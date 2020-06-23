@@ -3,7 +3,6 @@
   aur: 
     skip_installed: true
     name: 
-      - discord 
       - teamspeak3
   become: yes
   become_user: aur_builder

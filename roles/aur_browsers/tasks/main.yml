@@ -1,9 +1,0 @@
----
-- name: Install browsers from AUR
-  aur:
-    name:
-      - tor-browser
-      - icecat-bin
-    skip_installed: true
-  become: true
-  become_user: aur_builder
