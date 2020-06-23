@@ -6,6 +6,14 @@
     name:
       - git
 
+- name: Install hub
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - hub
+  when: git_install_hub
+
 - block:
   - git_config:
      name: user.email

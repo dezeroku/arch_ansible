@@ -24,14 +24,13 @@
       - { role: nmap, tags: ['nmap'] }
       - { role: libreoffice, tags: ['libreoffice'] }
       - { role: latex, tags: ['latex'] }
-      - { role: programming, tags: ['programming'] }
       - { role: steam, tags: ['steam'] }
       - { role: video, tags: ['video'] }
       - { role: vm, tags: ['vm'] }
       - { role: fzf, tags: ['fzf'] }
       - { role: vpn, tags: ['vpn'] }
       - { role: wine, tags: ['wine'] }
-      - { role: python_packages, tags: ['python_packages'] }
+      - { role: python3, tags: ['python3'] }
       - { role: nvidia, tags: ['nvidia'], when: pc == "g751" }
       - { role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751" }
       - { role: npm, tags: ['npm'] }
