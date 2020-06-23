@@ -1,0 +1,5 @@
+---
+- name: Install LibreOffice
+  pacman:
+    name:
+      - libreoffice

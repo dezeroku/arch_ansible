@@ -22,7 +22,8 @@
       - { role: misc, tags: ['misc'] }
       - { role: necessary, tags: ['necessary'] }
       - { role: nmap, tags: ['nmap'] }
-      - { role: office, tags: ['office'] }
+      - { role: libreoffice, tags: ['libreoffice'] }
+      - { role: latex, tags: ['latex'] }
       - { role: programming, tags: ['programming'] }
       - { role: steam, tags: ['steam'] }
       - { role: video, tags: ['video'] }

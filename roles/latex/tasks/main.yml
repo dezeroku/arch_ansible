@@ -1,7 +1,6 @@
 ---
-- name: Install office stuff
+- name: Install LaTeX packages
   pacman:
     name:
-      - libreoffice
       - texlive-most
       - texlive-lang
