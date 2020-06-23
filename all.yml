@@ -53,7 +53,8 @@
     - { role: spotify, tags: ['spotify'] }
     - { role: aur_misc, tags: ['aur_misc'] }
     - { role: aur_gui, tags: ['aur_gui'] }
-      #- { role: aur_ide, tags: ['aur_ide'] }
+    #- { role: intellij-idea, tags: ['intellij-idea'] }
+    #- { role: android-studio, tags: ['android-studio'] }
   tags:
     - setup
 
