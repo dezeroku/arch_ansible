@@ -33,7 +33,7 @@
       - { role: python_packages, tags: ['python_packages'] }
       - { role: nvidia, tags: ['nvidia'], when: pc == "g751" }
       - { role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751" }
-      - { role: js_packages, tags: ['js_packages'] }
+      - { role: npm, tags: ['npm'] }
       - { role: go, tags: ['go'] }
       - { role: i3lock, tags: ['i3lock'] }
   tags:

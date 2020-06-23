@@ -1,0 +1,22 @@
+---
+- name: Install npm
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - npm
+
+- npm:
+    name: js-beautify
+    global: yes
+  when: npm_install_packages
+
+- npm:
+    name: sass
+    global: yes
+  when: npm_install_packages
+
+- npm:
+    name: jslint
+    global: yes
+  when: npm_install_packages
