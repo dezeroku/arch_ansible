@@ -1,7 +1,0 @@
----
-- name: Install video stuff
-  pacman:
-    name:
-      - vlc
-      - qmmp
-      - mpv

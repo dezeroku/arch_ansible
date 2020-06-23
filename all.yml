@@ -25,7 +25,8 @@
       - { role: libreoffice, tags: ['libreoffice'] }
       - { role: latex, tags: ['latex'] }
       - { role: steam, tags: ['steam'] }
-      - { role: video, tags: ['video'] }
+      - { role: vlc, tags: ['vlc'] }
+      - { role: mpv, tags: ['mpv'] }
       - { role: vm, tags: ['vm'] }
       - { role: fzf, tags: ['fzf'] }
       - { role: vpn, tags: ['vpn'] }
