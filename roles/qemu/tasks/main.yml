@@ -1,0 +1,6 @@
+---
+- name: Install qemu
+  pacman:
+    name:
+      - qemu
+      - qemu-arch-extra

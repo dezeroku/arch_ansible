@@ -26,7 +26,10 @@
       - { role: steam, tags: ['steam'] }
       - { role: vlc, tags: ['vlc'] }
       - { role: mpv, tags: ['mpv'] }
-      - { role: vm, tags: ['vm'] }
+      - { role: qemu, tags: ['qemu'] }
+      - { role: docker, tags: ['docker'] }
+      - { role: vagrant, tags: ['vagrant'] }
+      - { role: virtualbox, tags: ['virtualbox'] }
       - { role: fzf, tags: ['fzf'] }
       - { role: vpn, tags: ['vpn'] }
       - { role: wine, tags: ['wine'] }

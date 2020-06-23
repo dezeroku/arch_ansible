@@ -1,0 +1,5 @@
+---
+- name: Install virtualbox
+  pacman:
+    name:
+      - virtualbox

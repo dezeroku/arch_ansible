@@ -1,0 +1,4 @@
+---
+dependencies:
+  # This should be probably defined via variable.
+  - role: virtualbox

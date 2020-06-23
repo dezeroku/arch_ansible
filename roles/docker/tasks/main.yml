@@ -1,18 +1,12 @@
 ---
-- name: Set up  virtualization stuff
+- name: Install docker
   pacman:
     name:
-      - qemu
-      - qemu-arch-extra 
       - docker
 
-- name: Started docker
+- name: Start and enable docker service
   systemd:
       state: started
-      name: docker
-
-- name: Enabled docker
-  systemd:
       enabled: yes
       name: docker
 
