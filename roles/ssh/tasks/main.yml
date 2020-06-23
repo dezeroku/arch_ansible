@@ -1,4 +1,11 @@
 ---
+- name: Install openssh
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - openssh
+
 - name: Ensure directory exists
   file:
     path: /home/{{ user.name }}/.ssh

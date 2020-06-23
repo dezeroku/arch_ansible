@@ -1,4 +1,11 @@
 ---
+- name: Install i3-gaps
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - i3-gaps
+
 - name: Ensure directory exists
   file:
     path: /home/{{ user.name }}/.config/i3/config_temp

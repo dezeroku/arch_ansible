@@ -1,4 +1,11 @@
 ---
+- name: Install GPG
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - gnupg
+
 - name: Ensure directory exists
   file:
     path: /home/{{ user.name }}/.gnupg

@@ -1,4 +1,11 @@
 ---
+- name: Install ntp
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - ntp
+
 - name: Enable and start NTP synchronisation
   systemd:
     name: systemd-timesyncd.service

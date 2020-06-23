@@ -1,10 +1,10 @@
 ---
-- name: Install i3lock-fancy
-  aur:
-    use: yay
-    name: i3lock
-  become: yes
-  become_user: aur_builder
+- name: Install i3lock
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - i3lock
 
 - name: Copy suspend service file
   copy:

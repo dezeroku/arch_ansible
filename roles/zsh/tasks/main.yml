@@ -1,14 +1,13 @@
 ---
 # Get zsh install script, and modify it for automation.
 
-- name: Install zsh, suggestions and fzf
+- name: Install zsh and suggestions 
   become: true
   become_user: root
   pacman:
     name:
       - zsh
       - zsh-autosuggestions
-      - fzf
 
 - name: Download zsh script
   get_url:

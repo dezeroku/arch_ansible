@@ -4,7 +4,7 @@
   become: true
   become_user: root
   roles:
-      - { role: time, tags: ['time'] }
+      - { role: ntp, tags: ['ntp'] }
       - { role: pacman, tags: ['pacman'] }
 
       - { role: create_user, tags: ['create_user'] }
@@ -28,6 +28,7 @@
       - { role: steam, tags: ['steam'] }
       - { role: video, tags: ['video'] }
       - { role: vm, tags: ['vm'] }
+      - { role: fzf, tags: ['fzf'] }
       - { role: vpn, tags: ['vpn'] }
       - { role: wine, tags: ['wine'] }
       - { role: python_packages, tags: ['python_packages'] }
@@ -70,7 +71,7 @@
     - { role: tmux, tags: ['tmux'] }
     - { role: git, tags: ['git'] }
     - { role: gpg, tags: ['gpg'] }
-    #- { role: zsh, tags: ['zsh'] }
+    - { role: zsh, tags: ['zsh'] }
     - { role: fish, tags: ['fish'] }
     - { role: ranger, tags: ['ranger'] }
     - { role: vim, tags: ['vim'] }
