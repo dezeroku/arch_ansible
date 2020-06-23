@@ -1,3 +1,4 @@
 ---
 dependencies:
   - role: fzf
+  - role: keychain

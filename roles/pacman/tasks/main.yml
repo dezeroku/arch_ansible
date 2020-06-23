@@ -1,4 +1,11 @@
 ---
+- name: Install contrib
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - pacman-contrib
+
 - name: enable colors
   lineinfile:
     dest: /etc/pacman.conf

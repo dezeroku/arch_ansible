@@ -1,0 +1,7 @@
+---
+- name: Install ntfs-3g
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - ntfs-3g

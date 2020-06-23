@@ -1,0 +1,7 @@
+---
+- name: Install fuse
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - fuse
