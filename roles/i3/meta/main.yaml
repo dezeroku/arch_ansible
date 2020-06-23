@@ -1,0 +1,9 @@
+---
+dependencies:
+  - role: aur_builder
+  - role: compton
+  - role: dunst
+  - role: flameshot
+  - role: redshift
+  - role: udiskie
+  - role: xresources

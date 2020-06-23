@@ -1,0 +1,7 @@
+---
+- name: Install flameshot
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - flameshot

@@ -6,6 +6,14 @@
     name:
       - i3-gaps
 
+- name: Install i3status-rust
+  aur:
+    name:
+      - i3status-rust
+    skip_installed: true
+  become: true
+  become_user: aur_builder
+
 - name: Ensure directory exists
   file:
     path: /home/{{ user.name }}/.config/i3/config_temp
