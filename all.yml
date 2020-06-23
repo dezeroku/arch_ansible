@@ -16,8 +16,7 @@
       - { role: gui, tags: ['gui'] }
       - { role: cli, tags: ['cli'] }
       - { role: utils, tags: ['utils'] }
-      - { role: editors, tags: ['editors'] }
-      - { role: browsers, tags: ['browsers'] }
+      - { role: firefox, tags: ['firefox'] }
       - { role: editors, tags: ['editors'] }
       - { role: image, tags: ['image'] }
       - { role: misc, tags: ['misc'] }

@@ -9,3 +9,9 @@
       name: NetworkManager
       enabled: yes
       state: started
+
+- name: Install NetworkManager's applet
+  pacman:
+    name: network-manager-applet
+    state: present
+  when: network_manager_enable_gui
