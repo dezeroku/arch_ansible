@@ -13,8 +13,18 @@
       src: acer_ec.pl
       dest: /usr/bin/acer_ec.pl
 
-- name: Set as executable
+- name: Copy script itself
+  become: true
+  become_user: root
+  copy:
+      src: temperature_management.py
+      dest: /usr/bin/temperature_management.py
+
+- name: Set binary as executable
   file: dest=/usr/bin/acer_ec.pl mode=a+x
+
+- name: Set script as executable
+  file: dest=/usr/bin/temperature_management.py mode=a+x
 
 - name: Start and enable service
   become: true
