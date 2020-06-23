@@ -16,7 +16,9 @@
       - { role: gui, tags: ['gui'] }
       - { role: utils, tags: ['utils'] }
       - { role: firefox, tags: ['firefox'] }
-      - { role: image, tags: ['image'] }
+      - { role: sxiv, tags: ['sxiv'] }
+      - { role: imagemagick, tags: ['imagemagick'] }
+      - { role: gimp, tags: ['gimp'] }
       - { role: misc, tags: ['misc'] }
       - { role: necessary, tags: ['necessary'] }
       - { role: network, tags: ['network'] }

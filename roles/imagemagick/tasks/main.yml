@@ -1,0 +1,7 @@
+---
+- name: Install imagemagick
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - imagemagick

@@ -1,0 +1,7 @@
+---
+- name: Install sxiv
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - sxiv
