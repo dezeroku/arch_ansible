@@ -1,10 +1,11 @@
 ---
-- name: Install compton
+- name: Install compton and transset-df
   become: true
   become_user: root
   pacman:
     name:
       - compton
+      - transset-df
 
 - name: Ensure directory exists
   file:

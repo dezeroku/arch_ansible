@@ -1,0 +1,8 @@
+---
+- name: Install xorg
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - xorg
+      - xorg-xinit

@@ -1,0 +1,15 @@
+---
+- name: Install mesa
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - mesa
+
+- name: Install mesa-demos
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - mesa-demos
+  when: mesa_install_mesa_demos

@@ -1,0 +1,8 @@
+---
+- name: Install ponymix and playerctl
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - ponymix 
+      - playerctl 

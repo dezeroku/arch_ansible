@@ -1,0 +1,34 @@
+---
+- name: Install pulseaudio packages
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - alsa-utils
+      - pulseaudio
+
+- name: Install pulseaudio bluetooth codecs from AUR
+  aur:
+    name:
+      - pulseaudio-modules-bt-git
+    skip_installed: true
+  become: true
+  become_user: aur_builder
+
+- name: Install pulseaudio equalizer plugin
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - pulseaudio-equalizer
+  when: pulseaudio_install_equalizer
+
+- name: Install pavucontrol
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - pavucontrol
+  when: pulseaudio_install_pavucontrol
+
+# TODO: add task that will bump sampler rate and in effect quality

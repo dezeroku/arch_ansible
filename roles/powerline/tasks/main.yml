@@ -1,0 +1,8 @@
+---
+- name: Install powerline and fonts
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - powerline
+      - powerline-fonts

@@ -1,8 +1,17 @@
 ---
 dependencies:
-  - role: indicator-kdeconnect
-  - role: i3status-rust
+  - role: xorg
   - role: compton
+  - role: mesa
+  - role: pulseaudio
+  - role: audio_control
+  - role: i3status-rust
+  - role: indicator-kdeconnect
+  - role: feh
+  - role: kitty
+  - role: terminator
+  - role: fonts
+  - role: powerline
   - role: dunst
   - role: flameshot
   - role: redshift

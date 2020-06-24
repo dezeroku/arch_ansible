@@ -1,9 +1,17 @@
 ---
+- name: Install fonts
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - awesome-terminal-fonts
+      - ttf-hack
+      - ttf-inconsolata
+
 - name: Install fonts from AUR
   aur:
     name:
       - ttf-font-icons
-      - powerline-fonts
     skip_installed: true
   become: true
   become_user: aur_builder
