@@ -1,0 +1,3 @@
+---
+vnstat_enable_service: True
+vnstat_service_state: "started"

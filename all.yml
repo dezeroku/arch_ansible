@@ -1,5 +1,10 @@
 ---
-# Install applications
+# This playbook should be treated mainly as a point of reference.
+# It contains all roles that are defined (listed alphabetically) and each
+# one of these can be run by calling ansible with --tags <role_name>
+# Whenever you want to run single role, you should probably use this playbook.
+
+# Set time to be synced, configure pacman and create user.
 - hosts: all
   become: true
   become_user: root
@@ -8,64 +13,90 @@
       - { role: pacman, tags: ['pacman'] }
       - { role: create_user, tags: ['create_user'] }
   tags:
-      - install
+      - base
 
-# Configure everything
+# Install all utilities available.
 - hosts: all
   become: true
   become_user: "{{ user.name }}"
   roles:
-    - { role: networkmanager, tags: ['networkmanager'] }
-    - { role: sudo, tags: ['install', 'sudo'] }
-
-    - { role: firefox, tags: ['firefox'] }
-    - { role: sxiv, tags: ['sxiv'] }
-    - { role: imagemagick, tags: ['imagemagick'] }
-    - { role: gimp, tags: ['gimp'] }
-    - { role: misc, tags: ['misc'] }
-    - { role: nmap, tags: ['nmap'] }
-    - { role: libreoffice, tags: ['libreoffice'] }
-    - { role: latex, tags: ['latex'] }
-    - { role: steam, tags: ['steam'] }
-    - { role: vlc, tags: ['vlc'] }
-    - { role: mpv, tags: ['mpv'] }
-    - { role: qemu, tags: ['qemu'] }
+    - { role: android-studio, tags: ['android-studio'] }
+    - { role: audio_control, tags: ['audio_control'] }
+    - { role: aur_builder, tags: ['aur_builder'] }
+    - { role: compton, tags: ['compton'] }
+    - { role: deluge, tags: ['deluge'] }
+    - { role: discord, tags: ['discord'] }
     - { role: docker, tags: ['docker'] }
-    - { role: vagrant, tags: ['vagrant'] }
-    - { role: virtualbox, tags: ['virtualbox'] }
+    - { role: dunst, tags: ['dunst'] }
+    - { role: emacs, tags: ['emacs'] }
+    - { role: exfat-utils, tags: ['exfat-utils'] }
+    - { role: feh, tags: ['feh'] }
+    - { role: firefox, tags: ['firefox'] }
+    - { role: fish, tags: ['fish'] }
+    - { role: flameshot, tags: ['flameshot'] }
+    - { role: fonts, tags: ['fonts'] }
+    - { role: fuse, tags: ['fuse'] }
     - { role: fzf, tags: ['fzf'] }
-    - { role: vpn, tags: ['vpn'] }
-    - { role: wine, tags: ['wine'] }
-    - { role: python3, tags: ['python3'] }
+    - { role: gimp, tags: ['gimp'] }
+    - { role: git, tags: ['git'] }
+    - { role: go, tags: ['go'] }
+    - { role: gparted, tags: ['gparted'] }
+    - { role: gpg, tags: ['gpg'] }
+    - { role: i3, tags: ['i3'] }
+    - { role: i3lock, tags: ['i3lock'] }
+    - { role: i3status-rust, tags: ['i3status-rust'] }
+    - { role: imagemagick, tags: ['imagemagick'] }
+    - { role: indicator-kdeconnect, tags: ['indicator-kdeconnect'] }
+    - { role: intellij-idea, tags: ['intellij-idea'] }
+    - { role: keychain, tags: ['keychain'] }
+    - { role: kitty, tags: ['kitty'] }
+    - { role: latex, tags: ['latex'] }
+    - { role: libreoffice, tags: ['libreoffice'] }
+    - { role: mesa, tags: ['mesa'] }
+    - { role: misc, tags: ['misc'] }
+    - { role: mpv, tags: ['mpv'] }
+    - { role: ncdu, tags: ['ncdu'] }
+    - { role: neofetch, tags: ['neofetch'] }
+    - { role: networkmanager, tags: ['networkmanager'] }
+    - { role: nmap, tags: ['nmap'] }
+    - { role: npm, tags: ['npm'] }
+    - { role: ntfs-3g, tags: ['ntfs-3g'] }
     - { role: nvidia, tags: ['nvidia'], when: pc == "g751" }
     - { role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751" }
-    - { role: npm, tags: ['npm'] }
-    - { role: go, tags: ['go'] }
-    - { role: i3lock, tags: ['i3lock'] }
-
-    - { role: st, tags: ['st'] }
-    - { role: discord, tags: ['discord'] }
-    - { role: teamspeak3, tags: ['teamspeak3'] }
-    - { role: spotify, tags: ['spotify'] }
-    - { role: fonts, tags: ['fonts'] }
-    #- { role: intellij-idea, tags: ['intellij-idea'] }
-    #- { role: android-studio, tags: ['android-studio'] }
-
-    - { role: rust, tags: ['rust'] }
-    - { role: i3, tags: ['i3'] }
-    - { role: ssh, tags: ['ssh'] }
-    - { role: tmux, tags: ['tmux'] }
-    - { role: git, tags: ['git'] }
-    - { role: gpg, tags: ['gpg'] }
-    - { role: zsh, tags: ['zsh'] }
-    - { role: fish, tags: ['fish'] }
-    - { role: ranger, tags: ['ranger'] }
-    - { role: vim, tags: ['vim'] }
-    - { role: compton, tags: ['compton'] }
-    - { role: dunst, tags: ['dunst'] }
-    - { role: rofi, tags: ['rofi'] }
-    - { role: xresources, tags: ['xresources'] }
+    - { role: p7zip, tags: ['p7zip'] }
+    - { role: pacman, tags: ['pacman'] }
+    - { role: pcmanfm, tags: ['pcmanfm'] }
+    - { role: powerline, tags: ['powerline'] }
+    - { role: pulseaudio, tags: ['pulseaudio'] }
+    - { role: python3, tags: ['python3'] }
+    - { role: qemu, tags: ['qemu'] }
     - { role: qutebrowser, tags: ['qutebrowser'] }
-    - { role: emacs, tags: ['emacs'] }
+    - { role: ranger, tags: ['ranger'] }
+    - { role: redshift, tags: ['redshift'] }
+    - { role: rofi, tags: ['rofi'] }
+    - { role: rust, tags: ['rust'] }
+    - { role: spotify, tags: ['spotify'] }
+    - { role: ssh, tags: ['ssh'] }
+    - { role: st, tags: ['st'] }
+    - { role: steam, tags: ['steam'] }
+    - { role: sudo, tags: ['sudo'] }
+    - { role: sxiv, tags: ['sxiv'] }
+    - { role: teamspeak3, tags: ['teamspeak3'] }
+    - { role: terminator, tags: ['terminator'] }
+    - { role: tldr, tags: ['tldr'] }
+    - { role: tmux, tags: ['tmux'] }
+    - { role: udiskie, tags: ['udiskie'] }
+    - { role: vagrant, tags: ['vagrant'] }
+    - { role: vim, tags: ['vim'] }
+    - { role: virtualbox, tags: ['virtualbox'] }
+    - { role: vlc, tags: ['vlc'] }
+    - { role: vnstat, tags: ['vnstat'] }
+    - { role: openvpn, tags: ['openvpn'] }
+    - { role: wget, tags: ['wget'] }
+    - { role: wine, tags: ['wine'] }
+    - { role: xarchiver, tags: ['xarchiver'] }
+    - { role: youtube-dl, tags: ['youtube-dl'] }
+    - { role: zathura, tags: ['zathura'] }
+    - { role: zsh, tags: ['zsh'] }
   tags:
-    - configure
+    - install
