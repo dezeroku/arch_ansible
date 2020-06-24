@@ -1,37 +1,48 @@
-## Ansible version of i3\_config
+## Arch setup roles written in Ansible
 
-Heavily inspired by [spark](https://github.com/pigmonkey/spark) .
+In the past, when I was distro-hopping at least once every two months, I've found it that it's not easy to keep track of all dotfiles and applications that I use.
+I've decided to do something with that, first approach was to define my own ["high level package manager"](https://github.com/d0ku/i3_config) and I got tired with it quite soon (the fact that I was only starting to learn programming at all wasn't helpful).
+Some time later I've stumbled upon Ansible in one of the courses I was taking and it seemed to be just perfect for the job, with all its dependencies management, changing state only when it's required etc., so I've decided to move my config to it.
+Fast-forward till today, this repository contains a bunch of roles that I am using everytime I need to set up an Arch install.
+It's not distro-agnostic, but serves as good starting point when I am experimenting with distros like Gentoo.
 
-Individual tags for each role.
+## What's done
 
-## Assumptions
+- [x] Small roles that are supposed to set up single functionality (i3 kind of breaks this rule)
+- [x] Dependencies correctly defined between these roles
+- [ ] Playbooks for common groups like audio related applications, xorg etc.
 
-You already have Archlinux base & base-devel installed, and you only want to set up system for daily-usage.
+Currently I am refactoring most of the roles I've written in the beginning, due to them being very monolithic.
 
+## Profiles
 
-All roles prefixed with 'aur' depend on aur_builder user with sudo rights (aur_builder role).
+At the moment configuration is based on some global variables, which are:
 
-## Base 'profiles'
+* username
+* ssh key generation options
+* email (to be used in e.g. git configuration)
+* shell you're going to use
 
-| Name | Resolution |
-| ---- | ---------- |
-| x200 | 1280x800   |
-| x230 | 1366x768   |
-| g751 | 1920x1080  |
+There are some roles which are tied to specific hardware, for example `g751` requires additional service for managing GPU fan speed, resolutions also differ between machines.
+That's one of the things I am currently working on, that kind of hardcoding some configurations is ugly and should be refactored.
 
-## Basic command
-Run all roles for g751 pc on localhost.
+| Name                 | Resolution |
+| ----                 | ---------- |
+| x200 (Thinkpad X200) | 1280x800   |
+| x230 (Thinkpad X230) | 1366x768   |
+| g751 (Asus G751JM)   | 1920x1080  |
+
+## Commands
+
+At the moment there's `all.yml` playbook defined, that contains all roles available (sorted alphabetically).
+It can be used to run single roles, e.g. to set up vim on `x230` machine
 ```
-ansible-playbook all.yml -i inventory -e pc=g751
+ansible-playbook all.yml -i inventory -e pc=x230 --tags vim
 ```
 
-### TODO
+It can also be used to installed all packages (some rules can be commented if not needed, ugly solution at the moment).
 
-1. Better handling of dependencies.
-2. README for specific roles
-3. Fix some roles which deadlock (e.g. vim related)
+## Credits
 
-
-### Credits
-
-Take a look at [dotfiles repo](https://github.com/tojatos/dotfiles) from @tojatos (especially ZSH theme).
+* Heavily inspired by [spark](https://github.com/pigmonkey/spark). If you're looking to implement something similar, then you should probably base on this repository.
+* Take a look at [dotfiles repo](https://github.com/tojatos/dotfiles) from @tojatos (especially ZSH theme).
