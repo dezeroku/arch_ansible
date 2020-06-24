@@ -7,29 +7,39 @@
       - qutebrowser
 
 - name: Ensure directory exists
+  become: true
+  become_user: "{{ user.name }}"
   file:
     path: /home/{{ user.name }}/.config/qutebrowser
     state: directory
     recurse: yes
 
 - name: Copy qutebrowser config
+  become: true
+  become_user: "{{ user.name }}"
   copy:
       src: qute_config.py
       dest: /home/{{ user.name }}/.config/qutebrowser/config.py
 
 - name: Ensure scripts directory exists
+  become: true
+  become_user: "{{ user.name }}"
   file:
     path: /home/{{ user.name }}/.config/qutebrowser/scripts
     state: directory
     recurse: yes
 
 - name: Copy download script
+  become: true
+  become_user: "{{ user.name }}"
   copy:
       src: download_video.sh
       dest: /home/{{ user.name }}/.config/qutebrowser/scripts/download_video.sh
 
 # TODO: move to separate bitwarden rol
 - name: Install password manager and dependency
+  become: true
+  become_user: root
   pacman:
     name:
     - python-tldextract

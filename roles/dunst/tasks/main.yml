@@ -7,12 +7,16 @@
       - dunst
 
 - name: Ensure directory exists
+  become: true
+  become_user: "{{ user.name }}"
   file:
     path: /home/{{ user.name }}/.config/dunst
     state: directory
     recurse: yes
 
 - name: Copy dunst dotfile
+  become: true
+  become_user: "{{ user.name }}"
   copy:
       src: dunstrc
       dest: /home/{{ user.name }}/.config/dunst/dunstrc

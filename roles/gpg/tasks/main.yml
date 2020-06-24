@@ -7,17 +7,23 @@
       - gnupg
 
 - name: Ensure directory exists
+  become: yes
+  become_user: "{{ user.name }}"
   file:
     path: /home/{{ user.name }}/.gnupg
     state: directory
     recurse: yes
 
 - name: Copy gpg config
+  become: yes
+  become_user: "{{ user.name }}"
   copy:
       src: gpg_config
       dest: /home/{{ user.name }}/.gnupg/gpg-agent.conf
 
 - name: Set gpg key to use with git
+  become: yes
+  become_user: "{{ user.name }}"
   git_config:
     name: user.signingkey
     scope: global
@@ -25,6 +31,8 @@
   when: user.gpg_key is defined
 
 - name: Set git to always use gpg
+  become: yes
+  become_user: "{{ user.name }}"
   git_config:
     name: commit.gpgsign
     scope: global

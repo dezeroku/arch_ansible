@@ -76,7 +76,7 @@
     - { role: rofi, tags: ['rofi'] }
     - { role: rust, tags: ['rust'] }
     - { role: spotify, tags: ['spotify'] }
-    - { role: ssh, tags: ['ssh'] }
+    - { role: openssh, tags: ['openssh'] }
     - { role: st, tags: ['st'] }
     - { role: steam, tags: ['steam'] }
     - { role: sudo, tags: ['sudo'] }

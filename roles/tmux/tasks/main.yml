@@ -7,23 +7,33 @@
       - tmux
 
 - name: Ensure directory exists
+  become: true
+  become_user: "{{ user.name }}"
   file:
     path: /home/{{ user.name }}/.tmux/plugins
     state: directory
     recurse: yes
 
 - name: Clone tmux plugin manager
+  become: true
+  become_user: "{{ user.name }}"
   git:
     repo: https://github.com/tmux-plugins/tpm.git
     dest: /home/{{ user.name }}/.tmux/plugins/tpm
 
 - name: Ensure directory exists
+  become: true
+  become_user: "{{ user.name }}"
   file:
     path: /home/{{ user.name }}
     state: directory
     recurse: yes
 
 - name: Copy tmux.conf
+  become: true
+  become_user: "{{ user.name }}"
   copy:
     src: tmux.conf
     dest: /home/{{ user.name }}/.tmux.conf
+
+# TODO: actually install plugins

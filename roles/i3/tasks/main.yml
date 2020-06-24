@@ -7,52 +7,70 @@
       - i3-gaps
 
 - name: Ensure directory exists
+  become: yes
+  become_user: "{{ user.name }}"
   file:
     path: /home/{{ user.name }}/.config/i3/config_temp
     state: directory
     recurse: yes
 
 - name: Copy scripts directory
+  become: yes
+  become_user: "{{ user.name }}"
   copy:
     src: scripts
     dest: /home/{{ user.name }}/.config/i3/
 
 - name: Copy wallpapers
+  become: yes
+  become_user: "{{ user.name }}"
   copy:
       src: wallpapers/{{ pc }}/
       dest: /home/{{ user.name }}/.config/i3/wallpapers
 
 - name: Copy base config
+  become: yes
+  become_user: "{{ user.name }}"
   copy:
     src: base
     dest: /home/{{ user.name }}/.config/i3/config_temp/base
   register: base_res
 
 - name: Copy specific config
+  become: yes
+  become_user: "{{ user.name }}"
   copy:
     src: specific_{{ pc }}
     dest: /home/{{ user.name }}/.config/i3/config_temp/specific
   register: spec_res
 
 - name: Merge configs
+  become: yes
+  become_user: "{{ user.name }}"
   assemble:
       src: /home/{{ user.name }}/.config/i3/config_temp
       dest: /home/{{ user.name }}/.config/i3/config
       delimiter: "#################################################################"
 
 - name: Copy specific status config
+  become: yes
+  become_user: "{{ user.name }}"
   copy:
     src: specific_status_{{ pc }}
     dest: /home/{{ user.name }}/.config/i3/i3status.conf
   when: pc != "x230" and pc != "g751"
 
 - name: Copy specific status config (i3status-rc)
+  become: yes
+  become_user: "{{ user.name }}"
   copy:
     src: specific_status_rc_{{ pc }}
     dest: /home/{{ user.name }}/.config/i3/status_rc.yoml
   when: pc == "x230" or pc == "g751"
 
 - name: Copy specific xinitrc
+  become: yes
+  become_user: "{{ user.name }}"
   copy:
     src: specific_xinitrc_{{ pc }}
     dest: /home/{{ user.name }}/.xinitrc

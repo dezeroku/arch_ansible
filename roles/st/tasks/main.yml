@@ -1,34 +1,50 @@
 ---
+# TODO: this recipe could probably use AUR library?
+
 - name: create temporary build directory
+  become: true
+  become_user: root
   tempfile:
     state: directory
     suffix: st-build
   register: build_dir
 
 - name: Copy config
+  become: true
+  become_user: root
   copy:
     src: config.h
     dest: "{{ build_dir.path }}"
 
 - name: Copy PKGBUILD
+  become: true
+  become_user: root
   copy:
     src: PKGBUILD
     dest: "{{ build_dir.path }}"
 
 - name: Copy patch (hidecursor)
+  become: true
+  become_user: root
   copy:
     src: st-hidecursor-0.8.1.diff
     dest: "{{ build_dir.path }}"
 
 - name: Copy patch (alpha)
+  become: true
+  become_user: root
   copy:
     src: st-alpha-0.8.1.diff
     dest: "{{ build_dir.path }}"
 
 - name: Copy patch (anysize)
+  become: true
+  become_user: root
   copy:
     src: st-anysize-0.8.1.diff
     dest: "{{ build_dir.path }}"
 
 - name: Build and install
-  command: chdir="{{ build_dir.path  }}" makepkg -si --noconfirm
+  become: true
+  become_user: root
+  command: chdir="{{ build_dir.path }}" makepkg -si --noconfirm

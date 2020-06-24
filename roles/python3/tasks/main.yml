@@ -8,6 +8,8 @@
       - python-pip
 
 - name: Install Python3 packages.
+  become: true
+  become_user: "{{ user.name }}"
   pip:
     executable: pip3
     name:

@@ -10,33 +10,45 @@
       - zsh-autosuggestions
 
 - name: Download zsh script
+  become: true
+  become_user: "{{ user.name }}"
   get_url:
     url: https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
     dest: /tmp/ohmyzsh.sh
 
 - name: Remove old zsh (if exists)
+  become: true
+  become_user: "{{ user.name }}"
   file:
     path: /home/{{ user.name }}/.oh-my-zsh
     state: absent
 
 - name: Get zsh
+  become: true
+  become_user: "{{ user.name }}"
   command: chdir=/tmp {{ item }}
   with_items:
       #      - sed -i.tmp 's:env zsh -l::g' ohmyzsh.sh
       - sh ohmyzsh.sh
 
 - name: Copy zsh config
+  become: true
+  become_user: "{{ user.name }}"
   template:
       src: zshrc
       dest: /home/{{ user.name }}/.zshrc
 
 - name: Ensure directory exists
+  become: true
+  become_user: "{{ user.name }}"
   file:
     path: /home/{{ user.name }}/.oh-my-zsh/themes
     state: directory
     recurse: yes
 
 - name: Copy theme
+  become: true
+  become_user: "{{ user.name }}"
   copy:
     src: tosAgnoster.zsh-theme
     dest: /home/{{ user.name }}/.oh-my-zsh/themes/tosAgnoster.zsh-theme

@@ -7,9 +7,13 @@
       - emacs
 
 - name: Copy Emacs config
+  become: true
+  become_user: "{{ user.name }}"
   copy:
     src: emacs
     dest: /home/{{ user.name }}/.emacs
 
 - name: Set up Emacs
+  become: true
+  become_user: "{{ user.name }}"
   shell: yes | emacs --script /home/{{ user.name }}/.emacs

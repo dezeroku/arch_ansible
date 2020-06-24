@@ -7,15 +7,21 @@
       - rustup
 
 - name: Ensure directory exists
+  become: true
+  become_user: "{{ user.name }}"
   file:
     path: /home/{{ user.name }}/.rustup
     state: directory
     recurse: yes
 
 - name: Install chosen toolchain
+  become: true
+  become_user: "{{ user.name }}"
   command: rustup toolchain install "{{ rust_toolchain_type }}"
   when: rust_install_toolchain
 
 - name: Install rls
+  become: true
+  become_user: "{{ user.name }}"
   command: rustup component add rls --toolchain "{{ rust_toolchain_type }}"
   when: rust_install_toolchain and rust_install_rls

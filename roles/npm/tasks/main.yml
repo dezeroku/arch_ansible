@@ -6,17 +6,24 @@
     name:
       - npm
 
+# TODO: Installing packages globally as root is just plain ugly.
 - npm:
     name: js-beautify
     global: yes
   when: npm_install_packages
+  become: true
+  become_user: root
 
 - npm:
     name: sass
     global: yes
   when: npm_install_packages
+  become: true
+  become_user: root
 
 - npm:
     name: jslint
     global: yes
   when: npm_install_packages
+  become: true
+  become_user: root

@@ -7,6 +7,8 @@
       - pacman-contrib
 
 - name: enable colors
+  become: true
+  become_user: root
   lineinfile:
     dest: /etc/pacman.conf
     state: "present"
@@ -15,6 +17,8 @@
     line: "Color"
 
 - name: multilib support 1
+  become: true
+  become_user: root
   lineinfile:
     dest: /etc/pacman.conf
     state: "present"
@@ -23,6 +27,8 @@
     insertafter: "^#\\[multilib\\]"
 
 - name: multilib 2
+  become: true
+  become_user: root
   lineinfile:
     dest: /etc/pacman.conf
     state: "present"

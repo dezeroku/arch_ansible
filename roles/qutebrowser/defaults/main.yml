@@ -1,2 +1,4 @@
 ---
 qutebrowser_install_widevine: True
+user:
+  name: d0ku
