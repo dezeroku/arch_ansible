@@ -1,6 +1,7 @@
 ---
 dependencies:
-  - role: aur_builder
+  - role: indicator-kdeconnect
+  - role: i3status-rust
   - role: compton
   - role: dunst
   - role: flameshot

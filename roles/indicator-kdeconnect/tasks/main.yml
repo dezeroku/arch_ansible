@@ -1,0 +1,8 @@
+---
+- name: Install indicator-kdeconnect using AUR
+  aur:
+    name:
+      - indicator-kdeconnect-git
+    skip_installed: true
+  become: true
+  become_user: aur_builder

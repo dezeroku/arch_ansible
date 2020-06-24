@@ -1,11 +1,9 @@
 ---
-- name: Install GUI related stuff from AUR
+- name: Install fonts from AUR
   aur:
     name:
-      - i3status-rust-git
       - ttf-font-icons
       - powerline-fonts
-      - indicator-kdeconnect-git
     skip_installed: true
   become: true
   become_user: aur_builder

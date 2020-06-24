@@ -50,7 +50,7 @@
     - { role: discord, tags: ['discord'] }
     - { role: teamspeak3, tags: ['teamspeak3'] }
     - { role: spotify, tags: ['spotify'] }
-    - { role: aur_gui, tags: ['aur_gui'] }
+    - { role: fonts, tags: ['fonts'] }
     #- { role: intellij-idea, tags: ['intellij-idea'] }
     #- { role: android-studio, tags: ['android-studio'] }
 
