@@ -18,7 +18,6 @@
     - { role: networkmanager, tags: ['networkmanager'] }
     - { role: sudo, tags: ['install', 'sudo'] }
 
-    - { role: utils, tags: ['utils'] }
     - { role: firefox, tags: ['firefox'] }
     - { role: sxiv, tags: ['sxiv'] }
     - { role: imagemagick, tags: ['imagemagick'] }

@@ -1,0 +1,7 @@
+---
+- name: Install ncdu
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - ncdu
