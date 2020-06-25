@@ -1,7 +1,8 @@
 ---
 user:
   name: d0ku
-  pc: default
 
+i3_resolution: "none"
 i3_setup_g751_scripts: False
 i3_nopasswd_g751_scripts: False
+i3_copy_xinitrc: True

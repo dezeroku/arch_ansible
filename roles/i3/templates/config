@@ -281,3 +281,6 @@ bindsym $mod+Control+l exec "/usr/bin/i3lock && sleep 1"
 
 default_border pixel 1
 hide_edge_borders both
+
+{% set specific_config = 'specific_' ~ i3_resolution %}
+{% include specific_config %}
