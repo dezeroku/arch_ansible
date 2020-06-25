@@ -1,3 +1,4 @@
 ---
 user:
   name: d0ku
+  shell: /bin/zsh
