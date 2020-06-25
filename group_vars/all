@@ -13,3 +13,5 @@ pc: default
 # WA: until better way of configuring global settings is done.
 openssh_start_server: "{{ pc == 'g751' }}"
 openssh_enable_server: "{{ pc == 'g751' }}"
+i3_setup_g751_scripts: "{{ pc == 'g751' }}"
+i3_nopasswd_g751_scripts: "{{ pc == 'g751' }}"

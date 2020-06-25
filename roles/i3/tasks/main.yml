@@ -75,7 +75,7 @@
     src: specific_xinitrc_{{ pc }}
     dest: /home/{{ user.name }}/.xinitrc
 
-- name: NOPASSWD sudo for g751 i3 script
+- name: NOPASSWD sudo for g751 i3 scripts
   become: true
   become_user: root
   lineinfile:
@@ -84,8 +84,8 @@
 "
     create: yes
     validate: 'visudo -cf %s'
-  when: pc == "g751"
+  when: i3_nopasswd_g751_scripts
 
 - name: Set script as executable
   file: dest=/home/{{ user.name }}/.config/i3/scripts/g751/change_brightness mode=a+x
-  when: pc == "g751"
+  when: i3_setup_g751_scripts
