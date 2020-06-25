@@ -27,5 +27,12 @@
   systemd:
       name: sshd
       state: started
+  when: openssh_start_server
+
+- name: Enable sshd
+  become: true
+  become_user: root
+  systemd:
+      name: sshd
       enabled: true
-  when: pc == "g751"
+  when: openssh_enable_server

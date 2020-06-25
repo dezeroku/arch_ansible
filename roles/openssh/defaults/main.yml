@@ -1,4 +1,5 @@
 ---
 user:
   name: d0ku
-  pc: default
+openssh_start_server: False
+openssh_enable_server: False
