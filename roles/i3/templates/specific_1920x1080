@@ -1,8 +1,3 @@
-# IMPORTANT NOTICE
-# Currently, that config is really tied to Asus G751JM. You can remove all the stuff about it below, and it should 
-# work nice with different systems. However you won't get scripts for keyboard backlight, hardware screen backlight etc.
-
-
 # This file should contain device or resolution specific fonts, configs or key bindings 1920x1080
 
 # Good for bigger screens. 
@@ -31,24 +26,29 @@ bar {
 }
 
 #prevents screen from dimming, it seems to work
-exec xset s off -dpms 
+exec xset s off -dpms
 
-#asus rog g751jm specific
-        # toggle touchpad shortcut
-        bindsym XF86TouchpadToggle exec "python3 ~/.config/i3/scripts/g751/touchpad_control.py toggle"
+{% if i3_setup_g751_scripts %}
+    # IMPORTANT NOTICE
+    # Currently, that config is really tied to Asus G751JM. You can remove all the stuff about it below, and it should 
+    # work nice with different systems. However you won't get scripts for keyboard backlight, hardware screen backlight etc.
 
-        #kbd backlight, this should be pretty universal
-                
-                #kbd backlight up
-                bindsym XF86KbdBrightnessUp exec "python3 ~/.config/i3/scripts/g751/kb-light.py +"
-                
-                #kbd backlight down
-                bindsym XF86KbdBrightnessDown exec "python3 ~/.config/i3/scripts/g751/kb-light.py -"
+    # toggle touchpad shortcut
+    bindsym XF86TouchpadToggle exec "python3 ~/.config/i3/scripts/g751/touchpad_control.py toggle"
 
-        #screen backlight, needs changes in /etc/sudoers to work properly (you have to give NOPASSWD sudo acces to change_brightness file)
+    # kbd backlight, this should be pretty universal
 
-                #screen backlight up, this path should be ~/.config/i3/scripts/change_brightness but it needs NOPASSWD changes
-                bindsym XF86MonBrightnessUp exec "sudo ~/.config/i3/scripts/g751/change_brightness +" 
+    # kbd backlight up
+    bindsym XF86KbdBrightnessUp exec "python3 ~/.config/i3/scripts/g751/kb-light.py +"
 
-                #screen backlight down, this path should be ~/.config/i3/scripts/change_brightness but it needs NOPASSWD changes
-                bindsym XF86MonBrightnessDown exec "sudo ~/.config/i3/scripts/g751/change_brightness -"
+    #kbd backlight down
+    bindsym XF86KbdBrightnessDown exec "python3 ~/.config/i3/scripts/g751/kb-light.py -"
+
+    # screen backlight, needs changes in /etc/sudoers to work properly (you have to give NOPASSWD sudo acces to change_brightness file)
+
+    # screen backlight up, this path should be ~/.config/i3/scripts/change_brightness but it needs NOPASSWD changes
+    bindsym XF86MonBrightnessUp exec "sudo ~/.config/i3/scripts/g751/change_brightness +" 
+
+    # screen backlight down, this path should be ~/.config/i3/scripts/change_brightness but it needs NOPASSWD changes
+    bindsym XF86MonBrightnessDown exec "sudo ~/.config/i3/scripts/g751/change_brightness -"
+{% endif %}

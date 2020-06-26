@@ -1,0 +1,18 @@
+---
+# This inventory is defined as generic starting point.
+default:
+  hosts:
+    localhost:
+      ansible_connection: local
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    i3_resolution: "none"
+    user:
+      name: d0ku
+      generate_ssh_key: True
+      ssh_key_bits: 4096
+      ssh_key_type: rsa
+      shell: /bin/fish
+      email: darthtyranus666666@gmail.com
+      gpg_key: C704E9FFDF4A1717
+      always_git_gpg: true

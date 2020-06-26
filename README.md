@@ -38,12 +38,12 @@ That's the part which should be extended if you're willing to try to run these r
 At the moment there's `all.yml` playbook defined, that contains all roles available (sorted alphabetically).
 It can be used to run single roles, e.g. to set up vim on `x230` machine
 ```
-sudo ansible-playbook -i inventory.yaml all.yml --tags vim --limit x230
+sudo ansible-playbook -i x230.yaml all.yml --tags vim
 ```
 
-In general for running <role> on <machine> use
+In general to run `<role>` on 1<machine>` use
 ```
-sudo ansible-playbook -i inventory.yaml all.yml --tags <role> --limit <machine>
+sudo ansible-playbook -i <machine>.yaml all.yml --tags <role>
 ```
 
 It can also be used to installed all packages (some rules can be commented if not needed, ugly solution at the moment).
