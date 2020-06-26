@@ -41,7 +41,7 @@ It can be used to run single roles, e.g. to set up vim on `x230` machine
 sudo ansible-playbook -i x230.yaml all.yml --tags vim
 ```
 
-In general to run `<role>` on 1<machine>` use
+In general to run `<role>` on `<machine>` use
 ```
 sudo ansible-playbook -i <machine>.yaml all.yml --tags <role>
 ```
