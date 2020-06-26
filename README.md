@@ -27,10 +27,11 @@ There are some roles which are tied to specific hardware, for example `g751` req
 Machines that I use are currently defined in inventory by setting necessary variables.
 That's the part which should be extended if you're willing to try to run these rules on your own.
 
-| Name                 | Resolution |
-| ----                 | ---------- |
-| x230 (Thinkpad X230) | 1366x768   |
-| g751 (Asus G751JM)   | 1920x1080  |
+| Name                 | Resolution                                                                |
+| ----                 | ----------                                                                |
+| x230 (Thinkpad X230) | 1366x768                                                                  |
+| g751 (Asus G751JM)   | 1920x1080                                                                 |
+| default              | none (1920x1080 and 1366x768 files are copied as base, depending on role) |
 
 ## Commands
 
