@@ -57,7 +57,7 @@ c.fonts.messages.info = "{} monospace".format(basic_size)
 c.fonts.messages.warning = "{} monospace".format(basic_size)
 c.fonts.prompts = "{} monospace".format(basic_size)
 c.fonts.statusbar = "{} monospace".format(basic_size)
-c.fonts.tabs = "{} monospace".format(basic_size)
+#c.fonts.tabs = "{} monospace".format(basic_size)
 
 # Password manager
 config.bind(',p', 'spawn --userscript qute-bitwarden')
