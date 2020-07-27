@@ -41,8 +41,15 @@ duckstr = "https://duckduckgo.com/?q={}"
 googlestr = "https://google.com/search?hl=en&q={}"
 # Translates english to polish by default, change to your like.
 translate_english_polish = "https://translate.google.com/#en/pl/{}"
-c.url.searchengines = {"DEFAULT":duckstr, "ddg":duckstr,  "google":googlestr,
-                       "translate":translate_english_polish}
+translate_german_polish = "https://translate.google.com/#de/pl/{}"
+c.url.searchengines = {"DEFAULT":duckstr,
+                       "ddg":duckstr,
+                       "google":googlestr,
+                       # Don't remove original `translate` for transition period.
+                       "translate":translate_english_polish,
+                       "english":translate_english_polish,
+                       "german":translate_german_polish,
+}
 
 # Fonts
 basic_size = "8"
