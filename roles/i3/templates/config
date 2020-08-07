@@ -271,6 +271,9 @@ bindsym $mod+Control+l exec "/usr/bin/i3lock && sleep 1"
    
     # Stardew Valley 
     assign [class="(?i)StardewValley"] $ws9
+
+    # Anki
+    assign [class="(?i)Anki"] $ws9
     
     # Spotify
     #assign [class="(?i)Spotify"] $ws5
