@@ -97,7 +97,7 @@
 - name: Compile YouCompleteMe
   become: true
   become_user: "{{ user.name }}"
-  command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe ./install.py --clang-completer --go-completer --rust-completer
+  command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe ./install.py --clang-completer --go-completer
   when: not result.stat.exists
 
 - name: Set YCM as compiled
