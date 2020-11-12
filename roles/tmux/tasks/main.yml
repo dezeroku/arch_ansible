@@ -36,4 +36,10 @@
     src: tmux.conf
     dest: /home/{{ user.name }}/.tmux.conf
 
+- name: Install plugins
+  become: true
+  become_user: "{{ user.name }}"
+  shell:
+    cmd: tmux start-server && tmux new-session -d install_plugins && ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+
 # TODO: actually install plugins
