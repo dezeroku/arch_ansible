@@ -69,3 +69,5 @@ c.fonts.statusbar = "{} monospace".format(basic_size)
 # Password manager
 config.bind(',p', 'spawn --userscript qute-bitwarden')
 config.bind(',P', 'spawn --userscript qute-bitwarden --password-only')
+
+config.load_autoconfig()

@@ -44,6 +44,14 @@
     name:
     - python-tldextract
 
+- name: Install brave adblocker to be used
+  aur:
+    name:
+      - python-adblock
+    skip_installed: true
+  become: true
+  become_user: root
+
 - name: Install decoding for DRM sites (e.g. Netflix)
   aur:
     name:
