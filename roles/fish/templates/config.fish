@@ -30,8 +30,7 @@ alias e="emacsclient -nw"
 alias v="vim"
 
 # PATHS
-set -x PATH /opt/GNAT/2019/bin $PATH
-set -x PATH /opt/GNAT/2019-arm-elf/bin $PATH
+set -x PATH $HOME/opt/GNAT/2020/bin $PATH
 set -x PATH $HOME/go/bin $PATH
 set -x PATH $HOME/.local/bin $PATH
 set -x PATH $HOME/npm_global/bin $PATH
