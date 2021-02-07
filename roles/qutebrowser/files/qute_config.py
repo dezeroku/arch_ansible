@@ -1,3 +1,5 @@
+config.load_autoconfig()
+
 # STREAMING/DOWNLOADING VIDEO. 
 # Max 480p.
 config.bind('<z>', 'spawn -d mpv --hwdec=vaapi --ytdl-format=best[height<=?480] {url}')
@@ -66,8 +68,12 @@ c.fonts.prompts = "{} monospace".format(basic_size)
 c.fonts.statusbar = "{} monospace".format(basic_size)
 #c.fonts.tabs = "{} monospace".format(basic_size)
 
+# File picker
+c.fileselect.handler = "external"
+c.fileselect.single_file.command = ["st", "-e", "ranger", "--choosefile={}"]
+c.fileselect.multiple_files.command = ["st", "-e", "ranger", "--choosefiles={}"]
+
 # Password manager
 config.bind(',p', 'spawn --userscript qute-bitwarden')
 config.bind(',P', 'spawn --userscript qute-bitwarden --password-only')
 
-config.load_autoconfig()
