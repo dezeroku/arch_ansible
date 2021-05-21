@@ -29,8 +29,8 @@ interval = 1
 
 [[block]]
 block = "memory"
-format_mem = "{mem_total_used;G}GB/{mem_total;G}"
-format_swap = "{swap_used;M}MB/{swap_total;M}MB({swap_used_percents}%)"
+format_mem = "{mem_total_used;G}/{mem_total;G}"
+format_swap = "{swap_used;M}/{swap_total;M}({swap_used_percents}%)"
 display_type = "memory"
 icons = true
 clickable = false
@@ -51,12 +51,12 @@ block = "sound"
 block = "temperature"
 collapsed = false
 interval = 2
-format = "{max}°"
+format = "{max}"
 
 [[block]]
 block = "battery"
 interval = 10
-format = "{percentage}% {time}"
+format = "{percentage} {time}"
 
 [[block]]
 block = "time"
