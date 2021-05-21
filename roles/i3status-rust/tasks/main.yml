@@ -1,8 +1,8 @@
 ---
-- name: Install i3status-rust using AUR
-  aur:
+- name: Install i3status-rust
+  become: true
+  become_user: root
+  pacman:
     name:
       - i3status-rust
-    skip_installed: true
-  become: true
-  become_user: aur_builder
+

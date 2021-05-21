@@ -15,7 +15,7 @@ alert = 10.0
 [[block]]
 block = "net"
 device = "wlp3s0"
-speed_up = false
+format = "{speed_down;K}"
 interval = 5
 
 #[[block]]
@@ -29,8 +29,8 @@ interval = 1
 
 [[block]]
 block = "memory"
-format_mem = "{Mug}GB/{MTg}GB"
-format_swap = "{SUm}MB/{STm}MB({SUp}%)"
+format_mem = "{mem_total_used;G}GB/{mem_total;G}"
+format_swap = "{swap_used;M}MB/{swap_total;M}MB({swap_used_percents}%)"
 display_type = "memory"
 icons = true
 clickable = false
