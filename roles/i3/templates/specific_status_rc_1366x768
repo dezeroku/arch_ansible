@@ -29,7 +29,7 @@ interval = 1
 
 [[block]]
 block = "memory"
-format_mem = "{mem_total_used;G}/{mem_total;G}"
+format_mem = "{mem_used;G}/{mem_total;G}"
 format_swap = "{swap_used;M}/{swap_total;M}({swap_used_percents}%)"
 display_type = "memory"
 icons = true
