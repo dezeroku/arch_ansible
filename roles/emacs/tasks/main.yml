@@ -1,10 +1,11 @@
 ---
-- name: Install Emacs
-  become: true
-  become_user: root
-  pacman:
-    name:
-      - emacs
+- name: Install Emacs (>=28)
+  aur: 
+    skip_installed: true
+    name: 
+      - emacs-git
+  become: yes
+  become_user: aur_builder
 
 - name: Copy Emacs config
   become: true

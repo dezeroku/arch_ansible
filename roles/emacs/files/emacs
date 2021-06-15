@@ -6,7 +6,8 @@
   '(inhibit-startup-screen t)
   '(package-selected-packages
      (quote
-       (flycheck flycheck-julia flycheck-rust flycheck-mypy go-mode company-ycmd ycmd evil-org evil-tutor evil-magit julia-mode julia-repl smooth-scrolling evil zenburn-theme smooth-scrolling powerline fill-column-indicator haskell-mode company-quickhelp go-guru gotest flymd yaml-mode rust-mode lsp-mode use-package lsp-ui company-lsp undo-tree))))
+       (flycheck flycheck-julia flycheck-rust flycheck-mypy go-mode company-ycmd ycmd evil-org evil-tutor julia-mode julia-repl smooth-scrolling evil zenburn-theme smooth-scrolling powerline fill-column-indicator haskell-mode company-quickhelp go-guru gotest flymd yaml-mode rust-mode lsp-mode use-package lsp-ui company-lsp))))
+
 
 
 ;; Auto install missing packages.
@@ -49,21 +50,19 @@
 ;; pop up with documentation
 (company-quickhelp-mode)
 
-;; Save whole undo tree, and do it in some nice place.
-(global-undo-tree-mode)
-(setq undo-tree-auto-save-history t)
-(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
-
-
 ;; ViM ALIKE
 ;; Evil
 
 ;; ViM like mode
+;; use undo-redo based on emacs 28 definitions
+(setq evil-undo-system 'undo-redo)
+
+;; Startup
 (require 'evil)
 (evil-mode 1)
 
 ;; vim magit binds
-(require 'evil-magit)
+;;(require 'evil-magit)
 
 ;; vim tutor
 (require 'evil-tutor)
@@ -143,7 +142,7 @@
 ;;(add-to-list 'flycheck-checkers 'python-mypy t)
 ;(flycheck-add-next-checker 'python-flake8 'python-mypy)
 
-;; Python
+;; PYTHON
 ;; color column
 (require 'fill-column-indicator)
 (add-hook 'python-mode-hook (lambda ()
@@ -154,6 +153,9 @@
                               ;; Select mypy as default flycheck checker.
                               (flycheck-select-checker 'python-mypy)
                               ))
+
+(add-hook 'python-mode-hook-lsp #'lsp)
+
 ;; GO
 ;; general mode for Go
 (require 'go-mode)
