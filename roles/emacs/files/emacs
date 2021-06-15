@@ -1,30 +1,39 @@
 ;; PACKAGES
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(package-initialize)
-(custom-set-variables
-  '(inhibit-startup-screen t)
-  '(package-selected-packages
-     (quote
-       (flycheck flycheck-julia flycheck-rust flycheck-mypy go-mode company-ycmd ycmd evil-org evil-tutor julia-mode julia-repl smooth-scrolling evil zenburn-theme smooth-scrolling powerline fill-column-indicator haskell-mode company-quickhelp go-guru gotest flymd yaml-mode rust-mode lsp-mode use-package lsp-ui company-lsp))))
 
+; Bootstrap straight.el
+; Repo has to be already cloned in the correct dir
+(defvar bootstrap-version)
+(let ((bootstrap-file
+               (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+            (bootstrap-version 5))
+    (load bootstrap-file nil 'nomessage))
 
+; Needed for Emacs >= 25
+(setq package-enable-at-startup nil)
 
-;; Auto install missing packages.
-(unless package-archive-contents
-  (package-refresh-contents))
-(package-install-selected-packages)
+(setq straight-use-package-by-default t)
+
+(straight-use-package 'use-package)
+
+; Install all the base packages (specific installations are done later on in appropriate sections)
+(straight-use-package 'flycheck)
+(straight-use-package 'flymd)
+(straight-use-package 'ycmd)
+(straight-use-package 'company-ycmd)
+(straight-use-package 'company-quickhelp)
+
+;; GENERAL
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
-  )
+)
 
-;; GENERAL
-
-(require 'use-package)
+(custom-set-variables
+  '(inhibit-startup-screen t)
+)
 
 ;; insert spaces when <Tab> is entered
 (setq-default indent-tabs-mode nil)
@@ -58,24 +67,24 @@
 (setq evil-undo-system 'undo-redo)
 
 ;; Startup
-(require 'evil)
+(use-package evil)
 (evil-mode 1)
 
 ;; vim magit binds
 ;;(require 'evil-magit)
 
 ;; vim tutor
-(require 'evil-tutor)
+(use-package evil-tutor)
 
 ;; vim binds for org-mode
-(require 'evil-org)
+(use-package evil-org)
 
 ;; Powerline look compliant with evil
-(require 'powerline)
+(use-package powerline)
 (powerline-center-evil-theme)
 
 ;; more vim-like scrolling
-(require 'smooth-scrolling)
+(use-package smooth-scrolling)
 (smooth-scrolling-mode 1)
 (setq smooth-scroll-margin 5)
 
@@ -119,7 +128,7 @@
 (tool-bar-mode -1)
 
 ;; Zenburn theme
-(require 'zenburn-theme)
+(use-package zenburn-theme)
 (load-theme 'zenburn t)
 
 ;; Line numbering
@@ -144,7 +153,8 @@
 
 ;; PYTHON
 ;; color column
-(require 'fill-column-indicator)
+(use-package fill-column-indicator)
+(use-package flycheck-mypy)
 (add-hook 'python-mode-hook (lambda ()
                               ;; Draw dark red line on column 79.
                               (set-fill-column 79)
@@ -158,7 +168,9 @@
 
 ;; GO
 ;; general mode for Go
-(require 'go-mode)
+(use-package go-mode)
+(use-package go-guru)
+(use-package gotest)
 (add-hook 'go-mode-hook (lambda ()
                           ;; run goimports instead of fmt.
                           (setq gofmt-command "goimports")
@@ -185,11 +197,12 @@
                           ))
 ;; JULIA
 ;; add julia-mode and REPL
-(require 'julia-mode)
-(require 'julia-repl)
+(use-package julia-mode)
+(use-package julia-repl)
+(use-package flycheck-julia)
 
 ;; HASKELL
-(require 'haskell-mode)
+(use-package haskell-mode)
 
 ;; JS/JSX/TS
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-jsx-mode))
@@ -199,7 +212,7 @@
 
 ;; YAML
 ;; Automatically use for common file types
-(require 'yaml-mode)
+(use-package yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 
@@ -209,7 +222,8 @@
 	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; RUST
-(require 'rust-mode)
+(use-package rust-mode)
+(use-package flycheck-rust)
 (add-hook 'rust-mode-hook-lsp #'lsp)
 
 (add-hook 'rust-mode-hook (lambda ()
@@ -218,3 +232,8 @@
                             ;; Properly understand cargo layout for flycheck.
                             (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
                             ))
+
+
+;; PACKAGES (kind of posthook)
+; Write the lockfile
+(straight-freeze-versions)
