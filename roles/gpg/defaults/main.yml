@@ -1,5 +1,5 @@
 ---
 user:
   name: d0ku
-  gpg_key: C704E9FFDF4A1717
+  gpg_key: 5D6772EEDDACD5B0
   always_git_gpg: true

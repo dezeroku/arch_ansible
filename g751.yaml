@@ -8,12 +8,13 @@ g751:
     i3_resolution: "1920x1080"
     user:
       name: d0ku
+      pub_name: dezeroku
       generate_ssh_key: True
       ssh_key_bits: 4096
       ssh_key_type: rsa
       shell: /bin/fish
-      email: darthtyranus666666@gmail.com
-      gpg_key: C704E9FFDF4A1717
+      email: dezeroku@gmail.com
+      gpg_key: 5D6772EEDDACD5B0
       always_git_gpg: True
     openssh_start_server: True
     openssh_enable_server: True

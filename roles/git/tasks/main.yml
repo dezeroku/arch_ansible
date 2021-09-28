@@ -23,6 +23,6 @@
   - git_config:
      name: user.name
      scope: global
-     value: "{{ user.name }}"
+     value: "{{ user.pub_name }}"
   become: yes
   become_user: "{{ user.name }}"

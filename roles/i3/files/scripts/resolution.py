@@ -203,7 +203,7 @@ class Runner:
                                  Runner (" + current_time_str + ")\n")
             current_config.write("# Don't edit this file, instead read\
                                  documentation at\
-                                 https://github.com/d0ku/i3_config and edit\
+                                 https://github.com/dezeroku/i3_config and edit\
                                  files accordingly.\n")
             if self.parse_resolution_file:
                 current_config.write("# Merging with resolution file (" +

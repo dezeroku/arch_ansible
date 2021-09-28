@@ -1,7 +1,7 @@
 ## Arch setup roles written in Ansible
 
 In the past, when I was distro-hopping at least once every two months, I've found it that it's not easy to keep track of all dotfiles and applications that I use.
-I've decided to do something with that, first approach was to define my own ["high level package manager"](https://github.com/d0ku/i3_config) and I got tired with it quite soon (the fact that I was only starting to learn programming at all wasn't helpful).
+I've decided to do something with that, first approach was to define my own ["high level package manager"](https://github.com/dezeroku/i3_config) and I got tired with it quite soon (the fact that I was only starting to learn programming at all wasn't helpful).
 Some time later I've stumbled upon Ansible in one of the courses I was taking and it seemed to be just perfect for the job, with all its dependencies management, changing state only when it's required etc., so I've decided to move my config to it.
 Fast-forward till today, this repository contains a bunch of roles that I am using everytime I need to set up an Arch install.
 It's not distro-agnostic, but serves as good starting point when I am experimenting with distros like Gentoo.
