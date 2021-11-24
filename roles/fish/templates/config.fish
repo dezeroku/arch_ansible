@@ -40,6 +40,11 @@ set -x PATH $HOME/.local/bin $PATH
 # MISC
 set -x EDITOR vim
 
+# UTILS
+function tmp
+    cd (mktemp -d)
+end
+
 # Allow node specific customizations.
 if test -e ~/.config/fish/custom.fish
     source ~/.config/fish/custom.fish
