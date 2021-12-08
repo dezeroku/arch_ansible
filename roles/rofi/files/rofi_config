@@ -1,4 +1,6 @@
-rofi.combi-modi:        window,drun,ssh
-rofi.theme:     solarized
-rofi.font:      hack 10
-rofi.modi:      combi,drun
+configuration {
+	modi: "combi,drun";
+	font: "hack 10";
+	combi-modi: "window,drun,ssh";
+}
+@theme "solarized"

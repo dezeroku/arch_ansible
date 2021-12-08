@@ -19,4 +19,4 @@
   become_user: "{{ user.name }}"
   copy:
       src: rofi_config
-      dest: /home/{{ user.name }}/.config/rofi/config
+      dest: /home/{{ user.name }}/.config/rofi/config.rasi
