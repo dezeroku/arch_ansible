@@ -45,6 +45,9 @@ function tmp
     cd (mktemp -d)
 end
 
+# AWS
+source ~/.config/fish/aws.fish
+
 # Allow node specific customizations.
 if test -e ~/.config/fish/custom.fish
     source ~/.config/fish/custom.fish

@@ -19,7 +19,14 @@
   become_user: "{{ user.name }}"
   template:
       src: config.fish
-      dest: /home/{{ user.name }}/.config/fish
+      dest: /home/{{ user.name }}/.config/fish/config.fish
+
+- name: Copy fish (AWS) config
+  become: true
+  become_user: "{{ user.name }}"
+  template:
+      src: aws.fish
+      dest: /home/{{ user.name }}/.config/fish/aws.fish
 
 - name: Copy fish colors
   become: true
