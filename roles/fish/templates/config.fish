@@ -45,6 +45,9 @@ function tmp
     cd (mktemp -d)
 end
 
+# BLOCKS (functions that can be used in other functions)
+source ~/.config/fish/blocks.fish
+
 # AWS
 source ~/.config/fish/aws.fish
 

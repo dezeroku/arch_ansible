@@ -46,3 +46,18 @@ function lambda_update_function_zip
 
     aws lambda update-function-code --function-name $argv[1] --zip-file fileb://$argv[2]
 end
+
+function lambda_python_full_test_run_zip
+    if test -z "$argv[1]"
+        echo "lambda_full_test_run_zip <function_name>"
+        return
+    end
+
+    set -l tmp_log
+    set tmp_log (mktemp)
+
+    fail_command_with_logs lambda_python_package && \
+    fail_command_with_logs lambda_update_function_zip $argv[1] lambda_deployment.zip && \
+    aws lambda wait function-updated --function-name $argv[1] && \
+    lambda_invoke_dummy $argv[1]
+end
