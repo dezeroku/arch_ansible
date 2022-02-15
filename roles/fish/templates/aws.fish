@@ -61,3 +61,8 @@ function lambda_python_full_test_run_zip
     aws lambda wait function-updated --function-name $argv[1] && \
     lambda_invoke_dummy $argv[1]
 end
+
+# Set up the autocompletion
+if type -f aws > /dev/null 2>&1
+    complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+end
