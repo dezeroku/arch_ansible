@@ -59,6 +59,7 @@ bindsym $mod+p exec "~/.config/i3/scripts/passthrough.sh"
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec "rofi -show drun"
+bindsym $mod+space exec "rofi -show drun"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -106,7 +107,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
