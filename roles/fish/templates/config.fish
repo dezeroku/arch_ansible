@@ -51,6 +51,9 @@ source ~/.config/fish/blocks.fish
 # AWS
 source ~/.config/fish/aws.fish
 
+# Kubernetes and friends
+source ~/.config/fish/kubernetes.fish
+
 # Allow node specific customizations.
 if test -e ~/.config/fish/custom.fish
     source ~/.config/fish/custom.fish

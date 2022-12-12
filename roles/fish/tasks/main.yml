@@ -29,6 +29,13 @@
       src: aws.fish
       dest: /home/{{ user.name }}/.config/fish/aws.fish
 
+- name: Copy fish (kubernetes) config
+  become: true
+  become_user: "{{ user.name }}"
+  template:
+      src: kubernetes.fish
+      dest: /home/{{ user.name }}/.config/fish/kubernetes.fish
+
 - name: Copy fish (blocks) config
   become: true
   become_user: "{{ user.name }}"
