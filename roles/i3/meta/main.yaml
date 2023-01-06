@@ -1,7 +1,7 @@
 ---
 dependencies:
   - role: xorg
-  - role: compton
+  - role: picom
   - role: mesa
   - role: pulseaudio
   - role: audio_control

@@ -23,7 +23,7 @@
     - { role: android-studio, tags: ['android-studio'] }
     - { role: audio_control, tags: ['audio_control'] }
     - { role: aur_builder, tags: ['aur_builder'] }
-    - { role: compton, tags: ['compton'] }
+    - { role: picom, tags: ['picom'] }
     - { role: deluge, tags: ['deluge'] }
     - { role: discord, tags: ['discord'] }
     - { role: docker, tags: ['docker'] }

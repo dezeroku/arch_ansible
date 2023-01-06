@@ -45,7 +45,7 @@ def dotfiles_symlink(dotfiles_dir, backup_dir="~/backup_dotfiles"):
              "ycm_extra_conf.py":"~/.ycm_extra_conf.py",
              "zshrc":"~/.zshrc",
              "tern-config":"~/.tern-config",
-             "compton.conf":"~/.config/compton.conf",
+             "picom.conf":"~/.config/picom.conf",
              "emacs":"~/.emacs",
              "vimrc":"~/.config/nvim/init.vim",
              "ssh_config":"~/.ssh/config"}

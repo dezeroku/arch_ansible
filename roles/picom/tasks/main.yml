@@ -1,10 +1,10 @@
 ---
-- name: Install compton and transset-df
+- name: Install picom and transset-df
   become: true
   become_user: root
   pacman:
     name:
-      - compton
+      - picom
       - transset-df
 
 - name: Ensure directory exists
@@ -15,9 +15,9 @@
     state: directory
     recurse: yes
 
-- name: Copy compton dotfile
+- name: Copy picom dotfile
   become: true
   become_user: "{{ user.name }}"
   copy:
-      src: compton.conf
-      dest: /home/{{ user.name }}/.config/compton.conf
+      src: picom.conf
+      dest: /home/{{ user.name }}/.config/picom.conf
