@@ -1,4 +1,5 @@
 setxkbmap pl 
+setxkbmap -option caps:escape
 xrandr --setprovideroutputsource modesetting NVIDIA-0 
 xrandr --auto 
 emacs --daemon &
