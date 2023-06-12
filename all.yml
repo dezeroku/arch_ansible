@@ -48,6 +48,7 @@
     - { role: imagemagick, tags: ['imagemagick'] }
     - { role: indicator-kdeconnect, tags: ['indicator-kdeconnect'] }
     - { role: intellij-idea, tags: ['intellij-idea'] }
+    - { role: jira, tags: ['jira'], when: work.enabled }
     - { role: keychain, tags: ['keychain'] }
     - { role: kitty, tags: ['kitty'] }
     - { role: latex, tags: ['latex'] }

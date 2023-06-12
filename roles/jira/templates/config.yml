@@ -1,0 +1,89 @@
+endpoint: {{ work.jira_endpoint }}
+user: {{ work.jira_user }}
+editor: vim
+
+{% raw %}
+custom-commands:
+  - name: mine
+    help: display active issues assigned to me
+    script: |-
+      if [ -n "$JIRA_PROJECT" ]; then
+          # if `project: ...` configured just list the issues for current project
+          {{jira}} list --template table --query "resolution = unresolved and assignee=currentuser() and project = $JIRA_PROJECT ORDER BY priority asc, created"
+      else
+          # otherwise list issues for all project
+          {{jira}} list --template table --query "resolution = unresolved and assignee=currentuser() ORDER BY priority asc, created"
+      fi
+  - name: mineByEstimate
+    help: display active issues assigned to me
+    script: |-
+      if [ -n "$JIRA_PROJECT" ]; then
+          # if `project: ...` configured just list the issues for current project
+          {{jira}} list --template table --query "resolution = unresolved and assignee=currentuser() and project = $JIRA_PROJECT ORDER BY remainingEstimate desc, created"
+      else
+          # otherwise list issues for all project
+          {{jira}} list --template table --query "resolution = unresolved and assignee=currentuser() ORDER BY remainingEstimate desc, created"
+      fi
+  - name: mineEverything
+    help: display all assigned to me
+    script: |-
+      if [ -n "$JIRA_PROJECT" ]; then
+          # if `project: ...` configured just list the issues for current project
+          {{jira}} list --template table --query "assignee=currentuser() and project = $JIRA_PROJECT ORDER BY priority asc, created"
+      else
+          # otherwise list issues for all project
+          {{jira}} list --template table --query "assignee=currentuser() ORDER BY priority asc, created"
+      fi
+  - name: byContent
+    help: look through tickets searching for phrase in either summary, title or description
+    args:
+      - name: TEXT
+        required: true
+    script: |-
+      if [ -n "$JIRA_PROJECT" ]; then
+          # if `project: ...` configured just list the issues for current project
+          {{jira}} list --template table --query "project = $JIRA_PROJECT and text ~ \"{{args.TEXT}}\" ORDER BY created"
+      else
+          # otherwise list issues for all project
+          {{jira}} list --template table --query "text ~ \"{{args.TEXT}}\" ORDER BY created"
+      fi
+  - name: byUser
+    help: look through tickets belonging to a single user
+    args:
+      - name: USER
+        required: true
+    script: |-
+      if [ -n "$JIRA_PROJECT" ]; then
+          # if `project: ...` configured just list the issues for current project
+          {{jira}} list --template table --query "project = $JIRA_PROJECT and assignee={{args.USER}} ORDER BY priority asc, created"
+      else
+          # otherwise list issues for all project
+          {{jira}} list --template table --query "assignee={{args.USER}} ORDER BY priority asc, created"
+      fi
+  - name: byUserComments
+    help: look through tickets that user commented on
+    args:
+      - name: USER
+        required: true
+    script: |-
+      if [ -n "$JIRA_PROJECT" ]; then
+          # if `project: ...` configured just list the issues for current project
+          {{jira}} list --template table --query "project = $JIRA_PROJECT and issuefunction in commented (\" by {{args.USER}}\") ORDER BY priority asc, created"
+      else
+          # otherwise list issues for all project
+          {{jira}} list --template table --query "issuefunction in commented (\" by {{args.USER}}\") ORDER BY priority asc, created"
+      fi
+  - name: byUserUnresolved
+    help: look through tickets belonging to a single user
+    args:
+      - name: USER
+        required: true
+    script: |-
+      if [ -n "$JIRA_PROJECT" ]; then
+          # if `project: ...` configured just list the issues for current project
+          {{jira}} list --template table --query "resolution = unresolved and project = $JIRA_PROJECT and assignee={{args.USER}} ORDER BY priority asc, created"
+      else
+          # otherwise list issues for all project
+          {{jira}} list --template table --query "resolution = unresolved and assignee={{args.USER}} ORDER BY priority asc, created"
+      fi
+{% endraw %}
