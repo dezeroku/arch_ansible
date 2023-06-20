@@ -27,7 +27,7 @@ alias ls="ls --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias emac="emacsclient -nw"
 alias e="emacsclient -nw"
-alias v="vim"
+alias v="nvim"
 
 # PATHS
 #set -x PATH $HOME/opt/GNAT/2020/bin $PATH
@@ -38,7 +38,7 @@ set -x PATH $HOME/bin $PATH
 set -x PATH $HOME/.local/bin $PATH
 
 # MISC
-set -x EDITOR vim
+set -x EDITOR nvim
 
 # UTILS
 function tmp
