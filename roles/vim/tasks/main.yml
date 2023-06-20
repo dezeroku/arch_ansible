@@ -1,10 +1,11 @@
 ---
-- name: Install gvim and spelling packages
+- name: Install vim, neovim and spelling packages
   become: true
   become_user: root
   pacman:
     name:
       - gvim
+      - neovim
       - vim-spell-en
       - vim-spell-pl
       - vim-spell-de
@@ -14,51 +15,43 @@
   become_user: "{{ user.name }}"
   copy:
     src: vundler.vim
-    dest: /home/{{ user.name }}/.vundler.vim
-  register: var_vim
+    dest: ~/.vundler.vim
+  register: var_vundler
 
-- name: Copy vim .vimrc
+- name: Template vim .vimrc
   become: true
   become_user: "{{ user.name }}"
-  copy:
+  template:
     src: vimrc
-    dest: /home/{{ user.name }}/.vimrc
+    dest: ~/.vimrc
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
   file:
-    path: /home/{{ user.name }}/.config/nvim
+    path: ~/.config/nvim
     state: directory
     recurse: yes
 
-- name: Copy neovim config
+- name: Template neovim config
   become: true
   become_user: "{{ user.name }}"
-  copy:
+  template: 
     src: vimrc
-    dest: /home/{{ user.name }}/.config/nvim/init.vim
-  register: var_neovim
-
-- name: Copy YCM config
-  become: true
-  become_user: "{{ user.name }}"
-  copy:
-      src: ycm_extra_conf.py
-      dest: /home/{{ user.name }}/.ycm_extra_conf.py
+    dest: ~/.config/nvim/init.vim
 
 - name: Copy tern config
   become: true
   become_user: "{{ user.name }}"
   copy:
       src: tern-config
-      dest: /home/{{ user.name }}/tern-config
+      dest: ~/tern-config
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
   file:
-    path: /home/{{ user.name }}/.vim/bundle
+    path: ~/.vim/bundle
     state: directory
     recurse: yes
 
@@ -66,50 +59,11 @@
   become: true
   become_user: "{{ user.name }}"
   git:
-    dest: /home/{{ user.name }}/.vim/bundle/Vundle.vim
+    dest: ~/.vim/bundle/Vundle.vim
     repo: https://github.com/gmarik/Vundle.vim.git
 
 - name: Download plugins if something changed
   become: true
   become_user: "{{ user.name }}"
   command: vim +PluginInstall +qall -u ~/.vundler.vim
-  when: var_vim.changed or var_neovim.changed
-
-- name: Download dependencies for YCM
-  become: true
-  become_user: "{{ user.name }}"
-  command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe git submodule update --init --recursive
-
-- name: Check if YCM already compiled
-  become: true
-  become_user: "{{ user.name }}"
-  stat:
-    path: /home/{{ user.name }}/.vim/bundle/YouCompleteMe/compiled
-  register: result
-
-- name: Ensure CMake is installed
-  become: true
-  become_user: root
-  pacman:
-    name: cmake
-    state: present
-
-- name: Compile YouCompleteMe
-  become: true
-  become_user: "{{ user.name }}"
-  command: chdir=/home/{{ user.name }}/.vim/bundle/YouCompleteMe ./install.py --clang-completer --go-completer
-  when: not result.stat.exists
-
-- name: Set YCM as compiled
-  become: true
-  become_user: "{{ user.name }}"
-  lineinfile:
-    path: /home/{{ user.name }}/.vim/bundle/YouCompleteMe/compiled
-    line: 'true'
-    create: yes
-  when: not result.stat.exists
-
-- name: Install binaries for vim-go
-  become: true
-  become_user: "{{ user.name }}"
-  command: chdir=/home/{{ user.name }}/ vim +GoInstallBinaries +qall
+  when: var_vundler.changed

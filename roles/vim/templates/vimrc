@@ -1,0 +1,145 @@
+{% include "files/vimrc-base" %}
+" CUSTOM CONFIG
+" Vundle
+source ~/.vundler.vim
+
+if v:progname =~? "evim"
+  finish
+endif
+
+if has("vms")
+  set nobackup		" do not keep a backup file, use versions instead
+else
+  set backup		" keep a backup file (restore to previous version)
+  if has('persistent_undo')
+    set undofile	" keep an undo file (undo changes after closing)
+  endif
+endif
+
+" Set encoding
+set encoding=utf-8
+
+" Add tab = 4 spaces (for ALL, some overwrites later)
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" Docstring for folded code
+let g:SimpylFold_docstring_preview=1
+
+" set showcmd
+let mapleader = " "
+
+" Python PEP8 standards
+au BufNewFile,BufRead *.py set tabstop=4
+au BufNewFile,BufRead *.py set softtabstop=4
+au BufNewFile,BufRead *.py set shiftwidth=4
+au BufNewFile,BufRead *.py set textwidth=79
+au BufNewFile,BufRead *.py set expandtab
+au BufNewFile,BufRead *.py set autoindent
+au BufNewFile,BufRead *.py set fileformat=unix
+
+" Define BadWhitespace and mark as darkred in py files
+highlight BadWhitespace ctermbg=red guibg=darkred
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" Red line at 79-th line in .py and .cpp files
+au BufNewFile,BufRead *.py set colorcolumn=79
+au BufNewFile,BufRead *.cpp set colorcolumn=79
+au BufNewFile,BufRead *.cpp highlight ColorColumn ctermbg=2
+
+" Similar but for webdev
+au BufNewFile,BufRead *.js set tabstop=4
+au BufNewFile,BufRead *.ts set tabstop=4
+au BufNewFile,BufRead *.html set tabstop=4
+au BufNewFile,BufRead *.css set tabstop=4
+au BufNewFile,BufRead *.scss set tabstop=4
+
+au BufNewFile,BufRead *.js set softtabstop=4
+au BufNewFile,BufRead *.ts set softtabstop=4
+au BufNewFile,BufRead *.html set softtabstop=4
+au BufNewFile,BufRead *.css set softtabstop=4
+au BufNewFile,BufRead *.scss set softtabstop=4
+
+au BufNewFile,BufRead *.js set shiftwidth=4
+au BufNewFile,BufRead *.ts set shiftwidth=4
+au BufNewFile,BufRead *.html set shiftwidth=4
+au BufNewFile,BufRead *.css set shiftwidth=4
+au BufNewFile,BufRead *.scss set shiftwidth=4
+
+" Syntax Python
+let python_highlight_all=1
+syntax on
+
+" ColorSchemes
+if has('gui_running')
+  set background=dark
+  colorscheme solarized
+else
+  colorscheme zenburn
+endif
+
+" Lines numbering
+set nu
+
+" Latex live preview default pdf opener -> zathura
+let g:vimtex_view_general_viewer = 'zathura'
+
+" Syntastic
+
+
+" Beautify shortcut
+noremap <F3> :Autoformat<CR>
+
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+" NERDTress File highlighting (thanks to @ryanoasis at github.com See: https://github.com/scrooloose/nerdtree/issues/433#issuecomment-92590696 )
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+" Only run linters named in ale_linters settings.
+let g:ale_linters_explicit = 1
+
+" Enable specific linters only.
+let g:ale_linters = {
+\   'javascript': ['jslint'],
+\   'python'    : ['mypy', 'flake8'],
+\   'go'        : ['go', 'golint', 'govet', 'errcheck'],
+\   'sh'        : ['shellcheck']
+\}
+
+let g:ale_lint_on_text_changed = 'never'
+" You can disable this option too
+" if you don't want linters to run on opening a file
+" let g:ale_lint_on_enter = 0
+
+"let g:syntastic_javascript_jslint_args = "--browser"
+" Disable vim-polyglot for latex, as it conflicts with vim-latex.
+" let g:polyglot_disabled = ['latex']

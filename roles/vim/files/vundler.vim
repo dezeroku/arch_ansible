@@ -16,8 +16,6 @@ Plugin 'dbext.vim'
 Plugin 'vim-scripts/indentpython.vim'
 " Vim LaTeX support
 Plugin 'lervag/vimtex'
-" Vim Go support
-Plugin 'fatih/vim-go'
 " Colors
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
@@ -34,8 +32,6 @@ Plugin 'aklt/plantuml-syntax'
 Plugin 'w0rp/ale'
 " Pretty status bar 
 Plugin 'vim-airline/vim-airline'
-" Autocompleting
-Plugin 'Valloric/YouCompleteMe'
 " Git commit support
 Plugin 'jreybert/vimagit'
 " Beautify on :Au.
@@ -45,7 +41,7 @@ Plugin 'scrooloose/nerdtree'
 " Git stuff for file tree.
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Julia support.
-Plugin 'JuliaEditorSupport/julia-vim'
+" Plugin 'JuliaEditorSupport/julia-vim'
 " Markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
