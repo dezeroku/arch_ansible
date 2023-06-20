@@ -75,3 +75,4 @@ sudo ansible-playbook -i <machine>.yaml all.yml --tags core,cli,desktop,desktop-
 
 * Heavily inspired by [spark](https://github.com/pigmonkey/spark). If you're looking to implement something similar, then you should probably base on this repository.
 * Take a look at [dotfiles repo](https://github.com/tojatos/dotfiles) from @tojatos (especially ZSH theme).
+* AUR library file in version `v0.10.0` taken from [kewlfft/ansible-aur](https://github.com/kewlfft/ansible-aur)
