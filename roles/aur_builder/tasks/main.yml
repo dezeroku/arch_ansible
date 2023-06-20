@@ -11,6 +11,14 @@
   become: true
   become_user: root
 
+- name: Install base-devel
+  become: yes
+  become_user: aur_builder
+  pacman:
+    name: base-devel
+    state: present
+  when: aur_install_yay
+
 - name: Install yay manager for AUR
   aur: name=yay use=makepkg state=present
   become: yes
