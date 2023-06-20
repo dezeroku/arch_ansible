@@ -46,7 +46,6 @@
     - { role: i3lock, tags: ['i3lock'] }
     - { role: i3status-rust, tags: ['i3status-rust'] }
     - { role: imagemagick, tags: ['imagemagick'] }
-    - { role: indicator-kdeconnect, tags: ['indicator-kdeconnect'] }
     - { role: intellij-idea, tags: ['intellij-idea'] }
     - { role: jira, tags: ['jira'], when: work.enabled }
     - { role: keychain, tags: ['keychain'] }

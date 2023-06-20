@@ -205,10 +205,6 @@ bindsym --release Shift+Print exec "flameshot gui"
 #applets run codes
 # Network Manager
 exec --no-startup-id "nm-applet &"
-# KDE Connect
-# Daemon and widget. Sleep is not perfect, but should give enough time for daemon to startup
-exec "/usr/lib/kdeconnectd &"
-exec "sleep 60; indicator-kdeconnect &"
 # Dunst
 exec --no-startup-id "dunst &"
 # Redshift

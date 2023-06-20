@@ -6,7 +6,6 @@ dependencies:
   - role: pulseaudio
   - role: audio_control
   - role: i3status-rust
-  - role: indicator-kdeconnect
   - role: feh
   - role: kitty
   - role: terminator
