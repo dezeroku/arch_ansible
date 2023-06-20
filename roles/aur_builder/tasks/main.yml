@@ -12,7 +12,7 @@
   become_user: root
 
 - name: Install yay manager for AUR
-  aur: name=yay use=makepkg skip_installed=true
+  aur: name=yay use=makepkg state=present
   become: yes
   become_user: aur_builder
   when: aur_install_yay
