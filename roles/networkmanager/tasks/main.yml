@@ -13,11 +13,3 @@
       name: NetworkManager
       enabled: yes
       state: started
-
-- name: Install NetworkManager's applet
-  become: true
-  become_user: root
-  pacman:
-    name: network-manager-applet
-    state: present
-  when: network_manager_enable_gui

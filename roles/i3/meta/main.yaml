@@ -6,8 +6,9 @@ dependencies:
   - role: pulseaudio
   - role: audio_control
   - role: i3status-rust
+  - role: i3lock
   - role: feh
-  - role: kitty
+  - role: st
   - role: terminator
   - role: fonts
   - role: powerline

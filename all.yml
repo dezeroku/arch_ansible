@@ -12,8 +12,12 @@
       - { role: ntp, tags: ['ntp'] }
       - { role: pacman, tags: ['pacman'] }
       - { role: create_user, tags: ['create_user'] }
+      - { role: sudo, tags: ['sudo'] }
+      - { role: aur_builder, tags: ['aur_builder'] }
+      - { role: networkmanager, tags: ['networkmanager'] }
+      - { role: pacman, tags: ['pacman'] }
   tags:
-      - base
+      - core
 
 # Install all utilities available.
 - hosts: all
@@ -21,82 +25,79 @@
   become_user: "{{ user.name }}"
   roles:
     - { role: android-studio, tags: ['android-studio'] }
-    - { role: audio_control, tags: ['audio_control'] }
-    - { role: aur_builder, tags: ['aur_builder'] }
-    - { role: picom, tags: ['picom'] }
+    - { role: audio_control, tags: ['audio_control', 'desktop'] }
+    - { role: picom, tags: ['picom', 'desktop'] }
     - { role: deluge, tags: ['deluge'] }
-    - { role: discord, tags: ['discord'] }
-    - { role: docker, tags: ['docker'] }
-    - { role: dunst, tags: ['dunst'] }
-    - { role: emacs, tags: ['emacs'] }
-    - { role: exfat-utils, tags: ['exfat-utils'] }
-    - { role: feh, tags: ['feh'] }
-    - { role: firefox, tags: ['firefox'] }
-    - { role: fish, tags: ['fish'] }
-    - { role: flameshot, tags: ['flameshot'] }
-    - { role: fonts, tags: ['fonts'] }
-    - { role: fuse, tags: ['fuse'] }
-    - { role: fzf, tags: ['fzf'] }
-    - { role: gimp, tags: ['gimp'] }
-    - { role: git, tags: ['git'] }
-    - { role: go, tags: ['go'] }
-    - { role: gparted, tags: ['gparted'] }
-    - { role: gpg, tags: ['gpg'] }
-    - { role: i3, tags: ['i3'] }
-    - { role: i3lock, tags: ['i3lock'] }
-    - { role: i3status-rust, tags: ['i3status-rust'] }
-    - { role: imagemagick, tags: ['imagemagick'] }
+    - { role: discord, tags: ['discord', 'social'] }
+    - { role: docker, tags: ['docker', 'docker'] }
+    - { role: dunst, tags: ['dunst', 'desktop'] }
+    - { role: emacs, tags: ['emacs', 'editors'] }
+    - { role: exfat-utils, tags: ['exfat-utils', 'utils'] }
+    - { role: feh, tags: ['feh', 'desktop'] }
+    - { role: firefox, tags: ['firefox', 'browser'] }
+    - { role: fish, tags: ['fish', 'cli'] }
+    - { role: flameshot, tags: ['flameshot', 'desktop'] }
+    - { role: fonts, tags: ['fonts', 'desktop'] }
+    - { role: fuse, tags: ['fuse', 'utils'] }
+    - { role: fzf, tags: ['fzf', 'cli'] }
+    - { role: gimp, tags: ['gimp', 'desktop-utils'] }
+    - { role: git, tags: ['git', 'cli'] }
+    - { role: go, tags: ['go', 'languages'] }
+    - { role: gparted, tags: ['gparted', 'desktop-utils'] }
+    - { role: gpg, tags: ['gpg', 'cli'] }
+    - { role: i3, tags: ['i3', 'desktop'] }
+    - { role: i3lock, tags: ['i3lock', 'desktop'] }
+    - { role: i3status-rust, tags: ['i3status-rust', 'desktop'] }
+    - { role: imagemagick, tags: ['imagemagick', 'utils'] }
     - { role: intellij-idea, tags: ['intellij-idea'] }
-    - { role: jira, tags: ['jira'], when: work.enabled }
-    - { role: keychain, tags: ['keychain'] }
+    - { role: jira, tags: ['jira', 'work'], when: work.enabled }
+    - { role: keychain, tags: ['keychain', 'cli'] }
     - { role: kitty, tags: ['kitty'] }
-    - { role: latex, tags: ['latex'] }
-    - { role: libreoffice, tags: ['libreoffice'] }
-    - { role: mesa, tags: ['mesa'] }
-    - { role: misc, tags: ['misc'] }
-    - { role: mpv, tags: ['mpv'] }
-    - { role: ncdu, tags: ['ncdu'] }
-    - { role: neofetch, tags: ['neofetch'] }
-    - { role: networkmanager, tags: ['networkmanager'] }
-    - { role: nmap, tags: ['nmap'] }
-    - { role: npm, tags: ['npm'] }
-    - { role: ntfs-3g, tags: ['ntfs-3g'] }
+    - { role: latex, tags: ['latex', 'office'] }
+    - { role: libreoffice, tags: ['libreoffice', 'office'] }
+    - { role: mesa, tags: ['mesa', 'desktop'] }
+    - { role: misc, tags: ['misc', 'utils'] }
+    - { role: mpv, tags: ['mpv', 'media'] }
+    - { role: ncdu, tags: ['ncdu', 'cli'] }
+    - { role: neofetch, tags: ['neofetch', 'cli'] }
+    - { role: networkmanager-applet, tags: ['networkmanager-applet', 'desktop'] }
+    - { role: nmap, tags: ['nmap', 'cli'] }
+    - { role: npm, tags: ['npm', 'languages'] }
+    - { role: ntfs-3g, tags: ['ntfs-3g', 'utils'] }
     - { role: nvidia, tags: ['nvidia'], when: pc == "g751" }
     - { role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751" }
-    - { role: p7zip, tags: ['p7zip'] }
-    - { role: pacman, tags: ['pacman'] }
-    - { role: pcmanfm, tags: ['pcmanfm'] }
-    - { role: powerline, tags: ['powerline'] }
-    - { role: pulseaudio, tags: ['pulseaudio'] }
-    - { role: python3, tags: ['python3'] }
-    - { role: qemu, tags: ['qemu'] }
-    - { role: qutebrowser, tags: ['qutebrowser'] }
-    - { role: ranger, tags: ['ranger'] }
-    - { role: redshift, tags: ['redshift'] }
-    - { role: rofi, tags: ['rofi'] }
-    - { role: rust, tags: ['rust'] }
-    - { role: spotify, tags: ['spotify'] }
-    - { role: openssh, tags: ['openssh'] }
-    - { role: st, tags: ['st'] }
-    - { role: steam, tags: ['steam'] }
-    - { role: sudo, tags: ['sudo'] }
-    - { role: sxiv, tags: ['sxiv'] }
-    - { role: teamspeak3, tags: ['teamspeak3'] }
+    - { role: p7zip, tags: ['p7zip', 'cli'] }
+    - { role: pcmanfm, tags: ['pcmanfm', 'desktop-utils'] }
+    - { role: powerline, tags: ['powerline', 'desktop'] }
+    - { role: pulseaudio, tags: ['pulseaudio', 'desktop'] }
+    - { role: python3, tags: ['python3', 'languages'] }
+    - { role: qemu, tags: ['qemu', 'virtualization'] }
+    - { role: qutebrowser, tags: ['qutebrowser', 'browser'] }
+    - { role: ranger, tags: ['ranger', 'cli'] }
+    - { role: redshift, tags: ['redshift', 'desktop'] }
+    - { role: rofi, tags: ['rofi', 'desktop'] }
+    - { role: rust, tags: ['rust', 'languages'] }
+    - { role: spotify, tags: ['spotify', 'media'] }
+    - { role: openssh, tags: ['openssh', 'cli'] }
+    - { role: openvpn, tags: ['openvpn', 'vpn'] }
+    - { role: st, tags: ['st', 'desktop'] }
+    - { role: steam, tags: ['steam', 'gaming'] }
+    - { role: sxiv, tags: ['sxiv', 'desktop-utils'] }
     - { role: terminator, tags: ['terminator'] }
-    - { role: tldr, tags: ['tldr'] }
-    - { role: tmux, tags: ['tmux'] }
-    - { role: udiskie, tags: ['udiskie'] }
-    - { role: vagrant, tags: ['vagrant'] }
-    - { role: vim, tags: ['vim'] }
-    - { role: virtualbox, tags: ['virtualbox'] }
-    - { role: vlc, tags: ['vlc'] }
-    - { role: vnstat, tags: ['vnstat'] }
-    - { role: openvpn, tags: ['openvpn'] }
-    - { role: wget, tags: ['wget'] }
+    - { role: tldr, tags: ['tldr', 'cli'] }
+    - { role: tmux, tags: ['tmux', 'cli'] }
+    - { role: udiskie, tags: ['udiskie', 'desktop'] }
+    - { role: vagrant, tags: ['vagrant', 'virtualization'] }
+    - { role: vim, tags: ['vim', 'editors'] }
+    - { role: virtualbox, tags: ['virtualbox', 'virtualization'] }
+    - { role: vlc, tags: ['vlc', 'media'] }
+    - { role: vnstat, tags: ['vnstat', 'utils'] }
+    - { role: wireguard-tools, tags: ['wireguard-tools', 'vpn'] }
+    - { role: wget, tags: ['wget', 'cli'] }
     - { role: wine, tags: ['wine'] }
-    - { role: xarchiver, tags: ['xarchiver'] }
-    - { role: youtube-dl, tags: ['youtube-dl'] }
-    - { role: zathura, tags: ['zathura'] }
+    - { role: xarchiver, tags: ['xarchiver', 'desktop-tools'] }
+    - { role: youtube-dl, tags: ['youtube-dl', 'media'] }
+    - { role: zathura, tags: ['zathura', 'desktop-tools'] }
     - { role: zsh, tags: ['zsh'] }
   tags:
     - install
