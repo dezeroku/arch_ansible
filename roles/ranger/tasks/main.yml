@@ -10,7 +10,7 @@
   become: true
   become_user: "{{ user.name }}"
   file:
-    path: /home/{{ user.name }}/.config/ranger
+    path: ~/.config/ranger
     state: directory
     recurse: yes
 
@@ -19,4 +19,4 @@
   become_user: "{{ user.name }}"
   copy:
       src: rc.conf
-      dest: /home/{{ user.name }}/.config/ranger/rc.conf
+      dest: ~/.config/ranger/rc.conf

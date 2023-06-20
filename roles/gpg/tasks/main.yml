@@ -10,7 +10,7 @@
   become: yes
   become_user: "{{ user.name }}"
   file:
-    path: /home/{{ user.name }}/.gnupg
+    path: ~/.gnupg
     state: directory
     recurse: yes
 
@@ -19,7 +19,7 @@
   become_user: "{{ user.name }}"
   copy:
       src: gpg_config
-      dest: /home/{{ user.name }}/.gnupg/gpg-agent.conf
+      dest: ~/.gnupg/gpg-agent.conf
 
 - name: Set gpg key to use with git
   become: yes

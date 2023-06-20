@@ -20,7 +20,7 @@
   become: true
   become_user: "{{ user.name }}"
   file:
-    path: /home/{{ user.name }}/.oh-my-zsh
+    path: ~/.oh-my-zsh
     state: absent
 
 - name: Get zsh
@@ -36,13 +36,13 @@
   become_user: "{{ user.name }}"
   template:
       src: zshrc
-      dest: /home/{{ user.name }}/.zshrc
+      dest: ~/.zshrc
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
   file:
-    path: /home/{{ user.name }}/.oh-my-zsh/themes
+    path: ~/.oh-my-zsh/themes
     state: directory
     recurse: yes
 
@@ -51,7 +51,7 @@
   become_user: "{{ user.name }}"
   copy:
     src: tosAgnoster.zsh-theme
-    dest: /home/{{ user.name }}/.oh-my-zsh/themes/tosAgnoster.zsh-theme
+    dest: ~/.oh-my-zsh/themes/tosAgnoster.zsh-theme
 
 - name: Enable shell
   become: true

@@ -4,4 +4,4 @@
   become_user: "{{ user.name }}"
   copy:
       src: Xresources
-      dest: /home/{{ user.name }}/.Xresources
+      dest: ~/.Xresources

@@ -10,7 +10,7 @@
   become: true
   become_user: "{{ user.name }}"
   file:
-    path: /home/{{ user.name }}/.ssh
+    path: ~/.ssh
     state: directory
     recurse: yes
 
@@ -19,7 +19,7 @@
   become_user: "{{ user.name }}"
   copy:
       src: ssh_config
-      dest: /home/{{ user.name }}/.ssh/config
+      dest: ~/.ssh/config
 
 - name: Start sshd
   become: true

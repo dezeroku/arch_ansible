@@ -10,7 +10,7 @@
   become: true
   become_user: "{{ user.name }}"
   file:
-    path: /home/{{ user.name }}/.tmux/plugins
+    path: ~/.tmux/plugins
     state: directory
     recurse: yes
 
@@ -19,13 +19,13 @@
   become_user: "{{ user.name }}"
   git:
     repo: https://github.com/tmux-plugins/tpm.git
-    dest: /home/{{ user.name }}/.tmux/plugins/tpm
+    dest: ~/.tmux/plugins/tpm
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
   file:
-    path: /home/{{ user.name }}
+    path: ~
     state: directory
     recurse: yes
 
@@ -34,7 +34,7 @@
   become_user: "{{ user.name }}"
   copy:
     src: tmux.conf
-    dest: /home/{{ user.name }}/.tmux.conf
+    dest: ~/.tmux.conf
 
 - name: Install plugins
   become: true

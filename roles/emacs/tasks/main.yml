@@ -10,7 +10,7 @@
 - name: Create the .emacs.d dir
   become: true
   become_user: "{{ user.name }}"
-  file: path=/home/{{ user.name }}/.emacs.d state=directory
+  file: path=~/.emacs.d state=directory
 
 # That's the stable release as of 15/06/2021
 - name: Get the straight.el as git repo (security + issues with GNUtls)
@@ -26,28 +26,28 @@
   become_user: "{{ user.name }}"
   copy:
     src: early-init.el
-    dest: /home/{{ user.name }}/.emacs.d/early-init.el
+    dest: ~/.emacs.d/early-init.el
 
 - name: Copy Emacs config
   become: true
   become_user: "{{ user.name }}"
   copy:
     src: emacs
-    dest: /home/{{ user.name }}/.emacs
+    dest: ~/.emacs
 
 - name: Create the straight.el dir
   become: true
   become_user: "{{ user.name }}"
-  file: path=/home/{{ user.name }}/.emacs.d/straight/versions state=directory
+  file: path=~/.emacs.d/straight/versions state=directory
 
 - name: Copy straight.el lockfile
   become: true
   become_user: "{{ user.name }}"
   copy:
     src: default.el
-    dest: /home/{{ user.name }}/.emacs.d/straight/versions/default.el
+    dest: ~/.emacs.d/straight/versions/default.el
 
 - name: Set up Emacs
   become: true
   become_user: "{{ user.name }}"
-  shell: yes | emacs --script /home/{{ user.name }}/.emacs
+  shell: yes | emacs --script ~/.emacs
