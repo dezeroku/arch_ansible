@@ -7,7 +7,7 @@ setxkbmap -option caps:escape
 #xrandr --auto 
 {% endif %}
 
-emacs --daemon &
+#emacs --daemon &
 export SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass
 
 {% if i3_disable_touchpad %}
