@@ -12,10 +12,10 @@ bindsym $mod+x layout toggle
 
 # XF86 music binds
 # volume control up 
-bindsym XF86AudioRaiseVolume exec "ponymix increase 5 && python3 ~/.config/i3/scripts/play_sound.py volume_change.wav "
+bindsym XF86AudioRaiseVolume exec "ponymix increase 5"
 
 # volume control down 
-bindsym XF86AudioLowerVolume exec "ponymix decrease 5 && python3 ~/.config/i3/scripts/play_sound.py volume_change.wav "
+bindsym XF86AudioLowerVolume exec "ponymix decrease 5"
 
 # volume mute
 bindsym XF86AudioMute exec "ponymix toggle"
@@ -34,10 +34,10 @@ bindsym XF86AudioPrev exec "playerctl previous"
 
 # Keyboard shortcuts music binds
 # volume control up 
-bindsym Mod1+End exec "ponymix increase 5 && python3 ~/.config/i3/scripts/play_sound.py volume_change.wav "
+bindsym Mod1+End exec "ponymix increase 5"
 
 # volume control down 
-bindsym Mod1+Delete exec "ponymix decrease 5 && python3 ~/.config/i3/scripts/play_sound.py volume_change.wav "
+bindsym Mod1+Delete exec "ponymix decrease 5"
 
 # volume mute
 bindsym Mod1+Up exec "ponymix toggle"
@@ -232,7 +232,7 @@ workspace_auto_back_and_forth yes
 bindsym $mod+Tab workspace next
 
 #tab+shift move to next workspace 
-bindsym $mod+Shift+Tab exec "python3 ~/.config/i3/scripts/i3/i3_next_workspace.py "
+bindsym $mod+Shift+Tab exec "python3 ~/.config/i3/scripts/i3_next_workspace.py "
 
 # Set wallpaper
 exec "feh --bg-scale ~/.config/i3/wallpapers/0_wallpaper.png"
@@ -241,11 +241,7 @@ exec "feh --bg-scale ~/.config/i3/wallpapers/0_wallpaper.png"
 # That's pretty hacky way to enable users to use wallpapers that are not version controled.
 exec "feh --bg-scale ~/.config/i3/wallpapers/custom.png"
 
-# set lock screen
-# exec "~/.config/i3/scripts/resolution.py lock --set-up-locker --lock-image-number 1 --lock-timeout 0 --lock-images-path ~/.config/i3/wallpapers"
-
 # lock screen 
-#bindsym $mod+Control+l exec "~/.config/i3/scripts/resolution.py lock --lock-screen --lock-image-number 1 --lock-images-path ~/.config/i3/wallpapers"
 bindsym $mod+Control+l exec "/usr/bin/i3lock && sleep 1"
 
 # assign programs to workspaces
@@ -286,5 +282,64 @@ bindsym $mod+Control+l exec "/usr/bin/i3lock && sleep 1"
 default_border pixel 1
 hide_edge_borders both
 
-{% set specific_config = 'specific_' ~ i3_resolution %}
-{% include specific_config %}
+{% if i3_resolution == "1920x1080" %}
+# Good for bigger screens.
+font pango:Inconsolata , Icons 12
+{% else %}
+# Quite nice for not so big screens
+font pango:monospace 8 
+{% endif %}
+
+# start a terminal
+bindsym $mod+Return exec st 
+
+bindsym XF86Launch1 exec terminator -e "echo KOCHAM && echo AKISO  && sleep 6 && echo MOCNO && sleep 3 "
+
+bindsym XF86AudioMicMute exec "~/.config/i3/scripts/mic_passthrough.sh"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    font pango:DejaVu Sans Mono for Powerline, FontAwesome 8.5
+    position top
+    status_command i3status-rs ~/.config/i3status-rust/config.toml
+    i3bar_command i3bar -t
+    colors {
+        separator #666666
+        background #22222200
+        statusline #dddddd
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #ffffff
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace #2f343a #900000 #ffffff
+    }
+    strip_workspace_numbers yes
+}
+
+
+#prevents screen from dimming, it seems to work
+#exec xset s off -dpms
+
+{% if i3_setup_g751_scripts %}
+    # IMPORTANT NOTICE
+    # Currently, that config is really tied to Asus G751JM. You can remove all the stuff about it below, and it should
+    # work nice with different systems. However you won't get scripts for keyboard backlight, hardware screen backlight et`
+    # toggle touchpad shortcut
+    bindsym XF86TouchpadToggle exec "python3 ~/.config/i3/scripts/g750
+
+    # kbd backlight, this should be pretty universal
+
+    # kbd backlight up
+    bindsym XF86KbdBrightnessUp exec "python3 ~/.config/i3/scripts/g751/kb-light.py +"
+
+    #kbd backlight down
+    bindsym XF86KbdBrightnessDown exec "python3 ~/.config/i3/scripts/g751/kb-light.py -"
+
+    # screen backlight, needs changes in /etc/sudoers to work properly (you have to
+
+    # screen backlight up, this path should be ~/.config/i3/scripts/change_brightness but it needs NOPASSWD changes
+    bindsym XF86MonBrightnessUp exec "sudo ~/.config/i3/scripts/g751/change_brightness +"
+
+    # screen backlight down, this path should be ~/.config/i3/scripts/change_brightness but it needs NOPASSWD changes
+    bindsym XF86MonBrightnessDown exec "sudo ~/.config/i3/scripts/g751/change_brightness -"
+{% endif %}

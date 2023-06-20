@@ -1,8 +1,0 @@
-setxkbmap pl
-setxkbmap -option caps:escape
-emacs --daemon &
-export SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass
-# Disable TouchPad
-xinput disable $(xinput | grep TouchPad | grep -E "id=[0-9]+" -o | grep -E "[0-9]*" -o)
-xrandr --dpi 125.37
-exec i3

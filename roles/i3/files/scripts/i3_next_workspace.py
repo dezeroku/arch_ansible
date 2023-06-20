@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import sys
 import json
@@ -22,8 +23,5 @@ for x in data:
 
 if your_next_workspace=="strange_name_to_not_use":
     your_next_workspace=data[0]['name']
-print(your_next_workspace)
 
 os.system("i3-msg -t command move container to workspace "+your_next_workspace +" && i3-msg -t command workspace next")
-
-#print(data)

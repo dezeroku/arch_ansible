@@ -24,7 +24,7 @@ At the moment configuration is based global variables, take a look at `base.yaml
 
 There is a single `base.yaml` configuration which should be used as a starting point and customized per each machine where it's used, e.g. the `g751` switches should be kept off on non-NVIDIA-Optimus devices (such as `Asus G751JM` for which they were written).
 
-`i3` role supports `1920x1080` (also can be set as `none`), `1366x768` and `1280x800` resolutions.
+`i3` role supports `1920x1080` (default in the role), `1366x768` and `1280x800` resolutions.
 Using this role on a device with a different resolution may result in a distorted wallpaper/lockscreen images, but shouldn't break anything.
 
 ## Commands

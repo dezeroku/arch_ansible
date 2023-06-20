@@ -2,7 +2,10 @@
 user:
   name: d0ku
 
-i3_resolution: "none"
+i3_resolution: "1920x1080"
 i3_setup_g751_scripts: False
 i3_nopasswd_g751_scripts: False
 i3_copy_xinitrc: True
+i3_disable_touchpad: False
+i3_dpi: "125.37"
+i3_nvidia_optimus_direct_rendering: False

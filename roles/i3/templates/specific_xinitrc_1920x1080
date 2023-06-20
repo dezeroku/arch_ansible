@@ -1,9 +1,0 @@
-setxkbmap pl 
-setxkbmap -option caps:escape
-xrandr --setprovideroutputsource modesetting NVIDIA-0 
-xrandr --auto 
-emacs --daemon &
-export SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass
-xinput disable 28
-xrandr --dpi 127
-exec i3

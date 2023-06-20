@@ -1,0 +1,19 @@
+setxkbmap pl
+setxkbmap -option caps:escape
+
+{% if i3_nvidia_optimus_direct_rendering %}
+# Needed for rendering everything on more powerful Nvidia
+#xrandr --setprovideroutputsource modesetting NVIDIA-0 
+#xrandr --auto 
+{% endif %}
+
+emacs --daemon &
+export SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass
+
+{% if i3_disable_touchpad %}
+# Disable TouchPad
+xinput disable $(xinput | grep TouchPad | grep -E "id=[0-9]+" -o | grep -E "[0-9]*" -o)
+{% endif %}
+
+xrandr --dpi {{ i3_dpi }}
+exec i3

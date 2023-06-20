@@ -10,7 +10,7 @@
   become: yes
   become_user: "{{ user.name }}"
   file:
-    path: /home/{{ user.name }}/.config/i3/
+    path: ~/.config/i3/
     state: directory
     recurse: yes
 
@@ -19,28 +19,28 @@
   become_user: "{{ user.name }}"
   copy:
     src: scripts
-    dest: /home/{{ user.name }}/.config/i3/
+    dest: ~/.config/i3/
 
 - name: Copy wallpapers
   become: yes
   become_user: "{{ user.name }}"
   copy:
       src: wallpapers/{{ i3_resolution }}/
-      dest: /home/{{ user.name }}/.config/i3/wallpapers
+      dest: ~/.config/i3/wallpapers
 
 - name: Template i3 config
   become: true
   become_user: "{{ user.name }}"
   template:
       src: config
-      dest: /home/{{ user.name }}/.config/i3/config
+      dest: ~/.config/i3/config
 
-- name: Copy specific xinitrc
+- name: Copy xinitrc
   become: yes
   become_user: "{{ user.name }}"
   template:
-    src: specific_xinitrc_{{ i3_resolution }}
-    dest: /home/{{ user.name }}/.xinitrc
+    src: xinitrc
+    dest: ~/.xinitrc
   when: i3_copy_xinitrc
 
 - name: NOPASSWD sudo for g751 i3 scripts
@@ -48,12 +48,12 @@
   become_user: root
   lineinfile:
     dest: /etc/sudoers.d/13-g751-scripts
-    line: "{{ user.name }} ALL=(root) NOPASSWD: /home/{{ user.name }}/.config/i3/scripts/g751/*
+    line: "{{ user.name }} ALL=(root) NOPASSWD: ~/.config/i3/scripts/g751/*
 "
     create: yes
     validate: 'visudo -cf %s'
   when: i3_nopasswd_g751_scripts
 
 - name: Set script as executable
-  file: dest=/home/{{ user.name }}/.config/i3/scripts/g751/change_brightness mode=a+x
+  file: dest=~/.config/i3/scripts/g751/change_brightness mode=a+x
   when: i3_setup_g751_scripts
