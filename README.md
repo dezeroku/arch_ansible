@@ -16,29 +16,23 @@ Currently I am refactoring most of the roles I've written in the beginning, due 
 
 ## Profiles
 
-At the moment configuration is based on some global variables, which are:
-
+At the moment configuration is based global variables, take a look at `base.yaml` for more details. The most important ones are:
 * username
 * ssh key generation options
-* email (to be used in e.g. git configuration)
+* email (to be used in e.g. git commits)
 * shell you're going to use
 
-There are some roles which are tied to specific hardware, for example `g751` requires additional service for managing GPU fan speed, resolutions also differ between machines.
-Machines that I use are currently defined in inventory by setting necessary variables.
-That's the part which should be extended if you're willing to try to run these rules on your own.
+There is a single `base.yaml` configuration which should be used as a starting point and customized per each machine where it's used, e.g. the `g751` switches should be kept off on non-NVIDIA-Optimus devices (such as `Asus G751JM` for which they were written).
 
-| Name                 | Resolution                                                                |
-| ----                 | ----------                                                                |
-| x230 (Thinkpad X230) | 1366x768                                                                  |
-| g751 (Asus G751JM)   | 1920x1080                                                                 |
-| default              | none (1920x1080 and 1366x768 files are copied as base, depending on role) |
+`i3` role supports `1920x1080` (also can be set as `none`), `1366x768` and `1280x800` resolutions.
+Using this role on a device with a different resolution may result in a distorted wallpaper/lockscreen images, but shouldn't break anything.
 
 ## Commands
 
 At the moment there's `all.yml` playbook defined, that contains all roles available (sorted alphabetically).
-It can be used to run single roles, e.g. to set up vim on `x230` machine
+It can be used to run single roles, e.g. to set up vim on `base` machine
 ```
-sudo ansible-playbook -i x230.yaml all.yml --tags vim
+sudo ansible-playbook -i base.yaml all.yml --tags vim
 ```
 
 In general to run `<role>` on `<machine>` use
@@ -46,7 +40,7 @@ In general to run `<role>` on `<machine>` use
 sudo ansible-playbook -i <machine>.yaml all.yml --tags <role>
 ```
 
-It can also be used to installed all packages (some rules can be commented if not needed, ugly solution at the moment).
+It can also be used to install all packages listed.
 
 ## Credits
 

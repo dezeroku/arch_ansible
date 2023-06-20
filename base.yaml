@@ -6,6 +6,10 @@ x230:
   vars:
     ansible_python_interpreter: /usr/bin/python3
     i3_resolution: "1366x768"
+    openssh_start_server: false
+    openssh_enable_server: false
+    i3_setup_g751_scripts: false
+    i3_nopasswd_g751_scripts: false
     user:
       name: d0ku
       pub_name: dezeroku
