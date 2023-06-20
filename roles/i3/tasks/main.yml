@@ -35,13 +35,6 @@
       src: config
       dest: /home/{{ user.name }}/.config/i3/config
 
-- name: Copy specific status config (i3status-rc)
-  become: yes
-  become_user: "{{ user.name }}"
-  template:
-    src: specific_status_rc_{{ i3_resolution }}
-    dest: /home/{{ user.name }}/.config/i3/status_rc.yoml
-
 - name: Copy specific xinitrc
   become: yes
   become_user: "{{ user.name }}"

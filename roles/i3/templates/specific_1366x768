@@ -15,7 +15,7 @@ bindsym XF86AudioMicMute exec "~/.config/i3/scripts/passthrough.sh"
 bar {
     font pango:DejaVu Sans Mono for Powerline, FontAwesome 8.5
     position top
-    status_command i3status-rs ~/.config/i3/status_rc.yoml
+    status_command i3status-rs ~/.config/i3status-rust/config.toml
     i3bar_command i3bar -t
     colors {
         separator #666666
