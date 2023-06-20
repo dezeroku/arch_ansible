@@ -47,4 +47,8 @@
 - name: Build and install
   become: true
   become_user: root
-  command: chdir="{{ build_dir.path }}" makepkg -si --noconfirm
+  aur:
+    use: makepkg
+    name:
+      - st_custom
+    local_pkgbuild: "{{ build_dir.path }}"
