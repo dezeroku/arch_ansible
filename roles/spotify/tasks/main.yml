@@ -3,6 +3,6 @@
   aur:
     name:
       - spotify
-    skip_installed: true
+    state: present
   become: true
   become_user: aur_builder

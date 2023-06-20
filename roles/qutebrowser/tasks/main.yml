@@ -48,7 +48,7 @@
   aur:
     name:
       - python-adblock
-    skip_installed: true
+    state: present
   become: true
   become_user: root
 
@@ -56,7 +56,7 @@
   aur:
     name:
       - chromium-widevine
-    skip_installed: true
+    state: present
   become: true
   become_user: aur_builder
   when: qutebrowser_install_widevine

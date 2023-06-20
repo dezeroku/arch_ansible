@@ -1,7 +1,7 @@
 ---
 - name:
   aur: 
-    skip_installed: true
+    state: present
     name: 
       - discord
   become: yes

@@ -11,7 +11,7 @@
   aur:
     name:
       - pulseaudio-modules-bt-git
-    skip_installed: true
+    state: present
   become: true
   become_user: aur_builder
 
