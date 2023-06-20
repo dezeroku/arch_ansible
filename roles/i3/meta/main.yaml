@@ -8,7 +8,6 @@ dependencies:
   - role: i3status-rust
   - role: i3lock
   - role: feh
-  - role: st
   - role: terminator
   - role: fonts
   - role: powerline
