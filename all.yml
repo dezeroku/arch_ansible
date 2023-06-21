@@ -53,6 +53,7 @@
     - { role: jira, tags: ['jira', 'work'], when: work.enabled }
     - { role: keychain, tags: ['keychain', 'cli'] }
     - { role: kitty, tags: ['kitty'] }
+    - { role: kubectl-stuff, tags: ['kubectl-stuff', 'cli'] }
     - { role: latex, tags: ['latex', 'office'] }
     - { role: libreoffice, tags: ['libreoffice', 'office'] }
     - { role: mesa, tags: ['mesa', 'desktop'] }

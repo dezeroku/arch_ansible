@@ -1,0 +1,28 @@
+---
+- name: Install kubectl, kubectx
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - kubectl
+      - kubectx
+
+- name: Install krew
+  aur:
+    state: present
+    name:
+      - krew-bin
+  become: yes
+  become_user: aur_builder
+
+- name: Refresh krew repos
+  become: true
+  become_user: "{{ user.name }}"
+  command: kubectl krew update
+
+- name: Install plugins managed by krew
+  become: true
+  become_user: "{{ user.name }}"
+  command: "{{ item }}"
+  with_items:
+    - kubectl krew install modify-secret
