@@ -45,9 +45,22 @@ build() {
 
 package() {
   cd $srcdir/$realname-$pkgver
-  make PREFIX=/usr DESTDIR="$pkgdir" TERMINFO="$pkgdir/usr/share/terminfo" install
-  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$realname/LICENSE"
-  install -Dm644 README "$pkgdir/usr/share/doc/$realname/README"
+  # This is a wild hack to fix up tic -sx missing permissions
+  # Basically a copy-paste with modifications from Makefile
+  # Instead of a proper patch
+  mkdir -p $pkgdir/usr/bin
+  cp -f st $pkgdir/usr/bin
+  chmod 755 $pkgdir/usr/bin/st
+
+  mkdir -p $pkgdir/usr/share/man/man1
+  sed "s/VERSION/0.8.1/g" < st.1 > $pkgdir/usr/share/man/man1/st.1
+  chmod 644 $pkgdir/usr/share/man/man1/st.1
+
+  mkdir -p $pkgdir/usr/share/terminfo
+  tic -sx st.info -o $pkgdir/usr/share/terminfo
+  #make PREFIX=/usr DESTDIR="$pkgdir" TERMINFO="$pkgdir/usr/share/terminfo" install
+  #install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$realname/LICENSE"
+  #install -Dm644 README "$pkgdir/usr/share/doc/$realname/README"
   # remove to avoid conflict with ncurses
   rm "${pkgdir}/usr/share/terminfo/s/st" "${pkgdir}/usr/share/terminfo/s/st-256color" 
 }

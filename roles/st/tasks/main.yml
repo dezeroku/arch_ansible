@@ -3,7 +3,7 @@
 
 - name: create temporary build directory
   become: true
-  become_user: root
+  become_user: aur_builder
   tempfile:
     state: directory
     suffix: st-build
@@ -11,42 +11,42 @@
 
 - name: Copy config
   become: true
-  become_user: root
+  become_user: aur_builder
   copy:
     src: config.h
     dest: "{{ build_dir.path }}"
 
 - name: Copy PKGBUILD
   become: true
-  become_user: root
+  become_user: aur_builder
   copy:
     src: PKGBUILD
     dest: "{{ build_dir.path }}"
 
 - name: Copy patch (hidecursor)
   become: true
-  become_user: root
+  become_user: aur_builder
   copy:
     src: st-hidecursor-0.8.1.diff
     dest: "{{ build_dir.path }}"
 
 - name: Copy patch (alpha)
   become: true
-  become_user: root
+  become_user: aur_builder
   copy:
     src: st-alpha-0.8.1.diff
     dest: "{{ build_dir.path }}"
 
 - name: Copy patch (anysize)
   become: true
-  become_user: root
+  become_user: aur_builder
   copy:
     src: st-anysize-0.8.1.diff
     dest: "{{ build_dir.path }}"
 
 - name: Build and install
   become: true
-  become_user: root
+  become_user: aur_builder
   aur:
     use: makepkg
     name:
