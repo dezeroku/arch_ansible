@@ -6,16 +6,15 @@
     name:
       - go
 
-- name: Go get some stuff.
+- name: Go install few tools
   become: yes
   become_user: "{{ user.name }}"
   command: "{{ item }}"
   with_items:
-    - go get golang.org/x/tour/gotour
-    - go get golang.org/x/tools/cmd/godoc
-    - go get golang.org/x/lint/golint
-    - go get golang.org/x/tools/cmd/goimports
-    - go get github.com/nsf/gocode
-    - go get github.com/rogpeppe/godef
-    - go get github.com/kisielk/errcheck
+    - go install golang.org/x/tools/cmd/godoc@latest
+    - go install golang.org/x/lint/golint@latest
+    - go install golang.org/x/tools/cmd/goimports@latest
+    - go install github.com/nsf/gocode@latest
+    - go install github.com/rogpeppe/godef@latest
+    - go install github.com/kisielk/errcheck@latest
   when: go_install_packages
