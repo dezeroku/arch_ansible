@@ -1,12 +1,12 @@
 ---
-- name: Install Python3 and pip
+- name: Install Python3, pip and pyenv
   become: true
   become_user: root
   pacman:
     name:
       - python3
       - python-pip
-
+      - pyenv
 
 - name: Install Python3 packages
   become: true
@@ -17,3 +17,4 @@
       - mypy
       - python-pylint
       - python-pytest
+      - python-poetry
