@@ -4,6 +4,13 @@
   become_user: "{{ user.name }}"
   command: go install github.com/go-jira/jira/cmd/jira@latest
 
+- name: Ensure directory exists
+  become: yes
+  become_user: "{{ user.name }}"
+  file:
+    path: ~/.jira.d/
+    state: directory
+
 - name: Template go-jira config
   become: true
   become_user: "{{ user.name }}"
