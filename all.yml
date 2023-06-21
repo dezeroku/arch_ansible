@@ -92,6 +92,7 @@
     - { role: vim, tags: ['vim', 'editors'] }
     - { role: virtualbox, tags: ['virtualbox', 'virtualization'] }
     - { role: vlc, tags: ['vlc', 'media'] }
+    - { role: vscode, tags: ['vscode', 'editors'] }
     - { role: vnstat, tags: ['vnstat', 'utils'] }
     - { role: wireguard-tools, tags: ['wireguard-tools', 'vpn'] }
     - { role: wget, tags: ['wget', 'cli'] }

@@ -1,0 +1,7 @@
+---
+- name: Install VS code (open source build)
+  become: true
+  become_user: root
+  pacman:
+    name:
+      - code
