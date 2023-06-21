@@ -66,10 +66,7 @@ sudo ansible-playbook -i <machine>.yaml all.yml --tags vpn # OpenVPN, wireguard 
 There are also few specific packages (such as android-studio or intellij-idea) that are not part of any group and need to installed using individual tags.
 Similar for things that are not used by me at the moment, but can be useful in the future, e.g. ZSH setup.
 
-To get all the groups and leave out the single packages:
-```
-sudo ansible-playbook -i <machine>.yaml all.yml --tags core,cli,desktop,desktop-tools,media,virtualization,social,browser,languages,editors,docker,utils,work,office,gaming,vpn
-```
+To get all the groups and leave out the single packages you can use the `install-all-groups` scriptlet.
 
 ## Credits
 

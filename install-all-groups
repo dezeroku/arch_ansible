@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+
+sudo ansible-playbook -i base.yaml all.yml --tags core,cli,desktop,desktop-tools,media,virtualization,social,browser,languages,editors,docker,utils,work,office,gaming,vpn
