@@ -13,7 +13,7 @@
 
 - name: Install base-devel
   become: yes
-  become_user: aur_builder
+  become_user: root
   pacman:
     name: base-devel
     state: present
