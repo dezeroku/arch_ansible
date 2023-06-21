@@ -4,5 +4,5 @@
   become_user: root
   pacman:
     name:
-      - texlive-most
+      - texlive-latexrecommended
       - texlive-lang
