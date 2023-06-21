@@ -31,7 +31,7 @@
     - { role: discord, tags: ['discord', 'social'] }
     - { role: docker, tags: ['docker', 'docker'] }
     - { role: dunst, tags: ['dunst', 'desktop'] }
-    - { role: emacs, tags: ['emacs', 'editors'] }
+    - { role: emacs, tags: ['emacs'] }
     - { role: exfat-utils, tags: ['exfat-utils', 'utils'] }
     - { role: feh, tags: ['feh', 'desktop'] }
     - { role: firefox, tags: ['firefox', 'browser'] }
