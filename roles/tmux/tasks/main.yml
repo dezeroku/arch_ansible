@@ -27,7 +27,6 @@
   file:
     path: "~"
     state: directory
-    recurse: yes
 
 - name: Copy tmux.conf
   become: true
