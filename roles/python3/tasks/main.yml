@@ -7,15 +7,13 @@
       - python3
       - python-pip
 
-- name: Install Python3 packages.
+
+- name: Install Python3 packages
   become: true
-  become_user: "{{ user.name }}"
-  pip:
-    executable: pip3
+  become_user: root
+  pacman:
     name:
+      - python-pynvim
       - mypy
-      - pylint
-      - flake8
-      - pytest
-      - powerline-status
-      - neovim
+      - python-pylint
+      - python-pytest
