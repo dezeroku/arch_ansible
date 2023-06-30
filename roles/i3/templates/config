@@ -4,17 +4,17 @@
 # Set main button to Win
 set $mod Mod4
 
-# Use Mouse+$mod to drag floating windows to their wanted position 
+# Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 #Mod1 + x toggles layout
 bindsym $mod+x layout toggle
 
 # XF86 music binds
-# volume control up 
+# volume control up
 bindsym XF86AudioRaiseVolume exec "pamixer --increase 5"
 
-# volume control down 
+# volume control down
 bindsym XF86AudioLowerVolume exec "pamixer --decrease 5"
 
 # volume mute
@@ -33,10 +33,10 @@ bindsym XF86AudioNext exec "playerctl next"
 bindsym XF86AudioPrev exec "playerctl previous"
 
 # Keyboard shortcuts music binds
-# volume control up 
+# volume control up
 bindsym Mod1+End exec "pamixer --increase 5"
 
-# volume control down 
+# volume control down
 bindsym Mod1+Delete exec "pamixer --decrease 5"
 
 # volume mute
@@ -118,12 +118,12 @@ bindsym $mod+a focus parent
 
 # set workspaces names
 	# monitor
-		set $ws1 "1:" 
+		set $ws1 "1:"
 	# web
 		set $ws2 "2:"
 	# notepad
 		set $ws3 "3:"
-	# hash 
+	# hash
 		set $ws4 "4:"
 	# note
 		set $ws5 "5:"
@@ -135,8 +135,8 @@ bindsym $mod+a focus parent
 		set $ws8 "8:"
 	# gamepad
 		set $ws9 "9:"
-	# briefcase 
-		set $ws10 "10:" 
+	# briefcase
+		set $ws10 "10:"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -189,7 +189,7 @@ mode "resize" {
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
-        
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -231,7 +231,7 @@ bindsym $mod+Tab workspace next
 # Alt-Tab like behaviour
 bindsym Mod1+Tab exec --no-startup-id rofi -modi combi -combi-modi window -show combi
 
-#tab+shift move to next workspace 
+#tab+shift move to next workspace
 bindsym $mod+Shift+Tab exec "python3 ~/.config/i3/scripts/i3_next_workspace.py "
 
 # Set wallpaper
@@ -241,18 +241,18 @@ exec "feh --bg-scale ~/.config/i3/wallpapers/0_wallpaper.png"
 # That's pretty hacky way to enable users to use wallpapers that are not version controled.
 exec "feh --bg-scale ~/.config/i3/wallpapers/custom.png"
 
-# lock screen 
+# lock screen
 bindsym $mod+Control+l exec "/usr/bin/i3lock && sleep 1"
 
 # assign programs to workspaces
 
 	#Workspace id's:
 	# $ws1
-	# $ws2 
+	# $ws2
 	# and so on...
 	# till $ws10
-    # Get class using xprop, run it in terminal and click on window, you want to get class from 
-	
+    # Get class using xprop, run it in terminal and click on window, you want to get class from
+
     assign [class="(?i)Firefox"] $ws2
     assign [class="(?i)qutebrowser"] $ws2
     assign [class="(?i)Steam"] $ws8
@@ -264,14 +264,14 @@ bindsym $mod+Control+l exec "/usr/bin/i3lock && sleep 1"
     assign [class="(?i)discord"] $ws8
 
     # CS GO, and probably more OpenGL games
-    assign [class="(?i)Linux"] $ws9 
-   
-    # Stardew Valley 
+    assign [class="(?i)Linux"] $ws9
+
+    # Stardew Valley
     assign [class="(?i)StardewValley"] $ws9
 
     # Anki
     assign [class="(?i)Anki"] $ws9
-    
+
     # Spotify
     #assign [class="(?i)Spotify"] $ws5
     for_window [class="(?i)spotify"] move to workspace $ws5
@@ -287,11 +287,11 @@ hide_edge_borders both
 font pango:Inconsolata , Icons 12
 {% else %}
 # Quite nice for not so big screens
-font pango:monospace 8 
+font pango:monospace 8
 {% endif %}
 
 # start a terminal
-bindsym $mod+Return exec st 
+bindsym $mod+Return exec st
 
 bindsym XF86Launch1 exec terminator -e "echo KOCHAM && echo AKISO  && sleep 6 && echo MOCNO && sleep 3 "
 

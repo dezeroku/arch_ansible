@@ -1,7 +1,7 @@
 ---
 # Get zsh install script, and modify it for automation.
 
-- name: Install zsh and suggestions 
+- name: Install zsh and suggestions
   become: true
   become_user: root
   pacman:

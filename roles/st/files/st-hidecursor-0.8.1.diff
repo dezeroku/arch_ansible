@@ -37,31 +37,31 @@ index c343ba2..a40de8c 100644
  	pid_t thispid = getpid();
  	XColor xmousefg, xmousebg;
 +	Pixmap blankpm;
- 
+
  	if (!(xw.dpy = XOpenDisplay(NULL)))
  		die("Can't open display\n");
 @@ -1076,8 +1088,9 @@ xinit(int cols, int rows)
  		die("XCreateIC failed. Could not obtain input method.\n");
- 
+
  	/* white cursor, black outline */
 -	cursor = XCreateFontCursor(xw.dpy, mouseshape);
 -	XDefineCursor(xw.dpy, xw.win, cursor);
 +	xw.pointerisvisible = 1;
 +	xw.vpointer = XCreateFontCursor(xw.dpy, mouseshape);
 +	XDefineCursor(xw.dpy, xw.win, xw.vpointer);
- 
+
  	if (XParseColor(xw.dpy, xw.cmap, colorname[mousefg], &xmousefg) == 0) {
  		xmousefg.red   = 0xffff;
 @@ -1091,7 +1104,10 @@ xinit(int cols, int rows)
  		xmousebg.blue  = 0x0000;
  	}
- 
+
 -	XRecolorCursor(xw.dpy, cursor, &xmousefg, &xmousebg);
 +	XRecolorCursor(xw.dpy, xw.vpointer, &xmousefg, &xmousebg);
 +	blankpm = XCreateBitmapFromData(xw.dpy, xw.win, &(char){0}, 1, 1);
 +	xw.bpointer = XCreatePixmapCursor(xw.dpy, blankpm, blankpm,
 +					  &xmousefg, &xmousebg, 0, 0);
- 
+
  	xw.xembed = XInternAtom(xw.dpy, "_XEMBED", False);
  	xw.wmdeletewin = XInternAtom(xw.dpy, "WM_DELETE_WINDOW", False);
 @@ -1574,6 +1590,8 @@ unmap(XEvent *ev)
@@ -76,7 +76,7 @@ index c343ba2..a40de8c 100644
 @@ -1692,6 +1710,12 @@ kpress(XEvent *ev)
  	Status status;
  	Shortcut *bp;
- 
+
 +	if (xw.pointerisvisible) {
 +		XDefineCursor(xw.dpy, xw.win, xw.bpointer);
 +		xsetpointermotion(1);

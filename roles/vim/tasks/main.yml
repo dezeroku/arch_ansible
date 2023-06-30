@@ -36,7 +36,7 @@
 - name: Template neovim config
   become: true
   become_user: "{{ user.name }}"
-  template: 
+  template:
     src: vimrc
     dest: ~/.config/nvim/init.vim
 

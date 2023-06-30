@@ -1,8 +1,8 @@
 ---
 - name:
-  aur: 
+  aur:
     state: present
-    name: 
+    name:
       - discord
   become: yes
   become_user: aur_builder

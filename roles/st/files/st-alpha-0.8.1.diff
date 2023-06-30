@@ -5,7 +5,7 @@ index 82b1b09..2c721e8 100644
 @@ -82,6 +82,9 @@ char *termname = "st-256color";
   */
  unsigned int tabspaces = 8;
- 
+
 +/* bg opacity */
 +unsigned int alpha = 0xcc;
 +
@@ -18,8 +18,8 @@ index 82b1b09..2c721e8 100644
  	"#555555",
 +	"black",
  };
- 
- 
+
+
 @@ -117,7 +121,7 @@ static const char *colorname[] = {
   * foreground, background, cursor, reverse cursor
   */
@@ -28,14 +28,14 @@ index 82b1b09..2c721e8 100644
 +unsigned int defaultbg = 257;
  static unsigned int defaultcs = 256;
  static unsigned int defaultrcs = 257;
- 
+
 diff --git a/config.mk b/config.mk
 index 039c42c..b1fa717 100644
 --- a/config.mk
 +++ b/config.mk
 @@ -11,10 +11,10 @@ X11INC = /usr/X11R6/include
  X11LIB = /usr/X11R6/lib
- 
+
  # includes and libs
 -INCS = -I$(X11INC) \
 +INCS = -I. -I/usr/include -I${X11INC} \
@@ -45,7 +45,7 @@ index 039c42c..b1fa717 100644
 +LIBS = -L/usr/lib -lc -L${X11LIB} -lm -lrt -lX11 -lutil -lXft -lXrender\
         `pkg-config --libs fontconfig` \
         `pkg-config --libs freetype2`
- 
+
 diff --git a/st.h b/st.h
 index dac64d8..433c74f 100644
 --- a/st.h
@@ -64,7 +64,7 @@ index c0bd890..0562571 100644
 @@ -48,6 +48,10 @@ typedef struct {
  #define XK_NO_MOD     0
  #define XK_SWITCH_MOD (1<<13)
- 
+
 +/* alpha */
 +#define OPAQUE 0Xff
 +#define USE_ARGB (alpha != OPAQUE && opt_embed == NULL)
@@ -81,14 +81,14 @@ index c0bd890..0562571 100644
  	int gm; /* geometry mask */
  } XWindow;
 @@ -686,7 +691,7 @@ xresize(int col, int row)
- 
+
  	XFreePixmap(xw.dpy, xw.buf);
  	xw.buf = XCreatePixmap(xw.dpy, xw.win, win.w, win.h,
 -			DefaultDepth(xw.dpy, xw.scr));
 +			xw.depth);
  	XftDrawChange(xw.draw, xw.buf);
  	xclear(0, 0, win.w, win.h);
- 
+
 @@ -746,6 +751,13 @@ xloadcols(void)
  			else
  				die("could not allocate color %d\n", i);
@@ -102,11 +102,11 @@ index c0bd890..0562571 100644
 +	}
  	loaded = 1;
  }
- 
+
 @@ -767,6 +779,17 @@ xsetcolorname(int x, const char *name)
  	return 0;
  }
- 
+
 +void
 +xtermclear(int col1, int row1, int col2, int row2)
 +{
@@ -160,12 +160,12 @@ index c0bd890..0562571 100644
 +			exit(1);
 +		}
 +	}
- 
+
  	/* font */
  	if (!FcInit())
 @@ -1014,7 +1070,11 @@ xinit(int cols, int rows)
  	xloadfonts(usedfont, 0);
- 
+
  	/* colors */
 -	xw.cmap = XDefaultColormap(xw.dpy, xw.scr);
 +	if (!USE_ARGB)
@@ -174,7 +174,7 @@ index c0bd890..0562571 100644
 +		xw.cmap = XCreateColormap(xw.dpy, XRootWindow(xw.dpy, xw.scr),
 +				xw.vis, None);
  	xloadcols();
- 
+
  	/* adjust fixed window geometry */
 @@ -1037,16 +1097,15 @@ xinit(int cols, int rows)
  	if (!(opt_embed && (parent = strtol(opt_embed, NULL, 0))))
@@ -184,7 +184,7 @@ index c0bd890..0562571 100644
 +			win.w, win.h, 0, xw.depth, InputOutput,
  			xw.vis, CWBackPixel | CWBorderPixel | CWBitGravity
  			| CWEventMask | CWColormap, &xw.attrs);
- 
+
  	memset(&gcvalues, 0, sizeof(gcvalues));
  	gcvalues.graphics_exposures = False;
 -	dc.gc = XCreateGC(xw.dpy, parent, GCGraphicsExposures,
@@ -196,4 +196,3 @@ index c0bd890..0562571 100644
 +			GCGraphicsExposures, &gcvalues);
  	XSetForeground(xw.dpy, dc.gc, dc.col[defaultbg].pixel);
  	XFillRectangle(xw.dpy, xw.buf, dc.gc, 0, 0, win.w, win.h);
- 

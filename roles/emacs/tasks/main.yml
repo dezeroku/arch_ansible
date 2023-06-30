@@ -1,8 +1,8 @@
 ---
 - name: Install Emacs (>=28)
-  aur: 
+  aur:
     state: present
-    name: 
+    name:
       - emacs-git
   become: yes
   become_user: aur_builder

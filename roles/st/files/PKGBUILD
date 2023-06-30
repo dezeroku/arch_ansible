@@ -17,7 +17,7 @@ makedepends=('ncurses')
 conflicts=('st')
 _patches=(
 "https://st.suckless.org/patches/alpha/st-alpha-0.8.1.diff"
-"https://st.suckless.org/patches/anysize/st-anysize-0.8.1.diff" 
+"https://st.suckless.org/patches/anysize/st-anysize-0.8.1.diff"
 "https://st.suckless.org/patches/hidecursor/st-hidecursor-0.8.1.diff"
 #"https://st.suckless.org/patches/scrollback/st-scrollback-0.8.1.diff"
 #"https://st.suckless.org/patches/scrollback/st-scrollback-mouse-0.8.diff"
@@ -62,7 +62,7 @@ package() {
   #install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$realname/LICENSE"
   #install -Dm644 README "$pkgdir/usr/share/doc/$realname/README"
   # remove to avoid conflict with ncurses
-  rm "${pkgdir}/usr/share/terminfo/s/st" "${pkgdir}/usr/share/terminfo/s/st-256color" 
+  rm "${pkgdir}/usr/share/terminfo/s/st" "${pkgdir}/usr/share/terminfo/s/st-256color"
 }
 md5sums=('92135aecdba29300bb2e274a55f5b71e'
          'db29609905b22d1d2fbbbf8fdb2bf51a'

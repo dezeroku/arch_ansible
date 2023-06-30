@@ -29,7 +29,7 @@ Plugin 'weirongxu/plantuml-previewer.vim'
 Plugin 'aklt/plantuml-syntax'
 " Asynchrounous checkers.
 Plugin 'w0rp/ale'
-" Pretty status bar 
+" Pretty status bar
 Plugin 'vim-airline/vim-airline'
 " Beautify on :Au.
 Plugin 'Chiel92/vim-autoformat'

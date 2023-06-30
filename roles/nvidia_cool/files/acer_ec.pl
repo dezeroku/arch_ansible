@@ -15,7 +15,7 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -153,9 +153,9 @@ sub print_regs
 			}
 		}
 	}
-	
+
 	print "\n";
-	
+
 	close_ioports();
 }
 
@@ -173,9 +173,9 @@ sub print_myregs
 		if ($i >= 130 && $i <= 136) { print "TT2:\t"; print $t; print "\n";};
 		if ($i >= 138 && $i <= 144) { print "FS2:\t"; print $t; print "\n";};
 	}
-	
+
 	print "\n";
-	
+
 	close_ioports();
 }
 
@@ -200,9 +200,9 @@ sub print_myregs2
 		$t = read_ec($t2 + $i); print $t; print "\t";
 		$t = read_ec($s2 + $i); print $t; print "\n";
 	}
-	
+
 	print "\n";
-	
+
 	close_ioports();
 }
 

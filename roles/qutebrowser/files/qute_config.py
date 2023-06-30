@@ -1,23 +1,33 @@
 config.load_autoconfig()
 
-# STREAMING/DOWNLOADING VIDEO. 
+# STREAMING/DOWNLOADING VIDEO.
 # Max 480p.
-config.bind('<z>', 'spawn -d mpv --hwdec=vaapi --ytdl-format=best[height<=?480] {url}')
+config.bind("<z>", "spawn -d mpv --hwdec=vaapi --ytdl-format=best[height<=?480] {url}")
 
 # Max 480p (ASCII).
-config.bind('<Shift-Ctrl-z>', 'spawn -d mpv --hwdec=vaapi --ytdl-format=best[height<=?480] {url} -vo caca')
+config.bind(
+    "<Shift-Ctrl-z>",
+    "spawn -d mpv --hwdec=vaapi --ytdl-format=best[height<=?480] {url} -vo caca",
+)
 
 # Max 720p.
-config.bind('<Shift-z>', 'spawn -d mpv --hwdec=vaapi --ytdl-format=best[height<=?720] {url}')
+config.bind(
+    "<Shift-z>", "spawn -d mpv --hwdec=vaapi --ytdl-format=best[height<=?720] {url}"
+)
 
 # Uncapped, should be max quality.
-config.bind('<Shift-x>', 'spawn -d mpv --hwdec=vaapi --ytdl-format=best[height<=?1080] {url}')
+config.bind(
+    "<Shift-x>", "spawn -d mpv --hwdec=vaapi --ytdl-format=best[height<=?1080] {url}"
+)
 
 # Download Max 720p.
-config.bind('<Shift-Ctrl-x>', 'spawn --userscript ~/.config/qutebrowser/scripts/download_video.sh')
+config.bind(
+    "<Shift-Ctrl-x>",
+    "spawn --userscript ~/.config/qutebrowser/scripts/download_video.sh",
+)
 
 # Max available.
-#config.bind('<c>', 'spawn mpv {url}')
+# config.bind('<c>', 'spawn mpv {url}')
 
 # REAL CONFIG
 # Disable autoplay of video tags (mpv is used instead).
@@ -35,8 +45,8 @@ c.tabs.last_close = "ignore"
 
 # Starting tab / Default page
 # TODO: write a nice start page with links to popular services.
-#c.url.default_page = 
-#c.url.start_pages = 
+# c.url.default_page =
+# c.url.start_pages =
 
 # Set up search engines.
 duckstr = "https://duckduckgo.com/?q={}"
@@ -45,12 +55,13 @@ googlestr = "https://google.com/search?hl=en&q={}"
 translate_english_polish = "https://translate.google.com/#en/pl/{}"
 translate_german_polish = "https://translate.google.com/#de/pl/{}"
 dictcc_german_english = "https://dict.cc/?s={}"
-c.url.searchengines = {"DEFAULT":duckstr,
-                       "ddg":duckstr,
-                       "google":googlestr,
-                       "english":translate_english_polish,
-                       "german":translate_german_polish,
-                       "dictcc": dictcc_german_english,
+c.url.searchengines = {
+    "DEFAULT": duckstr,
+    "ddg": duckstr,
+    "google": googlestr,
+    "english": translate_english_polish,
+    "german": translate_german_polish,
+    "dictcc": dictcc_german_english,
 }
 
 # Fonts
@@ -66,7 +77,7 @@ c.fonts.messages.info = "{} monospace".format(basic_size)
 c.fonts.messages.warning = "{} monospace".format(basic_size)
 c.fonts.prompts = "{} monospace".format(basic_size)
 c.fonts.statusbar = "{} monospace".format(basic_size)
-#c.fonts.tabs = "{} monospace".format(basic_size)
+# c.fonts.tabs = "{} monospace".format(basic_size)
 
 # File picker
 c.fileselect.handler = "external"
@@ -74,6 +85,5 @@ c.fileselect.single_file.command = ["st", "-e", "ranger", "--choosefile={}"]
 c.fileselect.multiple_files.command = ["st", "-e", "ranger", "--choosefiles={}"]
 
 # Password manager
-config.bind(',p', 'spawn --userscript qute-bitwarden')
-config.bind(',P', 'spawn --userscript qute-bitwarden --password-only')
-
+config.bind(",p", "spawn --userscript qute-bitwarden")
+config.bind(",P", "spawn --userscript qute-bitwarden --password-only")

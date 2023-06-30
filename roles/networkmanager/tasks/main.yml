@@ -4,7 +4,7 @@
   become_user: root
   pacman:
     name: networkmanager
-    state: present 
+    state: present
 
 - name: Start and enable NM
   become: true

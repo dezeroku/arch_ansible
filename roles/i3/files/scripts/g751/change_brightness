@@ -1,53 +1,68 @@
 #!/usr/bin/python3
-import os,sys
+import os, sys
 
-#add username ALL=(ALL) NOPASSWD: path_to_folder_with_your_script to your sudoers file , in my case or example d0ku ALL=(ALL) NOPASSWD: /home/d0ku/bin/
+# add username ALL=(ALL) NOPASSWD: path_to_folder_with_your_script to your sudoers file , in my case or example d0ku ALL=(ALL) NOPASSWD: /home/d0ku/bin/
+
 
 def set_backlight(brightness):
-    os.system("echo "+str(brightness)+" | sudo tee /sys/class/backlight/intel_backlight/brightness")
+    os.system(
+        "echo "
+        + str(brightness)
+        + " | sudo tee /sys/class/backlight/intel_backlight/brightness"
+    )
+
 
 def get_backlight():
-    with open("/sys/class/backlight/intel_backlight/brightness","r") as brightness_file:
-        brightness=int(brightness_file.read())
+    with open(
+        "/sys/class/backlight/intel_backlight/brightness", "r"
+    ) as brightness_file:
+        brightness = int(brightness_file.read())
     return brightness
 
+
 def get_max_backlight():
-    with open("/sys/class/backlight/intel_backlight/max_brightness","r") as max_brightness_file:
+    with open(
+        "/sys/class/backlight/intel_backlight/max_brightness", "r"
+    ) as max_brightness_file:
         max_brightness = int(max_brightness_file.read())
     return max_brightness
-#usage change_brigthness -v value or change_brightness + or change_brightness -
-#works with intel_backlight brightness , can be easily adjusted
-change_value=50
 
-brightness=get_backlight() #initial read
-max_brightness=get_max_backlight() #initial read
+
+# usage change_brigthness -v value or change_brightness + or change_brightness -
+# works with intel_backlight brightness , can be easily adjusted
+change_value = 50
+
+brightness = get_backlight()  # initial read
+max_brightness = get_max_backlight()  # initial read
 
 if len(sys.argv) > 1:
 
-    if sys.argv[1]=="-h":
+    if sys.argv[1] == "-h":
         print("Use change_brightness -v value , to set value as current brightness")
         print("Use change_brightness + , to increase brightness")
         print("Use change_brightness - , to decrease brightness")
-    if sys.argv[1]=="-v":
-        brightness=int(sys.argv[2])
-        if brightness<=max_brightness:
+    if sys.argv[1] == "-v":
+        brightness = int(sys.argv[2])
+        if brightness <= max_brightness:
             set_backlight(brightness)
     else:
-        if sys.argv[1]=="+":
+        if sys.argv[1] == "+":
             if brightness + change_value < max_brightness:
                 brightness += change_value
         elif sys.argv[1] == "-":
-            if brightness>change_value:
-                brightness-=change_value
+            if brightness > change_value:
+                brightness -= change_value
             else:
-                brightness=0
+                brightness = 0
         set_backlight(brightness)
 
 else:
     max_brightness = get_max_backlight()
 
-    print("max = "+str(max_brightness))
-    print("min = zero but remember, if you enter too low value your screen will literally go black ;) ")
+    print("max = " + str(max_brightness))
+    print(
+        "min = zero but remember, if you enter too low value your screen will literally go black ;) "
+    )
 
     brightness = int(input("What is your preferred brightness? "))
 

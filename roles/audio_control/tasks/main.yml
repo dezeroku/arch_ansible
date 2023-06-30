@@ -5,4 +5,4 @@
   pacman:
     name:
       - pamixer
-      - playerctl 
+      - playerctl

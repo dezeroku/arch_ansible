@@ -110,7 +110,7 @@ static const char *colorname[] = {
         "#3f3f3f",
         "#dcdccc",
         "#aaaaaa",
-            
+
 };
 
 
