@@ -18,7 +18,6 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'lervag/vimtex'
 " Colors
 Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
 " Sessions
 Plugin 'tpope/vim-obsession'
 " Planutml previews on save
@@ -32,8 +31,6 @@ Plugin 'aklt/plantuml-syntax'
 Plugin 'w0rp/ale'
 " Pretty status bar 
 Plugin 'vim-airline/vim-airline'
-" Git commit support
-Plugin 'jreybert/vimagit'
 " Beautify on :Au.
 Plugin 'Chiel92/vim-autoformat'
 " File tree.
