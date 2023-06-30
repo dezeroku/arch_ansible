@@ -57,9 +57,10 @@ bindsym $mod+Shift+q kill
 # audio passthrough
 bindsym $mod+p exec "~/.config/i3/scripts/passthrough.sh"
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec "rofi -show drun"
-bindsym $mod+space exec "rofi -show drun"
+# start rofi (a program launcher)
+bindsym $mod+d exec "rofi -show-icons -show drun"
+bindsym $mod+space exec "rofi -show-icons -show drun"
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
