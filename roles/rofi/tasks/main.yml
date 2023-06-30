@@ -14,9 +14,16 @@
     state: directory
     recurse: yes
 
-- name: Copy rofi dotfile
+- name: Copy rofi config
   become: true
   become_user: "{{ user.name }}"
   copy:
-      src: rofi_config
-      dest: ~/.config/rofi/config.rasi
+    src: config.rasi
+    dest: ~/.config/rofi/config.rasi
+
+- name: Copy rofi spotlight-dark theme
+  become: true
+  become_user: "{{ user.name }}"
+  copy:
+    src: spotlight-dark.rasi
+    dest: ~/.config/rofi/spotlight-dark.rasi
