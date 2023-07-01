@@ -5,24 +5,3 @@
   community.general.pacman:
     name:
       - npm
-
-#- community.general.npm:
-#    name: js-beautify
-#    global: yes
-#  when: npm_install_packages
-#  become: true
-#  become_user: root
-#
-#- community.general.npm:
-#    name: sass
-#    global: yes
-#  when: npm_install_packages
-#  become: true
-#  become_user: root
-#
-#- community.general.npm:
-#    name: jslint
-#    global: yes
-#  when: npm_install_packages
-#  become: true
-#  become_user: root
