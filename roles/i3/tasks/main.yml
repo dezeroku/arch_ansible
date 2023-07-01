@@ -55,5 +55,7 @@
   when: i3_nopasswd_g751_scripts
 
 - name: Set script as executable
-  ansible.builtin.file: dest=~/.config/i3/scripts/g751/change_brightness mode=a+x
+  ansible.builtin.file:
+    dest: ~/.config/i3/scripts/g751/change_brightness
+    mode: a+x
   when: i3_setup_g751_scripts

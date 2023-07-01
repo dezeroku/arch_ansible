@@ -23,12 +23,16 @@
 - name: Set binary as executable
   become: true
   become_user: root
-  ansible.builtin.file: dest=/usr/bin/acer_ec.pl mode=a+x
+  ansible.builtin.file:
+    dest: /usr/bin/acer_ec.pl
+    mode: a+x
 
 - name: Set script as executable
   become: true
   become_user: root
-  ansible.builtin.file: dest=/usr/bin/temperature_management.py mode=a+x
+  ansible.builtin.file:
+    dest: /usr/bin/temperature_management.py
+    mode: a+x
 
 - name: Start and enable service
   become: true

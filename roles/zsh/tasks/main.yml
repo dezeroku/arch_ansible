@@ -9,7 +9,7 @@
       - zsh
       - zsh-autosuggestions
 
-- name: Download zsh script
+- name: Download oh-my-zsh script
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.get_url:
@@ -23,13 +23,12 @@
     path: ~/.oh-my-zsh
     state: absent
 
-- name: Get zsh
+- name: Install oh-my-zsh
   become: true
   become_user: "{{ user.name }}"
-  ansible.builtin.command: chdir=/tmp {{ item }}
-  with_items:
-      #      - sed -i.tmp 's:env zsh -l::g' ohmyzsh.sh
-      - sh ohmyzsh.sh
+  ansible.builtin.command:
+    chdir: /tmp
+    cmd: sh ohmyzsh.sh
 
 - name: Copy zsh config
   become: true
