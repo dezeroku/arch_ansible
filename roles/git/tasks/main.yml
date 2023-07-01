@@ -23,6 +23,8 @@
       - less
 
 - block:
+  become: true
+  become_user: "{{ user.name }}"
   - community.general.git_config:
      name: user.email
      scope: global
@@ -47,6 +49,3 @@
      name: diff-so-fancy.markEmptyLines
      scope: global
      value: "false"
-
-  become: yes
-  become_user: "{{ user.name }}"
