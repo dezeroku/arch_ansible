@@ -24,7 +24,7 @@
   become: true
   become_user: "{{ user.name }}"
   roles:
-    - { role: android-studio, tags: ['android-studio'] }
+    - { role: android_studio, tags: ['android_studio'] }
     - { role: audio_control, tags: ['audio_control', 'desktop'] }
     - { role: picom, tags: ['picom', 'desktop'] }
     - { role: deluge, tags: ['deluge'] }
@@ -32,7 +32,7 @@
     - { role: docker, tags: ['docker', 'docker'] }
     - { role: dunst, tags: ['dunst', 'desktop'] }
     - { role: emacs, tags: ['emacs'] }
-    - { role: exfat-utils, tags: ['exfat-utils', 'utils'] }
+    - { role: exfat_utils, tags: ['exfat_utils', 'utils'] }
     - { role: feh, tags: ['feh', 'desktop'] }
     - { role: firefox, tags: ['firefox', 'browser'] }
     - { role: fish, tags: ['fish', 'cli'] }
@@ -47,13 +47,13 @@
     - { role: gpg, tags: ['gpg', 'cli'] }
     - { role: i3, tags: ['i3', 'desktop'] }
     - { role: i3lock, tags: ['i3lock', 'desktop'] }
-    - { role: i3status-rust, tags: ['i3status-rust', 'desktop'] }
+    - { role: i3status_rust, tags: ['i3status_rust', 'desktop'] }
     - { role: imagemagick, tags: ['imagemagick', 'utils'] }
-    - { role: intellij-idea, tags: ['intellij-idea'] }
+    - { role: intellij_idea, tags: ['intellij_idea'] }
     - { role: jira, tags: ['jira', 'work'], when: work.enabled }
     - { role: keychain, tags: ['keychain', 'cli'] }
     - { role: kitty, tags: ['kitty'] }
-    - { role: kubectl-stuff, tags: ['kubectl-stuff', 'cli'] }
+    - { role: kubectl_stuff, tags: ['kubectl_stuff', 'cli'] }
     - { role: latex, tags: ['latex', 'office'] }
     - { role: libreoffice, tags: ['libreoffice', 'office'] }
     - { role: mesa, tags: ['mesa', 'desktop'] }
@@ -61,10 +61,10 @@
     - { role: mpv, tags: ['mpv', 'media'] }
     - { role: ncdu, tags: ['ncdu', 'cli'] }
     - { role: neofetch, tags: ['neofetch', 'cli'] }
-    - { role: networkmanager-applet, tags: ['networkmanager-applet', 'desktop'] }
+    - { role: networkmanager_applet, tags: ['networkmanager_applet', 'desktop'] }
     - { role: nmap, tags: ['nmap', 'cli'] }
     - { role: npm, tags: ['npm', 'languages'] }
-    - { role: ntfs-3g, tags: ['ntfs-3g', 'utils'] }
+    - { role: ntfs_3g, tags: ['ntfs_3g', 'utils'] }
     - { role: nvidia, tags: ['nvidia'], when: pc == "g751" }
     - { role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751" }
     - { role: p7zip, tags: ['p7zip', 'cli'] }
@@ -94,11 +94,11 @@
     - { role: vlc, tags: ['vlc', 'media'] }
     - { role: vscode, tags: ['vscode', 'editors'] }
     - { role: vnstat, tags: ['vnstat', 'utils'] }
-    - { role: wireguard-tools, tags: ['wireguard-tools', 'vpn'] }
+    - { role: wireguard_tools, tags: ['wireguard_tools', 'vpn'] }
     - { role: wget, tags: ['wget', 'cli'] }
     - { role: wine, tags: ['wine'] }
     - { role: xarchiver, tags: ['xarchiver', 'desktop-tools'] }
-    - { role: youtube-dl, tags: ['youtube-dl', 'media'] }
+    - { role: youtube_dl, tags: ['youtube_dl', 'media'] }
     - { role: zathura, tags: ['zathura', 'desktop-tools'] }
     - { role: zsh, tags: ['zsh'] }
   tags:

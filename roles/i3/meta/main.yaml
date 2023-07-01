@@ -5,7 +5,7 @@ dependencies:
   - role: mesa
   - role: pulseaudio
   - role: audio_control
-  - role: i3status-rust
+  - role: i3status_rust
   - role: i3lock
   - role: feh
   - role: terminator
