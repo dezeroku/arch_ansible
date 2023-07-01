@@ -18,3 +18,4 @@
       - python-pylint
       - python-pytest
       - python-poetry
+      - python-pipx
