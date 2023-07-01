@@ -26,27 +26,32 @@
   become: true
   become_user: "{{ user.name }}"
   block:
-  - community.general.git_config:
+  - name: Set git user.email
+    community.general.git_config:
      name: user.email
      scope: global
      value: "{{ user.email }}"
 
-  - community.general.git_config:
+  - name: Set git user.name
+    community.general.git_config:
      name: user.name
      scope: global
      value: "{{ user.pub_name }}"
 
-  - community.general.git_config:
+  - name: Set git pager (diff-so-fancy)
+    community.general.git_config:
      name: core.pager
      scope: global
      value: "diff-so-fancy | less --tabs=4 -RFX"
 
-  - community.general.git_config:
+  - name: Set git diffFilter (diff-so-fancy)
+    community.general.git_config:
      name: interactive.diffFilter
      scope: global
      value: "diff-so-fancy --patch"
 
-  - community.general.git_config:
+  - name: Set git diff-so-fancy options
+    community.general.git_config:
      name: diff-so-fancy.markEmptyLines
      scope: global
      value: "false"

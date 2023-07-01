@@ -1,5 +1,5 @@
 ---
-- name:
+- name: Install Discord (from AUR)
   kewlfft.aur.aur:
     state: present
     name:
