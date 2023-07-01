@@ -3,6 +3,7 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.command: go install github.com/go-jira/jira/cmd/jira@latest
+  changed_when: true
 
 - name: Ensure directory exists
   become: true

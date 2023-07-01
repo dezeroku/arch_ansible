@@ -18,3 +18,4 @@
     - go install github.com/rogpeppe/godef@latest
     - go install github.com/kisielk/errcheck@latest
   when: go_install_packages
+  changed_when: true

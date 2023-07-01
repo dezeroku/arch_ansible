@@ -69,3 +69,4 @@
   become_user: "{{ user.name }}"
   ansible.builtin.command: vim +PluginInstall +qall -u ~/.vundler.vim
   when: var_vundler.changed or var_vundle_git.changed
+  changed_when: true

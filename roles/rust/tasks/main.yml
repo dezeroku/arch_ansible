@@ -19,9 +19,11 @@
   become_user: "{{ user.name }}"
   ansible.builtin.command: rustup toolchain install "{{ rust_toolchain_type }}"
   when: rust_install_toolchain
+  changed_when: true
 
 - name: Install rls
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.command: rustup component add rls --toolchain "{{ rust_toolchain_type }}"
   when: rust_install_toolchain and rust_install_rls
+  changed_when: true

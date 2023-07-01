@@ -19,6 +19,7 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.command: kubectl krew update
+  changed_when: true
 
 - name: Install plugins managed by krew
   become: true
@@ -26,3 +27,4 @@
   ansible.builtin.command: "{{ item }}"
   with_items:
     - kubectl krew install modify-secret
+  changed_when: true

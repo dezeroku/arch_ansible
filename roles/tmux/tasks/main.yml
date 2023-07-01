@@ -51,3 +51,4 @@
   ansible.builtin.shell:
     cmd: tmux start-server && tmux new-session -d install_plugins && ~/.tmux/plugins/tpm/scripts/install_plugins.sh
   when: var_tmux_plugins.changed or var_tmux_tpm_git.changed
+  changed_when: true
