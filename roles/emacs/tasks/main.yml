@@ -54,4 +54,6 @@
 - name: Set up Emacs
   become: true
   become_user: "{{ user.name }}"
-  ansible.builtin.shell: yes | emacs --script ~/.emacs
+  ansible.builtin.shell: set -o pipefail && yes | emacs --script ~/.emacs
+  args:
+    executable: /usr/bin/env bash
