@@ -6,6 +6,7 @@
       - emacs-git
   become: true
   become_user: aur_builder
+  register: var_emacs_installed
 
 - name: Create the .emacs.d dir
   become: true
@@ -22,6 +23,7 @@
     dest: ~/.emacs.d/straight/repos/straight.el
     repo: https://github.com/raxod502/straight.el.git
     version: 1e27b0590df77a5d478970ca58fd6606971692f5
+  register: var_emacs_straight_git
 
 - name: Copy Emacs early config
   become: true
@@ -36,6 +38,7 @@
   ansible.builtin.copy:
     src: emacs
     dest: ~/.emacs
+  register: var_emacs_config
 
 - name: Create the straight.el dir
   become: true
@@ -50,10 +53,13 @@
   ansible.builtin.copy:
     src: default.el
     dest: ~/.emacs.d/straight/versions/default.el
+  register: var_emacs_lockfile
 
-- name: Set up Emacs
+- name: Install plugins
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.shell: set -o pipefail && yes | emacs --script ~/.emacs
   args:
     executable: /usr/bin/env bash
+  changed_when: true
+  when: var_emacs_straight_git.changed or var_emacs_config.changed or var_emacs_lockfile.changed or var_emacs_installed.changed
