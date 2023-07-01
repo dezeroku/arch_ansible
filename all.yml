@@ -5,7 +5,8 @@
 # Whenever you want to run single role, you should probably use this playbook.
 
 # Set time to be synced, configure pacman and create user.
-- hosts: all
+- name: core
+  hosts: all
   become: true
   become_user: root
   roles:
@@ -20,7 +21,8 @@
       - core
 
 # Install all utilities available.
-- hosts: all
+- name: all
+  hosts: all
   become: true
   become_user: "{{ user.name }}"
   roles:
