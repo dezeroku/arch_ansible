@@ -60,10 +60,12 @@
   become_user: "{{ user.name }}"
   ansible.builtin.git:
     dest: ~/.vim/bundle/Vundle.vim
-    repo: https://github.com/gmarik/Vundle.vim.git
+    repo: https://github.com/VundleVim/Vundle.vim.git
+    version: b255382d6242d7ea3877bf059d2934125e0c4d95 # last commit from 2019, newest as of today
+  register: var_vundle_git
 
 - name: Download plugins if something changed
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.command: vim +PluginInstall +qall -u ~/.vundler.vim
-  when: var_vundler.changed
+  when: var_vundler.changed or var_vundle_git.changed
