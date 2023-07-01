@@ -37,12 +37,12 @@ ansible-galaxy install -r requirements.yml
 At the moment there's `all.yml` playbook defined, that contains all roles available (sorted alphabetically).
 It can be used to run single roles, e.g. to set up vim on `base` machine
 ```
-sudo ansible-playbook -i base.yaml all.yml --tags vim
+ansible-playbook -i base.yaml all.yml --tags vim
 ```
 
 In general to run `<role>` on `<machine>` use
 ```
-sudo ansible-playbook -i <machine>.yaml all.yml --tags <role>
+ansible-playbook -i <machine>.yaml all.yml --tags <role>
 ```
 
 It can also be used to install all packages listed, if no tags are provided.
@@ -50,22 +50,22 @@ It can also be used to install all packages listed, if no tags are provided.
 ### First time
 If you don't want to install all packages but still want to have a proper setup of specific "groups" you can use few high-level tags tags.
 ```
-sudo ansible-playbook -i <machine>.yaml all.yml --tags core
-sudo ansible-playbook -i <machine>.yaml all.yml --tags cli # sets up fzf, fish, etc.
-sudo ansible-playbook -i <machine>.yaml all.yml --tags desktop # sets up i3, i3lock and friends
-sudo ansible-playbook -i <machine>.yaml all.yml --tags desktop-tools # archiver, doc viewers, etc.
-sudo ansible-playbook -i <machine>.yaml all.yml --tags media # VNC, MPV, spotify, etc.
-sudo ansible-playbook -i <machine>.yaml all.yml --tags virtualization # qemu, vagrant, virtualbox
-sudo ansible-playbook -i <machine>.yaml all.yml --tags social # discord
-sudo ansible-playbook -i <machine>.yaml all.yml --tags browser # qutebrowser, firefox
-sudo ansible-playbook -i <machine>.yaml all.yml --tags languages # python, golang, rust
-sudo ansible-playbook -i <machine>.yaml all.yml --tags editors # vim, nvim, emacs
-sudo ansible-playbook -i <machine>.yaml all.yml --tags docker # just docker
-sudo ansible-playbook -i <machine>.yaml all.yml --tags utils # stuff that doesn't fall into any category really, but is generally useful
-sudo ansible-playbook -i <machine>.yaml all.yml --tags work # work related stuff, e.g. jira CLI (requires work.enabled = true in yaml config)
-sudo ansible-playbook -i <machine>.yaml all.yml --tags office # libreoffice, latex
-sudo ansible-playbook -i <machine>.yaml all.yml --tags gaming # Steam
-sudo ansible-playbook -i <machine>.yaml all.yml --tags vpn # OpenVPN, wireguard tooling
+ansible-playbook -i <machine>.yaml all.yml --tags core
+ansible-playbook -i <machine>.yaml all.yml --tags cli # sets up fzf, fish, etc.
+ansible-playbook -i <machine>.yaml all.yml --tags desktop # sets up i3, i3lock and friends
+ansible-playbook -i <machine>.yaml all.yml --tags desktop-tools # archiver, doc viewers, etc.
+ansible-playbook -i <machine>.yaml all.yml --tags media # VNC, MPV, spotify, etc.
+ansible-playbook -i <machine>.yaml all.yml --tags virtualization # qemu, vagrant, virtualbox
+ansible-playbook -i <machine>.yaml all.yml --tags social # discord
+ansible-playbook -i <machine>.yaml all.yml --tags browser # qutebrowser, firefox
+ansible-playbook -i <machine>.yaml all.yml --tags languages # python, golang, rust
+ansible-playbook -i <machine>.yaml all.yml --tags editors # vim, nvim, emacs
+ansible-playbook -i <machine>.yaml all.yml --tags docker # just docker
+ansible-playbook -i <machine>.yaml all.yml --tags utils # stuff that doesn't fall into any category really, but is generally useful
+ansible-playbook -i <machine>.yaml all.yml --tags work # work related stuff, e.g. jira CLI (requires work.enabled = true in yaml config)
+ansible-playbook -i <machine>.yaml all.yml --tags office # libreoffice, latex
+ansible-playbook -i <machine>.yaml all.yml --tags gaming # Steam
+ansible-playbook -i <machine>.yaml all.yml --tags vpn # OpenVPN, wireguard tooling
 ```
 
 There are also few specific packages (such as android-studio or intellij-idea) that are not part of any group and need to installed using individual tags.
