@@ -22,9 +22,10 @@
       - diff-so-fancy
       - less
 
-- block:
+- name: Set up gitconfig
   become: true
   become_user: "{{ user.name }}"
+  block:
   - community.general.git_config:
      name: user.email
      scope: global
