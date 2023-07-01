@@ -29,6 +29,11 @@ Using this role on a device with a different resolution may result in a distorte
 
 ## Commands
 
+To install the dependencies (roles) run:
+```
+ansible-galaxy install -r requirements.yml
+```
+
 At the moment there's `all.yml` playbook defined, that contains all roles available (sorted alphabetically).
 It can be used to run single roles, e.g. to set up vim on `base` machine
 ```
