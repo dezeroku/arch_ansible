@@ -10,15 +10,15 @@
   become: true
   become_user: root
   ansible.builtin.copy:
-      src: acer_ec.pl
-      dest: /usr/bin/acer_ec.pl
+    src: acer_ec.pl
+    dest: /usr/bin/acer_ec.pl
 
 - name: Copy script itself
   become: true
   become_user: root
   ansible.builtin.copy:
-      src: temperature_management.py
-      dest: /usr/bin/temperature_management.py
+    src: temperature_management.py
+    dest: /usr/bin/temperature_management.py
 
 - name: Set binary as executable
   become: true
@@ -38,6 +38,6 @@
   become: true
   become_user: root
   ansible.builtin.systemd:
-      name: gpu_cool
-      state: started
-      enabled: true
+    name: gpu_cool
+    state: started
+    enabled: true

@@ -18,5 +18,5 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.copy:
-      src: dunstrc
-      dest: ~/.config/dunst/dunstrc
+    src: dunstrc
+    dest: ~/.config/dunst/dunstrc

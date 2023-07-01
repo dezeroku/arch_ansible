@@ -6,7 +6,7 @@
     name: sudo
     state: latest
   tags:
-      - install
+    - install
 
 - name: Add user to sudo group
   ansible.builtin.lineinfile:
@@ -17,4 +17,4 @@
   become: true
   become_user: root
   tags:
-      - configure
+    - configure

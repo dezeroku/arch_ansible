@@ -18,8 +18,8 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.copy:
-      src: qute_config.py
-      dest: ~/.config/qutebrowser/config.py
+    src: qute_config.py
+    dest: ~/.config/qutebrowser/config.py
 
 - name: Ensure scripts directory exists
   become: true
@@ -33,8 +33,8 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.copy:
-      src: download_video.sh
-      dest: ~/.config/qutebrowser/scripts/download_video.sh
+    src: download_video.sh
+    dest: ~/.config/qutebrowser/scripts/download_video.sh
 
 # TODO: move to separate bitwarden rol
 - name: Install password manager and dependency
@@ -42,7 +42,7 @@
   become_user: root
   community.general.pacman:
     name:
-    - python-tldextract
+      - python-tldextract
 
 - name: Install brave adblocker to be used
   kewlfft.aur.aur:

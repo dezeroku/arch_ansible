@@ -10,6 +10,6 @@
   become: true
   become_user: root
   ansible.builtin.systemd:
-      name: vnstat
-      state: "{{ vnstat_service_state }}"
-      enabled: "{{ vnstat_enable_service | bool }}"
+    name: vnstat
+    state: "{{ vnstat_service_state }}"
+    enabled: "{{ vnstat_enable_service | bool }}"

@@ -18,5 +18,5 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.copy:
-      src: picom.conf
-      dest: ~/.config/picom.conf
+    src: picom.conf
+    dest: ~/.config/picom.conf

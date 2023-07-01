@@ -15,5 +15,5 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
-      src: config.yml
-      dest: ~/.jira.d/config.yml
+    src: config.yml
+    dest: ~/.jira.d/config.yml

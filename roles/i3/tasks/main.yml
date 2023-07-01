@@ -25,15 +25,15 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.copy:
-      src: wallpapers/{{ i3_resolution }}/
-      dest: ~/.config/i3/wallpapers
+    src: wallpapers/{{ i3_resolution }}/
+    dest: ~/.config/i3/wallpapers
 
 - name: Template i3 config
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
-      src: config
-      dest: ~/.config/i3/config
+    src: config
+    dest: ~/.config/i3/config
 
 - name: Copy xinitrc
   become: true

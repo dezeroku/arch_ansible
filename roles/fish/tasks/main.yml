@@ -18,37 +18,37 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
-      src: config.fish
-      dest: ~/.config/fish/config.fish
+    src: config.fish
+    dest: ~/.config/fish/config.fish
 
 # TODO: More generic approach for multiple config files
 - name: Copy fish (AWS) config
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
-      src: aws.fish
-      dest: ~/.config/fish/aws.fish
+    src: aws.fish
+    dest: ~/.config/fish/aws.fish
 
 - name: Copy fish (kubernetes) config
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
-      src: kubernetes.fish
-      dest: ~/.config/fish/kubernetes.fish
+    src: kubernetes.fish
+    dest: ~/.config/fish/kubernetes.fish
 
 - name: Copy fish (blocks) config
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
-      src: blocks.fish
-      dest: ~/.config/fish/blocks.fish
+    src: blocks.fish
+    dest: ~/.config/fish/blocks.fish
 
 - name: Copy fish colors
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
-      src: fish_variables
-      dest: ~/.config/fish/fish_variables
+    src: fish_variables
+    dest: ~/.config/fish/fish_variables
 
 - name: Ensure directory exists
   become: true
@@ -62,8 +62,8 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
-      src: fundle.fish
-      dest: ~/.config/fish/functions
+    src: fundle.fish
+    dest: ~/.config/fish/functions
 
 - name: Get plugins
   become: true

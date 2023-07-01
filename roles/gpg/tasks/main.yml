@@ -18,8 +18,8 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.copy:
-      src: gpg_config
-      dest: ~/.gnupg/gpg-agent.conf
+    src: gpg_config
+    dest: ~/.gnupg/gpg-agent.conf
 
 - name: Set gpg key to use with git
   become: true
