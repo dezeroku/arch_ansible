@@ -8,13 +8,13 @@
   ansible.builtin.lineinfile:
     path: /etc/sudoers.d/11-install-aur_builder
     line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
-    create: yes
+    create: true
     validate: 'visudo -cf %s'
   become: true
   become_user: root
 
 - name: Install base-devel
-  become: yes
+  become: true
   become_user: root
   community.general.pacman:
     name: base-devel
@@ -26,6 +26,6 @@
     name: yay
     use: makepkg
     state: present
-  become: yes
+  become: true
   become_user: aur_builder
   when: aur_install_yay

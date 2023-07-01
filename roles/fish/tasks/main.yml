@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: ~/.config/fish
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Copy fish config
   become: true
@@ -56,7 +56,7 @@
   ansible.builtin.file:
     path: ~/.config/fish/functions
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Copy fundle setup script
   become: true

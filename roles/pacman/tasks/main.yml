@@ -40,12 +40,12 @@
   become: true
   become_user: root
   community.general.pacman:
-    update_cache: yes
+    update_cache: true
   when: pacman_update
 
 - name: Upgrade packages
   become: true
   become_user: root
   community.general.pacman:
-    upgrade: yes
+    upgrade: true
   when: pacman_upgrade

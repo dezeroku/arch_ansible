@@ -1,5 +1,5 @@
 ---
-git_install_hub: True
+git_install_hub: true
 user:
   name: d0ku
   pub_name: dezeroku

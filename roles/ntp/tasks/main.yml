@@ -11,7 +11,7 @@
   become_user: root
   ansible.builtin.systemd:
     name: systemd-timesyncd.service
-    enabled: True
+    enabled: true
     state: started
 
 - name: Set timezone and hardware clock

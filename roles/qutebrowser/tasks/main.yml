@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: ~/.config/qutebrowser
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Copy qutebrowser config
   become: true
@@ -27,7 +27,7 @@
   ansible.builtin.file:
     path: ~/.config/qutebrowser/scripts
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Copy download script
   become: true

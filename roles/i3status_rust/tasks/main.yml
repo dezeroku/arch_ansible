@@ -14,15 +14,15 @@
       - ttf-font-awesome
 
 - name: Ensure directory exists
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   ansible.builtin.file:
     path: ~/.config/i3status-rust/
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Template status config
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
     src: config.toml

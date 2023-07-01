@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: ~/.config/dunst
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Copy dunst dotfile
   become: true

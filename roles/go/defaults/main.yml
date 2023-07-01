@@ -1,4 +1,4 @@
 ---
-go_install_packages: True
+go_install_packages: true
 user:
   name: d0ku

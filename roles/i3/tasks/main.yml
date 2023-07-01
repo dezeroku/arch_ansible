@@ -7,22 +7,22 @@
       - i3-gaps
 
 - name: Ensure directory exists
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   ansible.builtin.file:
     path: ~/.config/i3/
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Copy scripts directory
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   ansible.builtin.copy:
     src: scripts
     dest: ~/.config/i3/
 
 - name: Copy wallpapers
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   ansible.builtin.copy:
       src: wallpapers/{{ i3_resolution }}/
@@ -36,7 +36,7 @@
       dest: ~/.config/i3/config
 
 - name: Copy xinitrc
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
     src: xinitrc
@@ -50,7 +50,7 @@
     dest: /etc/sudoers.d/13-g751-scripts
     line: "{{ user.name }} ALL=(root) NOPASSWD: ~/.config/i3/scripts/g751/*
 "
-    create: yes
+    create: true
     validate: 'visudo -cf %s'
   when: i3_nopasswd_g751_scripts
 

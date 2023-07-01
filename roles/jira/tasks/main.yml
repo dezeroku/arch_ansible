@@ -1,11 +1,11 @@
 ---
 - name: Install go-jira
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   ansible.builtin.command: go install github.com/go-jira/jira/cmd/jira@latest
 
 - name: Ensure directory exists
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   ansible.builtin.file:
     path: ~/.jira.d/

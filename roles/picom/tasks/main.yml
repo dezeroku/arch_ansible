@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: ~/.config
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Copy picom dotfile
   become: true

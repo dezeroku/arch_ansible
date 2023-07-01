@@ -7,22 +7,22 @@
       - gnupg
 
 - name: Ensure directory exists
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   ansible.builtin.file:
     path: ~/.gnupg
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Copy gpg config
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   ansible.builtin.copy:
       src: gpg_config
       dest: ~/.gnupg/gpg-agent.conf
 
 - name: Set gpg key to use with git
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   community.general.git_config:
     name: user.signingkey
@@ -31,7 +31,7 @@
   when: user.gpg_key is defined
 
 - name: Set git to always use gpg
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   community.general.git_config:
     name: commit.gpgsign

@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: ~/.rustup
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Install chosen toolchain
   become: true

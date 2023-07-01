@@ -11,5 +11,5 @@
   become_user: root
   ansible.builtin.systemd:
       name: NetworkManager
-      enabled: yes
+      enabled: true
       state: started

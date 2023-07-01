@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: ~/.tmux/plugins
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Clone tmux plugin manager
   become: true

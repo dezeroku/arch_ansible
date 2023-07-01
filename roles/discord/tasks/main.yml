@@ -4,5 +4,5 @@
     state: present
     name:
       - discord
-  become: yes
+  become: true
   become_user: aur_builder

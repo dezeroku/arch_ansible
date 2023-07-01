@@ -7,7 +7,7 @@
       - go
 
 - name: Go install few tools
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   ansible.builtin.command: "{{ item }}"
   with_items:

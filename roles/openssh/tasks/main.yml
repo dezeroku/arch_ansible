@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: ~/.ssh
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Copy ssh config
   become: true

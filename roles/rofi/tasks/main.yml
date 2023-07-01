@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: ~/.config/rofi
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: Copy rofi config
   become: true
