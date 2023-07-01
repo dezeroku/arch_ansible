@@ -6,7 +6,7 @@
     name:
       - pacman-contrib
 
-- name: enable colors
+- name: Enable colors
   become: true
   become_user: root
   ansible.builtin.lineinfile:
@@ -16,7 +16,7 @@
     insertafter: "^#Color"
     line: "Color"
 
-- name: multilib support 1
+- name: Multilib support 1
   become: true
   become_user: root
   ansible.builtin.lineinfile:
@@ -26,7 +26,7 @@
     regexp: "^\\[multilib\\]"
     insertafter: "^#\\[multilib\\]"
 
-- name: multilib 2
+- name: Multilib 2
   become: true
   become_user: root
   ansible.builtin.lineinfile:

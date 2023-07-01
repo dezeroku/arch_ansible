@@ -1,7 +1,7 @@
 ---
 # TODO: this recipe could probably use AUR library?
 
-- name: create temporary build directory
+- name: Create temporary build directory
   become: true
   become_user: aur_builder
   ansible.builtin.tempfile:
