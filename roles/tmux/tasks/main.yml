@@ -20,6 +20,7 @@
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm.git
     dest: ~/.tmux/plugins/tpm
+    version: v3.1.0
 
 - name: Ensure directory exists
   become: true
