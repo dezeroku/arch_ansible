@@ -4,104 +4,102 @@
 # one of these can be run by calling ansible with --tags <role_name>
 # Whenever you want to run single role, you should probably use this playbook.
 
-# Set time to be synced, configure pacman and create user.
 - name: Core
   hosts: all
   become: true
   become_user: root
   roles:
-      - { role: ntp, tags: ['ntp'] }
-      - { role: pacman, tags: ['pacman'] }
-      - { role: create_user, tags: ['create_user'] }
-      - { role: sudo, tags: ['sudo'] }
-      - { role: aur_builder, tags: ['aur_builder'] }
-      - { role: networkmanager, tags: ['networkmanager'] }
-      - { role: pacman, tags: ['pacman'] }
+    - {role: ntp, tags: ['ntp']}
+    - {role: pacman, tags: ['pacman']}
+    - {role: create_user, tags: ['create_user']}
+    - {role: sudo, tags: ['sudo']}
+    - {role: aur_builder, tags: ['aur_builder']}
+    - {role: networkmanager, tags: ['networkmanager']}
+    - {role: pacman, tags: ['pacman']}
   tags:
-      - core
+    - core
 
-# Install all utilities available.
 - name: All
   hosts: all
   become: true
   become_user: "{{ user.name }}"
   roles:
-    - { role: android_studio, tags: ['android_studio'] }
-    - { role: audio_control, tags: ['audio_control', 'desktop'] }
-    - { role: picom, tags: ['picom', 'desktop'] }
-    - { role: deluge, tags: ['deluge'] }
-    - { role: discord, tags: ['discord', 'social'] }
-    - { role: docker, tags: ['docker', 'docker'] }
-    - { role: dunst, tags: ['dunst', 'desktop'] }
-    - { role: emacs, tags: ['emacs'] }
-    - { role: exfat_utils, tags: ['exfat_utils', 'utils'] }
-    - { role: feh, tags: ['feh', 'desktop'] }
-    - { role: firefox, tags: ['firefox', 'browser'] }
-    - { role: fish, tags: ['fish', 'cli'] }
-    - { role: flameshot, tags: ['flameshot', 'desktop'] }
-    - { role: fonts, tags: ['fonts', 'desktop'] }
-    - { role: fuse, tags: ['fuse', 'utils'] }
-    - { role: fzf, tags: ['fzf', 'cli'] }
-    - { role: gimp, tags: ['gimp', 'desktop-utils'] }
-    - { role: git, tags: ['git', 'cli'] }
-    - { role: go, tags: ['go', 'languages'] }
-    - { role: gparted, tags: ['gparted', 'desktop-utils'] }
-    - { role: gpg, tags: ['gpg', 'cli'] }
-    - { role: i3, tags: ['i3', 'desktop'] }
-    - { role: i3lock, tags: ['i3lock', 'desktop'] }
-    - { role: i3status_rust, tags: ['i3status_rust', 'desktop'] }
-    - { role: imagemagick, tags: ['imagemagick', 'utils'] }
-    - { role: intellij_idea, tags: ['intellij_idea'] }
-    - { role: jira, tags: ['jira', 'work'], when: work.enabled }
-    - { role: keychain, tags: ['keychain', 'cli'] }
-    - { role: kitty, tags: ['kitty'] }
-    - { role: kubectl_stuff, tags: ['kubectl_stuff', 'cli'] }
-    - { role: latex, tags: ['latex', 'office'] }
-    - { role: libreoffice, tags: ['libreoffice', 'office'] }
-    - { role: mesa, tags: ['mesa', 'desktop'] }
-    - { role: misc, tags: ['misc', 'utils'] }
-    - { role: mpv, tags: ['mpv', 'media'] }
-    - { role: ncdu, tags: ['ncdu', 'cli'] }
-    - { role: neofetch, tags: ['neofetch', 'cli'] }
-    - { role: networkmanager_applet, tags: ['networkmanager_applet', 'desktop'] }
-    - { role: nmap, tags: ['nmap', 'cli'] }
-    - { role: npm, tags: ['npm', 'languages'] }
-    - { role: ntfs_3g, tags: ['ntfs_3g', 'utils'] }
-    - { role: nvidia, tags: ['nvidia'], when: pc == "g751" }
-    - { role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751" }
-    - { role: p7zip, tags: ['p7zip', 'cli'] }
-    - { role: pcmanfm, tags: ['pcmanfm', 'desktop-utils'] }
-    - { role: powerline, tags: ['powerline', 'desktop'] }
-    - { role: pulseaudio, tags: ['pulseaudio', 'desktop'] }
-    - { role: python3, tags: ['python3', 'languages'] }
-    - { role: qemu, tags: ['qemu', 'virtualization'] }
-    - { role: qutebrowser, tags: ['qutebrowser', 'browser'] }
-    - { role: ranger, tags: ['ranger', 'cli'] }
-    - { role: redshift, tags: ['redshift', 'desktop'] }
-    - { role: rofi, tags: ['rofi', 'desktop'] }
-    - { role: rust, tags: ['rust', 'languages'] }
-    - { role: spotify, tags: ['spotify', 'media'] }
-    - { role: openssh, tags: ['openssh', 'cli'] }
-    - { role: openvpn, tags: ['openvpn', 'vpn'] }
-    - { role: st, tags: ['st', 'desktop'] }
-    - { role: steam, tags: ['steam', 'gaming'] }
-    - { role: sxiv, tags: ['sxiv', 'desktop-utils'] }
-    - { role: terminator, tags: ['terminator'] }
-    - { role: tldr, tags: ['tldr', 'cli'] }
-    - { role: tmux, tags: ['tmux', 'cli'] }
-    - { role: udiskie, tags: ['udiskie', 'desktop'] }
-    - { role: vagrant, tags: ['vagrant', 'virtualization'] }
-    - { role: vim, tags: ['vim', 'editors'] }
-    - { role: virtualbox, tags: ['virtualbox', 'virtualization'] }
-    - { role: vlc, tags: ['vlc', 'media'] }
-    - { role: vscode, tags: ['vscode', 'editors'] }
-    - { role: vnstat, tags: ['vnstat', 'utils'] }
-    - { role: wireguard_tools, tags: ['wireguard_tools', 'vpn'] }
-    - { role: wget, tags: ['wget', 'cli'] }
-    - { role: wine, tags: ['wine'] }
-    - { role: xarchiver, tags: ['xarchiver', 'desktop-tools'] }
-    - { role: youtube_dl, tags: ['youtube_dl', 'media'] }
-    - { role: zathura, tags: ['zathura', 'desktop-tools'] }
-    - { role: zsh, tags: ['zsh'] }
+    - {role: android_studio, tags: ['android_studio']}
+    - {role: audio_control, tags: ['audio_control', 'desktop']}
+    - {role: picom, tags: ['picom', 'desktop']}
+    - {role: deluge, tags: ['deluge']}
+    - {role: discord, tags: ['discord', 'social']}
+    - {role: docker, tags: ['docker', 'docker']}
+    - {role: dunst, tags: ['dunst', 'desktop']}
+    - {role: emacs, tags: ['emacs']}
+    - {role: exfat_utils, tags: ['exfat_utils', 'utils']}
+    - {role: feh, tags: ['feh', 'desktop']}
+    - {role: firefox, tags: ['firefox', 'browser']}
+    - {role: fish, tags: ['fish', 'cli']}
+    - {role: flameshot, tags: ['flameshot', 'desktop']}
+    - {role: fonts, tags: ['fonts', 'desktop']}
+    - {role: fuse, tags: ['fuse', 'utils']}
+    - {role: fzf, tags: ['fzf', 'cli']}
+    - {role: gimp, tags: ['gimp', 'desktop-utils']}
+    - {role: git, tags: ['git', 'cli']}
+    - {role: go, tags: ['go', 'languages']}
+    - {role: gparted, tags: ['gparted', 'desktop-utils']}
+    - {role: gpg, tags: ['gpg', 'cli']}
+    - {role: i3, tags: ['i3', 'desktop']}
+    - {role: i3lock, tags: ['i3lock', 'desktop']}
+    - {role: i3status_rust, tags: ['i3status_rust', 'desktop']}
+    - {role: imagemagick, tags: ['imagemagick', 'utils']}
+    - {role: intellij_idea, tags: ['intellij_idea']}
+    - {role: jira, tags: ['jira', 'work'], when: work.enabled}
+    - {role: keychain, tags: ['keychain', 'cli']}
+    - {role: kitty, tags: ['kitty']}
+    - {role: kubectl_stuff, tags: ['kubectl_stuff', 'cli']}
+    - {role: latex, tags: ['latex', 'office']}
+    - {role: libreoffice, tags: ['libreoffice', 'office']}
+    - {role: mesa, tags: ['mesa', 'desktop']}
+    - {role: misc, tags: ['misc', 'utils']}
+    - {role: mpv, tags: ['mpv', 'media']}
+    - {role: ncdu, tags: ['ncdu', 'cli']}
+    - {role: neofetch, tags: ['neofetch', 'cli']}
+    - {role: networkmanager_applet, tags: ['networkmanager_applet', 'desktop']}
+    - {role: nmap, tags: ['nmap', 'cli']}
+    - {role: npm, tags: ['npm', 'languages']}
+    - {role: ntfs_3g, tags: ['ntfs_3g', 'utils']}
+    - {role: nvidia, tags: ['nvidia'], when: pc == "g751"}
+    - {role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751"}
+    - {role: p7zip, tags: ['p7zip', 'cli']}
+    - {role: pcmanfm, tags: ['pcmanfm', 'desktop-utils']}
+    - {role: powerline, tags: ['powerline', 'desktop']}
+    - {role: pulseaudio, tags: ['pulseaudio', 'desktop']}
+    - {role: python3, tags: ['python3', 'languages']}
+    - {role: qemu, tags: ['qemu', 'virtualization']}
+    - {role: qutebrowser, tags: ['qutebrowser', 'browser']}
+    - {role: ranger, tags: ['ranger', 'cli']}
+    - {role: redshift, tags: ['redshift', 'desktop']}
+    - {role: rofi, tags: ['rofi', 'desktop']}
+    - {role: rust, tags: ['rust', 'languages']}
+    - {role: spotify, tags: ['spotify', 'media']}
+    - {role: openssh, tags: ['openssh', 'cli']}
+    - {role: openvpn, tags: ['openvpn', 'vpn']}
+    - {role: st, tags: ['st', 'desktop']}
+    - {role: steam, tags: ['steam', 'gaming']}
+    - {role: sxiv, tags: ['sxiv', 'desktop-utils']}
+    - {role: terminator, tags: ['terminator']}
+    - {role: tldr, tags: ['tldr', 'cli']}
+    - {role: tmux, tags: ['tmux', 'cli']}
+    - {role: udiskie, tags: ['udiskie', 'desktop']}
+    - {role: vagrant, tags: ['vagrant', 'virtualization']}
+    - {role: vim, tags: ['vim', 'editors']}
+    - {role: virtualbox, tags: ['virtualbox', 'virtualization']}
+    - {role: vlc, tags: ['vlc', 'media']}
+    - {role: vscode, tags: ['vscode', 'editors']}
+    - {role: vnstat, tags: ['vnstat', 'utils']}
+    - {role: wireguard_tools, tags: ['wireguard_tools', 'vpn']}
+    - {role: wget, tags: ['wget', 'cli']}
+    - {role: wine, tags: ['wine']}
+    - {role: xarchiver, tags: ['xarchiver', 'desktop-tools']}
+    - {role: youtube_dl, tags: ['youtube_dl', 'media']}
+    - {role: zathura, tags: ['zathura', 'desktop-tools']}
+    - {role: zsh, tags: ['zsh']}
   tags:
     - install
