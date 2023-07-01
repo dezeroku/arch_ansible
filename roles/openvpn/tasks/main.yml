@@ -2,7 +2,7 @@
 - name: Install VPN apps
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - easy-rsa
       - openvpn
@@ -10,7 +10,7 @@
 - name: Install networkmanager openvpn addon
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - networkmanager-openvpn
   when: openvpn_install_networkmanager_addon

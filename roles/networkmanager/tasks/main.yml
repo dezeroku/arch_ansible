@@ -2,14 +2,14 @@
 - name: Install NetworkManager
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name: networkmanager
     state: present
 
 - name: Start and enable NM
   become: true
   become_user: root
-  systemd:
+  ansible.builtin.systemd:
       name: NetworkManager
       enabled: yes
       state: started

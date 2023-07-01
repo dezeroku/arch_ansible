@@ -2,38 +2,38 @@
 - name: Render service file
   become: true
   become_user: root
-  template:
+  ansible.builtin.template:
     src: gpu_cool.service
     dest: /etc/systemd/system/gpu_cool.service
 
 - name: Copy dependency binary
   become: true
   become_user: root
-  copy:
+  ansible.builtin.copy:
       src: acer_ec.pl
       dest: /usr/bin/acer_ec.pl
 
 - name: Copy script itself
   become: true
   become_user: root
-  copy:
+  ansible.builtin.copy:
       src: temperature_management.py
       dest: /usr/bin/temperature_management.py
 
 - name: Set binary as executable
   become: true
   become_user: root
-  file: dest=/usr/bin/acer_ec.pl mode=a+x
+  ansible.builtin.file: dest=/usr/bin/acer_ec.pl mode=a+x
 
 - name: Set script as executable
   become: true
   become_user: root
-  file: dest=/usr/bin/temperature_management.py mode=a+x
+  ansible.builtin.file: dest=/usr/bin/temperature_management.py mode=a+x
 
 - name: Start and enable service
   become: true
   become_user: root
-  systemd:
+  ansible.builtin.systemd:
       name: gpu_cool
       state: started
       enabled: true

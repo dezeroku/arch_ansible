@@ -2,7 +2,7 @@
 - name: Install LaTeX packages
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - texlive-latexrecommended
       - texlive-lang

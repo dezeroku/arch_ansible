@@ -2,14 +2,14 @@
 - name: Install contrib
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - pacman-contrib
 
 - name: enable colors
   become: true
   become_user: root
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/pacman.conf
     state: "present"
     regexp: "^Color"
@@ -19,7 +19,7 @@
 - name: multilib support 1
   become: true
   become_user: root
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/pacman.conf
     state: "present"
     line: "[multilib]"
@@ -29,7 +29,7 @@
 - name: multilib 2
   become: true
   become_user: root
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/pacman.conf
     state: "present"
     line: "Include = /etc/pacman.d/mirrorlist"
@@ -39,13 +39,13 @@
 - name: Update repos
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     update_cache: yes
   when: pacman_update
 
 - name: Upgrade packages
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     upgrade: yes
   when: pacman_upgrade

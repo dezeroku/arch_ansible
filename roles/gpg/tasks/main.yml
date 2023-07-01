@@ -2,14 +2,14 @@
 - name: Install GPG
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - gnupg
 
 - name: Ensure directory exists
   become: yes
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.gnupg
     state: directory
     recurse: yes
@@ -17,14 +17,14 @@
 - name: Copy gpg config
   become: yes
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
       src: gpg_config
       dest: ~/.gnupg/gpg-agent.conf
 
 - name: Set gpg key to use with git
   become: yes
   become_user: "{{ user.name }}"
-  git_config:
+  community.general.git_config:
     name: user.signingkey
     scope: global
     value: "{{ user.gpg_key }}"
@@ -33,7 +33,7 @@
 - name: Set git to always use gpg
   become: yes
   become_user: "{{ user.name }}"
-  git_config:
+  community.general.git_config:
     name: commit.gpgsign
     scope: global
     value: "true"

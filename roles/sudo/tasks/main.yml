@@ -2,14 +2,14 @@
 - name: Install sudo
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name: sudo
     state: latest
   tags:
       - install
 
 - name: Add user to sudo group
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/sudoers.d/10-user-sudo
     line: '%wheel ALL=(ALL) ALL'
     create: yes

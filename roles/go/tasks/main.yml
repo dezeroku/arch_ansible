@@ -2,14 +2,14 @@
 - name: Install Go
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - go
 
 - name: Go install few tools
   become: yes
   become_user: "{{ user.name }}"
-  command: "{{ item }}"
+  ansible.builtin.command: "{{ item }}"
   with_items:
     - go install golang.org/x/tools/cmd/godoc@latest
     - go install golang.org/x/lint/golint@latest

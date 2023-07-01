@@ -2,14 +2,14 @@
 - name: Install ntp
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - ntp
 
 - name: Enable and start NTP synchronisation
   become: true
   become_user: root
-  systemd:
+  ansible.builtin.systemd:
     name: systemd-timesyncd.service
     enabled: True
     state: started
@@ -17,6 +17,6 @@
 - name: Set timezone and hardware clock
   become: true
   become_user: root
-  timezone:
+  community.general.timezone:
     hwclock: '{{ time.hwclock }}'
     name: '{{ time.timezone }}'

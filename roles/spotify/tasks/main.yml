@@ -1,6 +1,6 @@
 ---
 - name: Install Spotify from AUR
-  aur:
+  kewlfft.aur.aur:
     name:
       - spotify
     state: present

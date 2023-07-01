@@ -2,7 +2,7 @@
 - name: Install Python3, pip and pyenv
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - python3
       - python-pip
@@ -11,7 +11,7 @@
 - name: Install Python3 packages
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - python-pynvim
       - mypy

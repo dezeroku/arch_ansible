@@ -2,13 +2,13 @@
 - name: Install pulseaudio packages
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - alsa-utils
       - pulseaudio
 
 - name: Install pulseaudio bluetooth codecs from AUR
-  aur:
+  kewlfft.aur.aur:
     name:
       - pulseaudio-modules-bt-git
     state: present
@@ -18,7 +18,7 @@
 - name: Install pulseaudio equalizer plugin
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - pulseaudio-equalizer
   when: pulseaudio_install_equalizer
@@ -26,7 +26,7 @@
 - name: Install pavucontrol
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - pavucontrol
   when: pulseaudio_install_pavucontrol

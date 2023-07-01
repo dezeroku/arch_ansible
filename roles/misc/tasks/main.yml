@@ -2,7 +2,7 @@
 - name: Install some miscellanous stuff.
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - sl
       - cmatrix

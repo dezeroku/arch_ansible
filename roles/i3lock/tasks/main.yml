@@ -2,34 +2,34 @@
 - name: Install i3lock
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - i3lock
 
 - name: Copy suspend service file
   become: yes
   become_user: root
-  copy:
+  ansible.builtin.copy:
     src: suspend@.service
     dest: /etc/systemd/system/
 
 - name: Copy resume service file
   become: yes
   become_user: root
-  copy:
+  ansible.builtin.copy:
     src: resume@.service
     dest: /etc/systemd/system/
 
 - name: Enable suspend service file
   become: yes
   become_user: root
-  systemd:
+  ansible.builtin.systemd:
       name: suspend@{{ user.name }}
       enabled: true
 
 - name: Enable resume service file
   become: yes
   become_user: root
-  systemd:
+  ansible.builtin.systemd:
       name: resume@{{ user.name }}
       enabled: true

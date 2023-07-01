@@ -2,14 +2,14 @@
 - name: Install git
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - git
 
 - name: Install hub
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - hub
   when: git_install_hub
@@ -17,33 +17,33 @@
 - name: Install diff-so-fancy and less
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - diff-so-fancy
       - less
 
 - block:
-  - git_config:
+  - community.general.git_config:
      name: user.email
      scope: global
      value: "{{ user.email }}"
 
-  - git_config:
+  - community.general.git_config:
      name: user.name
      scope: global
      value: "{{ user.pub_name }}"
 
-  - git_config:
+  - community.general.git_config:
      name: core.pager
      scope: global
      value: "diff-so-fancy | less --tabs=4 -RFX"
 
-  - git_config:
+  - community.general.git_config:
      name: interactive.diffFilter
      scope: global
      value: "diff-so-fancy --patch"
 
-  - git_config:
+  - community.general.git_config:
      name: diff-so-fancy.markEmptyLines
      scope: global
      value: "false"

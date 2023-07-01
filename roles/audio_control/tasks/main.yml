@@ -2,7 +2,7 @@
 - name: Install pamixer and playerctl
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - pamixer
       - playerctl

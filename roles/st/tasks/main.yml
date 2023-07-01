@@ -4,7 +4,7 @@
 - name: create temporary build directory
   become: true
   become_user: aur_builder
-  tempfile:
+  ansible.builtin.tempfile:
     state: directory
     suffix: st-build
   register: build_dir
@@ -12,42 +12,42 @@
 - name: Copy config
   become: true
   become_user: aur_builder
-  copy:
+  ansible.builtin.copy:
     src: config.h
     dest: "{{ build_dir.path }}"
 
 - name: Copy PKGBUILD
   become: true
   become_user: aur_builder
-  copy:
+  ansible.builtin.copy:
     src: PKGBUILD
     dest: "{{ build_dir.path }}"
 
 - name: Copy patch (hidecursor)
   become: true
   become_user: aur_builder
-  copy:
+  ansible.builtin.copy:
     src: st-hidecursor-0.8.1.diff
     dest: "{{ build_dir.path }}"
 
 - name: Copy patch (alpha)
   become: true
   become_user: aur_builder
-  copy:
+  ansible.builtin.copy:
     src: st-alpha-0.8.1.diff
     dest: "{{ build_dir.path }}"
 
 - name: Copy patch (anysize)
   become: true
   become_user: aur_builder
-  copy:
+  ansible.builtin.copy:
     src: st-anysize-0.8.1.diff
     dest: "{{ build_dir.path }}"
 
 - name: Build and install
   become: true
   become_user: aur_builder
-  aur:
+  kewlfft.aur.aur:
     use: makepkg
     name:
       - st_custom

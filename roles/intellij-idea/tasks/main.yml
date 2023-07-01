@@ -1,6 +1,6 @@
 ---
 - name: Install Spotify from AUR
-  aur:
+  kewlfft.aur.aur:
     name:
       - intellij-idea-ultimate-edition
       - intellij-idea-ultimate-edition-jre

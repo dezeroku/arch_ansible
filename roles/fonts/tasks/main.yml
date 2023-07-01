@@ -2,14 +2,14 @@
 - name: Install fonts
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - awesome-terminal-fonts
       - ttf-hack
       - ttf-inconsolata
 
 - name: Install fonts from AUR
-  aur:
+  kewlfft.aur.aur:
     name:
       - ttf-font-icons
     state: present

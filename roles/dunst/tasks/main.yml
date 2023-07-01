@@ -2,14 +2,14 @@
 - name: Install dunst
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - dunst
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.config/dunst
     state: directory
     recurse: yes
@@ -17,6 +17,6 @@
 - name: Copy dunst dotfile
   become: true
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
       src: dunstrc
       dest: ~/.config/dunst/dunstrc

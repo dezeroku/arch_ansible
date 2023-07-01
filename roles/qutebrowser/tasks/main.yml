@@ -2,14 +2,14 @@
 - name: Install qutebrowser
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - qutebrowser
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.config/qutebrowser
     state: directory
     recurse: yes
@@ -17,14 +17,14 @@
 - name: Copy qutebrowser config
   become: true
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
       src: qute_config.py
       dest: ~/.config/qutebrowser/config.py
 
 - name: Ensure scripts directory exists
   become: true
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.config/qutebrowser/scripts
     state: directory
     recurse: yes
@@ -32,7 +32,7 @@
 - name: Copy download script
   become: true
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
       src: download_video.sh
       dest: ~/.config/qutebrowser/scripts/download_video.sh
 
@@ -40,12 +40,12 @@
 - name: Install password manager and dependency
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
     - python-tldextract
 
 - name: Install brave adblocker to be used
-  aur:
+  kewlfft.aur.aur:
     name:
       - python-adblock
     state: present
@@ -53,7 +53,7 @@
   become_user: root
 
 - name: Install decoding for DRM sites (e.g. Netflix)
-  aur:
+  kewlfft.aur.aur:
     name:
       - chromium-widevine
     state: present

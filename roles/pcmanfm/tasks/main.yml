@@ -2,6 +2,6 @@
 - name: Install pcmanfm
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - pcmanfm

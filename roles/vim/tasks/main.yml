@@ -2,7 +2,7 @@
 - name: Install vim, neovim and spelling packages
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - gvim
       - neovim
@@ -13,7 +13,7 @@
 - name: Copy vim vundle bootstrap
   become: true
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
     src: vundler.vim
     dest: ~/.vundler.vim
   register: var_vundler
@@ -21,14 +21,14 @@
 - name: Template vim .vimrc
   become: true
   become_user: "{{ user.name }}"
-  template:
+  ansible.builtin.template:
     src: vimrc
     dest: ~/.vimrc
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.config/nvim
     state: directory
     recurse: yes
@@ -36,21 +36,21 @@
 - name: Template neovim config
   become: true
   become_user: "{{ user.name }}"
-  template:
+  ansible.builtin.template:
     src: vimrc
     dest: ~/.config/nvim/init.vim
 
 - name: Copy tern config
   become: true
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
       src: tern-config
       dest: ~/tern-config
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.vim/bundle
     state: directory
     recurse: yes
@@ -58,12 +58,12 @@
 - name: Set up Vundle
   become: true
   become_user: "{{ user.name }}"
-  git:
+  ansible.builtin.git:
     dest: ~/.vim/bundle/Vundle.vim
     repo: https://github.com/gmarik/Vundle.vim.git
 
 - name: Download plugins if something changed
   become: true
   become_user: "{{ user.name }}"
-  command: vim +PluginInstall +qall -u ~/.vundler.vim
+  ansible.builtin.command: vim +PluginInstall +qall -u ~/.vundler.vim
   when: var_vundler.changed

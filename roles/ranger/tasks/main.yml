@@ -2,14 +2,14 @@
 - name: Install ranger
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - ranger
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.config/ranger
     state: directory
     recurse: yes
@@ -17,6 +17,6 @@
 - name: Copy ranger config
   become: true
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
       src: rc.conf
       dest: ~/.config/ranger/rc.conf

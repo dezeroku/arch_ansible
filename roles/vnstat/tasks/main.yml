@@ -2,14 +2,14 @@
 - name: Install vnstat
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - vnstat
 
 - name: Set state of vnstat service
   become: true
   become_user: root
-  systemd:
+  ansible.builtin.systemd:
       name: vnstat
       state: "{{ vnstat_service_state }}"
       enabled: "{{ vnstat_enable_service | bool }}"

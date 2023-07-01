@@ -2,6 +2,6 @@
 - name: Install exfat-utils
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - exfat-utils

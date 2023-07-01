@@ -2,6 +2,6 @@
 - name: Install ncdu
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - ncdu

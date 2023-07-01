@@ -2,14 +2,14 @@
 - name: Install tmux
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - tmux
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.tmux/plugins
     state: directory
     recurse: yes
@@ -17,28 +17,28 @@
 - name: Clone tmux plugin manager
   become: true
   become_user: "{{ user.name }}"
-  git:
+  ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm.git
     dest: ~/.tmux/plugins/tpm
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: "~"
     state: directory
 
 - name: Copy tmux.conf
   become: true
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
     src: tmux.conf
     dest: ~/.tmux.conf
 
 - name: Install plugins
   become: true
   become_user: "{{ user.name }}"
-  shell:
+  ansible.builtin.shell:
     cmd: tmux start-server && tmux new-session -d install_plugins && ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 # TODO: actually install plugins

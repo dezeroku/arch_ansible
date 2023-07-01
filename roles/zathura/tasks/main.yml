@@ -2,14 +2,14 @@
 - name: Install zathura
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - zathura
 
 - name: Install zathura PDF plugin
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - zathura-pdf-mupdf
   when: zathura_install_pdf

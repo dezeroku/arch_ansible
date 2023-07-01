@@ -2,21 +2,21 @@
 - name: Install i3status-rust
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - i3status-rust
 
 - name: Install fonts (awesome)
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - ttf-font-awesome
 
 - name: Ensure directory exists
   become: yes
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.config/i3status-rust/
     state: directory
     recurse: yes
@@ -24,6 +24,6 @@
 - name: Template status config
   become: yes
   become_user: "{{ user.name }}"
-  template:
+  ansible.builtin.template:
     src: config.toml
     dest: ~/.config/i3status-rust/config.toml

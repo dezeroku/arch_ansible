@@ -1,6 +1,6 @@
 ---
 - name:
-  aur:
+  kewlfft.aur.aur:
     state: present
     name:
       - discord

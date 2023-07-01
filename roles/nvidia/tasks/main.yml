@@ -2,7 +2,7 @@
 - name: Install GPU and CUDA drivers
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - nvidia
       - cuda

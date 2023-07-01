@@ -2,14 +2,14 @@
 - name: Install fish
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - fish
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.config/fish
     state: directory
     recurse: yes
@@ -17,7 +17,7 @@
 - name: Copy fish config
   become: true
   become_user: "{{ user.name }}"
-  template:
+  ansible.builtin.template:
       src: config.fish
       dest: ~/.config/fish/config.fish
 
@@ -25,35 +25,35 @@
 - name: Copy fish (AWS) config
   become: true
   become_user: "{{ user.name }}"
-  template:
+  ansible.builtin.template:
       src: aws.fish
       dest: ~/.config/fish/aws.fish
 
 - name: Copy fish (kubernetes) config
   become: true
   become_user: "{{ user.name }}"
-  template:
+  ansible.builtin.template:
       src: kubernetes.fish
       dest: ~/.config/fish/kubernetes.fish
 
 - name: Copy fish (blocks) config
   become: true
   become_user: "{{ user.name }}"
-  template:
+  ansible.builtin.template:
       src: blocks.fish
       dest: ~/.config/fish/blocks.fish
 
 - name: Copy fish colors
   become: true
   become_user: "{{ user.name }}"
-  template:
+  ansible.builtin.template:
       src: fish_variables
       dest: ~/.config/fish/fish_variables
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.config/fish/functions
     state: directory
     recurse: yes
@@ -61,19 +61,19 @@
 - name: Copy fundle setup script
   become: true
   become_user: "{{ user.name }}"
-  template:
+  ansible.builtin.template:
       src: fundle.fish
       dest: ~/.config/fish/functions
 
 - name: Get plugins
   become: true
   become_user: "{{ user.name }}"
-  shell: fish -c "fundle install" && fish -c "fundle update"
+  ansible.builtin.shell: fish -c "fundle install" && fish -c "fundle update"
 
 - name: Enable shell
   become: true
   become_user: root
-  user:
+  ansible.builtin.user:
     name: "{{ user.name }}"
     shell: '{{ user.shell | default("/bin/bash") }}'
     state: present

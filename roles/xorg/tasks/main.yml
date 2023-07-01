@@ -2,7 +2,7 @@
 - name: Install xorg
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - xorg
       - xorg-xinit

@@ -2,14 +2,14 @@
 - name: Install rofi
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - rofi
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.config/rofi
     state: directory
     recurse: yes
@@ -17,13 +17,13 @@
 - name: Copy rofi config
   become: true
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
     src: config.rasi
     dest: ~/.config/rofi/config.rasi
 
 - name: Copy rofi spotlight-dark theme
   become: true
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
     src: spotlight-dark.rasi
     dest: ~/.config/rofi/spotlight-dark.rasi

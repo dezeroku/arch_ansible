@@ -2,14 +2,14 @@
 - name: Install i3-gaps
   become: true
   become_user: root
-  pacman:
+  community.general.pacman:
     name:
       - i3-gaps
 
 - name: Ensure directory exists
   become: yes
   become_user: "{{ user.name }}"
-  file:
+  ansible.builtin.file:
     path: ~/.config/i3/
     state: directory
     recurse: yes
@@ -17,28 +17,28 @@
 - name: Copy scripts directory
   become: yes
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
     src: scripts
     dest: ~/.config/i3/
 
 - name: Copy wallpapers
   become: yes
   become_user: "{{ user.name }}"
-  copy:
+  ansible.builtin.copy:
       src: wallpapers/{{ i3_resolution }}/
       dest: ~/.config/i3/wallpapers
 
 - name: Template i3 config
   become: true
   become_user: "{{ user.name }}"
-  template:
+  ansible.builtin.template:
       src: config
       dest: ~/.config/i3/config
 
 - name: Copy xinitrc
   become: yes
   become_user: "{{ user.name }}"
-  template:
+  ansible.builtin.template:
     src: xinitrc
     dest: ~/.xinitrc
   when: i3_copy_xinitrc
@@ -46,7 +46,7 @@
 - name: NOPASSWD sudo for g751 i3 scripts
   become: true
   become_user: root
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/sudoers.d/13-g751-scripts
     line: "{{ user.name }} ALL=(root) NOPASSWD: ~/.config/i3/scripts/g751/*
 "
@@ -55,5 +55,5 @@
   when: i3_nopasswd_g751_scripts
 
 - name: Set script as executable
-  file: dest=~/.config/i3/scripts/g751/change_brightness mode=a+x
+  ansible.builtin.file: dest=~/.config/i3/scripts/g751/change_brightness mode=a+x
   when: i3_setup_g751_scripts
