@@ -1,20 +1,17 @@
 ---
-# For use with pre-commit.
-# See usage instructions at http://pre-commit.com
-
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
-    -   id: end-of-file-fixer
-    -   id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
 
--   repo: https://github.com/psf/black
+  - repo: https://github.com/psf/black
     rev: 22.10.0
     hooks:
-    -   id: black
+      - id: black
 
--   repo: https://github.com/ansible/ansible-lint
+  - repo: https://github.com/ansible/ansible-lint
     rev: v6.17.2
     hooks:
-    -   id: ansible-lint
+      - id: ansible-lint
