@@ -46,7 +46,6 @@
   ansible.builtin.file:
     path: ~/.oh-my-zsh/themes
     state: directory
-    recurse: true
     mode: 0755
 
 - name: Copy theme

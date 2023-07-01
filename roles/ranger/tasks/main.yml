@@ -12,7 +12,6 @@
   ansible.builtin.file:
     path: ~/.config/ranger
     state: directory
-    recurse: true
     mode: 0755
 
 - name: Copy ranger config

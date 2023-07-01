@@ -33,7 +33,6 @@
   ansible.builtin.file:
     path: ~/.config/nvim
     state: directory
-    recurse: true
     mode: 0755
 
 - name: Template neovim config
@@ -58,7 +57,6 @@
   ansible.builtin.file:
     path: ~/.vim/bundle
     state: directory
-    recurse: true
     mode: 0755
 
 - name: Set up Vundle

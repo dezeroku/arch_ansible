@@ -19,7 +19,6 @@
   ansible.builtin.file:
     path: ~/.config/i3status-rust/
     state: directory
-    recurse: true
     mode: 0755
 
 - name: Template status config
