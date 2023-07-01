@@ -20,3 +20,4 @@
   ansible.builtin.copy:
     src: dunstrc
     dest: ~/.config/dunst/dunstrc
+    mode: 0644

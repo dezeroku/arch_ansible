@@ -20,6 +20,7 @@
     path: ~/.config/i3status-rust/
     state: directory
     recurse: true
+    mode: 0755
 
 - name: Template status config
   become: true
@@ -27,3 +28,4 @@
   ansible.builtin.template:
     src: config.toml
     dest: ~/.config/i3status-rust/config.toml
+    mode: 0644

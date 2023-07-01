@@ -13,6 +13,7 @@
     path: ~/.tmux/plugins
     state: directory
     recurse: true
+    mode: 0755
 
 - name: Clone tmux plugin manager
   become: true
@@ -29,6 +30,7 @@
   ansible.builtin.file:
     path: "~"
     state: directory
+    mode: 0755
 
 - name: Copy tmux.conf
   become: true
@@ -36,6 +38,7 @@
   ansible.builtin.copy:
     src: tmux.conf
     dest: ~/.tmux.conf
+    mode: 0644
 
 - name: Copy tmux_plugins.conf
   become: true
@@ -43,6 +46,7 @@
   ansible.builtin.copy:
     src: tmux_plugins.conf
     dest: ~/.tmux_plugins.conf
+    mode: 0644
   register: var_tmux_plugins
 
 - name: Install plugins

@@ -20,6 +20,7 @@
   ansible.builtin.copy:
     src: scripts
     dest: ~/.config/i3/
+    mode: 0755
 
 - name: Copy wallpapers
   become: true
@@ -27,6 +28,7 @@
   ansible.builtin.copy:
     src: wallpapers/{{ i3_resolution }}/
     dest: ~/.config/i3/wallpapers
+    mode: 0644
 
 - name: Template i3 config
   become: true
@@ -34,6 +36,7 @@
   ansible.builtin.template:
     src: config
     dest: ~/.config/i3/config
+    mode: 0644
 
 - name: Copy xinitrc
   become: true
@@ -41,6 +44,7 @@
   ansible.builtin.template:
     src: xinitrc
     dest: ~/.xinitrc
+    mode: 0644
   when: i3_copy_xinitrc
 
 - name: NOPASSWD sudo for g751 i3 scripts
@@ -51,11 +55,12 @@
     line: "{{ user.name }} ALL=(root) NOPASSWD: ~/.config/i3/scripts/g751/*
 "
     create: true
+    mode: 0440
     validate: 'visudo -cf %s'
   when: i3_nopasswd_g751_scripts
 
 - name: Set script as executable
   ansible.builtin.file:
     dest: ~/.config/i3/scripts/g751/change_brightness
-    mode: a+x
+    mode: 0744
   when: i3_setup_g751_scripts

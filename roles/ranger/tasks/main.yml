@@ -13,6 +13,7 @@
     path: ~/.config/ranger
     state: directory
     recurse: true
+    mode: 0755
 
 - name: Copy ranger config
   become: true
@@ -20,3 +21,4 @@
   ansible.builtin.copy:
     src: rc.conf
     dest: ~/.config/ranger/rc.conf
+    mode: 0644

@@ -20,6 +20,7 @@
   ansible.builtin.copy:
     src: ssh_config
     dest: ~/.ssh/config
+    mode: 0644
 
 - name: Start sshd
   become: true

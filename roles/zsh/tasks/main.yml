@@ -15,6 +15,7 @@
   ansible.builtin.get_url:
     url: https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
     dest: /tmp/ohmyzsh.sh
+    mode: 0644
 
 - name: Remove old zsh (if exists)
   become: true
@@ -37,6 +38,7 @@
   ansible.builtin.template:
     src: zshrc
     dest: ~/.zshrc
+    mode: 0644
 
 - name: Ensure directory exists
   become: true
@@ -45,6 +47,7 @@
     path: ~/.oh-my-zsh/themes
     state: directory
     recurse: true
+    mode: 0755
 
 - name: Copy theme
   become: true
@@ -52,6 +55,7 @@
   ansible.builtin.copy:
     src: tosAgnoster.zsh-theme
     dest: ~/.oh-my-zsh/themes/tosAgnoster.zsh-theme
+    mode: 0644
 
 - name: Enable shell
   become: true

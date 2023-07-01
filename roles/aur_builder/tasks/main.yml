@@ -10,6 +10,7 @@
     line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
     create: true
     validate: 'visudo -cf %s'
+    mode: 0440
   become: true
   become_user: root
 

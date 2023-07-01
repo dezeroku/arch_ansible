@@ -13,6 +13,7 @@
     path: ~/.config/qutebrowser
     state: directory
     recurse: true
+    mode: 0755
 
 - name: Copy qutebrowser config
   become: true
@@ -20,6 +21,7 @@
   ansible.builtin.copy:
     src: qute_config.py
     dest: ~/.config/qutebrowser/config.py
+    mode: 0644
 
 - name: Ensure scripts directory exists
   become: true
@@ -28,6 +30,7 @@
     path: ~/.config/qutebrowser/scripts
     state: directory
     recurse: true
+    mode: 0755
 
 - name: Copy download script
   become: true
@@ -35,6 +38,7 @@
   ansible.builtin.copy:
     src: download_video.sh
     dest: ~/.config/qutebrowser/scripts/download_video.sh
+    mode: 0755
 
 # TODO: move to separate bitwarden rol
 - name: Install password manager and dependency

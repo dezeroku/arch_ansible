@@ -14,6 +14,7 @@
   ansible.builtin.file:
     path: ~/.emacs.d
     state: directory
+    mode: 0755
 
 # That's the stable release as of 15/06/2021
 - name: Get the straight.el as git repo (security + issues with GNUtls)
@@ -31,6 +32,7 @@
   ansible.builtin.copy:
     src: early-init.el
     dest: ~/.emacs.d/early-init.el
+    mode: 0644
 
 - name: Copy Emacs config
   become: true
@@ -38,6 +40,7 @@
   ansible.builtin.copy:
     src: emacs
     dest: ~/.emacs
+    mode: 0644
   register: var_emacs_config
 
 - name: Create the straight.el dir
@@ -46,6 +49,7 @@
   ansible.builtin.file:
     path: ~/.emacs.d/straight/versions
     state: directory
+    mode: 0755
 
 - name: Copy straight.el lockfile
   become: true
@@ -53,6 +57,7 @@
   ansible.builtin.copy:
     src: default.el
     dest: ~/.emacs.d/straight/versions/default.el
+    mode: 0644
   register: var_emacs_lockfile
 
 - name: Install plugins

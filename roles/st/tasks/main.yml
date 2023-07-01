@@ -15,6 +15,7 @@
   ansible.builtin.copy:
     src: config.h
     dest: "{{ build_dir.path }}"
+    mode: 0644
 
 - name: Copy PKGBUILD
   become: true
@@ -22,6 +23,7 @@
   ansible.builtin.copy:
     src: PKGBUILD
     dest: "{{ build_dir.path }}"
+    mode: 0644
 
 - name: Copy patch (hidecursor)
   become: true
@@ -29,6 +31,7 @@
   ansible.builtin.copy:
     src: st-hidecursor-0.8.1.diff
     dest: "{{ build_dir.path }}"
+    mode: 0644
 
 - name: Copy patch (alpha)
   become: true
@@ -36,6 +39,7 @@
   ansible.builtin.copy:
     src: st-alpha-0.8.1.diff
     dest: "{{ build_dir.path }}"
+    mode: 0644
 
 - name: Copy patch (anysize)
   become: true
@@ -43,6 +47,7 @@
   ansible.builtin.copy:
     src: st-anysize-0.8.1.diff
     dest: "{{ build_dir.path }}"
+    mode: 0644
 
 - name: Build and install
   become: true

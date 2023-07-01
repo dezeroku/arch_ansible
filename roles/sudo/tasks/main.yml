@@ -14,6 +14,7 @@
     line: '%wheel ALL=(ALL) ALL'
     create: true
     validate: 'visudo -cf %s'
+    mode: 0440
   become: true
   become_user: root
   tags:

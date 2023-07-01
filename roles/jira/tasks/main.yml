@@ -11,6 +11,7 @@
   ansible.builtin.file:
     path: ~/.jira.d/
     state: directory
+    mode: 0755
 
 - name: Template go-jira config
   become: true
@@ -18,3 +19,4 @@
   ansible.builtin.template:
     src: config.yml
     dest: ~/.jira.d/config.yml
+    mode: 0644

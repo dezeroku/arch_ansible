@@ -13,6 +13,7 @@
     path: ~/.config/rofi
     state: directory
     recurse: true
+    mode: 0755
 
 - name: Copy rofi config
   become: true
@@ -20,6 +21,7 @@
   ansible.builtin.copy:
     src: config.rasi
     dest: ~/.config/rofi/config.rasi
+    mode: 0644
 
 - name: Copy rofi spotlight-dark theme
   become: true
@@ -27,3 +29,4 @@
   ansible.builtin.copy:
     src: spotlight-dark.rasi
     dest: ~/.config/rofi/spotlight-dark.rasi
+    mode: 0644

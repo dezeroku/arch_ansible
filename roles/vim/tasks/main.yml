@@ -16,6 +16,7 @@
   ansible.builtin.copy:
     src: vundler.vim
     dest: ~/.vundler.vim
+    mode: 0644
   register: var_vundler
 
 - name: Template vim .vimrc
@@ -24,6 +25,7 @@
   ansible.builtin.template:
     src: vimrc
     dest: ~/.vimrc
+    mode: 0644
 
 - name: Ensure directory exists
   become: true
@@ -32,6 +34,7 @@
     path: ~/.config/nvim
     state: directory
     recurse: true
+    mode: 0755
 
 - name: Template neovim config
   become: true
@@ -39,6 +42,7 @@
   ansible.builtin.template:
     src: vimrc
     dest: ~/.config/nvim/init.vim
+    mode: 0644
 
 - name: Copy tern config
   become: true
@@ -46,6 +50,7 @@
   ansible.builtin.copy:
     src: tern-config
     dest: ~/tern-config
+    mode: 0644
 
 - name: Ensure directory exists
   become: true
@@ -54,6 +59,7 @@
     path: ~/.vim/bundle
     state: directory
     recurse: true
+    mode: 0755
 
 - name: Set up Vundle
   become: true

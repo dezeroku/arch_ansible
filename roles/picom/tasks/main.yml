@@ -13,6 +13,7 @@
     path: ~/.config
     state: directory
     recurse: true
+    mode: 0755
 
 - name: Copy picom dotfile
   become: true
@@ -20,3 +21,4 @@
   ansible.builtin.copy:
     src: picom.conf
     dest: ~/.config/picom.conf
+    mode: 0644

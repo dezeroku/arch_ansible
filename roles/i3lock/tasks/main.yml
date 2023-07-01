@@ -12,6 +12,7 @@
   ansible.builtin.copy:
     src: suspend@.service
     dest: /etc/systemd/system/
+    mode: 0644
 
 - name: Copy resume service file
   become: true
@@ -19,6 +20,7 @@
   ansible.builtin.copy:
     src: resume@.service
     dest: /etc/systemd/system/
+    mode: 0644
 
 - name: Enable suspend service file
   become: true
