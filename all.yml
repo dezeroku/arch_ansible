@@ -9,8 +9,8 @@
   become: true
   become_user: root
   roles:
-    - {role: ntp, tags: ['ntp']}
     - {role: pacman, tags: ['pacman']}
+    - {role: ntp, tags: ['ntp']}
     - {role: create_user, tags: ['create_user']}
     - {role: sudo, tags: ['sudo']}
     - {role: aur_builder, tags: ['aur_builder']}
