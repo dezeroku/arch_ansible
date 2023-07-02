@@ -84,6 +84,10 @@ c.fileselect.handler = "external"
 c.fileselect.single_file.command = ["st", "-e", "ranger", "--choosefile={}"]
 c.fileselect.multiple_files.command = ["st", "-e", "ranger", "--choosefiles={}"]
 
+# Dark mode
+c.colors.webpage.preferred_color_scheme = "dark"
+# c.colors.webpage.darkmode.enabled = True
+
 # Password manager
 config.bind(",p", "spawn --userscript qute-bitwarden")
 config.bind(",P", "spawn --userscript qute-bitwarden --password-only")
