@@ -1,0 +1,8 @@
+---
+- name: Install Zoom from AUR
+  kewlfft.aur.aur:
+    name:
+      - zoom
+    state: present
+  become: true
+  become_user: aur_builder
