@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: ~/.gnupg
     state: directory
-    mode: 0755
+    mode: 0700
 
 - name: Copy gpg config
   become: true
@@ -20,7 +20,7 @@
   ansible.builtin.copy:
     src: gpg_config
     dest: ~/.gnupg/gpg-agent.conf
-    mode: 0644
+    mode: 0600
 
 - name: Set gpg key to use with git
   become: true
