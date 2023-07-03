@@ -19,3 +19,4 @@
       - python-pytest
       - python-poetry
       - python-pipx
+      - python-pre-commit
