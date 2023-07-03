@@ -100,6 +100,7 @@
     - {role: wine, tags: ['wine']}
     - {role: xarchiver, tags: ['xarchiver', 'desktop-tools']}
     - {role: youtube_dl, tags: ['youtube_dl', 'media']}
+    - {role: yubikey, tags: ['yubikey', 'desktop-tools']}
     - {role: zathura, tags: ['zathura', 'desktop-tools']}
     - {role: zsh, tags: ['zsh']}
   tags:

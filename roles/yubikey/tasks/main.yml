@@ -1,0 +1,16 @@
+---
+- name: Install yubikey-manager
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - yubikey-manager
+      - yubikey-manager-qt
+
+- name: Start and enabled pcscd.service
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: pcscd
+    enabled: true
+    state: started
