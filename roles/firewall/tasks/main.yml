@@ -1,0 +1,16 @@
+---
+- name: Install nftables and firewalld
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - nftables
+      - firewalld
+
+- name: Start and enable nftables
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: nftables
+    enabled: true
+    state: started
