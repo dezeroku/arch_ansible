@@ -10,7 +10,7 @@
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.file:
-    path: ~/.config
+    path: ~/.config/picom
     state: directory
     mode: 0755
 
@@ -19,5 +19,5 @@
   become_user: "{{ user.name }}"
   ansible.builtin.copy:
     src: picom.conf
-    dest: ~/.config/picom.conf
+    dest: ~/.config/picom/picom.conf
     mode: 0644
