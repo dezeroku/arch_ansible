@@ -54,6 +54,16 @@
   become: true
   become_user: root
 
+
+# TODO: Can this be done with modifying ~/.config/mimeapps.list directly instead?
+# It seems this would be cleaner
+- name: Set qutebrowser as the default browser
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.command:
+    cmd: xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
+  changed_when: true
+
 - name: Install decoding for DRM sites (e.g. Netflix)
   kewlfft.aur.aur:
     name:
