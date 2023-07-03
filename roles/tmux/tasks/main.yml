@@ -1,10 +1,11 @@
 ---
-- name: Install tmux
+- name: Install tmux and inetutils (for hostname cmd)
   become: true
   become_user: root
   community.general.pacman:
     name:
       - tmux
+      - inetutils
 
 - name: Ensure directory exists
   become: true
