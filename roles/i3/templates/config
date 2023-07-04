@@ -260,10 +260,10 @@ bindsym $mod+Control+l exec "/usr/bin/i3lock && sleep 1 && xset dpms force stand
     assign [class="(?i)MellowPlayer"] $ws5
     assign [class="(?i)jetbrains-idea"] $ws3
     assign [class="(?i)jetbrains-studio"] $ws3
-    assign [class="(?i)VirtualBox Managerk"] $ws6
+    assign [class="(?i)VirtualBox Manager"] $ws6
     assign [class="(?i)discord"] $ws8
     assign [class="(?i)slack"] $ws8
-    assign [class="(?i)zoom"] $ws8
+    assign [class="(?i)zoom"] $ws6
 
     # CS GO, and probably more OpenGL games
     assign [class="(?i)Linux"] $ws9
