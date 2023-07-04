@@ -22,6 +22,22 @@
       - diff-so-fancy
       - less
 
+- name: Ensure directory exists
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.file:
+    path: ~/.config/i3/
+    state: directory
+    mode: 0755
+
+- name: Copy global excludesfile
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.copy:
+    src: gitignore_global
+    dest: ~/.gitignore_global
+    mode: 0644
+
 - name: Set up gitconfig
   become: true
   become_user: "{{ user.name }}"
@@ -37,6 +53,12 @@
         name: user.name
         scope: global
         value: "{{ user.pub_name }}"
+
+    - name: Set git excludesFile
+      community.general.git_config:
+        name: core.excludesfile
+        scope: global
+        value: "~/.gitignore_global"
 
     - name: Set git pager (diff-so-fancy)
       community.general.git_config:
