@@ -7,6 +7,7 @@
       - kubectl
       - kubectx
       - helm
+      - skaffold
 
 - name: Install krew
   kewlfft.aur.aur:
