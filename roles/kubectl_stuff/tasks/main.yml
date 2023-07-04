@@ -1,11 +1,12 @@
 ---
-- name: Install kubectl, kubectx
+- name: Install kubectl, kubectx, helm
   become: true
   become_user: root
   community.general.pacman:
     name:
       - kubectl
       - kubectx
+      - helm
 
 - name: Install krew
   kewlfft.aur.aur:
