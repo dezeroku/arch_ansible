@@ -7,6 +7,14 @@
       - alsa-utils
       - pulseaudio
 
+- name: Install pulseaudio packages (Bluetooth)
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - pulseaudio-bluetooth
+  when: pulseaudio_install_bluetooth
+
 - name: Install pulseaudio bluetooth codecs from AUR
   kewlfft.aur.aur:
     name:

@@ -26,6 +26,7 @@
   roles:
     - {role: android_studio, tags: ['android_studio']}
     - {role: audio_control, tags: ['audio_control', 'desktop']}
+    - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: setup.bluetooth.enabled}
     - {role: picom, tags: ['picom', 'desktop']}
     - {role: deluge, tags: ['deluge']}
     - {role: discord, tags: ['discord', 'social']}
@@ -71,7 +72,7 @@
     - {role: p7zip, tags: ['p7zip', 'cli']}
     - {role: pcmanfm, tags: ['pcmanfm', 'desktop-utils']}
     - {role: powerline, tags: ['powerline', 'desktop']}
-    - {role: pulseaudio, tags: ['pulseaudio', 'desktop']}
+    - {role: pulseaudio, tags: ['pulseaudio', 'desktop', 'audio']}
     - {role: python3, tags: ['python3', 'languages']}
     - {role: qemu, tags: ['qemu', 'virtualization']}
     - {role: qutebrowser, tags: ['qutebrowser', 'browser']}

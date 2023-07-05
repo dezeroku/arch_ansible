@@ -1,0 +1,16 @@
+---
+- name: Install bluetooth packages
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - bluez
+      - bluez-utils
+
+- name: Enable and start Bluetooth daemon
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: bluetooth.service
+    enabled: true
+    state: started
