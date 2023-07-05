@@ -20,3 +20,19 @@
     src: config.yml
     dest: ~/.jira.d/config.yml
     mode: 0644
+
+- name: Install dependencies for cookie scriptlet
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - sqlite3
+      - jq
+
+- name: Template get-jira-cookies-from-qutebrowser
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.template:
+    src: get-jira-cookies-from-qutebrowser.sh
+    dest: ~/.jira.d/get-jira-cookies-from-qutebrowser.sh
+    mode: 0755
