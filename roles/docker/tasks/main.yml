@@ -1,10 +1,11 @@
 ---
-- name: Install docker
+- name: Install docker and buildx
   become: true
   become_user: root
   community.general.pacman:
     name:
       - docker
+      - docker-buildx
 
 - name: Start and enable docker service
   become: true
