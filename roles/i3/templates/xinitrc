@@ -1,6 +1,3 @@
-setxkbmap pl
-setxkbmap -option caps:escape
-
 {% if i3_nvidia_optimus_direct_rendering %}
 # Needed for rendering everything on more powerful Nvidia
 #xrandr --setprovideroutputsource modesetting NVIDIA-0

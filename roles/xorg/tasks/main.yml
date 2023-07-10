@@ -6,3 +6,19 @@
     name:
       - xorg
       - xorg-xinit
+
+- name: Ensure directory exists
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    path: /etc/X11/xorg.conf.d
+    state: directory
+    mode: 0755
+
+- name: Copy keyboard setup
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: 00-keyboard.conf
+    dest: /etc/X11/xorg.conf.d/00-keyboard.conf
+    mode: 0755
