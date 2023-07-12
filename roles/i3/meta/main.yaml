@@ -13,6 +13,7 @@ dependencies:
   - role: powerline
   - role: dunst
   - role: flameshot
+  - role: firewall
   - role: redshift
   - role: udiskie
   - role: xresources

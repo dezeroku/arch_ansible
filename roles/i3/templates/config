@@ -207,6 +207,8 @@ bindsym --release Shift+Print exec "flameshot gui"
 #applets run codes
 # Network Manager
 exec --no-startup-id "nm-applet &"
+# Outcoming firewall
+exec --no-startup-id "opensnitch-ui &"
 # Dunst
 exec --no-startup-id "dunst &"
 # Redshift
@@ -219,9 +221,6 @@ exec --no-startup-id "picom -b --config ~/.config/picom/picom.conf &"
 exec --no-startup-id "flameshot &"
 # Read Xresources
 exec --no-startup-id "xrdb ~/.Xresources"
-
-# Set keyboard to polish.
-exec "setxkbmap pl"
 
 #workspaces back and forth
 workspace_auto_back_and_forth yes

@@ -1,16 +1,24 @@
 ---
-- name: Install nftables and firewalld
+- name: Install nftables, firewalld and opensnitch
   become: true
   become_user: root
   community.general.pacman:
     name:
       - nftables
-      - firewalld
+      - opensnitch
 
 - name: Start and enable nftables
   become: true
   become_user: root
   ansible.builtin.systemd:
     name: nftables
+    enabled: true
+    state: started
+
+- name: Start and enable opensnitchd
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: opensnitchd
     enabled: true
     state: started
