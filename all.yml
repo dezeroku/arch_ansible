@@ -16,6 +16,7 @@
     - {role: aur_builder, tags: ['aur_builder']}
     - {role: networkmanager, tags: ['networkmanager']}
     - {role: pacman, tags: ['pacman']}
+    - {role: hardening, tags: ['hardening']}
   tags:
     - core
 

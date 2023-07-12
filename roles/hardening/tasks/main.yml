@@ -1,0 +1,20 @@
+---
+#  via: https://wiki.archlinux.org/title/security
+#
+- name: Enforce a delay after a failed login attempt (4s)
+  become: true
+  become_user: root
+  ansible.builtin.lineinfile:
+    dest: /etc/pam.d/system-login
+    state: "present"
+    # Whitespace to keep nice formatting within the file
+    line: "auth       optional   pam_faildelay.so delay=4000000"
+    regexp: "^auth        optional   pam_faildelay.so"
+    insertafter: "^auth.*"
+
+- name: Install arch-audit
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - arch-audit
