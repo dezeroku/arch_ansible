@@ -22,6 +22,35 @@
     dest: ~/.ssh/config
     mode: 0644
 
+- name: Don't allow root login (server)
+  become: true
+  become_user: root
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    state: "present"
+    line: "PermitRootLogin no"
+    regexp: "^PermitRootLogin "
+    insertafter: "^#PermitRootLogin "
+
+- name: Disable password auth (server)
+  become: true
+  become_user: root
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    state: "present"
+    line: "PasswordAuthentication no"
+    regexp: "^PasswordAuthentication "
+    insertafter: "^#PasswordAuthentication "
+
+- name: Explicitly force SSH keys auth (server)
+  become: true
+  become_user: root
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    state: "present"
+    line: "AuthenticationMethods publickey"
+    regexp: "^AuthenticationMethods "
+
 - name: Start sshd
   become: true
   become_user: root
