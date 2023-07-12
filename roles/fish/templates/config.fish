@@ -38,6 +38,7 @@ set -x PATH $HOME/.local/bin $PATH
 
 # MISC
 set -x EDITOR nvim
+set -x SUDO_EDITOR rvim
 
 # UTILS
 function tmp

@@ -8,6 +8,18 @@
   tags:
     - install
 
+- name: Enable insults
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/01-sudo-insults
+    line: 'Defaults insults'
+    create: true
+    validate: 'visudo -cf %s'
+    mode: 0440
+  become: true
+  become_user: root
+  tags:
+    - configure
+
 - name: Add user to sudo group
   ansible.builtin.lineinfile:
     path: /etc/sudoers.d/10-user-sudo
