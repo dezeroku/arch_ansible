@@ -7,6 +7,14 @@
       - nftables
       - opensnitch
 
+- name: Install ebpf module for opensnitch
+  kewlfft.aur.aur:
+    name:
+      - opensnitch-ebpf-module
+    state: present
+  become: true
+  become_user: aur_builder
+
 - name: Start and enable nftables
   become: true
   become_user: root
