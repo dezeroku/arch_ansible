@@ -13,6 +13,7 @@ x230:
     i3_disable_touchpad: true
     i3_dpi: 125.37
     i3_nvidia_optimus_direct_rendering: false
+    i3_display_yubikey_otp: false
     setup:
       bluetooth:
         enabled: true
