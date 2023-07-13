@@ -1,11 +1,22 @@
 ---
-- name: Install yubikey-manager
+- name: Install yubikey tooling
   become: true
   become_user: root
   community.general.pacman:
     name:
       - yubikey-manager
       - yubikey-manager-qt
+      - yubikey-personalization-gui
+      - hopenpgp-tools
+      - libfido2
+
+- name: Install Yubico Authenticator from AUR
+  kewlfft.aur.aur:
+    name:
+      - yubico-authenticator-bin
+    state: present
+  become: true
+  become_user: aur_builder
 
 - name: Start and enabled pcscd.service
   become: true
