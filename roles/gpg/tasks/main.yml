@@ -14,13 +14,16 @@
     state: directory
     mode: 0700
 
-- name: Copy gpg config
+- name: Copy gpg configs
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.copy:
-    src: gpg_config
-    dest: ~/.gnupg/gpg-agent.conf
+    src: "{{ item }}"
+    dest: ~/.gnupg/
     mode: 0600
+  loop:
+    - gpg-agent.conf
+    - gpg.conf
 
 - name: Set gpg key to use with git
   become: true
