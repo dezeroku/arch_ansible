@@ -48,6 +48,10 @@ ansible-playbook -i <machine>.yaml all.yml --tags <role>
 It can also be used to install all packages listed, if no tags are provided.
 
 ### First time
+
+Tip: If you don't have a passwordless sudo set up (and you probably shouldn't) you can add `--ask-become-pass` flag to each call, so Ansible can elevate
+privileges when needed (e.g. for pacman operations).
+
 If you don't want to install all packages but still want to have a proper setup of specific "groups" you can use few high-level tags tags.
 ```
 ansible-playbook -i <machine>.yaml all.yml --tags core
