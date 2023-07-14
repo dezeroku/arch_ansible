@@ -26,7 +26,6 @@
     - aws.fish
     - kubernetes.fish
     - blocks.fish
-    - fish_variables
 
 - name: Template fish plugins config
   become: true
