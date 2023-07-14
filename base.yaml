@@ -21,8 +21,7 @@ x230:
       name: d0ku
       pub_name: dezeroku
       generate_ssh_key: true
-      ssh_key_bits: 4096
-      ssh_key_type: rsa
+      ssh_key_type: ed25519
       shell: /bin/fish
       email: dezeroku@gmail.com
       gpg_key: 5D6772EEDDACD5B0

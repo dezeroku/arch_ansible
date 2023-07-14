@@ -2,5 +2,4 @@
 user:
   name: d0ku
   generate_ssh_key: true
-  ssh_key_bits: 4096
-  ssh_key_type: rsa
+  ssh_key_type: ed25519
