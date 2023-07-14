@@ -8,6 +8,6 @@ low_battery=20;
 
 percentage=$(acpi -b | grep -P -o '[0-9]+(?=%)')
 
-if [ $percentage -lt $low_battery ] && [ $percentage -ne 10 ]; then
+if [ "$percentage" -lt "$low_battery" ] && [ "$percentage" -ne 10 ]; then
      DISPLAY=:0.0 /usr/bin/notify-send "Low battery" "You only got $percentage% left";
 fi;
