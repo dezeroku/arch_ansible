@@ -17,4 +17,4 @@ dependencies:
   - role: redshift
   - role: udiskie
   - role: xresources
-  - {role: yubikey, when: vars.i3_display_yubikey_otp}
+  - {role: yubikey, when: vars.i3_autostart_yubikey_otp}

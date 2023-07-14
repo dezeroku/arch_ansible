@@ -219,7 +219,7 @@ exec --no-startup-id "udiskie --smart-tray &"
 exec --no-startup-id "picom -b --config ~/.config/picom/picom.conf &"
 # Flameshot daemon
 exec --no-startup-id "flameshot &"
-{% if i3_display_yubikey_otp %}
+{% if i3_autostart_yubikey_otp %}
 # Yubikey OTP
 exec --no-startup-id "/opt/yubico-authenticator/authenticator &"
 {% endif %}
