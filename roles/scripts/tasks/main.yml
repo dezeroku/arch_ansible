@@ -1,0 +1,27 @@
+---
+- name: Install bash
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - bash
+
+- name: Ensure directory exists
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.file:
+    path: "{{ scripts.directory }}"
+    state: directory
+    mode: 0755
+
+- name: Copy encrypted_ scripts
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ scripts.directory }}"
+    mode: 0744
+  loop:
+    - encrypted_setup.sh
+    - encrypted_mount.sh
+    - encrypted_umount.sh

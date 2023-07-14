@@ -84,6 +84,7 @@
     - {role: spotify, tags: ['spotify', 'media']}
     - {role: openssh, tags: ['openssh', 'cli']}
     - {role: openvpn, tags: ['openvpn', 'vpn']}
+    - {role: scripts, tags: ['scripts', 'cli']}
     - {role: slack, tags: ['slack', 'work']}
     - {role: st, tags: ['st', 'desktop']}
     - {role: steam, tags: ['steam', 'gaming']}

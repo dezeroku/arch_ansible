@@ -34,6 +34,7 @@ set -x PATH $HOME/go/bin $PATH
 set -x PATH $HOME/.local/bin $PATH
 set -x PATH $HOME/npm_global/bin $PATH
 set -x PATH $HOME/bin $PATH
+set -x PATH $HOME/scripts $PATH
 set -x PATH $HOME/.local/bin $PATH
 
 # MISC
