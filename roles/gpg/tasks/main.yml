@@ -39,3 +39,21 @@
     scope: global
     value: "true"
   when: user.always_git_gpg is defined
+
+- name: Ensure scripts directory exists
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.file:
+    path: "~/scripts/gpg"
+    state: directory
+    mode: 0755
+
+- name: Copy gpg_ scripts
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "~/scripts/gpg"
+    mode: 0644
+  loop:
+    - gpg_setup_keyring.sh
