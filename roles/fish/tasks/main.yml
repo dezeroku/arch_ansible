@@ -14,16 +14,21 @@
     state: directory
     mode: 0755
 
-- name: Copy fish config
+- name: Template fish configs
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
-    src: config.fish
-    dest: ~/.config/fish/config.fish
+    src: "{{ item }}"
+    dest: ~/.config/fish/
     mode: 0644
+  loop:
+    - config.fish
+    - aws.fish
+    - kubernetes.fish
+    - blocks.fish
+    - fish_variables
 
-# TODO: More generic approach for multiple config files
-- name: Copy fish (plugins) config
+- name: Template fish plugins config
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.template:
@@ -31,38 +36,6 @@
     dest: ~/.config/fish/plugins.fish
     mode: 0644
   register: var_fish_plugins
-
-- name: Copy fish (AWS) config
-  become: true
-  become_user: "{{ user.name }}"
-  ansible.builtin.template:
-    src: aws.fish
-    dest: ~/.config/fish/aws.fish
-    mode: 0644
-
-- name: Copy fish (kubernetes) config
-  become: true
-  become_user: "{{ user.name }}"
-  ansible.builtin.template:
-    src: kubernetes.fish
-    dest: ~/.config/fish/kubernetes.fish
-    mode: 0644
-
-- name: Copy fish (blocks) config
-  become: true
-  become_user: "{{ user.name }}"
-  ansible.builtin.template:
-    src: blocks.fish
-    dest: ~/.config/fish/blocks.fish
-    mode: 0644
-
-- name: Copy fish colors
-  become: true
-  become_user: "{{ user.name }}"
-  ansible.builtin.template:
-    src: fish_variables
-    dest: ~/.config/fish/fish_variables
-    mode: 0644
 
 - name: Ensure directory exists
   become: true
