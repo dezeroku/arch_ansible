@@ -17,10 +17,11 @@ Currently I am refactoring most of the roles I've written in the beginning, due 
 ## Profiles
 
 At the moment configuration is based global variables, take a look at `base.yaml` for more details. The most important ones are:
-* username
-* ssh key generation options
-* email (to be used in e.g. git commits)
-* shell you're going to use
+
+- username
+- ssh key generation options
+- email (to be used in e.g. git commits)
+- shell you're going to use
 
 There is a single `base.yaml` configuration which should be used as a starting point and customized per each machine where it's used, e.g. the `g751` switches should be kept off on non-NVIDIA-Optimus devices (such as `Asus G751JM` for which they were written).
 
@@ -30,17 +31,20 @@ Using this role on a device with a different resolution may result in a distorte
 ## Commands
 
 To install the dependencies (roles) run:
+
 ```
 ansible-galaxy install -r requirements.yml
 ```
 
 At the moment there's `all.yml` playbook defined, that contains all roles available (sorted alphabetically).
 It can be used to run single roles, e.g. to set up vim on `base` machine
+
 ```
 ansible-playbook -i base.yaml all.yml --tags vim
 ```
 
 In general to run `<role>` on `<machine>` use
+
 ```
 ansible-playbook -i <machine>.yaml all.yml --tags <role>
 ```
@@ -53,6 +57,7 @@ Tip: If you don't have a passwordless sudo set up (and you probably shouldn't) y
 privileges when needed (e.g. for pacman operations).
 
 If you don't want to install all packages but still want to have a proper setup of specific "groups" you can use few high-level tags tags.
+
 ```
 ansible-playbook -i <machine>.yaml all.yml --tags core
 ansible-playbook -i <machine>.yaml all.yml --tags cli # sets up fzf, fish, etc.
@@ -79,6 +84,6 @@ To get all the groups and leave out the single packages you can use the `install
 
 ## Credits
 
-* Heavily inspired by [spark](https://github.com/pigmonkey/spark). If you're looking to implement something similar, then you should probably base on this repository.
-* Take a look at [dotfiles repo](https://github.com/tojatos/dotfiles) from @tojatos (especially ZSH theme).
-* AUR library file in version `v0.10.0` taken from [kewlfft/ansible-aur](https://github.com/kewlfft/ansible-aur)
+- Heavily inspired by [spark](https://github.com/pigmonkey/spark). If you're looking to implement something similar, then you should probably base on this repository.
+- Take a look at [dotfiles repo](https://github.com/tojatos/dotfiles) from @tojatos (especially ZSH theme).
+- AUR library file in version `v0.10.0` taken from [kewlfft/ansible-aur](https://github.com/kewlfft/ansible-aur)
