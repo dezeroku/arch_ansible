@@ -29,8 +29,6 @@ def set_cpu_fan(speed):
     addresses.append(fan_address)
     addresses.append(second_fan_adrress)
 
-    # TODO: write 0 to pwm_enable to disable pwm, and give it value of 1 in
-    # reset to restore pwm
     for address in addresses:
         if os.path.isfile(address):
             to_execute = base_command + str(speed) + " | " + write_command + address
