@@ -28,6 +28,7 @@
     - {role: autorandr, tags: ['autorandr', 'desktop']}
     - {role: android_studio, tags: ['android_studio']}
     - {role: audio_control, tags: ['audio_control', 'desktop']}
+    - {role: bitwarden, tags: ['bitwarden', 'cli', 'desktop']}
     - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: setup.bluetooth.enabled}
     - {role: picom, tags: ['picom', 'desktop']}
     - {role: deluge, tags: ['deluge']}
