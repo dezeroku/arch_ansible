@@ -62,7 +62,7 @@
     - {role: kubectl_stuff, tags: ['kubectl_stuff', 'cli']}
     - {role: latex, tags: ['latex', 'office']}
     - {role: libreoffice, tags: ['libreoffice', 'office']}
-    - {role: libvirt, tags: ['libvirt', 'virtualization']}
+    - {role: libvirt, tags: ['libvirt']}
     - {role: mesa, tags: ['mesa', 'desktop']}
     - {role: misc, tags: ['misc', 'utils']}
     - {role: mpv, tags: ['mpv', 'media']}
@@ -99,7 +99,7 @@
     - {role: udiskie, tags: ['udiskie', 'desktop']}
     - {role: vagrant, tags: ['vagrant', 'virtualization']}
     - {role: vim, tags: ['vim', 'editors']}
-    - {role: virtualbox, tags: ['virtualbox', 'virtualization']}
+    - {role: virtualbox, tags: ['virtualbox']}
     - {role: vlc, tags: ['vlc', 'media']}
     - {role: vscode, tags: ['vscode', 'editors']}
     - {role: vnstat, tags: ['vnstat', 'utils']}
