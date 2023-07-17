@@ -1,0 +1,7 @@
+---
+- name: Install bind (to get dig)
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - bind
