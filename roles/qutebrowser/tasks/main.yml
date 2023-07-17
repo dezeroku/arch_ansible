@@ -54,6 +54,16 @@
   become: true
   become_user: root
 
+- name: Install pdfjs
+  kewlfft.aur.aur:
+    name:
+      #  https://github.com/qutebrowser/qutebrowser/issues/7394
+      #  This should be changed to just pdfjs after the above issue is resolved
+      #  (when QT6 is officially the main branch)
+      - pdfjs-legacy
+    state: present
+  become: true
+  become_user: root
 
 # TODO: Can this be done with modifying ~/.config/mimeapps.list directly instead?
 # It seems this would be cleaner

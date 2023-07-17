@@ -88,6 +88,9 @@ c.fileselect.multiple_files.command = ["st", "-e", "ranger", "--choosefiles={}"]
 c.colors.webpage.preferred_color_scheme = "dark"
 # c.colors.webpage.darkmode.enabled = True
 
+# PDFJS
+c.content.pdfjs = True
+
 # Password manager
 config.bind(",p", "spawn --userscript qute-bitwarden")
 config.bind(",P", "spawn --userscript qute-bitwarden --password-only")
