@@ -91,6 +91,17 @@ To get all the groups and leave out the single packages you can use the `install
 
 Testing on host is probably the easiest approach, for end-to-end testing the `vagrant` role sets up Vagrant VM in `~/archlinux_vm` which can be used with ansible with minimal effort.
 
+Please remember that if the initial `pacman -Syu` updates some components (e.g. kernel) it might be necessary to reboot before continuing with the testing.
+As an example, starting `docker` is not possible after kernel update and without reboot.
+
+### Some useful commands
+
+- `vagrant up`
+- `vagrant halt`
+- `vagrant destroy`
+- `vagrant provision`
+- `vagrant ssh`
+
 ## Credits
 
 - Heavily inspired by [spark](https://github.com/pigmonkey/spark). If you're looking to implement something similar, then you should probably base on this repository.
