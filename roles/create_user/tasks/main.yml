@@ -1,4 +1,12 @@
 ---
+- name: Install openssh (for ssh-keygen)
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - openssh
+  when: vars.user.generate_ssh_key
+
 - name: Create user
   ansible.builtin.user:
     name: "{{ user.name }}"
