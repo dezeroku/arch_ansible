@@ -7,3 +7,16 @@
     groups: wheel
     state: present
     append: true
+
+- name: Create basic directory tree
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  loop:
+    - ~/Pictures/screenshots
+    - ~/Documents
+    - ~/Downloads
+    - ~/Videos
