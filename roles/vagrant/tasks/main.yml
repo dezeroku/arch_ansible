@@ -6,11 +6,21 @@
     name:
       - vagrant
 
-- name: Ensure directory exists
+- name: Install vagrant-libvirt plugin
   become: true
   become_user: "{{ user.name }}"
-  ansible.builtin.command: vagrant plugin install vagrant-disksize
+  ansible.builtin.command: vagrant plugin install vagrant-libvirt
   changed_when: true
+  when: vars.vagrant.provider == "libvirt"
+
+- name: Install vagrant plugins
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.command: vagrant plugin install "{{ item }}"
+  changed_when: true
+  loop:
+    - vagrant-disksize
+    - vagrant-cachier
 
 - name: Ensure directory exists
   become: true

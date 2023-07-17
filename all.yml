@@ -62,6 +62,7 @@
     - {role: kubectl_stuff, tags: ['kubectl_stuff', 'cli']}
     - {role: latex, tags: ['latex', 'office']}
     - {role: libreoffice, tags: ['libreoffice', 'office']}
+    - {role: libvirt, tags: ['libvirt', 'virtualization']}
     - {role: mesa, tags: ['mesa', 'desktop']}
     - {role: misc, tags: ['misc', 'utils']}
     - {role: mpv, tags: ['mpv', 'media']}

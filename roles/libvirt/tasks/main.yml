@@ -1,0 +1,26 @@
+---
+- name: Install libvirt, dnsmasq and virt-manager
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - libvirt
+      - dnsmasq
+      - virt-manager
+
+- name: Add user to libvirt group
+  become: true
+  become_user: root
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    groups: libvirt
+    state: present
+    append: true
+
+- name: Start and enable libvirtd
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: libvirtd
+    enabled: true
+    state: started

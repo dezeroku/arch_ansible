@@ -4,3 +4,4 @@ user:
 
 vagrant:
   prepare_archlinux_vm: true
+  provider: libvirt

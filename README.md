@@ -87,6 +87,10 @@ To get all the groups and leave out the single packages you can use the `install
 
 - autorandr
 
+## Testing
+
+Testing on host is probably the easiest approach, for end-to-end testing the `vagrant` role sets up Vagrant VM in `~/archlinux_vm` which can be used with ansible with minimal effort.
+
 ## Credits
 
 - Heavily inspired by [spark](https://github.com/pigmonkey/spark). If you're looking to implement something similar, then you should probably base on this repository.

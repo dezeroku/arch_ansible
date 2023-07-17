@@ -1,4 +1,53 @@
+$script = <<-SCRIPT
+# This is reaaaally stupid,
+# but hey, it works
+sudo sed -i 's#nameserver.*#nameserver 8.8.8.8##' /etc/resolv.conf
+pacman -Syu ansible --noconfirm
+SCRIPT
+
 Vagrant.configure("2") do |config|
   config.vm.box = 'archlinux/archlinux'
-  config.disksize.size = '50GB'
+  if Vagrant.has_plugin?("vagrant-disksize")
+    config.disksize.size = '50GB'
+  end
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 4096
+    v.cpus = 4
+  end
+
+  config.vm.provider "libvirt" do |v|
+    v.memory = 4096
+    v.cpus = 4
+  end
+
+  #config.vm.network "public_network", ip: "192.168.50.4"
+
+  # Reuse pacman cache from host (pretty ugly too, should be HTTP "mirror"?)
+  config.vm.synced_folder "/var/cache/pacman/", "/var/cache/pacman"
+
+  # Pass the ansible stuff
+  # Then you're good to go with the loop: vagrant up ; vagrant provision ; vagrant halt
+  # Side note: it seems that libvirt provider only syncs the files on machine startup,
+  # so you're going to need the halt and up approach to refresh the changes
+  config.vm.synced_folder "~/arch_ansible/", "/arch_ansible"
+
+  #if Vagrant.has_plugin?("vagrant-cachier")
+  #  config.cache.enable :pacman
+  #end
+
+
+  # install ansible and run pacman -Syu
+  config.vm.provision "shell", inline: $script
+
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.install = false
+    ansible.playbook = "all.yml"
+    ansible.inventory_path = "base.yaml"
+    ansible.provisioning_path = "/arch_ansible"
+    ansible.galaxy_role_file = "requirements.yml"
+    ansible.galaxy_roles_path = "/etc/ansible/roles"
+    ansible.galaxy_command = "sudo ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force"
+    ansible.playbook_command = "sudo ansible-playbook -i base.yaml all.yml --tags core,cli,desktop,desktop-tools,media,virtualization,social,browser,languages,editors,docker,utils,work,office,vpn && \#"
+  end
 end
