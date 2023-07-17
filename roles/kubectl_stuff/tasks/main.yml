@@ -1,5 +1,5 @@
 ---
-- name: Install kubectl, kubectx, helm, skaffold, k9s
+- name: Install K8s tools
   become: true
   become_user: root
   community.general.pacman:
@@ -9,6 +9,14 @@
       - helm
       - skaffold
       - k9s
+
+- name: Install jq, yq
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - jq
+      - yq
 
 - name: Install krew
   kewlfft.aur.aur:
