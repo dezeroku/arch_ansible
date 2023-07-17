@@ -15,10 +15,13 @@
     state: directory
     mode: 0755
 
-- name: Copy keyboard setup
+- name: Copy configs
   become: true
   become_user: root
   ansible.builtin.copy:
-    src: 00-keyboard.conf
-    dest: /etc/X11/xorg.conf.d/00-keyboard.conf
+    src: "{{ item }}"
+    dest: /etc/X11/xorg.conf.d/
     mode: 0755
+  loop:
+    - 00-keyboard.conf
+    - 30-touchpad.conf

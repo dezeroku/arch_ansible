@@ -105,6 +105,7 @@
     - {role: wget, tags: ['wget', 'cli']}
     - {role: wine, tags: ['wine']}
     - {role: xarchiver, tags: ['xarchiver', 'desktop-tools']}
+    - {role: xorg, tags: ['xorg', 'desktop']}
     - {role: youtube_dl, tags: ['youtube_dl', 'media']}
     - {role: yubikey, tags: ['yubikey', 'desktop-tools']}
     - {role: zathura, tags: ['zathura', 'desktop-tools']}
