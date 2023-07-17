@@ -15,13 +15,12 @@
   become: true
   become_user: aur_builder
 
-- name: Start and enable nftables
+- name: Enable nftables
   become: true
   become_user: root
   ansible.builtin.systemd:
     name: nftables
     enabled: true
-    state: started
 
 - name: Start and enable opensnitchd
   become: true
