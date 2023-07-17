@@ -5,3 +5,27 @@
   community.general.pacman:
     name:
       - vagrant
+
+- name: Ensure directory exists
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.command: vagrant plugin install vagrant-disksize
+  changed_when: true
+
+- name: Ensure directory exists
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.file:
+    path: ~/archlinux_vm
+    state: directory
+    mode: 0755
+  when: vars.vagrant.prepare_archlinux_vm
+
+- name: Copy Vagrantfile
+  become: true
+  become_user: "{{ user.name }}"
+  ansible.builtin.copy:
+    src: Vagrantfile
+    dest: ~/archlinux_vm/
+    mode: 0644
+  when: vars.vagrant.prepare_archlinux_vm

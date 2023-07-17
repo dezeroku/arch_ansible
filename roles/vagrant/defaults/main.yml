@@ -1,0 +1,6 @@
+---
+user:
+  name: d0ku
+
+vagrant:
+  prepare_archlinux_vm: true
