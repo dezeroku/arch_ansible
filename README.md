@@ -82,6 +82,10 @@ Similar for things that are not used by me at the moment, but can be useful in t
 
 To get all the groups and leave out the single packages you can use the `install-all-groups` scriptlet.
 
+## Things that require manual setup anyway (pretty much configuration dependent)
+
+- autorandr
+
 ## Credits
 
 - Heavily inspired by [spark](https://github.com/pigmonkey/spark). If you're looking to implement something similar, then you should probably base on this repository.
