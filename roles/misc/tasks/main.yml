@@ -9,3 +9,4 @@
       - cowsay
       - figlet
       - kernel-modules-hook
+      - tree
