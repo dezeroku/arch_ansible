@@ -8,3 +8,4 @@
       - cmatrix
       - cowsay
       - figlet
+      - kernel-modules-hook
