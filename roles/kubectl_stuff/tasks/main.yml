@@ -25,18 +25,21 @@
       - krew-bin
   become: true
   become_user: aur_builder
+  register: krew_install
 
 - name: Refresh krew repos
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.command: kubectl krew update
   changed_when: true
+  when: krew_install.changed  # noqa: no-handler
 
 - name: Install plugins managed by krew
   become: true
   become_user: "{{ user.name }}"
   ansible.builtin.command: "{{ item }}"
+  register: krew_install_plugin
   with_items:
     - kubectl krew install modify-secret
     - kubectl krew install resource-capacity
-  changed_when: true
+  changed_when: not (krew_install_plugin.stderr | regex_search("Skipping plugin .* it is already installed"))
