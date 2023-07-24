@@ -38,4 +38,5 @@
   ansible.builtin.command: "{{ item }}"
   with_items:
     - kubectl krew install modify-secret
+    - kubectl krew install resource-capacity
   changed_when: true
