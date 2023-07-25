@@ -34,6 +34,7 @@
     - {role: picom, tags: ['picom', 'desktop']}
     - {role: deluge, tags: ['deluge']}
     - {role: discord, tags: ['discord', 'social']}
+    - {role: dns_cache, tags: ['dns_cache', 'core']}
     - {role: docker, tags: ['docker', 'docker']}
     - {role: dunst, tags: ['dunst', 'desktop']}
     - {role: emacs, tags: ['emacs']}
