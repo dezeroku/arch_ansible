@@ -1,4 +1,3 @@
 ---
-user:
-  name: d0ku
-  shell: /bin/zsh
+user_name: d0ku
+user_shell: /bin/zsh

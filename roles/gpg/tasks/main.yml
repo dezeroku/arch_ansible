@@ -8,7 +8,7 @@
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.gnupg
     state: directory
@@ -16,7 +16,7 @@
 
 - name: Copy gpg configs
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: ~/.gnupg/
@@ -27,25 +27,25 @@
 
 - name: Set gpg key to use with git
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   community.general.git_config:
     name: user.signingkey
     scope: global
-    value: "{{ user.gpg_key }}"
-  when: user.gpg_key is defined
+    value: "{{ user_gpg_key }}"
+  when: user_gpg_key is defined
 
 - name: Set git to always use gpg
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   community.general.git_config:
     name: commit.gpgsign
     scope: global
     value: "true"
-  when: user.always_git_gpg is defined
+  when: user_always_git_gpg is defined
 
 - name: Ensure scripts directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: "~/scripts/gpg"
     state: directory
@@ -53,7 +53,7 @@
 
 - name: Copy gpg_ scripts
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "~/scripts/gpg"

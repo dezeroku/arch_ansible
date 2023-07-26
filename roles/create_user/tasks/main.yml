@@ -5,20 +5,20 @@
   community.general.pacman:
     name:
       - openssh
-  when: vars.user.generate_ssh_key
+  when: vars.user_generate_ssh_key
 
 - name: Create user
   ansible.builtin.user:
-    name: "{{ user.name }}"
-    generate_ssh_key: '{{ user.generate_ssh_key }}'
-    ssh_key_type: '{{ user.ssh_key_type }}'
+    name: "{{ user_name }}"
+    generate_ssh_key: '{{ user_generate_ssh_key }}'
+    ssh_key_type: '{{ user_ssh_key_type }}'
     groups: wheel
     state: present
     append: true
 
 - name: Create basic directory tree
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory

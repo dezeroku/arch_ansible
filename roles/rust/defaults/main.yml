@@ -1,6 +1,5 @@
 ---
+user_name: d0ku
 rust_install_toolchain: true
 rust_install_rls: true
 rust_toolchain_type: "stable"
-user:
-  name: d0ku

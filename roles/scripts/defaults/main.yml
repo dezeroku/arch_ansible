@@ -1,5 +1,3 @@
 ---
-user:
-  name: d0ku
-scripts:
-  directory: ~/scripts
+user_name: d0ku
+scripts_directory: ~/scripts

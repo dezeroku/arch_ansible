@@ -8,18 +8,18 @@
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
-    path: "{{ scripts.directory }}"
+    path: "{{ scripts_directory }}"
     state: directory
     mode: 0755
 
 - name: Copy encrypted_ scripts
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ scripts.directory }}"
+    dest: "{{ scripts_directory }}"
     mode: 0744
   loop:
     - encrypted_setup.sh

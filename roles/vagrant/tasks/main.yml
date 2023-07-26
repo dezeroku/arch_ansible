@@ -8,14 +8,14 @@
 
 - name: Install vagrant-libvirt plugin
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.command: vagrant plugin install vagrant-libvirt
   changed_when: true
-  when: vars.vagrant.provider == "libvirt"
+  when: vars.vagrant_provider == "libvirt"
 
 - name: Install vagrant plugins
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.command: vagrant plugin install "{{ item }}"
   changed_when: true
   loop:
@@ -24,18 +24,18 @@
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/archlinux_vm
     state: directory
     mode: 0755
-  when: vars.vagrant.prepare_archlinux_vm
+  when: vars.vagrant_prepare_archlinux_vm
 
 - name: Copy Vagrantfile
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: Vagrantfile
     dest: ~/archlinux_vm/
     mode: 0644
-  when: vars.vagrant.prepare_archlinux_vm
+  when: vars.vagrant_prepare_archlinux_vm

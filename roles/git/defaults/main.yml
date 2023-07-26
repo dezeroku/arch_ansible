@@ -1,6 +1,5 @@
 ---
 git_install_hub: true
-user:
-  name: d0ku
-  pub_name: dezeroku
-  email: dezeroku@gmail.com
+user_name: d0ku
+user_pub_name: dezeroku
+user_email: dezeroku@gmail.com

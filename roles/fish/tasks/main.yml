@@ -8,7 +8,7 @@
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/fish
     state: directory
@@ -16,7 +16,7 @@
 
 - name: Template fish configs
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: "{{ item }}"
     dest: ~/.config/fish/
@@ -29,7 +29,7 @@
 
 - name: Template fish plugins config
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: plugins.fish
     dest: ~/.config/fish/plugins.fish
@@ -38,7 +38,7 @@
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/fish/functions
     state: directory
@@ -46,7 +46,7 @@
 
 - name: Copy fundle setup script
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: fundle.fish
     dest: ~/.config/fish/functions
@@ -55,7 +55,7 @@
 
 - name: Get plugins
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.shell: fish -c "fundle install" && fish -c "fundle update"
   when: var_fish_plugins.changed or var_fundle_script.changed
   changed_when: true
@@ -64,6 +64,6 @@
   become: true
   become_user: root
   ansible.builtin.user:
-    name: "{{ user.name }}"
-    shell: '{{ user.shell | default("/bin/bash") }}'
+    name: "{{ user_name }}"
+    shell: '{{ user_shell | default("/bin/bash") }}'
     state: present

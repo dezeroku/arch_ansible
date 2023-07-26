@@ -24,7 +24,7 @@
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/i3/
     state: directory
@@ -32,7 +32,7 @@
 
 - name: Copy global excludesfile
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: gitignore_global
     dest: ~/.gitignore_global
@@ -40,19 +40,19 @@
 
 - name: Set up gitconfig
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   block:
     - name: Set git user.email
       community.general.git_config:
         name: user.email
         scope: global
-        value: "{{ user.email }}"
+        value: "{{ user_email }}"
 
     - name: Set git user.name
       community.general.git_config:
         name: user.name
         scope: global
-        value: "{{ user.pub_name }}"
+        value: "{{ user_pub_name }}"
 
     - name: Set git excludesFile
       community.general.git_config:

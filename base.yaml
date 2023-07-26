@@ -5,25 +5,29 @@ x230:
       ansible_connection: local
   vars:
     ansible_python_interpreter: /usr/bin/python3
-    i3_resolution: "1366x768"
+
     openssh_start_server: false
     openssh_enable_server: false
+
+    i3_resolution: "1366x768"
     i3_setup_g751_scripts: false
     i3_nopasswd_g751_scripts: false
     i3_disable_touchpad: true
     i3_dpi: 125.37
     i3_nvidia_optimus_direct_rendering: false
     i3_autostart_yubikey_otp: false
+
     setup_bluetooth_enabled: true
-    user:
-      name: d0ku
-      pub_name: dezeroku
-      generate_ssh_key: true
-      ssh_key_type: ed25519
-      shell: /bin/fish
-      email: dezeroku@gmail.com
-      gpg_key: 5D6772EEDDACD5B0
-      always_git_gpg: true
+
+    user_name: d0ku
+    user_pub_name: dezeroku
+    user_generate_ssh_key: true
+    user_ssh_key_type: ed25519
+    user_shell: /bin/fish
+    user_email: dezeroku@gmail.com
+    user_gpg_key: 5D6772EEDDACD5B0
+    user_always_git_gpg: true
+
     work_enabled: false
     work_jira_user: test@example.com
     work_jira_endpoint: jira.example.com

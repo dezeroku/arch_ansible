@@ -1,7 +1,7 @@
 ---
 - name: Copy Xresources dotfile
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: Xresources
     dest: ~/.Xresources

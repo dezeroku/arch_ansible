@@ -1,13 +1,13 @@
 ---
 - name: Install go-jira
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.command: go install github.com/go-jira/jira/cmd/jira@latest
   changed_when: true
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.jira.d/
     state: directory
@@ -15,7 +15,7 @@
 
 - name: Template go-jira config
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: config.yml
     dest: ~/.jira.d/config.yml
@@ -31,7 +31,7 @@
 
 - name: Template get-jira-cookies-from-qutebrowser
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: get-jira-cookies-from-qutebrowser.sh
     dest: ~/.jira.d/get-jira-cookies-from-qutebrowser.sh

@@ -19,7 +19,7 @@
   become: true
   become_user: root
   ansible.builtin.user:
-    name: "{{ user.name }}"
+    name: "{{ user_name }}"
     groups: docker
     state: present
     append: true

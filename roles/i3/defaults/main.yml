@@ -1,6 +1,5 @@
 ---
-user:
-  name: d0ku
+user_name: d0ku
 
 i3_resolution: "1920x1080"
 i3_setup_g751_scripts: false

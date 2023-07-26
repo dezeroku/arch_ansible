@@ -15,7 +15,7 @@
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/i3status-rust/
     state: directory
@@ -23,7 +23,7 @@
 
 - name: Template status config
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: config.toml
     dest: ~/.config/i3status-rust/config.toml

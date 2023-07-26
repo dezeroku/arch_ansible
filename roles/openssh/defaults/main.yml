@@ -1,5 +1,4 @@
 ---
-user:
-  name: d0ku
+user_name: d0ku
 openssh_start_server: false
 openssh_enable_server: false

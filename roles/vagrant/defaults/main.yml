@@ -1,7 +1,5 @@
 ---
-user:
-  name: d0ku
+user_name: d0ku
 
-vagrant:
-  prepare_archlinux_vm: true
-  provider: libvirt
+vagrant_prepare_archlinux_vm: true
+vagrant_provider: libvirt

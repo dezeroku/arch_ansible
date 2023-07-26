@@ -10,7 +10,7 @@
 
 - name: Create the .emacs.d dir
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.emacs.d
     state: directory
@@ -19,7 +19,7 @@
 # That's the stable release as of 15/06/2021
 - name: Get the straight.el as git repo (security + issues with GNUtls)
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.git:
     dest: ~/.emacs.d/straight/repos/straight.el
     repo: https://github.com/raxod502/straight.el.git
@@ -28,7 +28,7 @@
 
 - name: Copy Emacs early config
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: early-init.el
     dest: ~/.emacs.d/early-init.el
@@ -36,7 +36,7 @@
 
 - name: Copy Emacs config
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: emacs
     dest: ~/.emacs
@@ -45,7 +45,7 @@
 
 - name: Create the straight.el dir
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.emacs.d/straight/versions
     state: directory
@@ -53,7 +53,7 @@
 
 - name: Copy straight.el lockfile
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: default.el
     dest: ~/.emacs.d/straight/versions/default.el
@@ -62,7 +62,7 @@
 
 - name: Install plugins
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.shell: set -o pipefail && yes | emacs --script ~/.emacs
   args:
     executable: /usr/bin/env bash

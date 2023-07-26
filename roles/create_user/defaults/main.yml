@@ -1,5 +1,4 @@
 ---
-user:
-  name: d0ku
-  generate_ssh_key: true
-  ssh_key_type: ed25519
+user_name: d0ku
+user_generate_ssh_key: true
+user_ssh_key_type: ed25519

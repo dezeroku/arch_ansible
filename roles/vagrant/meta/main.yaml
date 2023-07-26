@@ -1,4 +1,4 @@
 ---
 dependencies:
-  - {role: libvirt, when: vars.vagrant.provider == "libvirt"}
-  - {role: virtualbox, when: vars.vagrant.provider == "virtualbox"}
+  - {role: libvirt, when: vars.vagrant_provider == "libvirt"}
+  - {role: virtualbox, when: vars.vagrant_provider == "virtualbox"}

@@ -23,7 +23,7 @@
 - name: All
   hosts: all
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   roles:
     - {role: autorandr, tags: ['autorandr', 'desktop']}
     - {role: android_studio, tags: ['android_studio']}

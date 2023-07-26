@@ -26,12 +26,12 @@
   become: true
   become_user: root
   ansible.builtin.systemd:
-    name: suspend@{{ user.name }}
+    name: suspend@{{ user_name }}
     enabled: true
 
 - name: Enable resume service file
   become: true
   become_user: root
   ansible.builtin.systemd:
-    name: resume@{{ user.name }}
+    name: resume@{{ user_name }}
     enabled: true

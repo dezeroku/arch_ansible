@@ -10,7 +10,7 @@
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/autorandr/
     state: directory
@@ -18,7 +18,7 @@
 
 - name: Copy settings file
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: settings.ini
     dest: ~/.config/autorandr/settings.ini

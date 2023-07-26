@@ -12,7 +12,7 @@
 
 - name: Copy vim vundle bootstrap
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: vundler.vim
     dest: ~/.vundler.vim
@@ -21,7 +21,7 @@
 
 - name: Template vim .vimrc
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: vimrc
     dest: ~/.vimrc
@@ -29,7 +29,7 @@
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/nvim
     state: directory
@@ -37,7 +37,7 @@
 
 - name: Template neovim config
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: vimrc
     dest: ~/.config/nvim/init.vim
@@ -45,7 +45,7 @@
 
 - name: Copy tern config
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: tern-config
     dest: ~/tern-config
@@ -53,7 +53,7 @@
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.vim/bundle
     state: directory
@@ -61,7 +61,7 @@
 
 - name: Set up Vundle
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.git:
     dest: ~/.vim/bundle/Vundle.vim
     repo: https://github.com/VundleVim/Vundle.vim.git
@@ -70,7 +70,7 @@
 
 - name: Download plugins if something changed
   become: true
-  become_user: "{{ user.name }}"
+  become_user: "{{ user_name }}"
   ansible.builtin.command: vim +PluginInstall +qall -u ~/.vundler.vim
   when: var_vundler.changed or var_vundle_git.changed
   changed_when: true
