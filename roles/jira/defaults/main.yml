@@ -1,3 +1,6 @@
 ---
 user:
   name: d0ku
+
+work_jira_user: test@example.com
+work_jira_endpoint: jira.example.com

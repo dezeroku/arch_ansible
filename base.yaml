@@ -24,7 +24,6 @@ x230:
       email: dezeroku@gmail.com
       gpg_key: 5D6772EEDDACD5B0
       always_git_gpg: true
-    work:
-      enabled: false
-      jira_user: test@example.com
-      jira_endpoint: jira.example.com
+    work_enabled: false
+    work_jira_user: test@example.com
+    work_jira_endpoint: jira.example.com

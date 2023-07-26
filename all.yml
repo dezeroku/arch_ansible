@@ -57,7 +57,7 @@
     - {role: i3status_rust, tags: ['i3status_rust', 'desktop']}
     - {role: imagemagick, tags: ['imagemagick', 'utils']}
     - {role: intellij_idea, tags: ['intellij_idea']}
-    - {role: jira, tags: ['jira', 'work'], when: work.enabled}
+    - {role: jira, tags: ['jira', 'work'], when: work_enabled}
     - {role: keychain, tags: ['keychain', 'cli']}
     - {role: kitty, tags: ['kitty']}
     - {role: kubectl_stuff, tags: ['kubectl_stuff', 'cli']}
