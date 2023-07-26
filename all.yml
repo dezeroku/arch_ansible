@@ -30,7 +30,7 @@
     - {role: audio_control, tags: ['audio_control', 'desktop']}
     - {role: bind, tags: ['bind', 'cli']}
     - {role: bitwarden, tags: ['bitwarden', 'cli', 'desktop']}
-    - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: setup.bluetooth.enabled}
+    - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: setup_bluetooth_enabled}
     - {role: picom, tags: ['picom', 'desktop']}
     - {role: deluge, tags: ['deluge']}
     - {role: discord, tags: ['discord', 'social']}
