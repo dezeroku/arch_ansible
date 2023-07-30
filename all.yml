@@ -10,12 +10,12 @@
   become_user: root
   roles:
     - {role: pacman, tags: ['pacman']}
+    - {role: pacoloco, tags: ['pacoloco']}
     - {role: ntp, tags: ['ntp']}
     - {role: create_user, tags: ['create_user']}
     - {role: sudo, tags: ['sudo']}
     - {role: aur_builder, tags: ['aur_builder']}
     - {role: networkmanager, tags: ['networkmanager']}
-    - {role: pacman, tags: ['pacman']}
     - {role: hardening, tags: ['hardening']}
   tags:
     - core

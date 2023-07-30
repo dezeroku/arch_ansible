@@ -6,6 +6,13 @@ local_machine:
   vars:
     ansible_python_interpreter: /usr/bin/python3
 
+    # Enable the local caching with pacoloco
+    pacoloco_setup_server: false
+    pacoloco_server_host: pacoloco-server
+    # This should be enabled if you have set up pacoloco server in your LAN
+    # The server_host must match
+    pacoloco_setup_client: false
+
     openssh_start_server: false
     openssh_enable_server: false
 

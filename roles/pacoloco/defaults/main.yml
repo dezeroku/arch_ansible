@@ -1,0 +1,4 @@
+---
+pacoloco_setup_client: false
+pacoloco_setup_server: false
+pacoloco_server_host: pacoloco-server
