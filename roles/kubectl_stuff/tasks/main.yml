@@ -7,6 +7,7 @@
       - kubectl
       - kubectx
       - helm
+      - helmfile
       - skaffold
       - k9s
 
@@ -17,6 +18,16 @@
     name:
       - jq
       - yq
+
+- name: Install helm plugins
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.command: helm plugin install "{{ item }}"
+  with_items:
+    - "https://github.com/databus23/helm-diff"
+  register: helm_install_plugin
+  changed_when: helm_install_plugin.rc == 0
+  failed_when: (helm_install_plugin.rc not in [0,1]) or ((helm_install_plugin.rc == 1) and (not (helm_install_plugin.stderr | regex_search("Error.* plugin already exists"))))
 
 - name: Install krew
   kewlfft.aur.aur:
@@ -37,9 +48,9 @@
 - name: Install plugins managed by krew
   become: true
   become_user: "{{ user_name }}"
-  ansible.builtin.command: "{{ item }}"
+  ansible.builtin.command: kubectl krew install "{{ item }}"
   register: krew_install_plugin
   with_items:
-    - kubectl krew install modify-secret
-    - kubectl krew install resource-capacity
+    - modify-secret
+    - resource-capacity
   changed_when: not (krew_install_plugin.stderr | regex_search("Skipping plugin .* it is already installed"))
