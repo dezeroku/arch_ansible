@@ -49,6 +49,18 @@
     - {match: "resolv-file=", line: "resolv-file=/etc/dnsmasq-resolv.conf"}
   register: dnsmasq_configure
 
+- name: Obtain service facts, to check if systemd-resolved exists
+  ansible.builtin.service_facts:
+
+- name: Make sure that systemd-resolved is not running
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: systemd-resolved.service
+    enabled: false
+    state: stopped
+  when: '"systemd-resolved.service" in services'
+
 - name: Start and enable dnsmasq
   become: true
   become_user: root
