@@ -8,7 +8,7 @@ local_machine:
 
     # Enable the local caching with pacoloco
     pacoloco_setup_server: false
-    pacoloco_server_host: pacoloco-server
+    pacoloco_server_url: http://pacoloco-server:9129
     # This should be enabled if you have set up pacoloco server in your LAN
     # The server_host must match
     pacoloco_setup_client: false

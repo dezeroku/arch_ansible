@@ -49,6 +49,6 @@
   ansible.builtin.lineinfile:
     dest: /etc/pacman.d/mirrorlist
     state: "present"
-    line: "Server = http://{{ pacoloco_server_host }}:9129/repo/archlinux-reflector/$repo/os/$arch"
+    line: "Server = {{ pacoloco_server_url }}/repo/archlinux-reflector/$repo/os/$arch"
     insertbefore: BOF
   when: pacoloco_setup_client
