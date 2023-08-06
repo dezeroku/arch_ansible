@@ -1,7 +1,7 @@
 {% include "files/vimrc-base" %}
 " CUSTOM CONFIG
 " Vundle
-source ~/.vundler.vim
+source ~/.config/nvim/vundler.vim
 
 if v:progname =~? "evim"
   finish

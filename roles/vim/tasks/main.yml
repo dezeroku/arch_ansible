@@ -4,28 +4,11 @@
   become_user: root
   community.general.pacman:
     name:
-      - gvim
+      - vim
       - neovim
       - vim-spell-en
       - vim-spell-pl
       - vim-spell-de
-
-- name: Copy vim vundle bootstrap
-  become: true
-  become_user: "{{ user_name }}"
-  ansible.builtin.copy:
-    src: vundler.vim
-    dest: ~/.vundler.vim
-    mode: 0644
-  register: var_vundler
-
-- name: Template vim .vimrc
-  become: true
-  become_user: "{{ user_name }}"
-  ansible.builtin.template:
-    src: vimrc
-    dest: ~/.vimrc
-    mode: 0644
 
 - name: Ensure directory exists
   become: true
@@ -34,6 +17,15 @@
     path: ~/.config/nvim
     state: directory
     mode: 0755
+
+- name: Copy vim vundle bootstrap
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.copy:
+    src: vundler.vim
+    dest: ~/.config/nvim/vundler.vim
+    mode: 0644
+  register: var_vundler
 
 - name: Template neovim config
   become: true
@@ -71,6 +63,6 @@
 - name: Download plugins if something changed
   become: true
   become_user: "{{ user_name }}"
-  ansible.builtin.command: vim +PluginInstall +qall -u ~/.vundler.vim
+  ansible.builtin.command: nvim +PluginInstall +qall -u ~/.config/nvim/vundler.vim
   when: var_vundler.changed or var_vundle_git.changed
   changed_when: true
