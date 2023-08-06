@@ -26,6 +26,9 @@ local_machine:
 
     setup_bluetooth_enabled: true
 
+    # Allow roles to install their own scriptlets to be sourced by fish
+    fish_install_extensions: true
+
     user_name: d0ku
     user_pub_name: dezeroku
     user_generate_ssh_key: true

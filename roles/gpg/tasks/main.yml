@@ -60,3 +60,22 @@
     mode: 0644
   loop:
     - gpg_setup_keyring.sh
+
+
+- name: Ensure fish directory exists
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.config/fish/ansible/gpg
+    state: directory
+    mode: 0700
+  when: fish_install_extensions
+
+- name: Copy fish config
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.copy:
+    src: gpg-agent.fish
+    dest: ~/.config/fish/ansible/gpg/gpg-agent.fish
+    mode: 0644
+  when: fish_install_extensions
