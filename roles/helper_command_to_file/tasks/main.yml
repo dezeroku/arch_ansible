@@ -1,0 +1,22 @@
+---
+# Write a command's output to a file
+# and check if it changes the file itself
+# Example usage:
+#  - name: Create fish completion for kubectl
+#    ansible.builtin.include_role:
+#      name: helper_command_to_file
+#    vars:
+#      helper_command_to_file_command: kubectl completion fish
+#      helper_command_to_file_path: ~/.config/fish/completions/kubectl.fish
+
+- name: Get command's output
+  ansible.builtin.command:
+    cmd: "{{ helper_command_to_file_command }}"
+  changed_when: false
+  register: command_result
+
+- name: Write to file
+  ansible.builtin.copy:
+    content: "{{ command_result.stdout }}"
+    dest: "{{ helper_command_to_file_path }}"
+    mode: "{{ helper_command_to_file_mode }}"

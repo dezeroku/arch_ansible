@@ -55,13 +55,13 @@
     - resource-capacity
   changed_when: not (krew_install_plugin.stderr | regex_search("Skipping plugin .* it is already installed"))
 
-- name: Ensure fish directory exists
+- name: Ensure fish scriptlets directory exists
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/fish/ansible/kubectl_stuff
     state: directory
-    mode: 0700
+    mode: 0755
   when: fish_install_extensions
 
 - name: Copy fish config
@@ -71,4 +71,29 @@
     src: kubernetes.fish
     dest: ~/.config/fish/ansible/kubectl_stuff/kubernetes.fish
     mode: 0644
+  when: fish_install_extensions
+
+- name: Ensure fish completions directory exists
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.config/fish/ansible/completions
+    state: directory
+    mode: 0755
+  when: fish_install_extensions
+
+- name: Create fish completion for kubectl
+  ansible.builtin.include_role:
+    name: helper_command_to_file
+  vars:
+    helper_command_to_file_command: kubectl completion fish
+    helper_command_to_file_path: ~/.config/fish/completions/kubectl.fish
+  when: fish_install_extensions
+
+- name: Create fish completion for k9s
+  ansible.builtin.include_role:
+    name: helper_command_to_file
+  vars:
+    helper_command_to_file_command: k9s completion fish
+    helper_command_to_file_path: ~/.config/fish/completions/k9s.fish
   when: fish_install_extensions
