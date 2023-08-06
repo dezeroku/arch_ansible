@@ -47,13 +47,14 @@ function tmp
 end
 
 # BLOCKS (functions that can be used in other functions)
-source ~/.config/fish/blocks.fish
+# Special treatment for it, source it explicitly as it may be reused in
+# scriptlets from other roles
+source ~/.config/fish/ansible/fish/blocks.fish
 
-# AWS
-source ~/.config/fish/aws.fish
-
-# Kubernetes and friends
-source ~/.config/fish/kubernetes.fish
+# Source all the scriptlets that could have been installed by other roles
+for scriptlet_file in ~/.config/fish/ansible/**/*.fish
+    source $scriptlet_file
+end
 
 # Allow node specific customizations.
 if test -e ~/.config/fish/custom.fish

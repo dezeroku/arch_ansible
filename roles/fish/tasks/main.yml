@@ -14,18 +14,13 @@
     state: directory
     mode: 0755
 
-- name: Template fish configs
+- name: Template fish config
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.template:
-    src: "{{ item }}"
+    src: config.fish
     dest: ~/.config/fish/
     mode: 0644
-  loop:
-    - config.fish
-    - aws.fish
-    - kubernetes.fish
-    - blocks.fish
 
 - name: Template fish plugins config
   become: true
@@ -59,6 +54,25 @@
   ansible.builtin.shell: fish -c "fundle install" && fish -c "fundle update"
   when: var_fish_plugins.changed or var_fundle_script.changed
   changed_when: true
+
+- name: Ensure scriptlets directory exists
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.config/fish/ansible/fish
+    state: directory
+    mode: 0755
+
+- name: Template fish scriptlets
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: ~/.config/fish/ansible/fish/
+    mode: 0644
+  loop:
+    - blocks.fish
+    - aws.fish
 
 - name: Enable shell
   become: true
