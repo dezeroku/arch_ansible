@@ -1,7 +1,6 @@
 {% include "files/vimrc-base" %}
 " CUSTOM CONFIG
-" Vundle
-source ~/.config/nvim/vundler.vim
+source ~/.config/nvim/vim-plug.vim
 
 if v:progname =~? "evim"
   finish
@@ -22,9 +21,9 @@ set undolevels=1000
 set undoreload=10000
 set swapfile
 
-set undodir=$HOME/.vim/tmp/undo
-set backupdir=$HOME/.vim/tmp/backup
-set directory=$HOME/.vim/tmp/swap
+set undodir=$HOME/.config/nvim/tmp/undo
+set backupdir=$HOME/.config/nvim/tmp/backup
+set directory=$HOME/.config/nvim/tmp/swap
 
 " Make these folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
