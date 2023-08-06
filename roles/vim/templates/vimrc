@@ -16,6 +16,27 @@ else
   endif
 endif
 
+" Get rid of ~ files everywhere
+" via: https://stackoverflow.com/a/61585014 with minor cahnges
+set undolevels=1000
+set undoreload=10000
+set swapfile
+
+set undodir=$HOME/.vim/tmp/undo
+set backupdir=$HOME/.vim/tmp/backup
+set directory=$HOME/.vim/tmp/swap
+
+" Make these folders automatically if they don't already exist.
+if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+endif
+if !isdirectory(expand(&backupdir))
+    call mkdir(expand(&backupdir), "p")
+endif
+if !isdirectory(expand(&directory))
+    call mkdir(expand(&directory), "p")
+endif
+
 " Set encoding
 set encoding=utf-8
 
