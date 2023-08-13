@@ -111,8 +111,49 @@ As an example, starting `docker` is not possible after kernel update and without
 - `vagrant provision`
 - `vagrant ssh`
 
-## Credits
+## Installation from scratch
 
-- Heavily inspired by [spark](https://github.com/pigmonkey/spark). If you're looking to implement something similar, then you should probably base on this repository.
-- Take a look at [dotfiles repo](https://github.com/tojatos/dotfiles) from @tojatos (especially ZSH theme).
-- AUR library file in version `v0.10.0` taken from [kewlfft/ansible-aur](https://github.com/kewlfft/ansible-aur)
+These are mostly notes for myself on how to set up an Arch system with encryption on a UEFI enabled device.
+
+- Follow [Installation Guide](https://wiki.archlinux.org/title/installation_guide) until you get to partitioning
+- Follow [LVM_on_LUKS](https://wiki.archlinux.org/title/dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS) for partitioning
+  Basic setup without separate home can be followed
+
+- Bootstrap with the following list `pacstrap -K /mnt base base-devel linux linux-firmware lvm2 networkmanager ansible git neovim refind`
+
+- Follow the guide again until you get to initramfs, then set up according to the `LVM_on_LUKS` article
+
+- Run `refind-install` to set up the bootloader
+- Uncomment the `extra_kernel_version_strings` line in `/boot/EFI/refind/refind.conf`
+
+- Modify the `/boot/refind_linux.conf`, so it looks similar to this:
+
+```
+# Choose proper microcode depending on your CPU here
+# You'll need to install amd-ucode or intel-ucode
+# You can run `blkid | grep UUID=` to get UUIDs of the partitions
+"Boot with microcode updates" "initrd=\intel-ucode.img initrd=\initramfs-%v.img cryptdevice=UUID=<LUKS PARTITION UUID>:<LVM name> root=/dev/<volume group name>/<root name> resume=/dev/<volume group name>/<swap name>
+...
+```
+
+- Modify your `/etc/fstab` so it looks roughly like this:
+
+```
+/dev/mapper/<GroupName>-<root name> / ext4 rw,relatime 0 0
+
+/dev/mapper/<GroupName>-<swap name> swap swap defaults 0 0
+
+UUID=<UUID of the EFI/boot partition> /boot vfat defaults 0 0
+```
+
+- Reboot into the freshly installed system
+
+- Start the `NetworkManager` service and obtain Internet connectivity with `nmcli`
+  For the wired connection:
+
+```
+nmcli device connect <interface name>
+```
+
+- Clone this repo, prepare `custom.yaml` and run as usual
+- One-shot action, run the `passwd <username>` to set up the password for a user that was created by this repo
