@@ -11,3 +11,4 @@
       - kernel-modules-hook
       - tree
       - btop
+      - zip
