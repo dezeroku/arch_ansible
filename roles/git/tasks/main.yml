@@ -1,10 +1,11 @@
 ---
-- name: Install git
+- name: Install git and git-lfs
   become: true
   become_user: root
   community.general.pacman:
     name:
       - git
+      - git-lfs
 
 - name: Install hub
   become: true
