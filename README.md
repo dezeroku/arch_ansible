@@ -139,11 +139,11 @@ These are mostly notes for myself on how to set up an Arch system with encryptio
 - Modify your `/etc/fstab` so it looks roughly like this:
 
 ```
-/dev/mapper/<GroupName>-<root name> / ext4 rw,relatime 0 0
+/dev/mapper/<GroupName>-<root name> / ext4 rw,relatime 0 1
 
 /dev/mapper/<GroupName>-<swap name> swap swap defaults 0 0
 
-UUID=<UUID of the EFI/boot partition> /boot vfat defaults 0 0
+UUID=<UUID of the EFI/boot partition> /boot vfat defaults 0 2
 ```
 
 - Reboot into the freshly installed system
