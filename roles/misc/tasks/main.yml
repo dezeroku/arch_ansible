@@ -12,3 +12,5 @@
       - tree
       - btop
       - zip
+      - man-pages
+      - man-db
