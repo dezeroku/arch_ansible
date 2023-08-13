@@ -14,3 +14,5 @@
       - zip
       - man-pages
       - man-db
+      - shellcheck
+      - shfmt
