@@ -1,5 +1,5 @@
 ---
-- name: Install libvirt, dnsmasq and virt-manager
+- name: Install libvirt, dnsmasq, virt-manager and dmidecode
   become: true
   become_user: root
   community.general.pacman:
@@ -7,6 +7,7 @@
       - libvirt
       - dnsmasq
       - virt-manager
+      - dmidecode
 
 - name: Add user to libvirt group
   become: true
