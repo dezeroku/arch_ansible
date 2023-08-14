@@ -6,18 +6,26 @@
     name:
       - vagrant
 
+- name: Get list of vagrant plugins
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.command: vagrant plugin list
+  changed_when: false
+  register: vagrant_plugins
+
 - name: Install vagrant-libvirt plugin
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command: vagrant plugin install vagrant-libvirt
   changed_when: true
-  when: vars.vagrant_provider == "libvirt"
+  when: vars.vagrant_provider == "libvirt" and "vagrant-libvirt" not in vagrant_plugins.stdout
 
 - name: Install vagrant plugins
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command: vagrant plugin install "{{ item }}"
   changed_when: true
+  when: item not in vagrant_plugins.stdout
   loop:
     - vagrant-disksize
     - vagrant-cachier
