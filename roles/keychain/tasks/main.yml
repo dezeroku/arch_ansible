@@ -1,7 +1,0 @@
----
-- name: Install keychain
-  become: true
-  become_user: root
-  community.general.pacman:
-    name:
-      - keychain

@@ -96,6 +96,5 @@
     - {role: yubikey, tags: ['yubikey', 'desktop-tools']}
     - {role: zathura, tags: ['zathura', 'desktop-tools']}
     - {role: zoom, tags: ['zoom', 'work']}
-    - {role: zsh, tags: ['zsh']}
   tags:
     - install
