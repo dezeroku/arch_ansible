@@ -1,0 +1,24 @@
+---
+- name: CLI
+  hosts: all
+  become: true
+  become_user: "{{ user_name }}"
+  roles:
+    - {role: fish, tags: ['fish']}
+    - {role: bind, tags: ['bind']}
+    - {role: fzf, tags: ['fzf']}
+    - {role: git, tags: ['git']}
+    - {role: gpg, tags: ['gpg']}
+    - {role: bitwarden, tags: ['bitwarden']}
+    - {role: kubectl_stuff, tags: ['kubectl_stuff']}
+    - {role: ncdu, tags: ['ncdu']}
+    - {role: neofetch, tags: ['neofetch']}
+    - {role: nmap, tags: ['nmap']}
+    - {role: p7zip, tags: ['p7zip']}
+    - {role: ranger, tags: ['ranger']}
+    - {role: scripts, tags: ['scripts']}
+    - {role: tldr, tags: ['tldr']}
+    - {role: tmux, tags: ['tmux']}
+    - {role: wget, tags: ['wget']}
+  tags:
+    - cli

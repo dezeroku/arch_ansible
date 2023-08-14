@@ -2,6 +2,9 @@
 - name: Core
   ansible.builtin.import_playbook: core.yml
 
+- name: CLI
+  ansible.builtin.import_playbook: cli.yml
+
 - name: All
   hosts: all
   become: true
@@ -10,8 +13,6 @@
     - {role: autorandr, tags: ['autorandr', 'desktop']}
     - {role: android_studio, tags: ['android_studio']}
     - {role: audio_control, tags: ['audio_control', 'desktop']}
-    - {role: bind, tags: ['bind', 'cli']}
-    - {role: bitwarden, tags: ['bitwarden', 'cli', 'desktop']}
     - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: setup_bluetooth_enabled}
     - {role: picom, tags: ['picom', 'desktop']}
     - {role: deluge, tags: ['deluge']}
@@ -24,62 +25,47 @@
     - {role: feh, tags: ['feh', 'desktop']}
     - {role: firefox, tags: ['firefox', 'browser']}
     - {role: firewall, tags: ['firewall', 'core']}
-    - {role: fish, tags: ['fish', 'cli']}
     - {role: flameshot, tags: ['flameshot', 'desktop']}
     - {role: fonts, tags: ['fonts', 'desktop']}
     - {role: fuse, tags: ['fuse', 'utils']}
-    - {role: fzf, tags: ['fzf', 'cli']}
     - {role: gimp, tags: ['gimp', 'desktop-utils']}
-    - {role: git, tags: ['git', 'cli']}
     - {role: go, tags: ['go', 'languages']}
     - {role: gparted, tags: ['gparted', 'desktop-utils']}
-    - {role: gpg, tags: ['gpg', 'cli']}
     - {role: i3, tags: ['i3', 'desktop']}
     - {role: i3lock, tags: ['i3lock', 'desktop']}
     - {role: i3status_rust, tags: ['i3status_rust', 'desktop']}
     - {role: imagemagick, tags: ['imagemagick', 'utils']}
     - {role: intellij_idea, tags: ['intellij_idea']}
     - {role: jira, tags: ['jira', 'work'], when: work_enabled}
-    - {role: keychain, tags: ['keychain', 'cli']}
     - {role: kitty, tags: ['kitty']}
-    - {role: kubectl_stuff, tags: ['kubectl_stuff', 'cli']}
     - {role: latex, tags: ['latex', 'office']}
     - {role: libreoffice, tags: ['libreoffice', 'office']}
     - {role: libvirt, tags: ['libvirt']}
     - {role: mesa, tags: ['mesa', 'desktop']}
     - {role: misc, tags: ['misc', 'utils']}
     - {role: mpv, tags: ['mpv', 'media']}
-    - {role: ncdu, tags: ['ncdu', 'cli']}
-    - {role: neofetch, tags: ['neofetch', 'cli']}
     - {role: networkmanager_applet, tags: ['networkmanager_applet', 'desktop']}
-    - {role: nmap, tags: ['nmap', 'cli']}
     - {role: npm, tags: ['npm', 'languages']}
     - {role: ntfs_3g, tags: ['ntfs_3g', 'utils']}
     - {role: nvidia, tags: ['nvidia'], when: pc == "g751"}
     - {role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751"}
-    - {role: p7zip, tags: ['p7zip', 'cli']}
     - {role: pcmanfm, tags: ['pcmanfm', 'desktop-utils']}
     - {role: powerline, tags: ['powerline', 'desktop']}
     - {role: pulseaudio, tags: ['pulseaudio', 'desktop', 'audio']}
     - {role: python3, tags: ['python3', 'languages']}
     - {role: qemu, tags: ['qemu', 'virtualization']}
     - {role: qutebrowser, tags: ['qutebrowser', 'browser']}
-    - {role: ranger, tags: ['ranger', 'cli']}
     - {role: redshift, tags: ['redshift', 'desktop']}
     - {role: rofi, tags: ['rofi', 'desktop']}
     - {role: rust, tags: ['rust', 'languages']}
     - {role: spotify, tags: ['spotify', 'media']}
-    - {role: openssh, tags: ['openssh', 'cli']}
     - {role: openvpn, tags: ['openvpn', 'vpn']}
-    - {role: scripts, tags: ['scripts', 'cli']}
     - {role: slack, tags: ['slack', 'work']}
     - {role: st, tags: ['st', 'desktop']}
     - {role: steam, tags: ['steam', 'gaming']}
     - {role: sxiv, tags: ['sxiv', 'desktop-utils']}
     - {role: terminator, tags: ['terminator']}
-    - {role: tldr, tags: ['tldr', 'cli']}
     - {role: thinkpad, tags: ['thinkpad']}
-    - {role: tmux, tags: ['tmux', 'cli']}
     - {role: udiskie, tags: ['udiskie', 'desktop']}
     - {role: vagrant, tags: ['vagrant', 'virtualization']}
     - {role: vim, tags: ['vim', 'editors']}
@@ -88,7 +74,6 @@
     - {role: vscode, tags: ['vscode', 'editors']}
     - {role: vnstat, tags: ['vnstat', 'utils']}
     - {role: wireguard_tools, tags: ['wireguard_tools', 'vpn']}
-    - {role: wget, tags: ['wget', 'cli']}
     - {role: wine, tags: ['wine']}
     - {role: xarchiver, tags: ['xarchiver', 'desktop-tools']}
     - {role: xorg, tags: ['xorg', 'desktop']}

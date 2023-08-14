@@ -12,5 +12,6 @@
     - {role: aur_builder, tags: ['aur_builder']}
     - {role: networkmanager, tags: ['networkmanager']}
     - {role: hardening, tags: ['hardening']}
+    - {role: openssh, tags: ['openssh']}
   tags:
     - core
