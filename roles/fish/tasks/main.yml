@@ -74,6 +74,14 @@
     - blocks.fish
     - aws.fish
 
+- name: Ensure completions directory exists
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.config/fish/completions
+    state: directory
+    mode: 0755
+
 - name: Enable shell
   become: true
   become_user: root
