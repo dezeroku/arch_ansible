@@ -18,12 +18,14 @@
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command: rustup toolchain install "{{ rust_toolchain_type }}"
+  register: rustup_toolchain_install
   when: rust_install_toolchain
-  changed_when: true
+  changed_when: ("unchanged" not in rustup_toolchain_install.stdout)
 
 - name: Install rls
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command: rustup component add rls --toolchain "{{ rust_toolchain_type }}"
+  register: rustup_rls_install
   when: rust_install_toolchain and rust_install_rls
-  changed_when: true
+  changed_when: ("is up to date" not in rustup_rls_install.stderr)
