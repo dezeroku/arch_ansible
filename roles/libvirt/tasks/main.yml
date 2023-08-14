@@ -8,6 +8,7 @@
       - dnsmasq
       - virt-manager
       - dmidecode
+  register: install_packages
 
 - name: Add user to libvirt group
   become: true
@@ -18,10 +19,17 @@
     state: present
     append: true
 
-- name: Start and enable libvirtd
+- name: Enable libvirtd
   become: true
   become_user: root
   ansible.builtin.systemd:
     name: libvirtd
     enabled: true
+
+- name: Start libvirtd
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: libvirtd
     state: started
+  when: install_packages.changed  # noqa: no-handler
