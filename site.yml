@@ -1,24 +1,6 @@
 ---
-# This playbook should be treated mainly as a point of reference.
-# It contains all roles that are defined (listed alphabetically) and each
-# one of these can be run by calling ansible with --tags <role_name>
-# Whenever you want to run single role, you should probably use this playbook.
-
 - name: Core
-  hosts: all
-  become: true
-  become_user: root
-  roles:
-    - {role: pacman, tags: ['pacman']}
-    - {role: pacoloco, tags: ['pacoloco']}
-    - {role: ntp, tags: ['ntp']}
-    - {role: create_user, tags: ['create_user']}
-    - {role: sudo, tags: ['sudo']}
-    - {role: aur_builder, tags: ['aur_builder']}
-    - {role: networkmanager, tags: ['networkmanager']}
-    - {role: hardening, tags: ['hardening']}
-  tags:
-    - core
+  ansible.builtin.import_playbook: core.yml
 
 - name: All
   hosts: all
