@@ -1,0 +1,34 @@
+---
+- name: Install tlp
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - tlp
+
+- name: Copy battery-charging.conf
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: 01-battery-charging.conf
+    dest: /etc/tlp.d/01-battery-charging.conf
+    mode: 0644
+  register: battery_config
+
+- name: Mask tlp's competition services
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: "{{ item }}.service"
+    masked: true
+  loop:
+    - systemd-rfkill.service
+    - systemd-rfkill.socket
+
+- name: Start and enable tlp
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: tlp.service
+    enabled: true
+    state: "{{ (battery_config.changed) | ternary('restarted', 'started') }}"

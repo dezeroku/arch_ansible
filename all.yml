@@ -96,6 +96,7 @@
     - {role: sxiv, tags: ['sxiv', 'desktop-utils']}
     - {role: terminator, tags: ['terminator']}
     - {role: tldr, tags: ['tldr', 'cli']}
+    - {role: thinkpad, tags: ['thinkpad']}
     - {role: tmux, tags: ['tmux', 'cli']}
     - {role: udiskie, tags: ['udiskie', 'desktop']}
     - {role: vagrant, tags: ['vagrant', 'virtualization']}
