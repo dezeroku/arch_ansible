@@ -6,6 +6,10 @@ local_machine:
   vars:
     ansible_python_interpreter: /usr/bin/python3
 
+    # Don't run the updates by default
+    pacman_update: false
+    pacman_upgrade: false
+
     # Enable the local caching with pacoloco
     pacoloco_setup_server: false
     pacoloco_server_url: http://pacoloco-server:9129
