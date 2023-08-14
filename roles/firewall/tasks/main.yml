@@ -1,11 +1,19 @@
 ---
-- name: Install nftables, firewalld and opensnitch
+- name: Install nftables
   become: true
   become_user: root
   community.general.pacman:
     name:
       - nftables
+  register: nftables_install
+
+- name: Install opensnitch
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
       - opensnitch
+  when: vars.firewall_enable_opensnitch
 
 - name: Install ebpf module for opensnitch
   kewlfft.aur.aur:
@@ -14,6 +22,7 @@
     state: present
   become: true
   become_user: aur_builder
+  when: vars.firewall_enable_opensnitch
 
 - name: Enable nftables
   become: true
@@ -22,6 +31,23 @@
     name: nftables
     enabled: true
 
+- name: Copy nftables.conf
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: "{{ vars.firewall_nftables_config }}.conf"
+    dest: /etc/nftables.conf
+    mode: 0644
+  register: nftables_config
+
+- name: Reload nftables configuration
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: nftables
+    state: started
+  when: nftables_install.changed or nftables_config.changed
+
 - name: Start and enable opensnitchd
   become: true
   become_user: root
@@ -29,3 +55,4 @@
     name: opensnitchd
     enabled: true
     state: started
+  when: vars.firewall_enable_opensnitch
