@@ -119,7 +119,7 @@ These are mostly notes for myself on how to set up an Arch system with encryptio
 - Follow [LVM_on_LUKS](https://wiki.archlinux.org/title/dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS) for partitioning
   Basic setup without separate home can be followed
 
-- Bootstrap with the following list `pacstrap -K /mnt base base-devel linux linux-firmware lvm2 networkmanager ansible git neovim refind`
+- Bootstrap with the following list `pacstrap -K /mnt <intel-ucode or amd-ucode depending on your CPU> base base-devel linux linux-firmware lvm2 networkmanager ansible git neovim refind`
 
 - Follow the guide again until you get to initramfs, then set up according to the `LVM_on_LUKS` article. Additionally you can add the `resume` hook after both `filesystems` and `lvm2`, but before `fsck` if you want to use hibernation later on.
 
@@ -130,10 +130,10 @@ These are mostly notes for myself on how to set up an Arch system with encryptio
 
 ```
 # Choose proper microcode depending on your CPU here
-# You'll need to install amd-ucode or intel-ucode
+# You'll need to install amd-ucode or intel-ucode as listed above
 # You can run `blkid | grep UUID=` to get UUIDs of the partitions
 # Add the `resume=` param if you want to use the hibernation
-"Boot with microcode updates" "initrd=\intel-ucode.img initrd=\initramfs-%v.img cryptdevice=UUID=<LUKS PARTITION UUID>:<LVM name> root=/dev/<volume group name>/<root name> resume=/dev/<volume group name>/<swap name>
+"Boot with microcode updates" "(initrd=\intel-ucode.img or initrd=\amd-ucode.img depending on your CPU) initrd=\initramfs-%v.img cryptdevice=UUID=<LUKS PARTITION UUID>:<LVM name> root=/dev/<volume group name>/<root name> resume=/dev/<volume group name>/<swap name>
 ...
 ```
 
