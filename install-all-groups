@@ -3,6 +3,6 @@ set -e
 
 ansible-galaxy install -r requirements.yml
 
-touch custom.yaml
+touch custom.yml
 
-ansible-playbook -i base.yaml -i custom.yaml site.yml --ask-become-pass --tags core,cli,desktop,desktop-tools,media,virtualization,social,browser,languages,editors,docker,utils,work,office,gaming,vpn
+ansible-playbook -i base.yaml -i custom.yml site.yml --ask-become-pass --tags core,cli,desktop,desktop-tools,media,virtualization,social,browser,languages,editors,docker,utils,work,office,gaming,vpn

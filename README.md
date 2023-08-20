@@ -40,14 +40,14 @@ At the moment there's `site.yml` playbook defined, that contains all roles avail
 It can be used to run single roles, e.g. to set up vim on `base` machine
 
 ```
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags vim
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags vim
 ```
 
 You'll most likely want to override some of the variables depending on your environment (e.g. you want to use a different git email for work and private stuff).
-This can be done with just modifying the whole inventory file or maintaining multiple copies, but your best bet is probably to define an override file like `custom.yaml`
+This can be done with just modifying the whole inventory file or maintaining multiple copies, but your best bet is probably to define an override file like `custom.yml`
 that would only contain the variables that actually differ from the defaults defined in `base.yaml`.
 This way it's much easier to update to the newer versions and keep everything tidy.
-Examples listed below are done with the `custom.yaml` file override in mind.
+Examples listed below are done with the `custom.yml` file override in mind.
 
 Note: Ansible doesn't like to merge the dictionaries from two inventories, the latter one just overrides the former.
 Remember about this when adding new variables.
@@ -69,22 +69,22 @@ Of course this will only work after user with sudo access is actually set up, it
 If you don't want to install all packages but still want to have a proper setup of specific "groups" you can use few high-level tags tags.
 
 ```
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags core
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags cli # sets up fzf, fish, etc.
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags desktop # sets up i3, i3lock and friends
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags desktop-tools # archiver, doc viewers, etc.
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags media # VNC, MPV, spotify, etc.
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags virtualization # qemu, vagrant, virtualbox
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags social # discord
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags browser # qutebrowser, firefox
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags languages # python, golang, rust
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags editors # vim, nvim, emacs
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags docker # just docker
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags utils # stuff that doesn't fall into any category really, but is generally useful
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags work # work related stuff, e.g. jira CLI (requires work.enabled = true in yaml config)
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags office # libreoffice, latex
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags gaming # Steam
-ansible-playbook -i base.yaml -i custom.yaml site.yml --tags vpn # OpenVPN, wireguard tooling
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags core
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags cli # sets up fzf, fish, etc.
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags desktop # sets up i3, i3lock and friends
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags desktop-tools # archiver, doc viewers, etc.
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags media # VNC, MPV, spotify, etc.
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags virtualization # qemu, vagrant, virtualbox
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags social # discord
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags browser # qutebrowser, firefox
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags languages # python, golang, rust
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags editors # vim, nvim, emacs
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags docker # just docker
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags utils # stuff that doesn't fall into any category really, but is generally useful
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags work # work related stuff, e.g. jira CLI (requires work.enabled = true in yaml config)
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags office # libreoffice, latex
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags gaming # Steam
+ansible-playbook -i base.yaml -i custom.yml site.yml --tags vpn # OpenVPN, wireguard tooling
 ```
 
 There are also few specific packages (such as android_studio or intellij_idea) that are not part of any group and need to installed using individual tags.
@@ -162,5 +162,5 @@ For Wi-Fi:
 nmcli device wifi connect <AP name> password <password>
 ```
 
-- Clone this repo, prepare `custom.yaml` and run as usual
+- Clone this repo, prepare `custom.yml` and run as usual
 - One-shot action, run the `passwd <username>` to set up the password for a user that was created by this repo
