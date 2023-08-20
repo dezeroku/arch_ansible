@@ -2,3 +2,4 @@
 dependencies:
   - role: aur_builder
   - role: ranger
+  - role: yt_dlp

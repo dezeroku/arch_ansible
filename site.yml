@@ -66,7 +66,7 @@
     - {role: wireguard_tools, tags: ['wireguard_tools', 'vpn']}
     - {role: xarchiver, tags: ['xarchiver', 'desktop-tools']}
     - {role: xorg, tags: ['xorg', 'desktop']}
-    - {role: youtube_dl, tags: ['youtube_dl', 'media']}
+    - {role: yt_dlp, tags: ['yt_dlp', 'media']}
     - {role: yubikey, tags: ['yubikey', 'desktop-tools']}
     - {role: zathura, tags: ['zathura', 'desktop-tools']}
     - {role: zoom, tags: ['zoom', 'work']}

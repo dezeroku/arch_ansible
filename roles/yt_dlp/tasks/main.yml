@@ -1,7 +1,7 @@
 ---
-- name: Install youtube-dl
+- name: Install yt-dlp
   become: true
   become_user: root
   community.general.pacman:
     name:
-      - youtube-dl
+      - yt-dlp
