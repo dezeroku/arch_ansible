@@ -1,20 +1,22 @@
 ---
 # TODO: this recipe could probably use AUR library?
+# TODO: I don't think any changes in the config files would be reflected
+# if the package was already installed before
 
-- name: Create temporary build directory
+- name: Ensure directory exists
   become: true
   become_user: aur_builder
-  ansible.builtin.tempfile:
+  ansible.builtin.file:
+    path: "{{ st_build_dir }}"
     state: directory
-    suffix: st-build
-  register: build_dir
+    mode: 0755
 
 - name: Copy config
   become: true
   become_user: aur_builder
   ansible.builtin.copy:
     src: config.h
-    dest: "{{ build_dir.path }}"
+    dest: "{{ st_build_dir }}"
     mode: 0644
 
 - name: Copy PKGBUILD
@@ -22,7 +24,7 @@
   become_user: aur_builder
   ansible.builtin.copy:
     src: PKGBUILD
-    dest: "{{ build_dir.path }}"
+    dest: "{{ st_build_dir }}"
     mode: 0644
 
 - name: Copy patch (hidecursor)
@@ -30,7 +32,7 @@
   become_user: aur_builder
   ansible.builtin.copy:
     src: st-hidecursor-0.8.1.diff
-    dest: "{{ build_dir.path }}"
+    dest: "{{ st_build_dir }}"
     mode: 0644
 
 - name: Copy patch (alpha)
@@ -38,7 +40,7 @@
   become_user: aur_builder
   ansible.builtin.copy:
     src: st-alpha-0.8.1.diff
-    dest: "{{ build_dir.path }}"
+    dest: "{{ st_build_dir }}"
     mode: 0644
 
 - name: Copy patch (anysize)
@@ -46,7 +48,7 @@
   become_user: aur_builder
   ansible.builtin.copy:
     src: st-anysize-0.8.1.diff
-    dest: "{{ build_dir.path }}"
+    dest: "{{ st_build_dir }}"
     mode: 0644
 
 - name: Build and install
@@ -54,6 +56,7 @@
   become_user: aur_builder
   kewlfft.aur.aur:
     use: makepkg
+    state: latest
     name:
       - st_custom
-    local_pkgbuild: "{{ build_dir.path }}"
+    local_pkgbuild: "{{ st_build_dir }}"
