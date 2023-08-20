@@ -22,41 +22,21 @@
     dest: ~/.ssh/config
     mode: 0644
 
-- name: Don't allow root login (server)
+- name: Copy sshd basic hardening config
   become: true
   become_user: root
-  ansible.builtin.lineinfile:
-    dest: /etc/ssh/sshd_config
-    state: "present"
-    line: "PermitRootLogin no"
-    regexp: "^PermitRootLogin "
-    insertafter: "^#PermitRootLogin "
-
-- name: Disable password auth (server)
-  become: true
-  become_user: root
-  ansible.builtin.lineinfile:
-    dest: /etc/ssh/sshd_config
-    state: "present"
-    line: "PasswordAuthentication no"
-    regexp: "^PasswordAuthentication "
-    insertafter: "^#PasswordAuthentication "
-
-- name: Explicitly force SSH keys auth (server)
-  become: true
-  become_user: root
-  ansible.builtin.lineinfile:
-    dest: /etc/ssh/sshd_config
-    state: "present"
-    line: "AuthenticationMethods publickey"
-    regexp: "^AuthenticationMethods "
+  ansible.builtin.copy:
+    src: 01-basic-sshd-hardening.conf
+    dest: /etc/ssh/sshd_config.d/01-basic-hardening.conf
+    mode: 0644
+  register: sshd_hardening_conf
 
 - name: Start sshd
   become: true
   become_user: root
   ansible.builtin.systemd:
     name: sshd
-    state: started
+    state: "{{ (sshd_hardening_conf.changed) | ternary('restarted', 'started') }}"
   when: openssh_start_server
 
 - name: Enable sshd
