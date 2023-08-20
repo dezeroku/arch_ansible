@@ -1,0 +1,22 @@
+---
+# A collection of roles that aren't installed by default in any other group
+# This can be caused by the tool being obsoleted in the workflow, but role still usable
+# Or the tool being so specific that it needs to be listed explicitly
+- name: Unorganized
+  hosts: all
+  become: true
+  become_user: "{{ user_name }}"
+  roles:
+    - {role: wine, tags: ['wine']}
+    - {role: emacs, tags: ['emacs']}
+    - {role: deluge, tags: ['deluge']}
+    - {role: openvpn, tags: ['openvpn']}
+    - {role: thinkpad, tags: ['thinkpad']}
+    - {role: terminator, tags: ['terminator']}
+    - {role: virtualbox, tags: ['virtualbox']}
+    - {role: nvidia, tags: ['nvidia']}
+    - {role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751"}
+    - {role: ntfs_3g, tags: ['ntfs_3g']}
+    - {role: kitty, tags: ['kitty']}
+  tags:
+    - unorganized

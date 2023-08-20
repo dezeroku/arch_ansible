@@ -15,12 +15,10 @@
     - {role: audio_control, tags: ['audio_control', 'desktop']}
     - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: setup_bluetooth_enabled}
     - {role: picom, tags: ['picom', 'desktop']}
-    - {role: deluge, tags: ['deluge']}
     - {role: discord, tags: ['discord', 'social']}
     - {role: dns_cache, tags: ['dns_cache', 'core']}
     - {role: docker, tags: ['docker', 'docker']}
     - {role: dunst, tags: ['dunst', 'desktop']}
-    - {role: emacs, tags: ['emacs']}
     - {role: exfat_utils, tags: ['exfat_utils', 'utils']}
     - {role: feh, tags: ['feh', 'desktop']}
     - {role: firefox, tags: ['firefox', 'browser']}
@@ -37,7 +35,6 @@
     - {role: imagemagick, tags: ['imagemagick', 'utils']}
     - {role: intellij_idea, tags: ['intellij_idea']}
     - {role: jira, tags: ['jira', 'work'], when: work_enabled}
-    - {role: kitty, tags: ['kitty']}
     - {role: latex, tags: ['latex', 'office']}
     - {role: libreoffice, tags: ['libreoffice', 'office']}
     - {role: libvirt, tags: ['libvirt']}
@@ -46,9 +43,6 @@
     - {role: mpv, tags: ['mpv', 'media']}
     - {role: networkmanager_applet, tags: ['networkmanager_applet', 'desktop']}
     - {role: npm, tags: ['npm', 'languages']}
-    - {role: ntfs_3g, tags: ['ntfs_3g', 'utils']}
-    - {role: nvidia, tags: ['nvidia'], when: pc == "g751"}
-    - {role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751"}
     - {role: pcmanfm, tags: ['pcmanfm', 'desktop-utils']}
     - {role: powerline, tags: ['powerline', 'desktop']}
     - {role: pulseaudio, tags: ['pulseaudio', 'desktop', 'audio']}
@@ -59,22 +53,17 @@
     - {role: rofi, tags: ['rofi', 'desktop']}
     - {role: rust, tags: ['rust', 'languages']}
     - {role: spotify, tags: ['spotify', 'media']}
-    - {role: openvpn, tags: ['openvpn', 'vpn']}
     - {role: slack, tags: ['slack', 'work']}
     - {role: st, tags: ['st', 'desktop']}
     - {role: steam, tags: ['steam', 'gaming']}
     - {role: sxiv, tags: ['sxiv', 'desktop-utils']}
-    - {role: terminator, tags: ['terminator']}
-    - {role: thinkpad, tags: ['thinkpad']}
     - {role: udiskie, tags: ['udiskie', 'desktop']}
     - {role: vagrant, tags: ['vagrant', 'virtualization']}
     - {role: vim, tags: ['vim', 'editors']}
-    - {role: virtualbox, tags: ['virtualbox']}
     - {role: vlc, tags: ['vlc', 'media']}
     - {role: vscode, tags: ['vscode', 'editors']}
     - {role: vnstat, tags: ['vnstat', 'utils']}
     - {role: wireguard_tools, tags: ['wireguard_tools', 'vpn']}
-    - {role: wine, tags: ['wine']}
     - {role: xarchiver, tags: ['xarchiver', 'desktop-tools']}
     - {role: xorg, tags: ['xorg', 'desktop']}
     - {role: youtube_dl, tags: ['youtube_dl', 'media']}
@@ -83,3 +72,6 @@
     - {role: zoom, tags: ['zoom', 'work']}
   tags:
     - install
+
+- name: Unorganized
+  ansible.builtin.import_playbook: unorganized.yml
