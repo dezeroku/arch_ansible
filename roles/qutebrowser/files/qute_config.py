@@ -15,12 +15,13 @@ config.bind(
     "<Shift-z>", "spawn -d mpv --hwdec=vaapi --ytdl-format=best[height<=?720] {url}"
 )
 
-# Uncapped, should be max quality.
+# Max 1080p.
 config.bind(
-    "<Shift-x>", "spawn -d mpv --hwdec=vaapi --ytdl-format=best[height<=?1080] {url}"
+    "<Shift-x>",
+    "spawn -d mpv --hwdec=vaapi --ytdl-format=bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best {url}",
 )
 
-# Download Max 720p.
+# Download Max 1080p.
 config.bind(
     "<Shift-Ctrl-x>",
     "spawn --userscript ~/.config/qutebrowser/scripts/download_video.sh",
