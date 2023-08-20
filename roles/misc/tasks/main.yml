@@ -16,3 +16,4 @@
       - man-db
       - shellcheck
       - shfmt
+      - acpi
