@@ -18,10 +18,9 @@
   become: true
   become_user: aur_builder
 
-- name: Start and enabled pcscd.service
+- name: Enable pcscd.service
   become: true
   become_user: root
   ansible.builtin.systemd:
     name: pcscd
     enabled: true
-    state: started
