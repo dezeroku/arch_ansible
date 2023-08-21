@@ -30,7 +30,7 @@
     state: directory
     mode: 0755
 
-- name: Copy download script
+- name: Copy video download script
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.copy:
@@ -38,8 +38,23 @@
     dest: ~/.config/qutebrowser/scripts/download_video.sh
     mode: 0755
 
-# TODO: move to separate bitwarden rol
-- name: Install password manager and dependency
+- name: Ensure greasemonkey directory exists
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.config/qutebrowser/greasemonkey
+    state: directory
+    mode: 0755
+
+- name: Copy youtube-adblock.user.js scriptlet
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.copy:
+    src: youtube-adblock.user.js
+    dest: ~/.config/qutebrowser/greasemonkey/youtube-adblock.user.js
+    mode: 0755
+
+- name: Install bitwarden CLI userscript dependency
   become: true
   become_user: root
   community.general.pacman:
@@ -53,7 +68,6 @@
     state: present
   become: true
   become_user: root
-
 
 # TODO: Can this be done with modifying ~/.config/mimeapps.list directly instead?
 # It seems this would be cleaner
