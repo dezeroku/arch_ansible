@@ -5,4 +5,4 @@
   community.general.pacman:
     name:
       - qemu
-      - qemu-arch-extra
+      - qemu-emulators-full
