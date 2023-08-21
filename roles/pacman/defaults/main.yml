@@ -1,3 +1,4 @@
 ---
-pacman_update: true
-pacman_upgrade: true
+pacman_update: false
+pacman_upgrade: false
+pacman_enable_multilib: false

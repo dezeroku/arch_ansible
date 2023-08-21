@@ -26,6 +26,7 @@
     line: "[multilib]"
     regexp: "^\\[multilib\\]"
     insertafter: "^#\\[multilib\\]"
+  when: vars.pacman_enable_multilib
 
 - name: Multilib 2
   become: true
@@ -36,6 +37,7 @@
     line: "Include = /etc/pacman.d/mirrorlist"
     insertafter: "^\\[multilib\\]"
     regexp: "Include = /etc/pacman.d/mirrorlist"
+  when: vars.pacman_enable_multilib
 
 - name: Check if mirrorlist exists
   become: true

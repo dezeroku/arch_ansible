@@ -9,6 +9,7 @@ local_machine:
     # Don't run the updates by default
     pacman_update: false
     pacman_upgrade: false
+    pacman_enable_multilib: false
 
     # Enable the local caching with pacoloco
     pacoloco_setup_server: false
