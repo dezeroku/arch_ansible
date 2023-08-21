@@ -29,6 +29,9 @@ local_machine:
 
     setup_bluetooth_enabled: true
 
+    setup_hardware_video_acceleration_enabled: true
+    hardware_video_acceleration_providers: ["intel"]
+
     # Allow roles to install their own scriptlets to be sourced by fish
     fish_install_extensions: true
 

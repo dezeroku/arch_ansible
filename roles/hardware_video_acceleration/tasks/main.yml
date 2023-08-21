@@ -1,0 +1,9 @@
+---
+- name: Install intel-media-driver and get intel_gpu_top
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - intel-media-driver
+      - intel-gpu-tools
+  when: '"intel" in vars.hardware_video_acceleration_providers'

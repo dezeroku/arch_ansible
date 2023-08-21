@@ -69,6 +69,7 @@
     - {role: yt_dlp, tags: ['yt_dlp', 'media']}
     - {role: yubikey, tags: ['yubikey', 'desktop-tools']}
     - {role: zathura, tags: ['zathura', 'desktop-tools']}
+    - {role: hardware_video_acceleration, tags: ['hardware_video_acceleration', 'desktop'], when: setup_hardware_video_acceleration_enabled}
     - {role: zoom, tags: ['zoom', 'work']}
   tags:
     - install
