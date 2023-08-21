@@ -347,4 +347,8 @@ bar {
 
     # screen backlight down, this path should be ~/.config/i3/scripts/change_brightness but it needs NOPASSWD changes
     bindsym XF86MonBrightnessDown exec "sudo ~/.config/i3/scripts/g751/change_brightness -"
+{% else %}
+    bindsym XF86MonBrightnessUp exec "xbacklight -inc 5 -fps 30"
+
+    bindsym XF86MonBrightnessDown exec "xbacklight -dec 5 -fps 30"
 {% endif %}

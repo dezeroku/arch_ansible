@@ -4,8 +4,58 @@
   become_user: root
   community.general.pacman:
     name:
-      - xorg
+      # This is an output of `pacman -Qg xorg | cut -d " " -f2`
+      # with xorg-xbacklight being removed to be replaced with acpiligth
+      - xf86-video-vesa
+      - xorg-bdftopcf
+      - xorg-docs
+      - xorg-font-util
+      - xorg-fonts-100dpi
+      - xorg-fonts-75dpi
+      - xorg-fonts-encodings
+      - xorg-iceauth
+      - xorg-mkfontscale
+      - xorg-server
+      - xorg-server-common
+      - xorg-server-devel
+      - xorg-server-xephyr
+      - xorg-server-xnest
+      - xorg-server-xvfb
+      - xorg-sessreg
+      - xorg-setxkbmap
+      - xorg-smproxy
+      - xorg-x11perf
+      - xorg-xauth
+      - xorg-xcmsdb
+      - xorg-xcursorgen
+      - xorg-xdpyinfo
+      - xorg-xdriinfo
+      - xorg-xev
+      - xorg-xgamma
+      - xorg-xhost
+      - xorg-xinput
+      - xorg-xkbcomp
+      - xorg-xkbevd
+      - xorg-xkbutils
+      - xorg-xkill
+      - xorg-xlsatoms
+      - xorg-xlsclients
+      - xorg-xmodmap
+      - xorg-xpr
+      - xorg-xprop
+      - xorg-xrandr
+      - xorg-xrdb
+      - xorg-xrefresh
+      - xorg-xset
+      - xorg-xsetroot
+      - xorg-xvinfo
+      - xorg-xwayland
+      - xorg-xwd
+      - xorg-xwininfo
+      - xorg-xwud
+
       - xorg-xinit
+      - acpilight
 
 - name: Ensure directory exists
   become: true
@@ -25,3 +75,20 @@
   loop:
     - 00-keyboard.conf
     - 30-touchpad.conf
+
+- name: Copy udev rules
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/etc/udev/rules.d/{{ item.split('/')[-1] }}"
+    mode: 0644
+  loop:
+    - udev/90-backlight.rules
+
+- name: Make sure user is in "video" group (for backlight permissions)
+  ansible.builtin.user:
+    name: "{{ user_name }}"
+    groups: wheel
+    state: present
+    append: true
