@@ -34,7 +34,7 @@
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.file:
-    path: ~/archlinux_vm
+    path: ~/arch_vm
     state: directory
     mode: 0755
   when: vars.vagrant_prepare_archlinux_vm
@@ -42,8 +42,35 @@
 - name: Copy Vagrantfile
   become: true
   become_user: "{{ user_name }}"
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: Vagrantfile
-    dest: ~/archlinux_vm/
+    dest: ~/arch_vm/
     mode: 0644
   when: vars.vagrant_prepare_archlinux_vm
+
+- name: Copy arch_vm README
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.copy:
+    src: README.md
+    dest: ~/arch_vm/
+    mode: 0644
+  when: vars.vagrant_prepare_archlinux_vm
+
+- name: Ensure fish scriptlets directory exists
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.config/fish/ansible/vagrant
+    state: directory
+    mode: 0755
+  when: fish_install_extensions
+
+- name: Copy fish config
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.template:
+    src: vagrant.fish
+    dest: ~/.config/fish/ansible/vagrant/vagrant.fish
+    mode: 0644
+  when: fish_install_extensions

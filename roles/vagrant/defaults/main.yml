@@ -3,3 +3,5 @@ user_name: d0ku
 
 vagrant_prepare_archlinux_vm: true
 vagrant_provider: libvirt
+
+fish_install_extensions: false

@@ -1,7 +1,10 @@
 $script = <<-SCRIPT
 # This is reaaaally stupid,
 # but hey, it works
-sudo sed -i 's#nameserver.*#nameserver 8.8.8.8##' /etc/resolv.conf
+sudo sed -i 's#nameserver.*#nameserver 1.1.1.1##' /etc/resolv.conf
+{% if pacoloco_setup_client %}
+echo 'Server = {{ pacoloco_server_url }}/repo/{{ pacoloco_repo }}/$repo/os/$arch' | sudo tee /etc/pacman.d/mirrorlist
+{% endif %}
 pacman -Syu ansible --noconfirm
 SCRIPT
 
@@ -21,25 +24,18 @@ Vagrant.configure("2") do |config|
     v.cpus = 4
   end
 
-  #config.vm.network "public_network", ip: "192.168.50.4"
-
-  # Reuse pacman cache from host (pretty ugly too, should be HTTP "mirror"?)
-  config.vm.synced_folder "/var/cache/pacman/", "/var/cache/pacman"
-
   # Pass the ansible stuff
-  # Then you're good to go with the loop: vagrant up ; vagrant provision ; vagrant halt
-  # Side note: it seems that libvirt provider only syncs the files on machine startup,
+  # Side note: it seems that libvirt provider only rsyncs the files on machine startup,
   # so you're going to need the halt and up approach to refresh the changes
   config.vm.synced_folder "~/arch_ansible/", "/arch_ansible"
 
-  #if Vagrant.has_plugin?("vagrant-cachier")
-  #  config.cache.enable :pacman
-  #end
-
-
-  # install ansible and run pacman -Syu
+  # Install ansible and run pacman -Syu
   config.vm.provision "shell", inline: $script
 
+  # Perform reboot to load (possibly) new kernel
+  config.vm.provision 'shell', reboot: true
+
+  # Perform Ansible provisioning
   config.vm.provision "ansible_local" do |ansible|
     ansible.install = false
     ansible.playbook = "site.yml"
@@ -47,7 +43,7 @@ Vagrant.configure("2") do |config|
     ansible.provisioning_path = "/arch_ansible"
     ansible.galaxy_role_file = "requirements.yml"
     ansible.galaxy_roles_path = "/etc/ansible/roles"
-    ansible.galaxy_command = "sudo ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force"
-    ansible.playbook_command = "sudo ansible-playbook -i base.yaml site.yml --tags core,cli,desktop,desktop-tools,media,virtualization,social,browser,languages,editors,docker,utils,work,office,vpn && \#"
+    ansible.galaxy_command = "true"
+    ansible.playbook_command = "CI_RUN_MODE=true ./install-common-groups && \#"
   end
 end

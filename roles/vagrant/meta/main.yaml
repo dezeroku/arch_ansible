@@ -1,4 +1,9 @@
 ---
 dependencies:
   - {role: libvirt, when: vars.vagrant_provider == "libvirt"}
-  - {role: virtualbox, when: vars.vagrant_provider == "virtualbox"}
+  # TODO: Only install virtualbox if needed
+  # https://github.com/sprotheroe/vagrant-disksize/issues/45
+  # vagrant-disksize relies on VBoxManage
+  - {role: virtualbox}
+  # - {role: virtualbox, when: vars.vagrant_provider == "virtualbox"}
+  - {role: pacoloco}

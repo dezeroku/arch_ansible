@@ -5,7 +5,8 @@ ansible-galaxy install -r requirements.yml
 
 touch custom.yml
 
-ansible-playbook -i base.yaml -i custom.yml site.yml --ask-become-pass --tags \
+# shellcheck disable=SC2046
+ansible-playbook -i base.yaml -i custom.yml site.yml $( [[ "${CI_RUN_MODE}" != "true" ]] && printf %s '--ask-become-pass') --tags \
 core,\
 cli,\
 desktop,\
