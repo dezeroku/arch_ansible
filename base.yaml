@@ -22,6 +22,10 @@ local_machine:
     openssh_start_server: false
     openssh_enable_server: false
 
+    # Set to false if you use kernel other than default `linux`
+    # You'll also need to install the headers for the kernel
+    virtualbox_modules_default_kernel: true
+
     i3_resolution: "1366x768"
     i3_setup_g751_scripts: false
     i3_nopasswd_g751_scripts: false

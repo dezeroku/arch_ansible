@@ -1,7 +1,31 @@
 ---
+- name: Install virtualbox modules
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - virtualbox-host-modules-arch
+  when: vars.virtualbox_modules_default_kernel
+
+# You'll need to have kernel headers installed for this
+- name: Install virtualbox modules (DKMS)
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - virtualbox-host-dkms
+  when: not vars.virtualbox_modules_default_kernel
+
 - name: Install virtualbox
   become: true
   become_user: root
   community.general.pacman:
     name:
       - virtualbox
+
+- name: Load the vboxdrv module
+  become: true
+  become_user: root
+  community.general.modprobe:
+    name: vboxdrv
+    state: present
