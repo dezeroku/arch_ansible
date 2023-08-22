@@ -90,7 +90,7 @@ ansible-playbook -i base.yaml -i custom.yml site.yml --tags vpn # OpenVPN, wireg
 There are also few specific packages (such as android_studio or intellij_idea) that are not part of any group and need to installed using individual tags.
 Similar for things that are not used by me at the moment, but can be useful in the future, e.g. ZSH setup.
 
-To get all the groups and leave out the single packages you can use the `install-all-groups` scriptlet.
+To get all the groups and leave out the single packages you can use the `install-common-groups` scriptlet.
 
 ## Things that require manual setup anyway (pretty much configuration dependent)
 
