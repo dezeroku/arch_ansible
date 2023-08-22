@@ -17,6 +17,7 @@ local_machine:
     # This should be enabled if you have set up pacoloco server in your LAN
     # The server_host must match
     pacoloco_setup_client: false
+    pacoloco_repo: archlinux-reflector
 
     openssh_start_server: false
     openssh_enable_server: false
