@@ -1,10 +1,11 @@
 ---
-- name: Install i3status-rust
+- name: Install i3status-rust and inetutils (for hostname)
   become: true
   become_user: root
   community.general.pacman:
     name:
       - i3status-rust
+      - inetutils
 
 - name: Install fonts (awesome)
   become: true
