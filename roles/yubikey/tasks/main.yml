@@ -24,3 +24,27 @@
   ansible.builtin.systemd:
     name: pcscd
     enabled: true
+
+- name: Ensure directory exists
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    path: /etc/polkit-1/rules.d
+    state: directory
+    mode: 0755
+
+- name: Copy polkit rules for pcscd
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: 99-pcscd.rules
+    dest: /etc/polkit-1/rules.d/99-pcscd.rules
+    mode: 0644
+  register: polkit_rules
+
+- name: Restart polkit service
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: polkit
+    state: "{{ (polkit_rules.changed) | ternary('restarted', 'started') }}"
