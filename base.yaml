@@ -21,6 +21,7 @@ local_machine:
 
     openssh_start_server: false
     openssh_enable_server: false
+    openssh_sshd_xforwarding: false
 
     # Set to false if you use kernel other than default `linux`
     # You'll also need to install the headers for the kernel

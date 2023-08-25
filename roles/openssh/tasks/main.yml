@@ -22,21 +22,25 @@
     dest: ~/.ssh/config
     mode: 0644
 
-- name: Copy sshd basic hardening config
+- name: Copy sshd conf files
   become: true
   become_user: root
   ansible.builtin.copy:
-    src: 01-basic-sshd-hardening.conf
-    dest: /etc/ssh/sshd_config.d/01-basic-hardening.conf
+    src: "{{ item }}"
+    dest: "/etc/ssh/sshd_config.d/{{ item }}"
     mode: 0644
-  register: sshd_hardening_conf
+  register: sshd_conf
+  when: "item != ''"
+  loop:
+    - 01-basic-sshd-hardening.conf
+    - "{{ '02-sshd-x11forwarding.conf' if vars.openssh_sshd_xforwarding else '' }}"
 
 - name: Start sshd
   become: true
   become_user: root
   ansible.builtin.systemd:
     name: sshd
-    state: "{{ (sshd_hardening_conf.changed) | ternary('restarted', 'started') }}"
+    state: "{{ (sshd_conf.changed) | ternary('restarted', 'started') }}"
   when: openssh_start_server
 
 - name: Enable sshd
