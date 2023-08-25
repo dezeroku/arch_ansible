@@ -1,6 +1,10 @@
 ---
 dependencies:
   - role: autorandr
+  - role: bluetooth
+    when: vars.bluetooth_enabled
+    vars:
+      bluetooth_install_gui: true
   - role: xorg
   - role: picom
   - role: mesa

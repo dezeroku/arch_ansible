@@ -207,6 +207,10 @@ bindsym --release Shift+Print exec "flameshot gui"
 #applets run codes
 # Network Manager
 exec --no-startup-id "nm-applet &"
+{% if bluetooth_enabled %}
+# Bluetooth
+exec --no-startup-id "dbus-launch blueman-applet &"
+{% endif %}
 # Outcoming firewall
 exec --no-startup-id "opensnitch-ui &"
 # Dunst

@@ -13,7 +13,7 @@
     - {role: autorandr, tags: ['autorandr', 'desktop']}
     - {role: android_studio, tags: ['android_studio']}
     - {role: audio_control, tags: ['audio_control', 'desktop']}
-    - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: setup_bluetooth_enabled}
+    - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: bluetooth_enabled}
     - {role: picom, tags: ['picom', 'desktop']}
     - {role: discord, tags: ['discord', 'social']}
     - {role: dns_cache, tags: ['dns_cache', 'core']}

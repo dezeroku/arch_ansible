@@ -7,6 +7,14 @@
       - bluez
       - bluez-utils
 
+- name: Install bluetooth packages (GUI)
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - blueman
+  when: vars.bluetooth_install_gui
+
 - name: Enable and start Bluetooth daemon
   become: true
   become_user: root
