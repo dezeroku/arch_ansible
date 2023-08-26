@@ -3,7 +3,10 @@
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 {% endif %}
-export SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass
+{% if i3_disable_touchpad %}
+# Disable TouchPad
+xinput disable $(xinput list | grep -i touchpad | grep -E "id=[0-9]+" -o | cut -d "=" -f2)
+{% endif %}
 
 xrandr --dpi {{ i3_dpi }}
 exec i3
