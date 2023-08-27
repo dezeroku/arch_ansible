@@ -1,3 +1,2 @@
 ---
 firewall_enable_opensnitch: true
-firewall_nftables_config: desktop

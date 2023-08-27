@@ -44,7 +44,6 @@ local_machine:
     fish_install_extensions: true
 
     firewall_enable_opensnitch: true
-    firewall_nftables_config: desktop
 
     user_name: d0ku
     user_pub_name: dezeroku

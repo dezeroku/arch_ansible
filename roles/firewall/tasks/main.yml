@@ -31,11 +31,11 @@
     name: nftables
     enabled: true
 
-- name: Copy nftables.conf
+- name: Template nftables.conf
   become: true
   become_user: root
-  ansible.builtin.copy:
-    src: "{{ vars.firewall_nftables_config }}.conf"
+  ansible.builtin.template:
+    src: base.conf
     dest: /etc/nftables.conf
     mode: 0644
   register: nftables_config
