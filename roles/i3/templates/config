@@ -220,7 +220,7 @@ exec --no-startup-id "redshift-gtk -t 5200:2000 -l 51.10:17.0 &"
 # Udiskie
 exec --no-startup-id "udiskie --smart-tray &"
 # Picom
-exec --no-startup-id "picom -b --config ~/.config/picom/picom.conf &"
+exec --no-startup-id "picom -b --config ~/.config/picom/picom.conf"
 # Flameshot daemon
 exec --no-startup-id "flameshot &"
 {% if i3_autostart_yubikey_otp %}
