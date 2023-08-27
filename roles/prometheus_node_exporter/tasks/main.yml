@@ -19,7 +19,7 @@
   become_user: root
   ansible.builtin.copy:
     src: prometheus-node-exporter.conf
-    dest: /etc/nftables.d/prometheus-node-exporter.conf
+    dest: /etc/nftables.d/89-prometheus-node-exporter.conf
     mode: 0644
   register: nftables_config
 
