@@ -56,3 +56,11 @@
     enabled: true
     state: started
   when: vars.firewall_enable_opensnitch
+
+- name: Ensure directory exists
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    path: /etc/nftables.d
+    state: directory
+    mode: 0755
