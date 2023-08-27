@@ -40,13 +40,30 @@
     mode: 0644
   register: nftables_config
 
+- name: Ensure append directory exists
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    path: /etc/nftables.d
+    state: directory
+    mode: 0755
+
+- name: Copy nftables counter append
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: counter.conf
+    dest: /etc/nftables.d/99-counter.conf
+    mode: 0644
+  register: nftables_counter
+
 - name: Reload nftables configuration
   become: true
   become_user: root
   ansible.builtin.systemd:
     name: nftables
     state: started
-  when: nftables_install.changed or nftables_config.changed
+  when: nftables_install.changed or nftables_config.changed or nftables_counter.changed
 
 - name: Start and enable opensnitchd
   become: true
@@ -56,11 +73,3 @@
     enabled: true
     state: started
   when: vars.firewall_enable_opensnitch
-
-- name: Ensure directory exists
-  become: true
-  become_user: root
-  ansible.builtin.file:
-    path: /etc/nftables.d
-    state: directory
-    mode: 0755
