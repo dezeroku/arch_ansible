@@ -18,5 +18,6 @@
     - {role: nvidia_cool, tags: ['nvidia_cool'], when: pc == "g751"}
     - {role: ntfs_3g, tags: ['ntfs_3g']}
     - {role: kitty, tags: ['kitty']}
+    - {role: prometheus_node_exporter, tags: ['prometheus_node_exporter']}
   tags:
     - unorganized

@@ -1,0 +1,32 @@
+---
+- name: Install prometheus-node-exporter
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - prometheus-node-exporter
+
+- name: Start and enable prometheus-node-exporter
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: prometheus-node-exporter
+    enabled: true
+    state: started
+
+- name: Copy nftables append
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: prometheus-node-exporter.conf
+    dest: /etc/nftables.d/prometheus-node-exporter.conf
+    mode: 0644
+  register: nftables_config
+
+- name: Reload nftables configuration
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: nftables
+    state: started
+  when: nftables_config.changed  # noqa: no-handler
