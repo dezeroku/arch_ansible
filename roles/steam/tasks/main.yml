@@ -1,5 +1,14 @@
 ---
-- name: Install some miscellanous stuff.
+- name: Sanity check for pacman multilib repo
+  ansible.builtin.fail:
+    msg: |
+      This role requires the pacman_enable_multilib param
+      to be set to true.
+      You should also run pacman -Syu
+      or use the appropriate params
+  when: not pacman_enable_multilib
+
+- name: Install Steam and fonts for it
   become: true
   become_user: root
   community.general.pacman:

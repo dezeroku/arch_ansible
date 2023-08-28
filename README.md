@@ -83,7 +83,6 @@ ansible-playbook -i base.yaml -i custom.yml site.yml --tags docker # just docker
 ansible-playbook -i base.yaml -i custom.yml site.yml --tags utils # stuff that doesn't fall into any category really, but is generally useful
 ansible-playbook -i base.yaml -i custom.yml site.yml --tags work # work related stuff, e.g. jira CLI (requires work.enabled = true in yaml config)
 ansible-playbook -i base.yaml -i custom.yml site.yml --tags office # libreoffice, latex
-ansible-playbook -i base.yaml -i custom.yml site.yml --tags gaming # Steam
 ansible-playbook -i base.yaml -i custom.yml site.yml --tags vpn # OpenVPN, wireguard tooling
 ```
 

@@ -53,7 +53,6 @@
     - {role: spotify, tags: ['spotify', 'media']}
     - {role: slack, tags: ['slack', 'work']}
     - {role: st, tags: ['st', 'desktop']}
-    - {role: steam, tags: ['steam', 'gaming']}
     - {role: sxiv, tags: ['sxiv', 'desktop-utils']}
     - {role: udiskie, tags: ['udiskie', 'desktop']}
     - {role: vagrant, tags: ['vagrant', 'virtualization']}
