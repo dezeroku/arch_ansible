@@ -250,7 +250,7 @@ exec "feh --bg-scale ~/.config/i3/wallpapers/0_wallpaper.png"
 exec "feh --bg-scale ~/.config/i3/wallpapers/custom.png"
 
 # lock screen
-bindsym $mod+Control+l exec "/usr/bin/i3lock && sleep 1 && xset dpms force standby"
+bindsym $mod+Control+l exec "/usr/bin/i3lock -f -t -i ~/.config/i3/wallpapers/1_lock.png && sleep 1 && xset dpms force standby"
 
 # assign programs to workspaces
 
