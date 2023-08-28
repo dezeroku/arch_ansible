@@ -1,10 +1,11 @@
 ---
-- name: Install ranger
+- name: Install ranger and w3m (for image preview)
   become: true
   become_user: root
   community.general.pacman:
     name:
       - ranger
+      - w3m
 
 - name: Ensure directory exists
   become: true
