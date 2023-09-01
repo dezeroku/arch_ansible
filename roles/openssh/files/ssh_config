@@ -1,1 +1,2 @@
+Include ~/.ssh/ssh_config.d/*.conf
 AddKeysToAgent yes

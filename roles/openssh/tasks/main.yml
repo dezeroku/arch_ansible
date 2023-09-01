@@ -14,6 +14,14 @@
     state: directory
     mode: 0755
 
+- name: Ensure directory exists
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.ssh/ssh_config.d
+    state: directory
+    mode: 0755
+
 - name: Copy ssh config
   become: true
   become_user: "{{ user_name }}"
