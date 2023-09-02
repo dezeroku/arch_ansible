@@ -2,29 +2,29 @@ config.load_autoconfig()
 
 # STREAMING/DOWNLOADING VIDEO.
 # Max 480p.
-config.bind("<z>", "spawn -d mpv --hwdec=auto --ytdl-format=best[height<=?480] {url}")
+config.bind("<z>", "spawn --userscript spawn_mpv.sh --ytdl-format=best[height<=?480]")
 
 # Max 480p (ASCII).
 config.bind(
     "<Shift-Ctrl-z>",
-    "spawn -d mpv --hwdec=auto --ytdl-format=best[height<=?480] {url} -vo caca",
+    "spawn --userscript spawn_mpv.sh --ytdl-format=best[height<=?480] -vo caca",
 )
 
 # Max 720p.
 config.bind(
-    "<Shift-z>", "spawn -d mpv --hwdec=auto --ytdl-format=best[height<=?720] {url}"
+    "<Shift-z>", "spawn --userscript spawn_mpv.sh --ytdl-format=best[height<=?720]"
 )
 
 # Max 1080p.
 config.bind(
     "<Shift-x>",
-    "spawn -d mpv --hwdec=auto --ytdl-format=bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best {url}",
+    "spawn --userscript spawn_mpv.sh --ytdl-format=bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
 )
 
 # Download Max 1080p.
 config.bind(
     "<Shift-Ctrl-x>",
-    "spawn --userscript ~/.config/qutebrowser/scripts/download_video.sh",
+    "spawn --userscript download_video.sh",
 )
 
 # Max available.

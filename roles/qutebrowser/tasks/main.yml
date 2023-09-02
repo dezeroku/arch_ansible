@@ -26,17 +26,20 @@
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.file:
-    path: ~/.config/qutebrowser/scripts
+    path: ~/.config/qutebrowser/userscripts
     state: directory
     mode: 0755
 
-- name: Copy video download script
+- name: Copy userscripts
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.copy:
-    src: download_video.sh
-    dest: ~/.config/qutebrowser/scripts/download_video.sh
+    src: "{{ item }}"
+    dest: ~/.config/qutebrowser/userscripts/
     mode: 0755
+  loop:
+    - download_video.sh
+    - spawn_mpv.sh
 
 - name: Ensure greasemonkey directory exists
   become: true
