@@ -1,5 +1,5 @@
 [Unit]
-Description=User resume actions
+Description=User resume actions DPMS
 After=suspend.target
 
 [Service]

@@ -1,12 +1,11 @@
 [Unit]
-Description=User suspend actions
+Description=User suspend actions i3lock
 Before=sleep.target
 
 [Service]
 User=%I
 Type=forking
 Environment=DISPLAY=:0
-ExecStartPre=/usr/bin/xset dpms force standby
 ExecStart=/usr/bin/i3lock
 ExecStartPost=/usr/bin/sleep 1
 

@@ -10,15 +10,7 @@
   become: true
   become_user: root
   ansible.builtin.copy:
-    src: suspend@.service
-    dest: /etc/systemd/system/
-    mode: 0644
-
-- name: Copy resume service file
-  become: true
-  become_user: root
-  ansible.builtin.copy:
-    src: resume@.service
+    src: suspend-i3lock@.service
     dest: /etc/systemd/system/
     mode: 0644
 
@@ -26,12 +18,5 @@
   become: true
   become_user: root
   ansible.builtin.systemd:
-    name: suspend@{{ user_name }}
-    enabled: true
-
-- name: Enable resume service file
-  become: true
-  become_user: root
-  ansible.builtin.systemd:
-    name: resume@{{ user_name }}
+    name: suspend-i3lock@{{ user_name }}
     enabled: true

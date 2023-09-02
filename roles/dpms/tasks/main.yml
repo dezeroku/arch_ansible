@@ -14,3 +14,33 @@
     state: present
     name:
       - caffeine-ng
+
+- name: Copy suspend service file
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: suspend-dpms@.service
+    dest: /etc/systemd/system/
+    mode: 0644
+
+- name: Enable suspend service file
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: suspend-dpms@{{ user_name }}
+    enabled: true
+
+- name: Copy resume service file
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: resume-dpms@.service
+    dest: /etc/systemd/system/
+    mode: 0644
+
+- name: Enable resume service file
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: resume-dpms@{{ user_name }}
+    enabled: true
