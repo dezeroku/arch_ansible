@@ -1,8 +1,7 @@
 ---
-- name: Install Discord (from AUR)
-  kewlfft.aur.aur:
-    state: present
+- name: Install Discord
+  become: true
+  become_user: root
+  community.general.pacman:
     name:
       - discord
-  become: true
-  become_user: aur_builder
