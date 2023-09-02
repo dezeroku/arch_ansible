@@ -207,6 +207,8 @@ bindsym --release Shift+Print exec "flameshot gui"
 #applets run codes
 # Network Manager
 exec --no-startup-id "nm-applet &"
+# DPMS Manager
+exec --no-startup-id "caffeine start &"
 {% if bluetooth_enabled %}
 # Bluetooth
 exec --no-startup-id "dbus-launch blueman-applet &"
@@ -325,9 +327,6 @@ bar {
     strip_workspace_numbers yes
 }
 
-
-#prevents screen from dimming, it seems to work
-#exec xset s off -dpms
 
 {% if i3_setup_g751_scripts %}
     # IMPORTANT NOTICE

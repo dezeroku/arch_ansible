@@ -1,0 +1,16 @@
+---
+- name: Template config
+  become: true
+  become_user: root
+  ansible.builtin.template:
+    src: 30-dpms.conf
+    dest: /etc/X11/xorg.conf.d/30-dpms.conf
+    mode: 0644
+
+- name: Install caffeine-ng
+  become: true
+  become_user: aur_builder
+  kewlfft.aur.aur:
+    state: present
+    name:
+      - caffeine-ng

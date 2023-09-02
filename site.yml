@@ -18,6 +18,7 @@
     - {role: discord, tags: ['discord', 'social']}
     - {role: docker, tags: ['docker', 'docker']}
     - {role: dunst, tags: ['dunst', 'desktop']}
+    - {role: dpms, tags: ['dpms', 'desktop']}
     - {role: exfat_utils, tags: ['exfat_utils', 'utils']}
     - {role: feh, tags: ['feh', 'desktop']}
     - {role: firefox, tags: ['firefox', 'browser']}

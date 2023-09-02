@@ -1,0 +1,7 @@
+---
+dpms_enabled: true
+# The times below are in minutes
+# as opposed to `xset` which accepts seconds instead
+dpms_standby_time: 10
+dpms_suspend_time: 20
+dpms_off_time: 30
