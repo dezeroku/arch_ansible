@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+ARGS=""
+WALLPAPER_PATH="$HOME/.config/i3lock/wallpapers/{{ vars.i3lock_wallpaper }}"
+
+if [ -f "$WALLPAPER_PATH" ]; then
+    ARGS="$ARGS --image $WALLPAPER_PATH"
+fi
+
+# We explicitly want to allow splitting
+# shellcheck disable=SC2086
+exec /usr/bin/i3lock --show-failed-attempts --ignore-empty-password $ARGS

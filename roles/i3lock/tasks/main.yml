@@ -20,3 +20,60 @@
   ansible.builtin.systemd:
     name: suspend-i3lock@{{ user_name }}
     enabled: true
+
+- name: Template the wrapper file
+  become: true
+  become_user: root
+  ansible.builtin.template:
+    src: i3lock-arch-ansible
+    dest: /usr/local/bin/i3lock-arch-ansible
+    mode: 0755
+
+- name: Ensure directory exists
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.config/i3lock/wallpapers
+    state: directory
+    mode: 0755
+  when: vars.i3lock_wallpaper
+
+- name: Properly bootstrap wallpaper
+  # If the word 'custom' is used, it's assumed that a wallpaper override from host is in use
+  when: vars.i3lock_wallpaper and "custom" not in vars.i3lock_wallpaper
+  block:
+    - name: Ensure cache directory exists
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.file:
+        path: ~/.cache/arch_ansible/i3lock
+        state: directory
+        mode: 0755
+
+    - name: Copy the base wallpaper
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.copy:
+        src: wallpapers/{{ vars.i3lock_wallpaper }}
+        dest: ~/.cache/arch_ansible/i3lock/{{ vars.i3lock_wallpaper }}
+        mode: 0644
+
+    - name: Resize and remove metadata
+      # Resize image and get rid of metadata
+      # so the hashes are deterministic
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.command:
+        chdir: ~/.cache/arch_ansible/i3lock
+        # The resize ! parameter allows changing ratio
+        cmd: convert {{ vars.i3lock_wallpaper }} -strip -resize "{{ vars.i3_resolution }}!" {{ vars.i3lock_wallpaper }}-fixed
+      # This is a "dummy task", proper checks are done in the surrounding copy tasks
+      changed_when: false
+
+    - name: Copy the modified wallpaper
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.copy:
+        src: ~/.cache/arch_ansible/i3lock/{{ vars.i3lock_wallpaper }}-fixed
+        dest: ~/.config/i3lock/wallpapers/{{ vars.i3lock_wallpaper }}
+        mode: 0644
