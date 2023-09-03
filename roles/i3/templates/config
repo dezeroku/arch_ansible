@@ -294,7 +294,7 @@ bindsym $mod+Control+l exec "/usr/local/bin/i3lock-arch-ansible && sleep 1 && xs
 default_border pixel 1
 hide_edge_borders both
 
-{% if i3_resolution == "1920x1080" %}
+{% if display_resolution == "1920x1080" %}
 # Good for bigger screens.
 font pango:Inconsolata , Icons 12
 {% else %}

@@ -66,7 +66,7 @@
       ansible.builtin.command:
         chdir: ~/.cache/arch_ansible/i3lock
         # The resize ! parameter allows changing ratio
-        cmd: convert {{ vars.i3lock_wallpaper }} -strip -resize "{{ vars.i3_resolution }}!" {{ vars.i3lock_wallpaper }}-fixed
+        cmd: convert {{ vars.i3lock_wallpaper }} -strip -resize "{{ vars.display_resolution }}!" {{ vars.i3lock_wallpaper }}-fixed
       # This is a "dummy task", proper checks are done in the surrounding copy tasks
       changed_when: false
 

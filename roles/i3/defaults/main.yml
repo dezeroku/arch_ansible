@@ -1,7 +1,8 @@
 ---
 user_name: d0ku
 
-i3_resolution: "1920x1080"
+display_resolution: 1920x1080
+
 i3_setup_g751_scripts: false
 i3_nopasswd_g751_scripts: false
 i3_copy_xinitrc: true

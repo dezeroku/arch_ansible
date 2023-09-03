@@ -26,7 +26,7 @@
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.copy:
-    src: wallpapers/{{ i3_resolution }}/
+    src: wallpapers/{{ display_resolution }}/
     dest: ~/.config/i3/wallpapers
     mode: 0644
 
