@@ -1,0 +1,5 @@
+[virtualenvs]
+create = true
+in-project = true
+# For easier pyenv integration
+prefer-active-python = true
