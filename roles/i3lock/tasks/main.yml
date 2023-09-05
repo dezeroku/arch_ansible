@@ -29,34 +29,34 @@
     dest: /usr/local/bin/i3lock-arch-ansible
     mode: 0755
 
-- name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
-  ansible.builtin.file:
-    path: ~/.config/i3lock/wallpapers
-    state: directory
-    mode: 0755
-  when: vars.i3lock_wallpaper
-
 - name: Properly bootstrap wallpaper
   # If the word 'custom' is used, it's assumed that a wallpaper override from host is in use
   when: vars.i3lock_wallpaper and "custom" not in vars.i3lock_wallpaper
   block:
-    - name: Ensure cache directory exists
+    - name: Ensure directory exists
       become: true
       become_user: "{{ user_name }}"
       ansible.builtin.file:
-        path: ~/.cache/arch_ansible/i3lock
+        path: ~/.config/i3lock/wallpapers
         state: directory
         mode: 0755
+
+    # Commands that don't change the "important" state are marked as non-changeable
+    - name: Create temporary directory
+      ansible.builtin.tempfile:
+        state: directory
+        suffix: i3lock
+      register: i3lock_tempdir
+      changed_when: false
 
     - name: Copy the base wallpaper
       become: true
       become_user: "{{ user_name }}"
       ansible.builtin.copy:
         src: wallpapers/{{ vars.i3lock_wallpaper }}
-        dest: ~/.cache/arch_ansible/i3lock/{{ vars.i3lock_wallpaper }}
+        dest: "{{ i3lock_tempdir.path }}/wallpaper"
         mode: 0644
+      changed_when: false
 
     - name: Resize and remove metadata
       # Resize image and get rid of metadata
@@ -64,16 +64,25 @@
       become: true
       become_user: "{{ user_name }}"
       ansible.builtin.command:
-        chdir: ~/.cache/arch_ansible/i3lock
+        chdir: "{{ i3lock_tempdir.path }}"
         # The resize ! parameter allows changing ratio
-        cmd: convert {{ vars.i3lock_wallpaper }} -strip -resize "{{ vars.display_resolution }}!" {{ vars.i3lock_wallpaper }}-fixed
-      # This is a "dummy task", proper checks are done in the surrounding copy tasks
+        cmd: convert wallpaper -strip -resize "{{ vars.display_resolution }}!" wallpaper-resized
+      changed_when: false
+
+    - name: Remove metadata (exiftool)
+      # For whatever reason imagemagick leaves png:tIME on some images
+      # exiftool handles it properly
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.command:
+        chdir: "{{ i3lock_tempdir.path }}"
+        cmd: exiftool -all= wallpaper-resized
       changed_when: false
 
     - name: Copy the modified wallpaper
       become: true
       become_user: "{{ user_name }}"
       ansible.builtin.copy:
-        src: ~/.cache/arch_ansible/i3lock/{{ vars.i3lock_wallpaper }}-fixed
+        src: "{{ i3lock_tempdir.path }}/wallpaper-resized"
         dest: ~/.config/i3lock/wallpapers/{{ vars.i3lock_wallpaper }}
         mode: 0644
