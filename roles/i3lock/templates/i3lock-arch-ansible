@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
 ARGS=""
-WALLPAPER_PATH="$HOME/.config/i3lock/wallpapers/{{ vars.i3lock_wallpaper }}"
+WALLPAPER_DIR="$HOME/.config/i3lock/wallpapers"
+WALLPAPER_PATH="$WALLPAPER_DIR/{{ vars.i3lock_wallpaper }}"
+WALLPAPER_CUSTOM_PATH="$WALLPAPER_DIR/custom.png"
 
-if [ -f "$WALLPAPER_PATH" ]; then
+if [ -f "$WALLPAPER_CUSTOM_PATH" ]; then
+    ARGS="$ARGS --image $WALLPAPER_CUSTOM_PATH"
+elif [ -f "$WALLPAPER_PATH" ]; then
     ARGS="$ARGS --image $WALLPAPER_PATH"
 fi
 

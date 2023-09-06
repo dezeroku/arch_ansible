@@ -30,8 +30,7 @@
     mode: 0755
 
 - name: Properly bootstrap wallpaper
-  # If the word 'custom' is used, it's assumed that a wallpaper override from host is in use
-  when: vars.i3lock_wallpaper and "custom" not in vars.i3lock_wallpaper
+  when: vars.i3lock_wallpaper
   block:
     - name: Ensure directory exists
       become: true
