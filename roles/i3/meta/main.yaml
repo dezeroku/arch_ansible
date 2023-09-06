@@ -13,6 +13,7 @@ dependencies:
   - role: audio_control
   - role: i3status_rust
   - role: i3lock
+  - role: imagemagick
   - role: feh
   - role: terminator
   - role: fonts
