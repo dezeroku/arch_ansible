@@ -1,0 +1,20 @@
+---
+- name: Install pipewire (pulseaudio) packages
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - alsa-utils
+      - pipewire
+      - pipewire-audio
+      - pipewire-pulse
+      - wireplumber
+      - qpwgraph
+
+- name: Install pavucontrol
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - pavucontrol
+  when: pipewire_install_pavucontrol

@@ -9,7 +9,7 @@ dependencies:
   - role: picom
   - role: mesa
   - role: dpms
-  - role: pulseaudio
+  - role: pipewire
   - role: audio_control
   - role: i3status_rust
   - role: i3lock

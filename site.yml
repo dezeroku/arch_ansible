@@ -44,7 +44,7 @@
     - {role: npm, tags: ['npm', 'languages']}
     - {role: pcmanfm, tags: ['pcmanfm', 'desktop-utils']}
     - {role: powerline, tags: ['powerline', 'desktop']}
-    - {role: pulseaudio, tags: ['pulseaudio', 'desktop', 'audio']}
+    - {role: pipewire, tags: ['pipewire', 'desktop', 'audio']}
     - {role: python3, tags: ['python3', 'languages']}
     - {role: qemu, tags: ['qemu', 'virtualization']}
     - {role: qutebrowser, tags: ['qutebrowser', 'browser']}

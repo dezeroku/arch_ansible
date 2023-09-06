@@ -1,4 +1,0 @@
----
-pulseaudio_install_bluetooth: true
-pulseaudio_install_equalizer: true
-pulseaudio_install_pavucontrol: true
