@@ -92,3 +92,4 @@ c.colors.webpage.preferred_color_scheme = "dark"
 # Password manager
 config.bind(",p", "spawn --userscript qute-bitwarden")
 config.bind(",P", "spawn --userscript qute-bitwarden --password-only")
+config.bind(",,P", "spawn --userscript qute-bitwarden --totp-only")
