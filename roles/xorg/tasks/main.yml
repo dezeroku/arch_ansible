@@ -5,7 +5,7 @@
   community.general.pacman:
     name:
       # This is an output of `pacman -Qg xorg | cut -d " " -f2`
-      # with xorg-xbacklight being removed to be replaced with acpiligth
+      # with xorg-xbacklight being removed to be replaced with acpilight
       - xf86-video-vesa
       - xorg-bdftopcf
       - xorg-docs
@@ -56,6 +56,7 @@
 
       - xorg-xinit
       - acpilight
+      - xclip
 
 - name: Ensure directory exists
   become: true
