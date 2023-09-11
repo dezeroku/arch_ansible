@@ -116,7 +116,35 @@ These are mostly notes for myself on how to set up an Arch system with encryptio
 
 - Follow [Installation Guide](https://wiki.archlinux.org/title/installation_guide) until you get to partitioning
 - Follow [LVM_on_LUKS](https://wiki.archlinux.org/title/dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS) for partitioning
-  Basic setup without separate home can be followed
+  Basic setup without separate home can be followed. Rough idea for the setup:
+
+```
+parted <device>
+  mklabel gpt
+  yes
+  mkpart "EFI" fat32 1MiB 1001MiB
+  set 1 esp on
+  mkpart "ARCH" ext4 1001MiB 100%
+
+cryptsetup luksFormat /dev/<device>2
+cryptsetup open /dev/<device>2 archlvm
+
+pvcreate /dev/mapper/archlvm
+vgcreate ArchGroup /dev/mapper/archlvm
+
+# Make it at least the same size as your RAM
+# if you want hibernation to work easily
+lvcreate -L 32G ArchGroup -n swap
+lvcreate -l 100%FREE ArchGroup -n root
+
+mkfs.ext4 /dev/ArchGroup/root
+mkswap /dev/ArchGroup/swap
+mkfs.fat -F32 /dev/<device>1
+
+mount /dev/ArchGroup/root /mnt
+mount --mkdir /dev/<device>1 /mnt/boot
+swapon /dev/ArchGroup/swap
+```
 
 - Bootstrap with the following list `pacstrap -K /mnt <intel-ucode or amd-ucode depending on your CPU> base base-devel linux linux-firmware lvm2 networkmanager ansible git neovim refind`
 
@@ -132,16 +160,16 @@ These are mostly notes for myself on how to set up an Arch system with encryptio
 # You'll need to install amd-ucode or intel-ucode as listed above
 # You can run `blkid | grep UUID=` to get UUIDs of the partitions
 # Add the `resume=` param if you want to use the hibernation
-"Boot with microcode updates" "(initrd=\intel-ucode.img or initrd=\amd-ucode.img depending on your CPU) initrd=\initramfs-%v.img cryptdevice=UUID=<LUKS PARTITION UUID>:<LVM name> root=/dev/<volume group name>/<root name> resume=/dev/<volume group name>/<swap name>
+"Boot with microcode updates" "(initrd=\intel-ucode.img or initrd=\amd-ucode.img depending on your CPU) initrd=\initramfs-%v.img cryptdevice=UUID=<LUKS PARTITION UUID>:archlvm root=/dev/ArchGroup/root resume=/dev/ArchGroup/swap
 ...
 ```
 
 - Modify your `/etc/fstab` so it looks roughly like this:
 
 ```
-/dev/mapper/<GroupName>-<root name> / ext4 rw,relatime 0 1
+/dev/mapper/ArchGroup-root / ext4 rw,relatime 0 1
 
-/dev/mapper/<GroupName>-<swap name> swap swap defaults 0 0
+/dev/mapper/ArchGroup-swap swap swap defaults 0 0
 
 UUID=<UUID of the EFI/boot partition> /boot vfat defaults 0 2
 ```
@@ -161,5 +189,5 @@ For Wi-Fi:
 nmcli device wifi connect <AP name> password <password>
 ```
 
-- Clone this repo, prepare `custom.yml` and run as usual
+- Clone this repo, prepare `custom.yml` (copy `install-common-groups` to a separate file if you want to manage groups independently) and run as usual
 - One-shot action, run the `passwd <username>` to set up the password for a user that was created by this repo
