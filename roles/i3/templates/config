@@ -250,49 +250,44 @@ bindsym $mod+Shift+Tab exec "python3 ~/.config/i3/scripts/i3_next_workspace.py "
 # Set wallpaper
 exec "feh --bg-scale ~/.config/i3/wallpapers/{{ vars.i3_wallpaper }}"
 
-# Set custom wallpaper, if exists.
+# Set custom wallpaper, if it exists.
 # That's pretty hacky way to enable users to use wallpapers that are not version controled.
 exec "feh --bg-scale ~/.config/i3/wallpapers/custom.png"
 
 # lock screen
 bindsym $mod+Control+l exec "/usr/local/bin/i3lock-arch-ansible && sleep 1 && xset dpms force standby"
 
-# assign programs to workspaces
+### WINDOW-WORKSPACE ASSIGNMENT
+# Workspace ids:
+# $ws1
+# $ws2
+# and so on...
+# till $ws10
+# Get class using xprop, run it in terminal and click on window, you want to get class from
 
-	#Workspace id's:
-	# $ws1
-	# $ws2
-	# and so on...
-	# till $ws10
-    # Get class using xprop, run it in terminal and click on window, you want to get class from
+assign [class="(?i)firefox"] $ws2
+assign [class="(?i)qutebrowser"] $ws2
 
-    assign [class="(?i)Firefox"] $ws2
-    assign [class="(?i)qutebrowser"] $ws2
-    assign [class="(?i)Steam"] $ws8
-    assign [class="(?i)Spotify"] $ws5
-    assign [class="(?i)MellowPlayer"] $ws5
-    assign [class="(?i)jetbrains-idea"] $ws3
-    assign [class="(?i)jetbrains-studio"] $ws3
-    assign [class="(?i)VirtualBox Manager"] $ws6
-    assign [class="(?i)discord"] $ws8
-    assign [class="(?i)slack"] $ws8
-    assign [class="(?i)zoom"] $ws6
+assign [class="(?i)jetbrains-idea"] $ws3
+assign [class="(?i)jetbrains-studio"] $ws3
 
-    # CS GO, and probably more OpenGL games
-    assign [class="(?i)Linux"] $ws9
+assign [class="(?i)spotify"] $ws5
+assign [class="(?i)mellowPlayer"] $ws5
 
-    # Stardew Valley
-    assign [class="(?i)StardewValley"] $ws9
+assign [class="(?i)virtualBox Manager"] $ws6
+assign [class="(?i)zoom"] $ws6
 
-    # Anki
-    assign [class="(?i)Anki"] $ws9
+assign [class="(?i)discord"] $ws8
+assign [class="(?i)steam"] $ws8
+assign [class="(?i)slack"] $ws8
 
-    # Spotify
-    #assign [class="(?i)Spotify"] $ws5
-    for_window [class="(?i)spotify"] move to workspace $ws5
+assign [class="(?i)anki"] $ws9
+# CS GO, and probably more OpenGL games
+assign [class="(?i)linux"] $ws9
+assign [class="(?i)stardewValley"] $ws9
 
-    # Floating workspace for Steam and applications, that don't really like tilling.
-    # for_window [workspace=$ws8] floating enable
+# Floating workspace for Steam and applications, that don't really like tilling.
+# for_window [workspace=$ws8] floating enable
 
 default_border pixel 1
 hide_edge_borders both
