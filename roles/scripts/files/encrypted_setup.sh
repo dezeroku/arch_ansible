@@ -12,6 +12,9 @@ CONTAINER_PATH="${HOME}/.encrypted-volumes/${CONTAINER_NAME}"
 
 set -x
 
+mkdir -p "${HOME}/encrypted-volumes"
+mkdir -p "${HOME}/.encrypted-volumes"
+
 fallocate -l 512M "${CONTAINER_PATH}"
 dd if=/dev/zero of="${CONTAINER_PATH}" bs=1M count=512
 sudo cryptsetup -y luksFormat "${CONTAINER_PATH}"
@@ -28,5 +31,5 @@ sudo mount "/dev/mapper/${CONTAINER_NAME}" "${CONTAINER_MOUNT_PATH}"
 
 sudo chown "$USER:$USER" "${CONTAINER_MOUNT_PATH}"
 
-sudo umount "${CONTAINER_MOUNT_PATH}"
-sudo cryptsetup luksClose "${CONTAINER_NAME}"
+#sudo umount "${CONTAINER_MOUNT_PATH}"
+#sudo cryptsetup luksClose "${CONTAINER_NAME}"
