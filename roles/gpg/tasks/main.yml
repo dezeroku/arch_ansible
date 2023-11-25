@@ -61,6 +61,7 @@
     mode: 0644
   loop:
     - gpg_setup_keyring.sh
+    - gpg_yubikey_initial_setup.sh
 
 - name: Ensure /usr/local/bin directory exists
   become: true
