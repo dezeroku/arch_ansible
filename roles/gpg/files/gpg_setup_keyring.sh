@@ -11,6 +11,8 @@
 #
 # Creating a secure environment and making sure that EXTERNAL_BACKUP_DIR is encrypted
 # is out of scope of this script
+#
+# It also removes the GNUPGHOME at the end, leaving only EXTERNAL_BACKUP_DIR in place
 
 set -euo pipefail
 
@@ -28,6 +30,8 @@ require_value REAL_EMAIL
 # It's enough for this to be a separate encrypted container on a safe machine
 require_value EXTERNAL_BACKUP_DIR
 USE_YUBIKEY_ENTROPY="${USE_YUBIKEY_ENTROPY:-true}"
+
+export GNUPGHOME
 
 chown "${USER}:${USER}" "${GNUPGHOME}"
 chmod 0700 "${GNUPGHOME}"
@@ -81,8 +85,8 @@ HEREDOC
 MASTER_KEY_ID="$(gpg --list-keys --with-fingerprint --with-colons | grep pub | cut -d ":" -f 5)"
 MASTER_KEY_FINGERPRINT="$(gpg --list-keys --with-fingerprint --with-colons | grep fpr | cut -d ":" -f 10)"
 gpg --batch --pinentry-mode loopback --passphrase "${MASTER_PASSPHRASE}" --quick-add-key "${MASTER_KEY_FINGERPRINT}" Ed25519 sign 1y
-gpg --batch --pinentry-mode loopback --passphrase "${MASTER_PASSPHRASE}" --quick-add-key "${MASTER_KEY_FINGERPRINT}" Ed25519 auth 1y
 gpg --batch --pinentry-mode loopback --passphrase "${MASTER_PASSPHRASE}" --quick-add-key "${MASTER_KEY_FINGERPRINT}" Curve25519 encrypt 1y
+gpg --batch --pinentry-mode loopback --passphrase "${MASTER_PASSPHRASE}" --quick-add-key "${MASTER_KEY_FINGERPRINT}" Ed25519 auth 1y
 
 # Sign subkeys (this seems to be done by default)
 #for subkey in $(gpg --list-keys --with-fingerprint --with-colons | grep sub | cut -d":" -f 5);
@@ -103,9 +107,12 @@ printf "Y\n0\n\nY\n" | gpg --command-fd 0 --pinentry-mode loopback --passphrase 
 echo "${GNUPGHOME}/to-backup"
 ls "${GNUPGHOME}/to-backup"
 
-cp -avi "${GNUPGHOME}" "${EXTERNAL_BACKUP_DIR}"
+cp -avi "${GNUPGHOME}/"* "${EXTERNAL_BACKUP_DIR}"
 
 PUBLIC_KEY_FILE="${HOME}/gpg-${MASTER_KEY_ID}-$(date +%F).asc"
 
 gpg --armor --export "${MASTER_KEY_ID}" | tee "${PUBLIC_KEY_FILE}"
 echo "Public key can be accessed at ${PUBLIC_KEY_FILE}"
+
+echo "Removing the ${GNUPGHOME}"
+rm -rf "${GNUPGHOME}"
