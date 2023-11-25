@@ -3,7 +3,7 @@
 # This is not executable by default
 # as it's not a common ocurrence setup and running with sh requires more attendance
 #
-# The setup is based on https://github.com/drduh/YubiKey-Guide#purchase
+# The setup is based on https://github.com/drduh/YubiKey-Guide
 # It's recommended to run this setup in a LUKS encrypted directory
 # preferably on a secured and offline device used only for that purpose
 #
@@ -12,13 +12,22 @@
 # Creating a secure environment and making sure that EXTERNAL_BACKUP_DIR is encrypted
 # is out of scope of this script
 
-set -e
+set -euo pipefail
 
-[ -z "${GNUPGHOME}" ] && echo "GNUPGHOME variable must be defined" && exit 1
-[ -z "${REAL_NAME}" ] && echo "REAL_NAME variable must be defined" && exit 1
-[ -z "${REAL_EMAIL}" ] && echo "REAL_EMAIL variable must be defined" && exit 1
+function require_value() {
+    var_name="${1:-}"
+    if [ -z "${!var_name:-}" ]; then
+        echo "${var_name} variable must be defined"
+        return 1
+    fi
+}
+
+require_value GNUPGHOME
+require_value REAL_NAME
+require_value REAL_EMAIL
 # It's enough for this to be a separate encrypted container on a safe machine
-[ -z "${EXTERNAL_BACKUP_DIR}" ] && echo "EXTERNAL_BACKUP_DIR variable must be defined" && exit 1
+require_value EXTERNAL_BACKUP_DIR
+USE_YUBIKEY_ENTROPY="${USE_YUBIKEY_ENTROPY:-true}"
 
 chown "${USER}:${USER}" "${GNUPGHOME}"
 chmod 0700 "${GNUPGHOME}"
@@ -51,7 +60,10 @@ MASTER_PASSPHRASE="$(gpg --gen-random --armor 0 24)"
 echo "${MASTER_PASSPHRASE}" > "${GNUPGHOME}/master-passphrase"
 
 # Improved entropy via YubiKey
-#echo "SCD RANDOM 512" | gpg-connect-agent | sudo tee /dev/random | hexdump -C
+if [[ "${USE_YUBIKEY_ENTROPY}" == "true" ]]; then
+    echo "Using Yubikey to increase entropy"
+    echo "SCD RANDOM 512" | gpg-connect-agent | sudo tee /dev/random | hexdump -C
+fi
 
 gpg --batch --generate-key << HEREDOC
 %echo Generating a master key
@@ -61,7 +73,7 @@ Key-Usage: cert
 Name-Real: ${REAL_NAME}
 Name-Email: ${REAL_EMAIL}
 Passphrase: ${MASTER_PASSPHRASE}
-Expire-Date: 10y
+Expire-Date: 5y
 %commit
 %echo done
 HEREDOC
@@ -86,8 +98,7 @@ gpg --pinentry-mode loopback --passphrase "${MASTER_PASSPHRASE}" --armor --expor
 gpg --pinentry-mode loopback --passphrase "${MASTER_PASSPHRASE}" --armor --export-secret-subkeys "${MASTER_KEY_ID}" > "${GNUPGHOME}/to-backup/sub.key"
 
 echo "Creating a revocation cert"
-echo "y 0 enter y"
-gpg --pinentry-mode loopback --passphrase "${MASTER_PASSPHRASE}" --output "${GNUPGHOME}/to-backup/revoke.asc" --gen-revoke "${MASTER_KEY_ID}"
+printf "Y\n0\n\nY\n" | gpg --command-fd 0 --pinentry-mode loopback --passphrase "${MASTER_PASSPHRASE}" --output "${GNUPGHOME}/to-backup/revoke.asc" --gen-revoke "${MASTER_KEY_ID}"
 
 echo "${GNUPGHOME}/to-backup"
 ls "${GNUPGHOME}/to-backup"
