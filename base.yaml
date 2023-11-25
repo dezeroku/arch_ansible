@@ -52,7 +52,7 @@ local_machine:
     user_ssh_key_type: ed25519
     user_shell: /bin/fish
     user_email: dezeroku@gmail.com
-    user_gpg_key: 5D6772EEDDACD5B0
+    user_gpg_key: 6AC2332BCF8E1A97
     user_always_git_gpg: true
 
     work_enabled: false
