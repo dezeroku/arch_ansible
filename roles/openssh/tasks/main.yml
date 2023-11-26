@@ -30,6 +30,16 @@
     dest: ~/.ssh/config
     mode: 0644
 
+- name: Copy ssh conf files
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: ~/.ssh/ssh_config.d/{{ item }}
+    mode: 0644
+  loop:
+    - 01-ssh-devserver.conf
+
 - name: Copy sshd conf files
   become: true
   become_user: root
