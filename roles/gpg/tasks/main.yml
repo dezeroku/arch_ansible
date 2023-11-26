@@ -149,3 +149,27 @@
         stdin: "trust\n5\ny\n"
       changed_when: true
       when: gpg_key_is_trusted.rc != 0
+
+    - name: Ensure ssh directory exists
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.file:
+        path: ~/.ssh
+        state: directory
+        mode: 0700
+
+    - name: Obtain ssh public key
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.command:
+        cmd: gpg --export-ssh-key "0x{{ user_gpg_key }}"
+      changed_when: false
+      register: gpg_ssh_key
+
+    - name: Write ssh public key
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.copy:
+        content: "{{ gpg_ssh_key.stdout }}"
+        dest: ~/.ssh/id_smartcard_{{ user_name }}.pub
+        mode: 0644
