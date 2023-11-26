@@ -97,3 +97,55 @@
     dest: ~/.config/fish/ansible/gpg/gpg-agent.fish
     mode: 0644
   when: fish_install_extensions
+
+- name: Ensure that provided GPG key is imported and trusted
+  # Only run when key is actually provided
+  when: user_gpg_key | length > 0
+  block:
+    - name: Check if the key is available in keyring
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.command:
+        cmd: gpg --with-colons --list-keys "0x{{ user_gpg_key }}"
+      changed_when: false
+      failed_when: false
+      register: gpg_key_present
+
+    - name: Import gpg key
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.command:
+        cmd: gpg --receive-keys "0x{{ user_gpg_key }}"
+      changed_when: true
+      when: gpg_key_present.rc != 0
+
+    - name: Obtain list of trusted keys
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.command:
+        cmd: gpg --export-ownertrust
+      changed_when: false
+      register: gpg_trusted_keys
+
+    - name: Check if the key is ultimately trusted
+      ansible.builtin.command:
+        argv:
+          - python3
+          - -c
+          - |
+            import sys;
+            key_fingerprint = list(filter(lambda x: "fpr" in x, {{ gpg_key_present.stdout_lines }}))[0].split(":")[-2];
+            print(key_fingerprint);
+            if "{0}:6:".format(key_fingerprint) not in {{ gpg_trusted_keys.stdout_lines }}: sys.exit(1);
+      changed_when: false
+      failed_when: false
+      register: gpg_key_is_trusted
+
+    - name: Ultimately trust the key
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.command:
+        cmd: gpg --command-fd 0 --edit-key "0x{{ user_gpg_key }}"
+        stdin: "trust\n5\ny\n"
+      changed_when: true
+      when: gpg_key_is_trusted.rc != 0
