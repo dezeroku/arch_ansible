@@ -42,6 +42,7 @@
   loop:
     - 01-basic-sshd-hardening.conf
     - "{{ '02-sshd-x11forwarding.conf' if vars.openssh_sshd_xforwarding else '' }}"
+    - 03-sshd-gpg-agent.conf
 
 - name: Start sshd
   become: true
