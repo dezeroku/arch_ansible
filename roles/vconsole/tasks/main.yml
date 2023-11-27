@@ -1,0 +1,24 @@
+---
+- name: Ensure directory exists
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    path: /usr/local/share/kbd/keymaps
+    state: directory
+    mode: 0755
+
+- name: Copy Keymap append
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: dezeroku_personal.map
+    dest: /usr/local/share/kbd/keymaps/dezeroku_personal.map
+    mode: 0644
+
+- name: Copy vconsole.conf
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: vconsole.conf
+    dest: /etc/vconsole.conf
+    mode: 0644
