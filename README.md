@@ -191,3 +191,12 @@ nmcli device wifi connect <AP name> password <password>
 
 - Clone this repo, prepare `custom.yml` (copy `install-common-groups` to a separate file if you want to manage groups independently) and run as usual
 - One-shot action, run the `passwd <username>` to set up the password for a user that was created by this repo
+- (optionally) set up the decryption over SSH at boot time following the [wiki article](https://wiki.archlinux.org/title/Dm-crypt/Specialties).
+  I am using the `mkinitcpio-tinyssh` based approach at this time:
+  - Install `mkinitcpio-tinyssh mkinitcpio-netconf mkinitcpio-utils` packages
+  - Follow the [Github issue](https://github.com/grazzolini/mkinitcpio-tinyssh/issues/10) and apply the patch from it locally
+  - Copy your public key under `/etc/tinyssh/root_key`
+  - Add the `netconf tinyssh encryptssh (replaces encrypt)` hooks before the `lvm2` and `filesystems` in `/etc/mkinitcpio.conf`
+  - Regenerate the initramfs with `# mkinitcpio -P`. Take a good look at the `tinyssh` hook logs as the issue mentioned above will occur now and fail silently, if it's not patched
+  - Add `ip=dhcp netconf_timeout=30` to kernel parameters in `/boot/refind_linux.conf`
+  - Now you can ssh into the host at startup with `root` username and provide the encryption passphrase
