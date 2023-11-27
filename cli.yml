@@ -11,6 +11,7 @@
     - {role: gpg, tags: ['gpg']}
     - {role: bitwarden, tags: ['bitwarden']}
     - {role: kubectl_stuff, tags: ['kubectl_stuff']}
+    - {role: terraform, tags: ['terraform']}
     - {role: ncdu, tags: ['ncdu']}
     - {role: neofetch, tags: ['neofetch']}
     - {role: nmap, tags: ['nmap']}
