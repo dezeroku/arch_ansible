@@ -36,3 +36,21 @@
     src: pypoetry-config.toml
     dest: ~/.config/pypoetry/config.toml
     mode: 0644
+
+- name: Ensure fish scriptlets directory exists
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.config/fish/ansible/python3
+    state: directory
+    mode: 0755
+  when: fish_install_extensions
+
+- name: Copy fish config
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.copy:
+    src: pyenv.fish
+    dest: ~/.config/fish/ansible/python3/pyenv.fish
+    mode: 0644
+  when: fish_install_extensions
