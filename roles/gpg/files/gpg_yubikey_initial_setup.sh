@@ -37,6 +37,16 @@ require_value TARGET_YUBIKEY_ADMIN_PIN
 CURRENT_YUBIKEY_PIN="${CURRENT_YUBIKEY_PIN:-123456}"
 CURRENT_YUBIKEY_ADMIN_PIN="${CURRENT_YUBIKEY_ADMIN_PIN:-12345678}"
 
+echo "Move the built-in OTP to second slot (long-press), if feasible"
+if OTP_SLOT=$(ykman otp info | grep "empty"); then
+    OTP_SLOT="$(echo "${OTP_SLOT}" | cut -d ":" -f1)"
+    if [[ "${OTP_SLOT}" != "Slot 1" ]]; then
+        echo "Empty slot 2 detected for OTP"
+        echo "Moving slot 1 to slot 2 (long press)"
+        ykman otp swap -f
+    fi
+fi
+
 echo "Setting up the user info"
 printf "admin\nname\n%s\n%s\n" "${USER_FAMILY_NAME}" "${USER_GIVEN_NAME}" | gpg --command-fd 0 --status-fd 1 --pinentry-mode loopback --passphrase "${CURRENT_YUBIKEY_ADMIN_PIN}" --card-edit
 printf "admin\nlang\nen\n" | gpg --command-fd 0 --status-fd 1 --pinentry-mode loopback --passphrase "${CURRENT_YUBIKEY_ADMIN_PIN}" --card-edit
