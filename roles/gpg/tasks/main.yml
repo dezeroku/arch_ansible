@@ -25,6 +25,15 @@
     - gpg-agent.conf
     - gpg.conf
     - scdaemon.conf
+  register: gpg_config
+
+- name: Restart gpg services
+  become: true
+  become_user: "{{ user_name }}"
+  when: gpg_config.changed  # noqa: no-handler
+  changed_when: false
+  ansible.builtin.command:
+    cmd: gpgconf --kill all
 
 - name: Set gpg key to use with git
   become: true
