@@ -10,17 +10,13 @@
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.file:
-    path: ~/.ssh
+    path: "{{ item }}"
     state: directory
     mode: 0755
-
-- name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
-  ansible.builtin.file:
-    path: ~/.ssh/ssh_config.d
-    state: directory
-    mode: 0755
+  loop:
+    - ~/.ssh
+    - ~/.ssh/ssh_config.d
+    - ~/.ssh/sockets
 
 - name: Copy ssh config
   become: true
@@ -40,6 +36,7 @@
   loop:
     - 01-ssh-devserver.conf
     - 02-ssh-homeserver.conf
+    - 03-ssh-controlpersist.conf
 
 - name: Copy sshd conf files
   become: true
