@@ -21,5 +21,6 @@
     - {role: tldr, tags: ['tldr']}
     - {role: tmux, tags: ['tmux']}
     - {role: wget, tags: ['wget']}
+    - {role: apprise, tags: ['apprise']}
   tags:
     - cli

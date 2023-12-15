@@ -55,6 +55,11 @@ local_machine:
     user_gpg_key: 6AC2332BCF8E1A97
     user_always_git_gpg: true
 
+    # Override these if you want the push notifications support via pushover
+    # otherwise just leave it as it is
+    apprise_pushover_user_key: ""
+    apprise_pushover_api_key: ""
+
     work_enabled: false
     work_jira_user: test@example.com
     work_jira_endpoint: jira.example.com
