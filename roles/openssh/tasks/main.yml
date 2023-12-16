@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    mode: 0755
+    mode: 0700
   loop:
     - ~/.ssh
     - ~/.ssh/ssh_config.d
@@ -24,7 +24,7 @@
   ansible.builtin.copy:
     src: ssh_config
     dest: ~/.ssh/config
-    mode: 0644
+    mode: 0600
 
 - name: Copy ssh conf files
   become: true
@@ -32,7 +32,7 @@
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: ~/.ssh/ssh_config.d/{{ item }}
-    mode: 0644
+    mode: 0600
   loop:
     - 01-ssh-devserver.conf
     - 02-ssh-homeserver.conf
