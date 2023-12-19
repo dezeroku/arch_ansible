@@ -7,7 +7,6 @@
 #      bluetooth_install_gui: true
 #  - role: wayland
 #  - role: mesa
-#    #- role: dpms
 #  - role: pipewire
 #  - role: audio_control
 #  - role: i3status_rust
@@ -16,6 +15,7 @@
 #  - role: fonts
 #  - role: powerline
 #  - role: dunst
+#  - role: rofi
 #  - role: firewall
 #  - role: udiskie
 #  - {role: yubikey, when: vars.sway_autostart_yubikey_otp}

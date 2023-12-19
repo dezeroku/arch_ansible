@@ -1,10 +1,19 @@
 ---
-- name: Install rofi
+- name: Remove rofi
   become: true
   become_user: root
   community.general.pacman:
     name:
       - rofi
+    state: absent
+
+- name: Install rofi fork with wayland support
+  kewlfft.aur.aur:
+    name:
+      - rofi-lbonn-wayland
+    state: present
+  become: true
+  become_user: aur_builder
 
 - name: Ensure directory exists
   become: true
