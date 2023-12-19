@@ -10,7 +10,7 @@
   become: true
   become_user: "{{ user_name }}"
   roles:
-    - {role: audio_control, tags: ['audio_control', 'desktop', 'audio']}
+    - {role: audio_control, tags: ['audio_control', 'desktop-utils', 'audio']}
     - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: bluetooth_enabled}
     - {role: discord, tags: ['discord', 'social']}
     - {role: docker, tags: ['docker', 'docker']}
@@ -39,7 +39,7 @@
     - {role: python3, tags: ['python3', 'languages']}
     - {role: qemu, tags: ['qemu', 'virtualization']}
     - {role: qutebrowser, tags: ['qutebrowser', 'browser']}
-    - {role: rofi, tags: ['rofi', 'desktop']}
+    - {role: rofi, tags: ['rofi', 'desktop', 'sway-wm']}
     - {role: rust, tags: ['rust', 'languages']}
     - {role: spotify, tags: ['spotify', 'media']}
     - {role: slack, tags: ['slack', 'work']}

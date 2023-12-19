@@ -20,7 +20,7 @@
 - name: Core (non-root)
   hosts: all
   roles:
-    - {role: networkmanager, tags: ['networkmanager']}
-    - {role: firewall, tags: ['firewall']}
+    - {role: networkmanager, tags: ['networkmanager', 'desktop-utils']}
+    - {role: firewall, tags: ['firewall', 'desktop-utils']}
   tags:
     - core
