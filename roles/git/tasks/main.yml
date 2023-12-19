@@ -78,3 +78,22 @@
         name: diff-so-fancy.markEmptyLines
         scope: global
         value: "false"
+
+- name: Set up fish scriptlets
+  when: fish_install_extensions
+  block:
+    - name: Ensure directory exists
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.file:
+        path: ~/.config/fish/ansible/git
+        state: directory
+        mode: 0755
+
+    - name: Template scriptlet
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.template:
+        src: git.fish
+        dest: ~/.config/fish/ansible/git/git.fish
+        mode: 0644

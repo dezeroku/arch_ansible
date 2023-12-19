@@ -3,3 +3,5 @@ git_install_hub: true
 user_name: d0ku
 user_pub_name: dezeroku
 user_email: dezeroku@gmail.com
+
+fish_install_extensions: false
