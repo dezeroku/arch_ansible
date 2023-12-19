@@ -1,0 +1,18 @@
+# "Special buttons" keyboards
+bindsym XF86AudioRaiseVolume exec "pamixer --increase 5"
+bindsym XF86AudioLowerVolume exec "pamixer --decrease 5"
+bindsym XF86AudioMute exec "pamixer --toggle-mute"
+
+bindsym XF86AudioPlay exec "playerctl play-pause"
+bindsym XF86AudioStop exec "playerctl stop"
+bindsym XF86AudioNext exec "playerctl next"
+bindsym XF86AudioPrev exec "playerctl previous"
+
+# Alternative controls (for "normal" keyboards)
+bindsym Mod1+End exec "pamixer --increase 5"
+bindsym Mod1+Delete exec "pamixer --decrease 5"
+bindsym Mod1+Up exec "pamixer --toggle-mute"
+
+bindsym Mod1+Down exec "playerctl play-pause"
+bindsym Mod1+Right exec "playerctl next"
+bindsym Mod1+Left exec "playerctl previous"

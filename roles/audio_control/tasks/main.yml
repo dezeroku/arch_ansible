@@ -6,3 +6,9 @@
     name:
       - pamixer
       - playerctl
+
+- name: Template sway plugin
+  ansible.builtin.include_role:
+    name: helper_sway_plugin
+  vars:
+    helper_sway_plugin_template_name: audio-control-plugin
