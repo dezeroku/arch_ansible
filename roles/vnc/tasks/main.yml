@@ -1,0 +1,37 @@
+---
+- name: Install wayvnc
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - wayvnc
+
+- name: Ensure directory exists
+  become: true
+  become_user: aur_builder
+  ansible.builtin.file:
+    path: "{{ wlvncc_build_dir }}"
+    state: directory
+    mode: 0755
+
+- name: Copy files
+  become: true
+  become_user: aur_builder
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ wlvncc_build_dir }}"
+    mode: 0644
+  loop:
+    - PKGBUILD
+    - change_inhibit_keybind.patch
+    - dont_inhibit_on_focus.patch
+
+- name: Build and install
+  become: true
+  become_user: aur_builder
+  kewlfft.aur.aur:
+    use: makepkg
+    state: latest
+    name:
+      - wlvncc-im-0xea-git
+    local_pkgbuild: "{{ wlvncc_build_dir }}"

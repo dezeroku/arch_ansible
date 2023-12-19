@@ -1,0 +1,13 @@
+diff --git a/src/main.c b/src/main.c
+index ff7d504..13c425e 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -552,7 +552,7 @@ void on_keyboard_event(struct keyboard_collection* collection,
+ 	// TODO handle multiple symbols
+ 	xkb_keysym_t symbol = xkb_state_key_get_one_sym(keyboard->state, key);
+
+-	if (symbol == XKB_KEY_F12) {
++	if (symbol == XKB_KEY_F8) {
+ 		if (!is_pressed) {
+ 			inhibitor_toggle(inhibitor);
+ 		}
