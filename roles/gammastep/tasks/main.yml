@@ -1,0 +1,17 @@
+---
+- name: Get rid of redshift
+  ansible.builtin.include_tasks:
+    file: redshift-cleanup.yml
+
+- name: Install gammastep
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - gammastep
+
+- name: Template sway plugin
+  ansible.builtin.include_role:
+    name: helper_sway_plugin
+  vars:
+    helper_sway_plugin_template_name: gammastep-plugin

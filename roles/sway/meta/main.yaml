@@ -22,7 +22,6 @@
 #  - role: dunst
 #  - role: flameshot
 #  - role: firewall
-#    #- role: redshift
 #  - role: udiskie
 #    #- role: xresources
 #  - {role: yubikey, when: vars.i3_autostart_yubikey_otp}

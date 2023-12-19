@@ -1,0 +1,2 @@
+# TODO: parametrize with ansible variables
+exec "gammastep-indicator -t 5200:2000 -l 51.10:17.0 &"

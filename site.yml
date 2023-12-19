@@ -42,7 +42,6 @@
     - {role: python3, tags: ['python3', 'languages']}
     - {role: qemu, tags: ['qemu', 'virtualization']}
     - {role: qutebrowser, tags: ['qutebrowser', 'browser']}
-    - {role: redshift, tags: ['redshift', 'desktop']}
     - {role: rofi, tags: ['rofi', 'desktop']}
     - {role: rust, tags: ['rust', 'languages']}
     - {role: spotify, tags: ['spotify', 'media']}
@@ -63,6 +62,7 @@
     # DEVELOPMENT
     - {role: sway, tags: ['sway', 'desktop', 'sway-wm']}
     - {role: swaylock, tags: ['swaylock', 'desktop', 'sway-wm']}
+    - {role: gammastep, tags: ['gammastep', 'desktop', 'sway-wm']}
     - {role: wayland, tags: ['wayland', 'desktop']}
     - {role: foot, tags: ['foot', 'desktop']}
   tags:
