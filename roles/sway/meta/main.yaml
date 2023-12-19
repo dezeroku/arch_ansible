@@ -19,5 +19,4 @@
 #  - role: flameshot
 #  - role: firewall
 #  - role: udiskie
-#    #- role: xresources
-#  - {role: yubikey, when: vars.i3_autostart_yubikey_otp}
+#  - {role: yubikey, when: vars.sway_autostart_yubikey_otp}
