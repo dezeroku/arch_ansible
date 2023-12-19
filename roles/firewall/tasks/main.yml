@@ -73,3 +73,9 @@
     enabled: true
     state: started
   when: vars.firewall_enable_opensnitch
+
+- name: Template sway plugin
+  ansible.builtin.include_role:
+    name: helper_sway_plugin
+  vars:
+    helper_sway_plugin_template_name: opensnitch-plugin
