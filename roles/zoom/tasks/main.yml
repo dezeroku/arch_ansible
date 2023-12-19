@@ -6,3 +6,5 @@
     state: present
   become: true
   become_user: aur_builder
+
+# TODO: template the config file (it's kinda long and messed up) and set enableWaylandShare=true in the [General] section
