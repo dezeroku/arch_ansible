@@ -50,7 +50,6 @@
     - {role: rust, tags: ['rust', 'languages']}
     - {role: spotify, tags: ['spotify', 'media']}
     - {role: slack, tags: ['slack', 'work']}
-    - {role: st, tags: ['st', 'desktop']}
     - {role: sxiv, tags: ['sxiv', 'desktop-utils']}
     - {role: udiskie, tags: ['udiskie', 'desktop']}
     - {role: vagrant, tags: ['vagrant', 'virtualization']}
@@ -65,8 +64,10 @@
     - {role: zathura, tags: ['zathura', 'desktop-tools']}
     - {role: hardware_video_acceleration, tags: ['hardware_video_acceleration', 'desktop'], when: setup_hardware_video_acceleration_enabled}
     - {role: zoom, tags: ['zoom', 'work']}
-    - {role: wayland, tags: ['wayland', 'desktop']}
+    # DEVELOPMENT
     - {role: sway, tags: ['sway', 'desktop']}
+    - {role: wayland, tags: ['wayland', 'desktop']}
+    - {role: foot, tags: ['foot', 'desktop']}
   tags:
     - install
 

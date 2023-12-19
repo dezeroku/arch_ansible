@@ -16,6 +16,7 @@
 #  - role: imagemagick
 #    #- role: feh
 #  - role: terminator
+#  - role: foot
 #  - role: fonts
 #  - role: powerline
 #  - role: dunst

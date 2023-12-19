@@ -304,7 +304,7 @@ font pango:monospace 8
 {% endif %}
 
 # start a terminal
-bindsym $mod+Return exec st
+bindsym $mod+Return exec foot
 
 #bindsym XF86Launch1 exec terminator -e "echo KOCHAM && echo AKISO  && sleep 6 && echo MOCNO && sleep 3 "
 
