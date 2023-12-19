@@ -89,6 +89,8 @@
     src: config
     dest: ~/.config/sway/config
     mode: 0644
+  notify:
+    - Reload sway
 
       #- name: Copy xinitrc
       #  become: true

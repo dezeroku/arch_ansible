@@ -1,0 +1,3 @@
+bindsym $mod+Control+l exec "/usr/local/bin/swaylock-arch-ansible"
+
+exec swayidle -w timeout "{{swaylock_idle_seconds}}" 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep "/usr/local/bin/swaylock-arch-ansible" after-resume 'swaymsg "output * dpms on"'

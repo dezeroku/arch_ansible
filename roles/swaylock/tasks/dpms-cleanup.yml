@@ -1,0 +1,15 @@
+---
+- name: Get rid of caffeine-ng
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - caffeine-ng
+    state: absent
+
+- name: Get rid of the service
+  ansible.builtin.include_tasks:
+    file: remove-service.yml
+  loop:
+    - suspend-dpms@
+    - resume-dpms@

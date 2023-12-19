@@ -259,7 +259,7 @@ output * {
 #exec "feh --bg-scale ~/.config/sway/wallpapers/custom.png"
 
 # lock screen
-bindsym $mod+Control+l exec "/usr/local/bin/swaylock-arch-ansible && sleep 1 && xset dpms force standby"
+#bindsym $mod+Control+l exec "/usr/local/bin/swaylock-arch-ansible && sleep 1 && xset dpms force standby"
 
 ### WINDOW-WORKSPACE ASSIGNMENT
 # Workspace ids:
@@ -388,6 +388,5 @@ input type:keyboard {
   xkb_layout pl
   xkb_options caps:escape
 }
-
 
 include ~/.config/sway/config.d/*

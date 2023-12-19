@@ -1,0 +1,25 @@
+---
+- name: Get rid of the service
+  block:
+    - name: Check if service file exists
+      ansible.builtin.stat:
+        path: /etc/systemd/system/{{ item }}.service
+
+      register: service_stat
+
+    - name: Get rid of the service
+      when: service_stat.stat.exists
+      block:
+        - name: Disable the service
+          become: true
+          become_user: root
+          ansible.builtin.systemd:
+            name: "{{ item }}{{ user_name }}"
+            enabled: false
+
+        - name: Remove the service file
+          become: true
+          become_user: root
+          ansible.builtin.file:
+            path: /etc/systemd/system/{{ item }}.service
+            state: absent

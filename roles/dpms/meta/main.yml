@@ -1,4 +1,0 @@
----
-dependencies:
-  - role: xorg
-  - role: aur_builder

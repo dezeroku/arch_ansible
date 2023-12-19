@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+ARGS=""
+WALLPAPER_DIR="$HOME/.config/swaylock/wallpapers"
+WALLPAPER_PATH="$WALLPAPER_DIR/{{ vars.swaylock_wallpaper }}"
+WALLPAPER_CUSTOM_PATH="$WALLPAPER_DIR/custom.png"
+
+if [ -f "$WALLPAPER_CUSTOM_PATH" ]; then
+    ARGS="$ARGS --image $WALLPAPER_CUSTOM_PATH"
+elif [ -f "$WALLPAPER_PATH" ]; then
+    ARGS="$ARGS --image $WALLPAPER_PATH"
+fi
+
+# Sleep for a while, so we can get the hands off the keyboard and not instantly wake the swayidle
+sleep 0.5
+
+# Notify the swayidle that it's time to turn off the screen
+# Allow this command to fail, we mostly care about locking the screen anyway
+killall -USR1 swayidle || true
+
+# We explicitly want to allow splitting
+# shellcheck disable=SC2086
+exec /usr/bin/swaylock --daemonize --scaling stretch --show-failed-attempts --ignore-empty-password $ARGS
