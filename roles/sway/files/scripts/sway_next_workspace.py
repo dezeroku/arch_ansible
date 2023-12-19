@@ -4,7 +4,7 @@ import sys
 import json
 import subprocess
 
-stdoutdata = subprocess.getoutput("i3-msg -t get_workspaces")
+stdoutdata = subprocess.getoutput("swaymsg -t get_workspaces")
 your_next_workspace = "strange_name_to_not_use"
 # print(stdoutdata)
 next_break = False
@@ -25,7 +25,7 @@ if your_next_workspace == "strange_name_to_not_use":
     your_next_workspace = data[0]["name"]
 
 os.system(
-    "i3-msg -t command move container to workspace "
+    "swaymsg -t command move container to workspace "
     + your_next_workspace
-    + " && i3-msg -t command workspace next"
+    + " && swaymsg -t command workspace next"
 )

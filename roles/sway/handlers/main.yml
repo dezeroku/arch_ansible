@@ -1,6 +1,5 @@
 ---
 - name: Reload sway
+  when: lookup('env','WAYLAND_DISPLAY')
   ansible.builtin.command:
-    # TODO: do we want to fight with passing SWAYSOCK through to tmux?
-    #cmd: swaymsg reload
-    cmd: true
+    cmd: swaymsg reload

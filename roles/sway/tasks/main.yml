@@ -10,16 +10,12 @@
       - python-i3ipc
 
 - name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/sway/config.d
     state: directory
     mode: 0755
 
 - name: Copy scripts directory
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: scripts
     dest: ~/.config/sway/
@@ -30,8 +26,6 @@
   block:
     # Commands that don't change the "important" state are marked as non-changeable
     - name: Ensure directory exists
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.file:
         path: ~/.config/sway/wallpapers
         state: directory
@@ -45,8 +39,6 @@
       changed_when: false
 
     - name: Copy the base wallpaper
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.copy:
         src: wallpapers/{{ vars.sway_wallpaper }}
         dest: "{{ sway_tempdir.path }}/wallpaper"
@@ -56,8 +48,6 @@
     - name: Resize and remove metadata
       # Resize image and get rid of metadata
       # so the hashes are deterministic
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.command:
         chdir: "{{ sway_tempdir.path }}"
         # The resize ! parameter allows changing ratio
@@ -67,54 +57,21 @@
     - name: Remove metadata (exiftool)
       # For whatever reason imagemagick leaves png:tIME on some images
       # exiftool handles it properly
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.command:
         chdir: "{{ sway_tempdir.path }}"
         cmd: exiftool -all= wallpaper-resized
       changed_when: false
 
     - name: Copy the modified wallpaper
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.copy:
         src: "{{ sway_tempdir.path }}/wallpaper-resized"
         dest: ~/.config/sway/wallpapers/{{ vars.sway_wallpaper }}
         mode: 0644
 
 - name: Template sway config
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: config
     dest: ~/.config/sway/config
     mode: 0644
   notify:
     - Reload sway
-
-      #- name: Copy xinitrc
-      #  become: true
-      #  become_user: "{{ user_name }}"
-      #  ansible.builtin.template:
-      #    src: xinitrc
-      #    dest: ~/.xinitrc
-      #    mode: 0644
-      #  when: sway_copy_xinitrc
-
-      #- name: NOPASSWD sudo for g751 sway scripts
-      #  become: true
-      #  become_user: root
-      #  ansible.builtin.lineinfile:
-      #    dest: /etc/sudoers.d/13-g751-scripts
-      #    line: "{{ user_name }} ALL=(root) NOPASSWD: ~/.config/sway/scripts/g751/*
-      #"
-      #    create: true
-      #    mode: 0440
-      #    validate: 'visudo -cf %s'
-      #  when: sway_nopasswd_g751_scripts
-      #
-      #- name: Set script as executable
-      #  ansible.builtin.file:
-      #    dest: ~/.config/sway/scripts/g751/change_brightness
-      #    mode: 0744
-      #  when: sway_setup_g751_scripts

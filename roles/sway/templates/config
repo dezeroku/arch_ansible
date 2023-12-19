@@ -172,8 +172,8 @@ workspace $ws5 output primary
 # reload the configuration file
 bindsym $mod+Shift+r reload
 
-# exit sway (logs you out of your X session)
-bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your X session.' -b 'Yes, exit sway' 'sway-msg exit'"
+# exit sway
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -220,8 +220,6 @@ bindsym --release Shift+Print exec "flameshot gui"
 #exec --no-startup-id "opensnitch-ui &"
 # Dunst
 #exec --no-startup-id "dunst &"
-# Redshift
-#exec --no-startup-id "redshift-gtk -t 5200:2000 -l 51.10:17.0 &"
 # Udiskie
 #exec --no-startup-id "udiskie --smart-tray &"
 # Picom
@@ -269,11 +267,13 @@ output * {
 # till $ws10
 # Get class using xprop, run it in terminal and click on window, you want to get class from
 
+# TODO: change X11 classes to Wayland app_ids wherever possible
+# Get the values by looking at the `swaymsg -t get_tree` output
 assign [class="(?i)firefox"] $ws2
-assign [class="(?i)qutebrowser"] $ws2
+assign [app_id="org.qutebrowser.qutebrowser"] $ws2
 
-assign [class="(?i)jetbrains-idea"] $ws3
-assign [class="(?i)jetbrains-studio"] $ws3
+#assign [class="(?i)jetbrains-idea"] $ws3
+#assign [class="(?i)jetbrains-studio"] $ws3
 
 assign [class="(?i)spotify"] $ws5
 assign [class="(?i)mellowPlayer"] $ws5
@@ -314,7 +314,7 @@ bindsym $mod+Return exec foot
 bar {
     font pango:DejaVu Sans Mono for Powerline, FontAwesome 8.5
     position top
-    tray_output primary
+    tray_output *
     status_command i3status-rs ~/.config/i3status-rust/config.toml
     colors {
         separator #666666
@@ -329,33 +329,9 @@ bar {
 }
 
 
-#{% if sway_setup_g751_scripts %}
-#    # IMPORTANT NOTICE
-#    # Currently, that config is really tied to Asus G751JM. You can remove all the stuff about it below, and it should
-#    # work nice with different systems. However you won't get scripts for keyboard backlight, hardware screen backlight et`
-#    # toggle touchpad shortcut
-#    bindsym XF86TouchpadToggle exec "python3 ~/.config/sway/scripts/g750
-#
-#    # kbd backlight, this should be pretty universal
-#
-#    # kbd backlight up
-#    bindsym XF86KbdBrightnessUp exec "python3 ~/.config/sway/scripts/g751/kb-light.py +"
-#
-#    #kbd backlight down
-#    bindsym XF86KbdBrightnessDown exec "python3 ~/.config/sway/scripts/g751/kb-light.py -"
-#
-#    # screen backlight, needs changes in /etc/sudoers to work properly (you have to
-#
-#    # screen backlight up, this path should be ~/.config/sway/scripts/change_brightness but it needs NOPASSWD changes
-#    bindsym XF86MonBrightnessUp exec "sudo ~/.config/sway/scripts/g751/change_brightness +"
-#
-#    # screen backlight down, this path should be ~/.config/sway/scripts/change_brightness but it needs NOPASSWD changes
-#    bindsym XF86MonBrightnessDown exec "sudo ~/.config/sway/scripts/g751/change_brightness -"
-#{% else %}
 #    bindsym XF86MonBrightnessUp exec "xbacklight -inc 5 -fps 30"
 #
 #    bindsym XF86MonBrightnessDown exec "xbacklight -dec 5 -fps 30"
-#{% endif %}
 
 
 ## TODO: clean this up
@@ -370,23 +346,24 @@ output * {
   scale 2
 }
 
-# TODO: migrate the mouse settings
-# TODO: migrate the keyboard settings
-
 input type:touchpad {
   tap enabled
   natural_scroll enabled
   scroll_method two_finger
 }
 
-# TODO: make it an option
+{% if sway_disable_touchpad %}
 input type:touchpad {
   events disabled
 }
+{% endif %}
 
 input type:keyboard {
   xkb_layout pl
   xkb_options caps:escape
 }
+
+# Include the system files just in case
+include /etc/sway/config.d/*
 
 include ~/.config/sway/config.d/*
