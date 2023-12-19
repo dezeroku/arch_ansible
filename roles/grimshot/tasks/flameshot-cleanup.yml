@@ -1,7 +1,8 @@
 ---
-- name: Install flameshot
+- name: Remove flameshot
   become: true
   become_user: root
   community.general.pacman:
     name:
       - flameshot
+    state: absent

@@ -201,12 +201,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#screenshot whole
-bindsym --release Print exec "flameshot full -p ~/Pictures/screenshots"
-
-#screenshot part
-bindsym --release Shift+Print exec "flameshot gui"
-
 #applets run codes
 # Network Manager
 #exec --no-startup-id "nm-applet &"
@@ -223,8 +217,6 @@ exec --no-startup-id "opensnitch-ui &"
 # TODO: seems that running it with just --tray make the tray icon unhappy :/
 # Check if it works correctly
 exec --no-startup-id "udiskie --smart-tray &"
-# Flameshot daemon
-exec --no-startup-id "flameshot &"
 {% if sway_autostart_yubikey_otp %}
 # Yubikey OTP
 exec --no-startup-id "/opt/yubico-authenticator/authenticator &"

@@ -16,7 +16,6 @@
 #  - role: fonts
 #  - role: powerline
 #  - role: dunst
-#  - role: flameshot
 #  - role: firewall
 #  - role: udiskie
 #  - {role: yubikey, when: vars.sway_autostart_yubikey_otp}

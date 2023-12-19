@@ -18,7 +18,6 @@
     - {role: dunst, tags: ['dunst', 'desktop']}
     - {role: exfat_utils, tags: ['exfat_utils', 'utils']}
     - {role: firefox, tags: ['firefox', 'browser']}
-    - {role: flameshot, tags: ['flameshot', 'desktop']}
     - {role: fonts, tags: ['fonts', 'desktop']}
     - {role: fuse, tags: ['fuse', 'utils']}
     - {role: gimp, tags: ['gimp', 'desktop-utils']}
@@ -65,6 +64,7 @@
     - {role: gammastep, tags: ['gammastep', 'desktop', 'sway-wm']}
     - {role: wayland, tags: ['wayland', 'desktop']}
     - {role: foot, tags: ['foot', 'desktop']}
+    - {role: grimshot, tags: ['grimshot', 'desktop', 'sway-wm']}
   tags:
     - install
 

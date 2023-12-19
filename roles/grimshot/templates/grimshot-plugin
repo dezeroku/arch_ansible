@@ -1,0 +1,8 @@
+# screenshot whole
+bindsym --release Print exec "grimshot --notify save output $(~/.config/sway/scripts/grimshot/find_filename.sh ~/Pictures/screenshots)"
+
+# screenshot part
+bindsym --release Shift+Print exec "grimshot --notify save anything $(~/.config/sway/scripts/grimshot/find_filename.sh ~/Pictures/screenshots)"
+
+# screenshot part to clipboard
+bindsym --release Ctrl+Shift+Print exec "grimshot --notify copy anything"

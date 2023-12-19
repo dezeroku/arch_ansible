@@ -1,0 +1,37 @@
+---
+- name: Get rid of flameshot
+  ansible.builtin.include_tasks:
+    file: flameshot-cleanup.yml
+
+- name: Install the optdepends
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - wl-clipboard
+
+- name: Install grimshot from AUR
+  become: true
+  become_user: aur_builder
+  kewlfft.aur.aur:
+    name:
+      - grimshot
+    state: present
+
+- name: Ensure directory exists
+  ansible.builtin.file:
+    path: ~/.config/sway/scripts/grimshot/
+    state: directory
+    mode: 0755
+
+- name: Template the helper script
+  ansible.builtin.template:
+    src: screenshot-filename.sh
+    dest: ~/.config/sway/scripts/grimshot/find_filename.sh
+    mode: 0755
+
+- name: Template sway plugin
+  ansible.builtin.include_role:
+    name: helper_sway_plugin
+  vars:
+    helper_sway_plugin_template_name: grimshot-plugin
