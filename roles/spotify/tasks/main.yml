@@ -3,6 +3,7 @@
   kewlfft.aur.aur:
     name:
       - spotify
+      - spotify-wayland
     state: present
   become: true
   become_user: aur_builder
