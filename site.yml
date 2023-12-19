@@ -32,7 +32,6 @@
     - {role: i3lock, tags: ['i3lock', 'desktop']}
     - {role: i3status_rust, tags: ['i3status_rust', 'desktop']}
     - {role: imagemagick, tags: ['imagemagick', 'utils']}
-    - {role: intellij_idea, tags: ['intellij_idea']}
     - {role: jira, tags: ['jira', 'work'], when: work_enabled}
     - {role: latex, tags: ['latex', 'office']}
     - {role: libreoffice, tags: ['libreoffice', 'office']}
