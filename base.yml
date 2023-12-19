@@ -66,3 +66,4 @@ local_machine:
 
     # TODO: change this to a more general flag
     bluetooth_install_gui: true
+    networkmanager_install_gui: true

@@ -33,7 +33,6 @@
     - {role: mesa, tags: ['mesa', 'desktop']}
     - {role: misc, tags: ['misc', 'utils']}
     - {role: mpv, tags: ['mpv', 'media']}
-    - {role: networkmanager_applet, tags: ['networkmanager_applet', 'desktop']}
     - {role: npm, tags: ['npm', 'languages']}
     - {role: pcmanfm, tags: ['pcmanfm', 'desktop-utils']}
     - {role: powerline, tags: ['powerline', 'desktop']}
