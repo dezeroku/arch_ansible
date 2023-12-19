@@ -210,28 +210,25 @@ bindsym --release Shift+Print exec "flameshot gui"
 #applets run codes
 # Network Manager
 #exec --no-startup-id "nm-applet &"
-# DPMS Manager
-#exec --no-startup-id "caffeine start &"
 {% if bluetooth_enabled %}
 # Bluetooth
-#exec --no-startup-id "dbus-launch blueman-applet &"
+exec --no-startup-id "blueman-applet &"
 {% endif %}
 # Outcoming firewall
-#exec --no-startup-id "opensnitch-ui &"
+exec --no-startup-id "opensnitch-ui &"
 # Dunst
+# TODO: It seems this is automatically run by something already?
 #exec --no-startup-id "dunst &"
 # Udiskie
-#exec --no-startup-id "udiskie --smart-tray &"
-# Picom
-#exec --no-startup-id "picom -b --config ~/.config/picom/picom.conf"
+# TODO: seems that running it with just --tray make the tray icon unhappy :/
+# Check if it works correctly
+exec --no-startup-id "udiskie --smart-tray &"
 # Flameshot daemon
-#exec --no-startup-id "flameshot &"
+exec --no-startup-id "flameshot &"
 {% if sway_autostart_yubikey_otp %}
 # Yubikey OTP
-#exec --no-startup-id "/opt/yubico-authenticator/authenticator &"
+exec --no-startup-id "/opt/yubico-authenticator/authenticator &"
 {% endif %}
-# Read Xresources
-#exec --no-startup-id "xrdb ~/.Xresources"
 
 #workspaces back and forth
 workspace_auto_back_and_forth yes

@@ -5,3 +5,5 @@ sway_wallpaper: 0_wallpaper.png
 sway_disable_touchpad: false
 sway_dpi: "125.37"
 sway_autostart_yubikey_otp: false
+
+fish_install_extensions: false
