@@ -55,17 +55,17 @@ bindsym Mod1+Left exec "playerctl previous"
 bindsym $mod+Shift+q kill
 
 # audio passthrough
-bindsym $mod+p exec "~/.config/i3/scripts/mic_passthrough.sh"
-#bindsym XF86AudioMicMute exec "~/.config/i3/scripts/mic_passthrough.sh"
+bindsym $mod+p exec "~/.config/sway/scripts/mic_passthrough.sh"
+#bindsym XF86AudioMicMute exec "~/.config/sway/scripts/mic_passthrough.sh"
 
 # start rofi (a program launcher)
 bindsym $mod+d exec "rofi -show-icons -show drun"
 bindsym $mod+space exec "rofi -show-icons -show drun"
 
-# There also is the (new) i3-dmenu-desktop which only displays applications
+# There also is the (new) sway-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# bindsym $mod+d exec --no-startup-id sway-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -170,13 +170,10 @@ workspace $ws2 output primary
 workspace $ws5 output primary
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r reload
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# exit sway (logs you out of your X session)
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your X session.' -b 'Yes, exit sway' 'sway-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -231,7 +228,7 @@ bindsym --release Shift+Print exec "flameshot gui"
 #exec --no-startup-id "picom -b --config ~/.config/picom/picom.conf"
 # Flameshot daemon
 #exec --no-startup-id "flameshot &"
-{% if i3_autostart_yubikey_otp %}
+{% if sway_autostart_yubikey_otp %}
 # Yubikey OTP
 #exec --no-startup-id "/opt/yubico-authenticator/authenticator &"
 {% endif %}
@@ -248,17 +245,21 @@ bindsym $mod+Tab workspace next
 bindsym Mod1+Tab exec --no-startup-id rofi -modi combi -combi-modi window -show combi
 
 #tab+shift move to next workspace
-bindsym $mod+Shift+Tab exec "python3 ~/.config/i3/scripts/i3_next_workspace.py "
+bindsym $mod+Shift+Tab exec "python3 ~/.config/sway/scripts/sway_next_workspace.py "
+
+output * {
+  background ~/.config/sway/wallpapers/{{ vars.sway_wallpaper }} stretch
+}
 
 # Set wallpaper
-#exec "feh --bg-scale ~/.config/i3/wallpapers/{{ vars.i3_wallpaper }}"
+#exec "feh --bg-scale ~/.config/sway/wallpapers/{{ vars.sway_wallpaper }}"
 
 # Set custom wallpaper, if it exists.
 # That's pretty hacky way to enable users to use wallpapers that are not version controled.
-#exec "feh --bg-scale ~/.config/i3/wallpapers/custom.png"
+#exec "feh --bg-scale ~/.config/sway/wallpapers/custom.png"
 
 # lock screen
-bindsym $mod+Control+l exec "/usr/local/bin/i3lock-arch-ansible && sleep 1 && xset dpms force standby"
+bindsym $mod+Control+l exec "/usr/local/bin/swaylock-arch-ansible && sleep 1 && xset dpms force standby"
 
 ### WINDOW-WORKSPACE ASSIGNMENT
 # Workspace ids:
@@ -292,8 +293,8 @@ assign [class="(?i)stardewValley"] $ws9
 # Floating workspace for Steam and applications, that don't really like tilling.
 # for_window [workspace=$ws8] floating enable
 
-default_border pixel 1
-hide_edge_borders both
+default_border none
+hide_edge_borders smart_no_gaps
 
 {% if display_resolution == "1920x1080" %}
 # Good for bigger screens.
@@ -308,7 +309,7 @@ bindsym $mod+Return exec foot
 
 #bindsym XF86Launch1 exec terminator -e "echo KOCHAM && echo AKISO  && sleep 6 && echo MOCNO && sleep 3 "
 
-# Start i3bar to display a workspace bar (plus the system information i3status
+# Start swaybar to display a workspace bar (plus the system information swaystatus
 # finds out, if available)
 bar {
     font pango:DejaVu Sans Mono for Powerline, FontAwesome 8.5
@@ -328,28 +329,28 @@ bar {
 }
 
 
-#{% if i3_setup_g751_scripts %}
+#{% if sway_setup_g751_scripts %}
 #    # IMPORTANT NOTICE
 #    # Currently, that config is really tied to Asus G751JM. You can remove all the stuff about it below, and it should
 #    # work nice with different systems. However you won't get scripts for keyboard backlight, hardware screen backlight et`
 #    # toggle touchpad shortcut
-#    bindsym XF86TouchpadToggle exec "python3 ~/.config/i3/scripts/g750
+#    bindsym XF86TouchpadToggle exec "python3 ~/.config/sway/scripts/g750
 #
 #    # kbd backlight, this should be pretty universal
 #
 #    # kbd backlight up
-#    bindsym XF86KbdBrightnessUp exec "python3 ~/.config/i3/scripts/g751/kb-light.py +"
+#    bindsym XF86KbdBrightnessUp exec "python3 ~/.config/sway/scripts/g751/kb-light.py +"
 #
 #    #kbd backlight down
-#    bindsym XF86KbdBrightnessDown exec "python3 ~/.config/i3/scripts/g751/kb-light.py -"
+#    bindsym XF86KbdBrightnessDown exec "python3 ~/.config/sway/scripts/g751/kb-light.py -"
 #
 #    # screen backlight, needs changes in /etc/sudoers to work properly (you have to
 #
-#    # screen backlight up, this path should be ~/.config/i3/scripts/change_brightness but it needs NOPASSWD changes
-#    bindsym XF86MonBrightnessUp exec "sudo ~/.config/i3/scripts/g751/change_brightness +"
+#    # screen backlight up, this path should be ~/.config/sway/scripts/change_brightness but it needs NOPASSWD changes
+#    bindsym XF86MonBrightnessUp exec "sudo ~/.config/sway/scripts/g751/change_brightness +"
 #
-#    # screen backlight down, this path should be ~/.config/i3/scripts/change_brightness but it needs NOPASSWD changes
-#    bindsym XF86MonBrightnessDown exec "sudo ~/.config/i3/scripts/g751/change_brightness -"
+#    # screen backlight down, this path should be ~/.config/sway/scripts/change_brightness but it needs NOPASSWD changes
+#    bindsym XF86MonBrightnessDown exec "sudo ~/.config/sway/scripts/g751/change_brightness -"
 #{% else %}
 #    bindsym XF86MonBrightnessUp exec "xbacklight -inc 5 -fps 30"
 #
@@ -358,6 +359,12 @@ bar {
 
 
 ## TODO: clean this up
+
+# Enable transparency for inactive windows
+exec /usr/share/sway/scripts/inactive-windows-transparency.py --opacity 0.95
+
+# Disable transparency for the focused window
+for_window [class=".*"] opacity set 1
 
 output * {
   scale 2
@@ -381,3 +388,6 @@ input type:keyboard {
   xkb_layout pl
   xkb_options caps:escape
 }
+
+
+include ~/.config/sway/config.d/*

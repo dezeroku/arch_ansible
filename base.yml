@@ -29,12 +29,12 @@ local_machine:
 
     display_resolution: 1920x1080
 
-    i3_setup_g751_scripts: false
-    i3_nopasswd_g751_scripts: false
-    i3_disable_touchpad: false
-    i3_dpi: 125.37
-    i3_nvidia_optimus_direct_rendering: false
-    i3_autostart_yubikey_otp: false
+    sway_setup_g751_scripts: false
+    sway_nopasswd_g751_scripts: false
+    sway_disable_touchpad: false
+    sway_dpi: 125.37
+    sway_nvidia_optimus_direct_rendering: false
+    sway_autostart_yubikey_otp: false
 
     bluetooth_enabled: false
 

@@ -13,7 +13,6 @@
     - {role: autorandr, tags: ['autorandr', 'desktop']}
     - {role: audio_control, tags: ['audio_control', 'desktop']}
     - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: bluetooth_enabled}
-    - {role: picom, tags: ['picom', 'desktop']}
     - {role: discord, tags: ['discord', 'social']}
     - {role: docker, tags: ['docker', 'docker']}
     - {role: dunst, tags: ['dunst', 'desktop']}
@@ -26,7 +25,6 @@
     - {role: gimp, tags: ['gimp', 'desktop-utils']}
     - {role: go, tags: ['go', 'languages']}
     - {role: gparted, tags: ['gparted', 'desktop-utils']}
-    - {role: i3, tags: ['i3', 'desktop']}
     - {role: i3lock, tags: ['i3lock', 'desktop']}
     - {role: i3status_rust, tags: ['i3status_rust', 'desktop']}
     - {role: imagemagick, tags: ['imagemagick', 'utils']}

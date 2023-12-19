@@ -5,12 +5,15 @@
   community.general.pacman:
     name:
       - sway
+      - swaybg
+      - swayimg
+      - python-i3ipc
 
 - name: Ensure directory exists
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.file:
-    path: ~/.config/sway/
+    path: ~/.config/sway/config.d
     state: directory
     mode: 0755
 
@@ -23,7 +26,7 @@
     mode: 0755
 
 - name: Properly bootstrap wallpaper
-  when: vars.i3_wallpaper
+  when: vars.sway_wallpaper
   block:
     # Commands that don't change the "important" state are marked as non-changeable
     - name: Ensure directory exists
@@ -37,16 +40,16 @@
     - name: Create temporary directory
       ansible.builtin.tempfile:
         state: directory
-        suffix: i3
-      register: i3_tempdir
+        suffix: sway
+      register: sway_tempdir
       changed_when: false
 
     - name: Copy the base wallpaper
       become: true
       become_user: "{{ user_name }}"
       ansible.builtin.copy:
-        src: wallpapers/{{ vars.i3_wallpaper }}
-        dest: "{{ i3_tempdir.path }}/wallpaper"
+        src: wallpapers/{{ vars.sway_wallpaper }}
+        dest: "{{ sway_tempdir.path }}/wallpaper"
         mode: 0644
       changed_when: false
 
@@ -56,7 +59,7 @@
       become: true
       become_user: "{{ user_name }}"
       ansible.builtin.command:
-        chdir: "{{ i3_tempdir.path }}"
+        chdir: "{{ sway_tempdir.path }}"
         # The resize ! parameter allows changing ratio
         cmd: convert wallpaper -strip -resize "{{ vars.display_resolution }}!" wallpaper-resized
       changed_when: false
@@ -67,7 +70,7 @@
       become: true
       become_user: "{{ user_name }}"
       ansible.builtin.command:
-        chdir: "{{ i3_tempdir.path }}"
+        chdir: "{{ sway_tempdir.path }}"
         cmd: exiftool -all= wallpaper-resized
       changed_when: false
 
@@ -75,11 +78,11 @@
       become: true
       become_user: "{{ user_name }}"
       ansible.builtin.copy:
-        src: "{{ i3_tempdir.path }}/wallpaper-resized"
-        dest: ~/.config/sway/wallpapers/{{ vars.i3_wallpaper }}
+        src: "{{ sway_tempdir.path }}/wallpaper-resized"
+        dest: ~/.config/sway/wallpapers/{{ vars.sway_wallpaper }}
         mode: 0644
 
-- name: Template i3 config
+- name: Template sway config
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.template:
@@ -94,22 +97,22 @@
       #    src: xinitrc
       #    dest: ~/.xinitrc
       #    mode: 0644
-      #  when: i3_copy_xinitrc
+      #  when: sway_copy_xinitrc
 
-      #- name: NOPASSWD sudo for g751 i3 scripts
+      #- name: NOPASSWD sudo for g751 sway scripts
       #  become: true
       #  become_user: root
       #  ansible.builtin.lineinfile:
       #    dest: /etc/sudoers.d/13-g751-scripts
-      #    line: "{{ user_name }} ALL=(root) NOPASSWD: ~/.config/i3/scripts/g751/*
+      #    line: "{{ user_name }} ALL=(root) NOPASSWD: ~/.config/sway/scripts/g751/*
       #"
       #    create: true
       #    mode: 0440
       #    validate: 'visudo -cf %s'
-      #  when: i3_nopasswd_g751_scripts
+      #  when: sway_nopasswd_g751_scripts
       #
       #- name: Set script as executable
       #  ansible.builtin.file:
-      #    dest: ~/.config/i3/scripts/g751/change_brightness
+      #    dest: ~/.config/sway/scripts/g751/change_brightness
       #    mode: 0744
-      #  when: i3_setup_g751_scripts
+      #  when: sway_setup_g751_scripts
