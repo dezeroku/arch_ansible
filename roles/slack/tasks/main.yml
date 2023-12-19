@@ -6,3 +6,11 @@
     state: present
   become: true
   become_user: aur_builder
+
+- name: Copy the wayland desktop file
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: slack-wayland.desktop
+    dest: /usr/share/applications/slack-wayland.desktop
+    mode: 0644

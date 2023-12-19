@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Slack (Wayland)
+StartupWMClass=Slack
+Comment=Slack Desktop (Wayland)
+GenericName=Slack Client for Linux (Wayland)
+Exec=/usr/bin/slack --enable-features=UseOzonePlatform --enable-features=WebRTCPipeWireCapturer --enable-features=WaylandWindowDecorations --ozone-platform=wayland -s %U
+Icon=slack
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Network;InstantMessaging;
+MimeType=x-scheme-handler/slack;
