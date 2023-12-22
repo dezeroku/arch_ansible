@@ -40,7 +40,7 @@ endif
 set encoding=utf-8
 
 " Add tab = 4 spaces (for ALL, some overwrites later)
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
