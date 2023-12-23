@@ -22,6 +22,10 @@ if status is-interactive
             set -gx PINENTRY_USER_DATA "USE_GTK2"
         end
 
+        if [ -n "$WAYLAND_DISPLAY" ]
+            set -gx PINENTRY_USER_DATA "USE_QT"
+        end
+
         # Force the SSH_CLIENT to always use TTY,
         # even if X is forwarded
         if [ -n "$SSH_CLIENT" ]
