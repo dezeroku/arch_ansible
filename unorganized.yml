@@ -16,7 +16,6 @@
     - {role: virtualbox, tags: ['virtualbox']}
     - {role: nvidia, tags: ['nvidia']}
     - {role: ntfs_3g, tags: ['ntfs_3g']}
-    - {role: kitty, tags: ['kitty']}
     - {role: prometheus_node_exporter, tags: ['prometheus_node_exporter']}
     - {role: steam, tags: ['steam']}
   tags:
