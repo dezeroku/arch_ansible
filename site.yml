@@ -22,6 +22,7 @@
     - {role: fonts, tags: ['fonts', 'desktop']}
     - {role: fuse, tags: ['fuse', 'utils']}
     - {role: gimp, tags: ['gimp', 'desktop-utils']}
+    - {role: imv, tags: ['imv', 'desktop-utils']}
     - {role: go, tags: ['go', 'languages']}
     - {role: gparted, tags: ['gparted', 'desktop-utils']}
     - {role: i3status_rust, tags: ['i3status_rust', 'desktop']}
@@ -46,7 +47,6 @@
     - {role: rust, tags: ['rust', 'languages']}
     - {role: spotify, tags: ['spotify', 'media']}
     - {role: slack, tags: ['slack', 'work']}
-    - {role: sxiv, tags: ['sxiv', 'desktop-utils']}
     - {role: udiskie, tags: ['udiskie', 'desktop']}
     - {role: vagrant, tags: ['vagrant', 'virtualization']}
     - {role: vim, tags: ['vim', 'editors']}
