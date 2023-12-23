@@ -10,7 +10,6 @@
   become: true
   become_user: "{{ user_name }}"
   roles:
-    - {role: autorandr, tags: ['autorandr', 'desktop']}
     - {role: audio_control, tags: ['audio_control', 'desktop']}
     - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: bluetooth_enabled}
     - {role: discord, tags: ['discord', 'social']}
@@ -65,6 +64,7 @@
     - {role: foot, tags: ['foot', 'desktop']}
     - {role: grimshot, tags: ['grimshot', 'desktop', 'sway-wm']}
     - {role: brightnessctl, tags: ['brightnessctl', 'desktop', 'sway-wm']}
+    - {role: kanshi, tags: ['kanshi', 'desktop', 'sway-wm']}
   tags:
     - install
 

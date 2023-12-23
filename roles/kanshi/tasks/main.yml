@@ -1,0 +1,46 @@
+---
+- name: Install kanshi
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - kanshi
+      - inotify-tools
+
+- name: Ensure directory exists
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.config/kanshi/
+    state: directory
+    mode: 0755
+
+# You are supposed to modify the config file yourself
+# on per-device basis
+- name: Ensure the config file exists
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.config/kanshi/config
+    mode: 0644
+    state: touch
+    modification_time: preserve
+    access_time: preserve
+
+- name: Ensure directory exists
+  ansible.builtin.file:
+    path: ~/.config/sway/scripts/kanshi/
+    state: directory
+    mode: 0755
+
+- name: Template the helper script
+  ansible.builtin.template:
+    src: kanshi-wrapper.sh
+    dest: ~/.config/sway/scripts/kanshi/kanshi-wrapper.sh
+    mode: 0755
+
+- name: Template sway plugin
+  ansible.builtin.include_role:
+    name: helper_sway_plugin
+  vars:
+    helper_sway_plugin_template_name: kanshi-plugin
