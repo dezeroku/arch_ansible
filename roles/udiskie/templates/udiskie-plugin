@@ -1,0 +1,3 @@
+# TODO: seems that running it with just --tray make the tray icon unhappy :/
+# Check if it works correctly
+exec "udiskie --smart-tray &"

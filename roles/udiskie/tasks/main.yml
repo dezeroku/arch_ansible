@@ -5,3 +5,9 @@
   community.general.pacman:
     name:
       - udiskie
+
+- name: Template sway plugin
+  ansible.builtin.include_role:
+    name: helper_sway_plugin
+  vars:
+    helper_sway_plugin_template_name: udiskie-plugin
