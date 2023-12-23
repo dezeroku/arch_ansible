@@ -1,0 +1,3 @@
+{% if yubikey_sway_autostart_otp %}
+exec "/opt/yubico-authenticator/authenticator &"
+{% endif %}

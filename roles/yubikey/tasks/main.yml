@@ -48,3 +48,9 @@
   ansible.builtin.systemd:
     name: polkit
     state: "{{ (polkit_rules.changed) | ternary('restarted', 'started') }}"
+
+- name: Template sway plugin
+  ansible.builtin.include_role:
+    name: helper_sway_plugin
+  vars:
+    helper_sway_plugin_template_name: yubikey-plugin
