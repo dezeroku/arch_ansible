@@ -6,3 +6,9 @@
     name: network-manager-applet
     state: present
   when: network_manager_enable_gui
+
+- name: Template sway plugin
+  ansible.builtin.include_role:
+    name: helper_sway_plugin
+  vars:
+    helper_sway_plugin_template_name: nm-applet-plugin
