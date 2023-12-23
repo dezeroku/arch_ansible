@@ -1,0 +1,19 @@
+---
+# Write a sway template plugin
+# Example usage:
+#  - name: Template sway plugin
+#    ansible.builtin.include_role:
+#      name: helper_sway_plugin
+#    vars:
+#      helper_sway_plugin_template_name: swaylock-plugin
+
+- name: Install the sway plugin
+  when: helper_sway_plugin_enabled
+  block:
+    - name: Plug into sway
+      ansible.builtin.template:
+        src: "{{ helper_sway_plugin_template_name }}"
+        dest: ~/.config/sway/config.d/{{ helper_sway_plugin_template_name }}
+        mode: "{{ helper_sway_plugin_mode }}"
+      notify:
+        - Reload sway

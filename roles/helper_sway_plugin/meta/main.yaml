@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: sway
+    when: helper_sway_plugin_enabled
