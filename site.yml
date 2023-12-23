@@ -10,7 +10,7 @@
   become: true
   become_user: "{{ user_name }}"
   roles:
-    - {role: audio_control, tags: ['audio_control', 'desktop']}
+    - {role: audio_control, tags: ['audio_control', 'desktop', 'audio']}
     - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: bluetooth_enabled}
     - {role: discord, tags: ['discord', 'social']}
     - {role: docker, tags: ['docker', 'docker']}
