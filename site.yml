@@ -65,6 +65,7 @@
     - {role: wayland, tags: ['wayland', 'desktop']}
     - {role: foot, tags: ['foot', 'desktop']}
     - {role: grimshot, tags: ['grimshot', 'desktop', 'sway-wm']}
+    - {role: brightnessctl, tags: ['brightnessctl', 'desktop', 'sway-wm']}
   tags:
     - install
 

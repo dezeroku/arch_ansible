@@ -1,0 +1,30 @@
+---
+- name: Install brightnessctl
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - brightnessctl
+
+- name: Make sure user is in the "video" group (for backlight permissions)
+  become: true
+  become_user: root
+  ansible.builtin.user:
+    name: "{{ user_name }}"
+    groups: video
+    state: present
+    append: true
+
+- name: Copy the udev rule
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: 90-backlight.rules
+    dest: /etc/udev/rules.d/90-backlight.rules
+    mode: 0644
+
+- name: Template sway plugin
+  ansible.builtin.include_role:
+    name: helper_sway_plugin
+  vars:
+    helper_sway_plugin_template_name: brightnessctl-plugin
