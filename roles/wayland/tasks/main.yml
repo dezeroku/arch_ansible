@@ -1,0 +1,43 @@
+---
+- name: Install wayland
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - wayland
+      # TODO: do we want to put it in a better place?
+      - qt6-wayland
+      # For pinentry-qt
+      - kwayland5
+
+- name: Enable wayland for Electron (system) apps
+  ansible.builtin.copy:
+    src: electron25-flags.conf
+    dest: ~/.config/electron{{ item }}-flags.conf
+    mode: 0644
+  loop:
+    - 25
+    - 24
+    - 23
+    - 22
+    - 21
+    - 20
+
+- name: Set up fish scriptlets
+  when: fish_install_extensions
+  block:
+    - name: Ensure directory exists
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.file:
+        path: ~/.config/fish/ansible/wayland
+        state: directory
+        mode: 0755
+
+    - name: Template wayland scriptlet
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.template:
+        src: env.fish
+        dest: ~/.config/fish/ansible/wayland/env.fish
+        mode: 0644
