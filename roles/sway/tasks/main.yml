@@ -6,7 +6,6 @@
     name:
       - sway
       - swaybg
-      - swayimg
       - python-i3ipc
 
 - name: Ensure directory exists

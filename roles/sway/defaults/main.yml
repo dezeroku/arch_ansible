@@ -3,7 +3,9 @@ display_resolution: 1920x1080
 
 sway_wallpaper: 0_wallpaper.png
 sway_disable_touchpad: false
-sway_dpi: "125.37"
-sway_autostart_yubikey_otp: false
+sway_output_scale: 1
+sway_kb_layout: pl
+sway_swap_caps_escape: true
 
+sway_log_file: "/tmp/sway.log"
 fish_install_extensions: false

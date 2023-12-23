@@ -1,21 +1,9 @@
 ---
-#dependencies:
-#  #- role: autorandr
-#  - role: bluetooth
-#    when: vars.bluetooth_enabled
-#    vars:
-#      bluetooth_install_gui: true
-#  - role: wayland
-#  - role: mesa
-#  - role: pipewire
-#  - role: audio_control
-#  - role: i3status_rust
-#  - role: terminator
-#  - role: foot
-#  - role: fonts
-#  - role: powerline
-#  - role: dunst
-#  - role: rofi
-#  - role: firewall
-#  - role: udiskie
-#  - {role: yubikey, when: vars.sway_autostart_yubikey_otp}
+dependencies:
+  - role: wayland
+  - role: i3status_rust
+  - role: terminator
+  - role: foot
+  - role: fonts
+  - role: powerline
+  - role: rofi

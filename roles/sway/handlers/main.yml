@@ -1,5 +1,6 @@
 ---
 - name: Reload sway
   when: lookup('env','WAYLAND_DISPLAY')
+  changed_when: false
   ansible.builtin.command:
     cmd: swaymsg reload

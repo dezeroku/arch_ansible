@@ -1,6 +1,3 @@
-# This is base config file, put here all settings that are shared between all devices you use.
-# If you specify same things in base and device specific config, device specific overrides base
-
 # Set main button to Win
 set $mod Mod4
 
@@ -9,47 +6,6 @@ floating_modifier $mod
 
 #Mod1 + x toggles layout
 bindsym $mod+x layout toggle
-
-# XF86 music binds
-# volume control up
-#bindsym XF86AudioRaiseVolume exec "pamixer --increase 5"
-
-# volume control down
-#bindsym XF86AudioLowerVolume exec "pamixer --decrease 5"
-
-# volume mute
-#bindsym XF86AudioMute exec "pamixer --toggle-mute"
-
-# start/pause music
-#bindsym XF86AudioPlay exec "playerctl play-pause"
-
-# stop music
-#bindsym XF86AudioStop exec "playerctl stop"
-
-# next song
-#bindsym XF86AudioNext exec "playerctl next"
-
-# previous song
-#bindsym XF86AudioPrev exec "playerctl previous"
-
-# Keyboard shortcuts music binds
-# volume control up
-bindsym Mod1+End exec "pamixer --increase 5"
-
-# volume control down
-bindsym Mod1+Delete exec "pamixer --decrease 5"
-
-# volume mute
-bindsym Mod1+Up exec "pamixer --toggle-mute"
-
-# start/pause music
-bindsym Mod1+Down exec "playerctl play-pause"
-
-# next song
-bindsym Mod1+Right exec "playerctl next"
-
-# previous song
-bindsym Mod1+Left exec "playerctl previous"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -61,11 +17,6 @@ bindsym $mod+p exec "~/.config/sway/scripts/mic_passthrough.sh"
 # start rofi (a program launcher)
 bindsym $mod+d exec "rofi -show-icons -show drun"
 bindsym $mod+space exec "rofi -show-icons -show drun"
-
-# There also is the (new) sway-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id sway-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -201,27 +152,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#applets run codes
-# Network Manager
-#exec --no-startup-id "nm-applet &"
-{% if bluetooth_enabled %}
-# Bluetooth
-exec --no-startup-id "blueman-applet &"
-{% endif %}
-# Outcoming firewall
-exec --no-startup-id "opensnitch-ui &"
-# Dunst
-# TODO: It seems this is automatically run by something already?
-#exec --no-startup-id "dunst &"
-# Udiskie
-# TODO: seems that running it with just --tray make the tray icon unhappy :/
-# Check if it works correctly
-exec --no-startup-id "udiskie --smart-tray &"
-{% if sway_autostart_yubikey_otp %}
-# Yubikey OTP
-exec --no-startup-id "/opt/yubico-authenticator/authenticator &"
-{% endif %}
-
 #workspaces back and forth
 workspace_auto_back_and_forth yes
 
@@ -229,24 +159,14 @@ workspace_auto_back_and_forth yes
 bindsym $mod+Tab workspace next
 
 # Alt-Tab like behaviour
-bindsym Mod1+Tab exec --no-startup-id rofi -modi combi -combi-modi window -show combi
+bindsym Mod1+Tab exec "rofi -modi combi -combi-modi window -show combi"
 
 #tab+shift move to next workspace
-bindsym $mod+Shift+Tab exec "python3 ~/.config/sway/scripts/sway_next_workspace.py "
+bindsym $mod+Shift+Tab exec "python3 ~/.config/sway/scripts/sway_next_workspace.py"
 
 output * {
   background ~/.config/sway/wallpapers/{{ vars.sway_wallpaper }} stretch
 }
-
-# Set wallpaper
-#exec "feh --bg-scale ~/.config/sway/wallpapers/{{ vars.sway_wallpaper }}"
-
-# Set custom wallpaper, if it exists.
-# That's pretty hacky way to enable users to use wallpapers that are not version controled.
-#exec "feh --bg-scale ~/.config/sway/wallpapers/custom.png"
-
-# lock screen
-#bindsym $mod+Control+l exec "/usr/local/bin/swaylock-arch-ansible && sleep 1 && xset dpms force standby"
 
 ### WINDOW-WORKSPACE ASSIGNMENT
 # Workspace ids:
@@ -296,10 +216,6 @@ font pango:monospace 8
 # start a terminal
 bindsym $mod+Return exec foot
 
-#bindsym XF86Launch1 exec terminator -e "echo KOCHAM && echo AKISO  && sleep 6 && echo MOCNO && sleep 3 "
-
-# Start swaybar to display a workspace bar (plus the system information swaystatus
-# finds out, if available)
 bar {
     font pango:DejaVu Sans Mono for Powerline, FontAwesome 8.5
     position top
@@ -318,13 +234,6 @@ bar {
 }
 
 
-#    bindsym XF86MonBrightnessUp exec "xbacklight -inc 5 -fps 30"
-#
-#    bindsym XF86MonBrightnessDown exec "xbacklight -dec 5 -fps 30"
-
-
-## TODO: clean this up
-
 # Enable transparency for inactive windows
 exec /usr/share/sway/scripts/inactive-windows-transparency.py --opacity 0.95
 
@@ -332,7 +241,7 @@ exec /usr/share/sway/scripts/inactive-windows-transparency.py --opacity 0.95
 for_window [class=".*"] opacity set 1
 
 output * {
-  scale 2
+  scale {{ sway_output_scale }}
 }
 
 input type:touchpad {
@@ -348,11 +257,14 @@ input type:touchpad {
 {% endif %}
 
 input type:keyboard {
-  xkb_layout pl
+  xkb_layout {{ sway_kb_layout }}
+{% if sway_swap_caps_escape %}
   xkb_options caps:escape
+{% endif %}
 }
 
 # Include the system files just in case
 include /etc/sway/config.d/*
 
+# Include plugins defined in other roles
 include ~/.config/sway/config.d/*

@@ -30,10 +30,8 @@ local_machine:
     display_resolution: 1920x1080
 
     sway_disable_touchpad: false
-    sway_dpi: 125.37
-    sway_autostart_yubikey_otp: false
-
-    bluetooth_enabled: false
+    sway_output_scale: 1
+    yubikey_sway_autostart_otp: false
 
     setup_hardware_video_acceleration_enabled: true
     hardware_video_acceleration_providers: ["intel"]
