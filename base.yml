@@ -59,6 +59,10 @@ local_machine:
     work_jira_user: test@example.com
     work_jira_endpoint: jira.example.com
 
+    bluetooth_enabled: false
     # TODO: set of variables defining if GUI is to be enabled
     # Settings this to true as default basically breaks the CLI only deployments
     helper_sway_plugin_enabled: true
+
+    # TODO: change this to a more general flag
+    bluetooth_install_gui: true
