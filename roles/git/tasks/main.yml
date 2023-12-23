@@ -7,6 +7,15 @@
       - git
       - git-lfs
 
+- name: Install sendemail SSL dependencies
+  become: true
+  become_user: root
+  when: git_smtp_password | length > 0
+  community.general.pacman:
+    name:
+      - perl-authen-sasl
+      - perl-io-socket-ssl
+
 - name: Install hub
   become: true
   become_user: root
@@ -79,20 +88,79 @@
         scope: global
         value: "false"
 
+- name: Set up sendmail
+  become: true
+  become_user: "{{ user_name }}"
+  block:
+    - name: Set server
+      community.general.git_config:
+        name: sendemail.smtpserver
+        scope: global
+        value: "{{ git_smtp_server }}"
+
+    - name: Set user
+      community.general.git_config:
+        name: sendemail.smtpuser
+        scope: global
+        value: "{{ git_smtp_user }}"
+
+    - name: Set encryption
+      community.general.git_config:
+        name: sendemail.smtpencryption
+        scope: global
+        value: "{{ git_smtp_encryption }}"
+
+    - name: Set serverport
+      community.general.git_config:
+        name: sendemail.smtpserverport
+        scope: global
+        value: "{{ git_smtp_serverport }}"
+
+    - name: Set the confirmation level
+      community.general.git_config:
+        name: sendemail.confirm
+        scope: global
+        value: "{{ git_sendemail_confirm }}"
+
+    - name: Set the password
+      # TODO: switch to using a proper credentials helper
+      # GPG / bitwarden?
+      # Relying on a file with restricted permissions is not safe at all
+      block:
+        - name: Ensure the password file has correct permissions
+          ansible.builtin.file:
+            path: "{{ git_sendemail_password_file }}"
+            mode: 0600
+            state: touch
+            modification_time: preserve
+            access_time: preserve
+
+        - name: Set password in a separate file
+          # We allow the user to set the password outside of the
+          # arch_ansible ecosystem
+          when: git_smtp_password | length > 0
+          community.general.git_config:
+            file: "{{ git_sendemail_password_file }}"
+            name: sendemail.smtpPass
+            scope: file
+            value: "{{ git_smtp_password }}"
+
+    - name: Include the password file
+      community.general.git_config:
+        name: include.path
+        scope: global
+        value: "{{ git_sendemail_password_file }}"
+
 - name: Set up fish scriptlets
   when: fish_install_extensions
   block:
     - name: Ensure directory exists
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.file:
         path: ~/.config/fish/ansible/git
         state: directory
         mode: 0755
 
     - name: Template scriptlet
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.template:
         src: git.fish
         dest: ~/.config/fish/ansible/git/git.fish

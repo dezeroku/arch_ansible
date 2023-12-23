@@ -1,5 +1,13 @@
 ---
 git_install_hub: true
+git_smtp_server: smtp.gmail.com
+git_smtp_user: dezeroku@gmail.com
+# Follow https://git-send-email.io to find out how to obtain password for GMail
+git_smtp_password: ""
+git_smtp_encryption: tls
+git_smtp_serverport: 587
+git_sendemail_confirm: "always"
+git_sendemail_password_file: "~/.gitconfig_sendemail_password"
 user_name: d0ku
 user_pub_name: dezeroku
 user_email: dezeroku@gmail.com
