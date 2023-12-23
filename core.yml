@@ -12,9 +12,15 @@
     - {role: sudo, tags: ['sudo']}
     - {role: aur_builder, tags: ['aur_builder']}
     - {role: dns_cache, tags: ['dns_cache']}
-    - {role: networkmanager, tags: ['networkmanager']}
-    - {role: firewall, tags: ['firewall']}
     - {role: hardening, tags: ['hardening']}
     - {role: openssh, tags: ['openssh']}
+  tags:
+    - core
+
+- name: Core (non-root)
+  hosts: all
+  roles:
+    - {role: networkmanager, tags: ['networkmanager']}
+    - {role: firewall, tags: ['firewall']}
   tags:
     - core
