@@ -10,7 +10,6 @@
 - name: Install sendemail SSL dependencies
   become: true
   become_user: root
-  when: git_smtp_password | length > 0
   community.general.pacman:
     name:
       - perl-authen-sasl
