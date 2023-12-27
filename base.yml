@@ -38,6 +38,8 @@ local_machine:
 
     # Allow roles to install their own scriptlets to be sourced by fish
     fish_install_extensions: true
+    # TODO: replace every usage of the above with below
+    helper_fish_plugin_enabled: true
 
     firewall_enable_opensnitch: true
 

@@ -1,0 +1,27 @@
+---
+# Write a fish template plugin
+# Example usage:
+#  - name: Template fish plugin
+#    ansible.builtin.include_role:
+#      name: helper_fish_plugin
+#    vars:
+#      helper_fish_plugin_directory_name: kubectl_stuff
+#      helper_fish_plugin_template_name: kubernetes.fish
+
+- name: Ensure fish plugin directory exists
+  when: helper_fish_plugin_enabled
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: ~/.config/fish/ansible/{{ helper_fish_plugin_directory_name }}
+    state: directory
+    mode: "{{ helper_fish_plugin_directory_mode }}"
+
+- name: Install the fish plugin
+  when: helper_fish_plugin_enabled
+  block:
+    - name: Plug into fish
+      ansible.builtin.template:
+        src: "{{ helper_fish_plugin_template_name }}"
+        dest: ~/.config/fish/ansible/{{ helper_fish_plugin_directory_name }}/{{ helper_fish_plugin_template_name }}
+        mode: "{{ helper_fish_plugin_mode }}"

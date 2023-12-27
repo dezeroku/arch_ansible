@@ -1,0 +1,6 @@
+---
+helper_fish_plugin_mode: "0644"
+helper_fish_plugin_directory_mode: "0755"
+helper_fish_plugin_directory_name: ""
+helper_fish_plugin_template_name: ""
+helper_fish_plugin_enabled: false
