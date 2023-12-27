@@ -6,22 +6,10 @@
     name:
       - apprise
 
-- name: Set up fish scriptlets
-  when: fish_install_extensions
-  block:
-    - name: Ensure directory exists
-      become: true
-      become_user: "{{ user_name }}"
-      ansible.builtin.file:
-        path: ~/.config/fish/ansible/apprise
-        state: directory
-        mode: 0755
-
-    - name: Template pushover scriptlet
-      become: true
-      become_user: "{{ user_name }}"
-      ansible.builtin.template:
-        src: pushover.fish
-        dest: ~/.config/fish/ansible/apprise/pushover.fish
-        mode: 0644
-      when: "apprise_pushover_user_key | length > 0 and apprise_pushover_api_key | length > 0"
+- name: Template fish plugin
+  when: "apprise_pushover_user_key | length > 0 and apprise_pushover_api_key | length > 0"
+  ansible.builtin.include_role:
+    name: helper_fish_plugin
+  vars:
+    helper_fish_plugin_directory_name: apprise
+    helper_fish_plugin_template_name: pushover.fish

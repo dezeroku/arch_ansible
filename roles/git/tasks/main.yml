@@ -151,17 +151,9 @@
         scope: global
         value: "{{ git_sendemail_password_file }}"
 
-- name: Set up fish scriptlets
-  when: fish_install_extensions
-  block:
-    - name: Ensure directory exists
-      ansible.builtin.file:
-        path: ~/.config/fish/ansible/git
-        state: directory
-        mode: 0755
-
-    - name: Template scriptlet
-      ansible.builtin.template:
-        src: git.fish
-        dest: ~/.config/fish/ansible/git/git.fish
-        mode: 0644
+- name: Template fish plugin
+  ansible.builtin.include_role:
+    name: helper_fish_plugin
+  vars:
+    helper_fish_plugin_directory_name: git
+    helper_fish_plugin_template_name: git.fish

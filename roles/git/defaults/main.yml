@@ -11,5 +11,3 @@ git_sendemail_password_file: "~/.gitconfig_sendemail_password"
 user_name: d0ku
 user_pub_name: dezeroku
 user_email: dezeroku@gmail.com
-
-fish_install_extensions: false

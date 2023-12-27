@@ -57,20 +57,9 @@
     mode: 0644
   when: vars.vagrant_prepare_archlinux_vm
 
-- name: Ensure fish scriptlets directory exists
-  become: true
-  become_user: "{{ user_name }}"
-  ansible.builtin.file:
-    path: ~/.config/fish/ansible/vagrant
-    state: directory
-    mode: 0755
-  when: fish_install_extensions
-
-- name: Copy fish config
-  become: true
-  become_user: "{{ user_name }}"
-  ansible.builtin.template:
-    src: vagrant.fish
-    dest: ~/.config/fish/ansible/vagrant/vagrant.fish
-    mode: 0644
-  when: fish_install_extensions
+- name: Template fish plugin
+  ansible.builtin.include_role:
+    name: helper_fish_plugin
+  vars:
+    helper_fish_plugin_directory_name: vagrant
+    helper_fish_plugin_template_name: vagrant.fish

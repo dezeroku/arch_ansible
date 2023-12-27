@@ -1,6 +1,5 @@
 ---
 user_name: d0ku
-fish_install_extensions: false
 
 apprise_pushover_user_key: ""
 apprise_pushover_api_key: ""

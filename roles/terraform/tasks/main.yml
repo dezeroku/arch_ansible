@@ -16,20 +16,9 @@
   become_user: aur_builder
   register: krew_install
 
-- name: Ensure fish scriptlets directory exists
-  become: true
-  become_user: "{{ user_name }}"
-  ansible.builtin.file:
-    path: ~/.config/fish/ansible/terraform
-    state: directory
-    mode: 0755
-  when: fish_install_extensions
-
-- name: Copy fish config
-  become: true
-  become_user: "{{ user_name }}"
-  ansible.builtin.copy:
-    src: aliases.fish
-    dest: ~/.config/fish/ansible/terraform/aliases.fish
-    mode: 0644
-  when: fish_install_extensions
+- name: Template fish plugin
+  ansible.builtin.include_role:
+    name: helper_fish_plugin
+  vars:
+    helper_fish_plugin_directory_name: terraform
+    helper_fish_plugin_template_name: aliases.fish

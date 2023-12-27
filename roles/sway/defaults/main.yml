@@ -8,4 +8,3 @@ sway_kb_layout: pl
 sway_swap_caps_escape: true
 
 sway_log_file: "/tmp/sway.log"
-fish_install_extensions: false

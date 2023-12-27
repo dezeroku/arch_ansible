@@ -67,24 +67,12 @@
         dest: ~/.config/sway/wallpapers/{{ vars.sway_wallpaper }}
         mode: 0644
 
-- name: Set up fish scriptlets
-  when: fish_install_extensions
-  block:
-    - name: Ensure directory exists
-      become: true
-      become_user: "{{ user_name }}"
-      ansible.builtin.file:
-        path: ~/.config/fish/ansible/sway
-        state: directory
-        mode: 0755
-
-    - name: Template scriptlet
-      become: true
-      become_user: "{{ user_name }}"
-      ansible.builtin.template:
-        src: env.fish
-        dest: ~/.config/fish/ansible/sway/env.fish
-        mode: 0644
+- name: Template fish plugin
+  ansible.builtin.include_role:
+    name: helper_fish_plugin
+  vars:
+    helper_fish_plugin_directory_name: sway
+    helper_fish_plugin_template_name: env.fish
 
 - name: Template sway config
   ansible.builtin.template:
