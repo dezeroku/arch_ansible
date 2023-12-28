@@ -1,0 +1,11 @@
+{
+  "email": "{{ bitwarden_email }}",
+  "base_url": null,
+  "identity_url": null,
+  "notifications_url": null,
+  "lock_timeout": 900,
+  "sync_interval": 3600,
+{# TODO: this relies on the pinentry from gpg role, clean it up #}
+  "pinentry": "/usr/local/bin/smart-pinentry",
+  "client_cert_path": null
+}

@@ -5,3 +5,19 @@
   community.general.pacman:
     name:
       - bitwarden-cli
+      - rbw
+
+# https://github.com/doy/rbw/pull/151
+# cargo install --git https://github.com/Ty3uK/rbw --rev 40a33ec
+
+- name: Ensure directory exists
+  ansible.builtin.file:
+    path: ~/.config/rbw
+    state: directory
+    mode: 0755
+
+- name: Template rbw config
+  ansible.builtin.template:
+    src: rbw.json
+    dest: ~/.config/rbw/config.json
+    mode: 0600
