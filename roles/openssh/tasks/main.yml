@@ -37,6 +37,7 @@
     - 01-ssh-devserver.conf
     - 02-ssh-homeserver.conf
     - 03-ssh-controlpersist.conf
+    - 04-ssh-term.conf
 
 - name: Copy sshd conf files
   become: true
