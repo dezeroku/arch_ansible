@@ -14,7 +14,6 @@ for x in data:
         your_next_workspace = x["name"]
         break
     if x["visible"] == True and x["focused"] == True:
-
         print(x)
         your_current_workspace = x["name"]
         print(your_current_workspace)
