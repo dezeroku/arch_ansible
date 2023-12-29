@@ -7,32 +7,24 @@
       - qutebrowser
 
 - name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/qutebrowser
     state: directory
     mode: 0755
 
 - name: Copy qutebrowser config
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: qute_config.py
     dest: ~/.config/qutebrowser/config.py
     mode: 0644
 
 - name: Ensure scripts directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/qutebrowser/userscripts
     state: directory
     mode: 0755
 
 - name: Copy userscripts
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: ~/.config/qutebrowser/userscripts/
@@ -42,16 +34,12 @@
     - spawn_mpv.sh
 
 - name: Ensure greasemonkey directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/qutebrowser/greasemonkey
     state: directory
     mode: 0755
 
 - name: Copy youtube-adblock.user.js scriptlet
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: youtube-adblock.user.js
     dest: ~/.config/qutebrowser/greasemonkey/youtube-adblock.user.js
@@ -73,16 +61,12 @@
   become_user: root
 
 - name: Query default browser
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.command:
     cmd: xdg-settings get default-web-browser
   changed_when: false
   register: default_browser_check
 
 - name: Set qutebrowser as the default browser
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.command:
     cmd: xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
   changed_when: true

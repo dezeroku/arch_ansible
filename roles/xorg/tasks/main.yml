@@ -89,7 +89,7 @@
 
 - name: Make sure user is in "video" group (for backlight permissions)
   ansible.builtin.user:
-    name: "{{ user_name }}"
+    name: "{{ ansible_user_id }}"
     groups: wheel
     state: present
     append: true

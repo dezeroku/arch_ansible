@@ -33,8 +33,6 @@
   when: vars.swaylock_wallpaper
   block:
     - name: Ensure directory exists
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.file:
         path: ~/.config/swaylock/wallpapers
         state: directory
@@ -49,8 +47,6 @@
       changed_when: false
 
     - name: Copy the base wallpaper
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.copy:
         src: wallpapers/{{ vars.swaylock_wallpaper }}
         dest: "{{ swaylock_tempdir.path }}/wallpaper"
@@ -60,8 +56,6 @@
     - name: Resize and remove metadata
       # Resize image and get rid of metadata
       # so the hashes are deterministic
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.command:
         chdir: "{{ swaylock_tempdir.path }}"
         # The resize ! parameter allows changing ratio
@@ -71,16 +65,12 @@
     - name: Remove metadata (exiftool)
       # For whatever reason imagemagick leaves png:tIME on some images
       # exiftool handles it properly
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.command:
         chdir: "{{ swaylock_tempdir.path }}"
         cmd: exiftool -all= wallpaper-resized
       changed_when: false
 
     - name: Copy the modified wallpaper
-      become: true
-      become_user: "{{ user_name }}"
       ansible.builtin.copy:
         src: "{{ swaylock_tempdir.path }}/wallpaper-resized"
         dest: ~/.config/swaylock/wallpapers/{{ vars.swaylock_wallpaper }}

@@ -22,16 +22,12 @@
       - python-pre-commit
 
 - name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/pypoetry/
     state: directory
     mode: 0755
 
 - name: Copy poetry config
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: pypoetry-config.toml
     dest: ~/.config/pypoetry/config.toml

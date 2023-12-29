@@ -8,7 +8,7 @@
 
 - name: Ensure directory exists
   become: true
-  become_user: "{{ user_name }}"
+  become_user: "{{ openssh_user_name }}"
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
@@ -20,7 +20,7 @@
 
 - name: Copy ssh config
   become: true
-  become_user: "{{ user_name }}"
+  become_user: "{{ openssh_user_name }}"
   ansible.builtin.copy:
     src: ssh_config
     dest: ~/.ssh/config
@@ -28,7 +28,7 @@
 
 - name: Copy ssh conf files
   become: true
-  become_user: "{{ user_name }}"
+  become_user: "{{ openssh_user_name }}"
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: ~/.ssh/ssh_config.d/{{ item }}

@@ -7,22 +7,16 @@
       - vagrant
 
 - name: Get list of vagrant plugins
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.command: vagrant plugin list
   changed_when: false
   register: vagrant_plugins
 
 - name: Install vagrant-libvirt plugin
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.command: vagrant plugin install vagrant-libvirt
   changed_when: true
   when: vars.vagrant_provider == "libvirt" and "vagrant-libvirt" not in vagrant_plugins.stdout
 
 - name: Install vagrant plugins
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.command: vagrant plugin install "{{ item }}"
   changed_when: true
   when: item not in vagrant_plugins.stdout
@@ -31,8 +25,6 @@
     - vagrant-cachier
 
 - name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/arch_vm
     state: directory
@@ -40,8 +32,6 @@
   when: vars.vagrant_prepare_archlinux_vm
 
 - name: Copy Vagrantfile
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: Vagrantfile
     dest: ~/arch_vm/
@@ -49,8 +39,6 @@
   when: vars.vagrant_prepare_archlinux_vm
 
 - name: Copy arch_vm README
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: README.md
     dest: ~/arch_vm/

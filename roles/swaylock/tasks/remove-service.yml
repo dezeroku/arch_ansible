@@ -14,7 +14,7 @@
           become: true
           become_user: root
           ansible.builtin.systemd:
-            name: "{{ item }}{{ user_name }}"
+            name: "{{ item }}{{ ansible_user_id }}"
             enabled: false
 
         - name: Remove the service file

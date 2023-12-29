@@ -7,8 +7,6 @@
       - go
 
 # - name: Go install few tools
-#   become: true
-#   become_user: "{{ user_name }}"
 #   ansible.builtin.command: "{{ item }}"
 #   with_items:
 #     - go install golang.org/x/tools/cmd/godoc@latest

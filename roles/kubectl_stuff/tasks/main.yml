@@ -20,8 +20,6 @@
       - yq
 
 - name: Install helm plugins
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.command: helm plugin install "{{ item }}"
   with_items:
     - "https://github.com/databus23/helm-diff"
@@ -39,15 +37,11 @@
   register: krew_install
 
 - name: Refresh krew repos
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.command: kubectl krew update
   changed_when: true
   when: krew_install.changed  # noqa: no-handler
 
 - name: Install plugins managed by krew
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.command: kubectl krew install "{{ item }}"
   register: krew_install_plugin
   with_items:
@@ -64,8 +58,6 @@
     helper_fish_plugin_template_name: kubernetes.fish
 
 - name: Ensure fish completions directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/fish/ansible/completions
     state: directory

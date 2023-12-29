@@ -8,16 +8,12 @@
       - w3m
 
 - name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/ranger
     state: directory
     mode: 0755
 
 - name: Copy ranger config
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: rc.conf
     dest: ~/.config/ranger/rc.conf

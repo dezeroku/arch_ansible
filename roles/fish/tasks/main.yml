@@ -7,24 +7,18 @@
       - fish
 
 - name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/fish
     state: directory
     mode: 0755
 
 - name: Template fish config
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: config.fish
     dest: ~/.config/fish/
     mode: 0644
 
 - name: Template fish plugins config
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: plugins.fish
     dest: ~/.config/fish/plugins.fish
@@ -32,16 +26,12 @@
   register: var_fish_plugins
 
 - name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/fish/functions
     state: directory
     mode: 0755
 
 - name: Copy fundle setup script
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: fundle.fish
     dest: ~/.config/fish/functions
@@ -49,30 +39,22 @@
   register: var_fundle_script
 
 - name: Get plugins
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.shell: fish -c "fundle install" && fish -c "fundle update"
   when: var_fish_plugins.changed or var_fundle_script.changed
   changed_when: true
 
 - name: Ensure scriptlets directory is cleaned up
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/fish/ansible/fish
     state: absent
 
 - name: Template fish blocks
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: blocks.fish
     dest: ~/.config/fish/blocks.fish
     mode: 0644
 
 - name: Ensure completions directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/fish/completions
     state: directory
@@ -82,6 +64,6 @@
   become: true
   become_user: root
   ansible.builtin.user:
-    name: "{{ user_name }}"
+    name: "{{ ansible_user_id }}"
     shell: '{{ user_shell | default("/bin/bash") }}'
     state: present

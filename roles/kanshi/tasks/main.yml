@@ -8,8 +8,6 @@
       - inotify-tools
 
 - name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/kanshi/
     state: directory
@@ -18,8 +16,6 @@
 # You are supposed to modify the config file yourself
 # on per-device basis
 - name: Ensure the config file exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/kanshi/config
     mode: 0644

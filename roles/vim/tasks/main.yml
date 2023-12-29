@@ -11,16 +11,12 @@
       - vim-spell-de
 
 - name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/nvim
     state: directory
     mode: 0755
 
 - name: Copy vim-plug bootstrap
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: vim-plug.vim
     dest: ~/.config/nvim/vim-plug.vim
@@ -28,8 +24,6 @@
   register: var_vim_plug
 
 - name: Copy vim-plug snapshot
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: snapshot.vim
     dest: ~/.config/nvim/snapshot.vim
@@ -37,32 +31,24 @@
   register: var_vim_plug_snapshot
 
 - name: Template neovim config
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.template:
     src: vimrc
     dest: ~/.config/nvim/init.vim
     mode: 0644
 
 - name: Copy tern config
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.copy:
     src: tern-config
     dest: ~/tern-config
     mode: 0644
 
 - name: Ensure directory exists
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/nvim/
     state: directory
     mode: 0755
 
 - name: Set up vim-plug
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.get_url:
     dest: ~/.config/nvim/plug.vim
     checksum: "sha256:0d4dc422c3151ff651063b251933b3465714c5b9f3226faf0ca7f8b4a440a552"
@@ -72,8 +58,6 @@
   register: var_vim_plug_git
 
 - name: Download plugins if something changed
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.command: nvim -es -u ~/.config/nvim/vim-plug.vim -i NONE -c "PlugInstall" -c "qa"
   when: var_vim_plug.changed or var_vim_plug_git.changed or var_vim_plug_snapshot.changed
   changed_when: true

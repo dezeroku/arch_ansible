@@ -10,8 +10,6 @@
 
 - name: Ensure fish plugin directory exists
   when: helper_fish_plugin_enabled
-  become: true
-  become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/fish/ansible/{{ helper_fish_plugin_directory_name }}
     state: directory
