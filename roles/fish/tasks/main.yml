@@ -55,24 +55,20 @@
   when: var_fish_plugins.changed or var_fundle_script.changed
   changed_when: true
 
-- name: Ensure scriptlets directory exists
+- name: Ensure scriptlets directory is cleaned up
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.file:
     path: ~/.config/fish/ansible/fish
-    state: directory
-    mode: 0755
+    state: absent
 
-- name: Template fish scriptlets
+- name: Template fish blocks
   become: true
   become_user: "{{ user_name }}"
   ansible.builtin.template:
-    src: "{{ item }}"
-    dest: ~/.config/fish/ansible/fish/
+    src: blocks.fish
+    dest: ~/.config/fish/blocks.fish
     mode: 0644
-  loop:
-    - blocks.fish
-    - aws.fish
 
 - name: Ensure completions directory exists
   become: true
