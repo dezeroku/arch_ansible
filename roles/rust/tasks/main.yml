@@ -29,3 +29,10 @@
   register: rustup_rls_install
   when: rust_install_toolchain and rust_install_rls
   changed_when: ("is up to date" not in rustup_rls_install.stderr)
+
+- name: Template fish plugin
+  ansible.builtin.include_role:
+    name: helper_fish_plugin
+  vars:
+    helper_fish_plugin_directory_name: rust
+    helper_fish_plugin_template_name: env.fish
