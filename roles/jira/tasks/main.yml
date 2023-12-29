@@ -36,3 +36,10 @@
     src: get-jira-cookies-from-qutebrowser.sh
     dest: ~/.jira.d/get-jira-cookies-from-qutebrowser.sh
     mode: 0755
+
+- name: Template fish plugin
+  ansible.builtin.include_role:
+    name: helper_fish_plugin
+  vars:
+    helper_fish_plugin_directory_name: jira
+    helper_fish_plugin_template_name: wrapper.fish
