@@ -190,7 +190,6 @@ assign [class="(?i)mellowPlayer"] $ws5
 assign [class="(?i)virtualBox Manager"] $ws6
 assign [class="(?i)zoom"] $ws6
 
-assign [class="(?i)discord"] $ws8
 assign [class="(?i)steam"] $ws8
 assign [class="(?i)slack"] $ws8
 

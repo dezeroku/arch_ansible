@@ -1,0 +1,1 @@
+assign [app_id="(?i)discord"] $ws8
