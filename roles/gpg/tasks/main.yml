@@ -33,15 +33,15 @@
   community.general.git_config:
     name: user.signingkey
     scope: global
-    value: "{{ user_gpg_key }}"
-  when: user_gpg_key is defined
+    value: "{{ gpg_user_key }}"
+  when: gpg_user_key is defined
 
 - name: Set git to always use gpg
   community.general.git_config:
     name: commit.gpgsign
     scope: global
     value: "true"
-  when: user_always_git_gpg is defined
+  when: gpg_sign_git_commits
 
 - name: Ensure scripts directory exists
   ansible.builtin.file:
@@ -84,18 +84,18 @@
 
 - name: Ensure that provided GPG key is imported and trusted
   # Only run when key is actually provided
-  when: user_gpg_key | length > 0
+  when: gpg_user_key | length > 0
   block:
     - name: Check if the key is available in keyring
       ansible.builtin.command:
-        cmd: gpg --with-colons --list-keys "0x{{ user_gpg_key }}"
+        cmd: gpg --with-colons --list-keys "0x{{ gpg_user_key }}"
       changed_when: false
       failed_when: false
       register: gpg_key_present
 
     - name: Import gpg key
       ansible.builtin.command:
-        cmd: gpg --receive-keys "0x{{ user_gpg_key }}"
+        cmd: gpg --receive-keys "0x{{ gpg_user_key }}"
       changed_when: true
       when: gpg_key_present.rc != 0
 
@@ -121,7 +121,7 @@
 
     - name: Ultimately trust the key
       ansible.builtin.command:
-        cmd: gpg --command-fd 0 --edit-key "0x{{ user_gpg_key }}"
+        cmd: gpg --command-fd 0 --edit-key "0x{{ gpg_user_key }}"
         stdin: "trust\n5\ny\n"
       changed_when: true
       when: gpg_key_is_trusted.rc != 0
@@ -134,7 +134,7 @@
 
     - name: Obtain ssh public key
       ansible.builtin.command:
-        cmd: gpg --export-ssh-key "0x{{ user_gpg_key }}"
+        cmd: gpg --export-ssh-key "0x{{ gpg_user_key }}"
       changed_when: false
       register: gpg_ssh_key
 

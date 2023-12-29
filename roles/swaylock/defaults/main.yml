@@ -1,5 +1,5 @@
 ---
-display_resolution: 1920x1080
+swaylock_display_resolution: "{{ display_resolution }}"
 swaylock_wallpaper: 1_lock.png
 # When to turn the monitor off because of inactivity
 swaylock_idle_seconds: 1800

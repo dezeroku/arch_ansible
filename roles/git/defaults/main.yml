@@ -1,6 +1,6 @@
 ---
 git_email: "{{ user_email }}"
-git_username: "{{ user_pub_name }}"
+git_username: "{{ ansible_user_id }}"
 git_install_hub: true
 git_smtp_server: smtp.gmail.com
 git_smtp_user: "{{ user_email }}"

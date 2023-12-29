@@ -1,3 +1,3 @@
 ---
-time_hwclock: UTC
-time_timezone: Europe/Warsaw
+ntp_hwclock: UTC
+ntp_timezone: Europe/Warsaw

@@ -10,7 +10,7 @@ sqlite3 -json "file:${HOME}/.local/share/qutebrowser/webengine/Cookies?immutable
     SELECT host_key, name, value
     FROM cookies
     WHERE host_key
-    LIKE '%{{ work_jira_endpoint | regex_replace('.*://','') }}%' AND (name = 'atlassian.xsrf.token' OR name = 'JSESSIONID')
+    LIKE '%{{ jira_endpoint | regex_replace('.*://','') }}%' AND (name = 'atlassian.xsrf.token' OR name = 'JSESSIONID')
 HEREDOC
 ) | (
 jq "$( cat <<HEREDOC
@@ -18,7 +18,7 @@ jq "$( cat <<HEREDOC
         "Name": .name,
         "Value": .value,
         "Path": .host_key,
-        "Domain": "{{ work_jira_endpoint | regex_replace('.*://','') }}",
+        "Domain": "{{ jira_endpoint | regex_replace('.*://','') }}",
         "Expires": .expires,
         "Secure": .secure}]
 HEREDOC

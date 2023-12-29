@@ -30,7 +30,7 @@
     mode: 0755
 
 - name: Properly bootstrap wallpaper
-  when: vars.swaylock_wallpaper
+  when: swaylock_wallpaper
   block:
     - name: Ensure directory exists
       ansible.builtin.file:
@@ -48,7 +48,7 @@
 
     - name: Copy the base wallpaper
       ansible.builtin.copy:
-        src: wallpapers/{{ vars.swaylock_wallpaper }}
+        src: wallpapers/{{ swaylock_wallpaper }}
         dest: "{{ swaylock_tempdir.path }}/wallpaper"
         mode: 0644
       changed_when: false
@@ -59,7 +59,7 @@
       ansible.builtin.command:
         chdir: "{{ swaylock_tempdir.path }}"
         # The resize ! parameter allows changing ratio
-        cmd: convert wallpaper -strip -resize "{{ vars.display_resolution }}!" wallpaper-resized
+        cmd: convert wallpaper -strip -resize "{{ swaylock_display_resolution }}!" wallpaper-resized
       changed_when: false
 
     - name: Remove metadata (exiftool)
@@ -73,5 +73,5 @@
     - name: Copy the modified wallpaper
       ansible.builtin.copy:
         src: "{{ swaylock_tempdir.path }}/wallpaper-resized"
-        dest: ~/.config/swaylock/wallpapers/{{ vars.swaylock_wallpaper }}
+        dest: ~/.config/swaylock/wallpapers/{{ swaylock_wallpaper }}
         mode: 0644

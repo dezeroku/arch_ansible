@@ -18,5 +18,5 @@
   become: true
   become_user: root
   community.general.timezone:
-    hwclock: '{{ time_hwclock }}'
-    name: '{{ time_timezone }}'
+    hwclock: '{{ ntp_hwclock }}'
+    name: '{{ ntp_timezone }}'

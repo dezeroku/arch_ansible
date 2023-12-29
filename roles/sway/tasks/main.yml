@@ -21,7 +21,7 @@
     mode: 0755
 
 - name: Properly bootstrap wallpaper
-  when: vars.sway_wallpaper
+  when: sway_wallpaper
   block:
     # Commands that don't change the "important" state are marked as non-changeable
     - name: Ensure directory exists
@@ -39,7 +39,7 @@
 
     - name: Copy the base wallpaper
       ansible.builtin.copy:
-        src: wallpapers/{{ vars.sway_wallpaper }}
+        src: wallpapers/{{ sway_wallpaper }}
         dest: "{{ sway_tempdir.path }}/wallpaper"
         mode: 0644
       changed_when: false
@@ -50,7 +50,7 @@
       ansible.builtin.command:
         chdir: "{{ sway_tempdir.path }}"
         # The resize ! parameter allows changing ratio
-        cmd: convert wallpaper -strip -resize "{{ vars.display_resolution }}!" wallpaper-resized
+        cmd: convert wallpaper -strip -resize "{{ sway_display_resolution }}!" wallpaper-resized
       changed_when: false
 
     - name: Remove metadata (exiftool)
@@ -64,7 +64,7 @@
     - name: Copy the modified wallpaper
       ansible.builtin.copy:
         src: "{{ sway_tempdir.path }}/wallpaper-resized"
-        dest: ~/.config/sway/wallpapers/{{ vars.sway_wallpaper }}
+        dest: ~/.config/sway/wallpapers/{{ sway_wallpaper }}
         mode: 0644
 
 - name: Template fish plugin

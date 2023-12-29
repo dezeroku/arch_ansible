@@ -1,5 +1,5 @@
 ---
-display_resolution: 1920x1080
+sway_display_resolution: "{{ display_resolution }}"
 
 sway_wallpaper: 0_wallpaper.png
 sway_disable_touchpad: false

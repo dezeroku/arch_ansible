@@ -1,5 +1,5 @@
-endpoint: {{ work_jira_endpoint }}
-user: {{ work_jira_user }}
+endpoint: {{ jira_endpoint }}
+user: {{ jira_user }}
 editor: vim
 
 {% raw %}

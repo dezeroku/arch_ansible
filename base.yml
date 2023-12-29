@@ -40,14 +40,13 @@ local_machine:
 
     firewall_enable_opensnitch: true
 
-    user_name: d0ku
-    user_pub_name: dezeroku
-    user_generate_ssh_key: true
-    user_ssh_key_type: ed25519
+    user_name: dezeroku
+    create_user_generate_ssh_key: true
+    create_user_ssh_key_type: ed25519
     user_shell: /bin/fish
     user_email: dezeroku@gmail.com
-    user_gpg_key: 6AC2332BCF8E1A97
-    user_always_git_gpg: true
+    gpg_user_key: 6AC2332BCF8E1A97
+    gpg_sign_git_commits: true
 
     # Override these if you want the push notifications support via pushover
     # otherwise just leave it as it is

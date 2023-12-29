@@ -6,6 +6,9 @@
     name:
       - openssh
 
+# TODO: split into ssh and sshd roles
+# and run the latter as a "real user"
+# to get rid of becomes
 - name: Ensure directory exists
   become: true
   become_user: "{{ openssh_user_name }}"
