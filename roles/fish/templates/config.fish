@@ -32,7 +32,6 @@ end
 
 # PATHS
 #set -x PATH $HOME/opt/GNAT/2020/bin $PATH
-set -x PATH $HOME/go/bin $PATH
 set -x PATH $HOME/.local/bin $PATH
 set -x PATH $HOME/npm_global/bin $PATH
 set -x PATH $HOME/bin $PATH
