@@ -1,4 +1,10 @@
 ---
+# Dummy way to gather facts when tags are specified
+# https://github.com/ansible/ansible/issues/57529
+# TODO: do i need to put it in all playbooks?...
+- name: Gather facts
+  hosts: all
+
 - name: Core
   ansible.builtin.import_playbook: core.yml
 
