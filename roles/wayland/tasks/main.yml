@@ -16,6 +16,9 @@
     dest: ~/.config/electron{{ item }}-flags.conf
     mode: 0644
   loop:
+    - 28
+    - 27
+    - 26
     - 25
     - 24
     - 23
