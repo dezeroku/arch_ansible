@@ -114,12 +114,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-# bind workspaces to outputs
-workspace $ws2 output primary
-#workspace $ws3 output primary
-#workspace $ws4 output primary
-workspace $ws5 output primary
-
 # reload the configuration file
 bindsym $mod+Shift+r reload
 
