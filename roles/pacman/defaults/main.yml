@@ -2,3 +2,4 @@
 pacman_update: false
 pacman_upgrade: false
 pacman_enable_multilib: false
+pacman_parallel_downloads_number: 5

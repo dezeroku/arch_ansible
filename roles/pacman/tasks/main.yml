@@ -17,6 +17,16 @@
     insertafter: "^#Color"
     line: "Color"
 
+- name: Enable parallel downloads
+  become: true
+  become_user: root
+  ansible.builtin.lineinfile:
+    dest: /etc/pacman.conf
+    state: "present"
+    regexp: "^ParallelDownloads ="
+    insertafter: "^#ParallelDownloads =.*$"
+    line: "ParallelDownloads = {{ pacman_parallel_downloads_number }}"
+
 - name: Multilib support 1
   become: true
   become_user: root
