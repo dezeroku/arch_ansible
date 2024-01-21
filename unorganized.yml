@@ -18,5 +18,6 @@
     - {role: ntfs_3g, tags: ['ntfs_3g']}
     - {role: prometheus_node_exporter, tags: ['prometheus_node_exporter']}
     - {role: steam, tags: ['steam']}
+    - {role: cups, tags: ['cups']}
   tags:
     - unorganized

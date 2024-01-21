@@ -1,0 +1,25 @@
+---
+- name: Install cups and networking related things
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - cups
+      - cups-browsed
+      - avahi
+
+- name: Enable avahi-daemon
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: avahi-daemon
+    enabled: true
+    state: started
+
+- name: Enable cups-browsed
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: cups-browsed
+    enabled: true
+    state: started
