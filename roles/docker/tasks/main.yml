@@ -23,3 +23,21 @@
     groups: docker
     state: present
     append: true
+
+- name: Copy nftables config
+  become: true
+  become_user: root
+  ansible.builtin.template:
+    src: docker-nft.conf
+    dest: /etc/nftables.d/01-docker.conf
+    mode: 0644
+  register: nftables_config
+
+# TODO: rework properly
+- name: Reload nftables configuration
+  become: true
+  become_user: root
+  ansible.builtin.systemd:
+    name: nftables
+    state: started
+  when: nftables_config.changed  # noqa: no-handler
