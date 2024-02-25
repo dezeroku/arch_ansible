@@ -1,2 +1,5 @@
 ---
 qutebrowser_install_widevine: true
+
+# Enter a domain here if you want to redirect
+qutebrowser_invidious_domain: ""

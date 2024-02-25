@@ -12,11 +12,13 @@
     state: directory
     mode: 0755
 
-- name: Copy qutebrowser config
-  ansible.builtin.copy:
+- name: Template qutebrowser config
+  ansible.builtin.template:
     src: qute_config.py
     dest: ~/.config/qutebrowser/config.py
     mode: 0644
+  notify:
+    - Reload config
 
 - name: Ensure scripts directory exists
   ansible.builtin.file:
@@ -24,8 +26,8 @@
     state: directory
     mode: 0755
 
-- name: Copy userscripts
-  ansible.builtin.copy:
+- name: Template userscripts
+  ansible.builtin.template:
     src: "{{ item }}"
     dest: ~/.config/qutebrowser/userscripts/
     mode: 0755
@@ -39,11 +41,16 @@
     state: directory
     mode: 0755
 
-- name: Copy youtube-adblock.user.js scriptlet
-  ansible.builtin.copy:
-    src: youtube-adblock.user.js
-    dest: ~/.config/qutebrowser/greasemonkey/youtube-adblock.user.js
+- name: Template greasemonkey scriptlets
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: ~/.config/qutebrowser/greasemonkey/{{ item }}
     mode: 0755
+  loop:
+    - youtube-adblock.user.js
+    - invidious.user.js
+  notify:
+    - Reload greasemonkey scripts
 
 - name: Install bitwarden CLI userscript dependency
   become: true
@@ -80,3 +87,17 @@
   become: true
   become_user: aur_builder
   when: qutebrowser_install_widevine
+
+# For the handlers
+# TODO: move this part to the handlers/ dir?
+- name: Check if qutebrowser is running
+  block:
+    - name: Check for qutebrowser PID
+      community.general.pids:
+        pattern: "[^ ]*python3 [^ ]*qutebrowser.*"
+      register: qutebrowser_pids
+
+    - name: Set fact
+      ansible.builtin.set_fact:
+        # A little ugly but works
+        qutebrowser_running: "{{ 'true' if qutebrowser_pids.pids else 'false' }}"

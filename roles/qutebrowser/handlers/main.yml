@@ -1,0 +1,12 @@
+---
+- name: Reload greasemonkey scripts
+  when: qutebrowser_running
+  ansible.builtin.command:
+    cmd: qutebrowser :greasemonkey-reload
+  changed_when: false
+
+- name: Reload config
+  when: qutebrowser_running
+  ansible.builtin.command:
+    cmd: qutebrowser :config-source
+  changed_when: false
