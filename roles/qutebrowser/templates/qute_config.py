@@ -57,7 +57,7 @@ translate_english_polish = "https://translate.google.com/#en/pl/{}"
 translate_german_polish = "https://translate.google.com/#de/pl/{}"
 dictcc_german_english = "https://dict.cc/?s={}"
 c.url.searchengines = {
-    "DEFAULT": duckstr,
+    "DEFAULT": googlestr,
     "ddg": duckstr,
     "google": googlestr,
     "english": translate_english_polish,
@@ -82,8 +82,8 @@ c.fonts.statusbar = "{} monospace".format(basic_size)
 
 # File picker
 c.fileselect.handler = "external"
-c.fileselect.single_file.command = ["st", "-e", "ranger", "--choosefile={}"]
-c.fileselect.multiple_files.command = ["st", "-e", "ranger", "--choosefiles={}"]
+c.fileselect.single_file.command = ["foot", "-e", "ranger", "--choosefile={}"]
+c.fileselect.multiple_files.command = ["foot", "-e", "ranger", "--choosefiles={}"]
 
 # Dark mode
 c.colors.webpage.preferred_color_scheme = "dark"
