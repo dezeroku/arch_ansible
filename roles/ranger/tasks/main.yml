@@ -1,11 +1,21 @@
 ---
-- name: Install ranger and w3m (for image preview)
+- name: Get rid of repos ranger
   become: true
   become_user: root
   community.general.pacman:
     name:
       - ranger
-      - w3m
+    state: absent
+
+- name: Install ranger from AUR
+  # TODO: install from Arch repos when version newer than 2019
+  # with sixel support is released
+  become: true
+  become_user: aur_builder
+  kewlfft.aur.aur:
+    name:
+      - ranger-git
+    state: present
 
 - name: Ensure directory exists
   ansible.builtin.file:
