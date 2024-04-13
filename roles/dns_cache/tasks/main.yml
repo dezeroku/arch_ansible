@@ -45,6 +45,9 @@
   with_items:
     - {match: "listen-address=", line: "listen-address=::1,127.0.0.1"}
     - {match: "cache-size=", line: "cache-size=1000"}
+    - {match: "bind-interfaces", line: "bind-interfaces"}
+    # Only listen on localhost, we don't serve other machines in the network
+    - {match: "interface=", line: "interface="}
     - {match: "conf-file=", line: "conf-file=/etc/dnsmasq-conf.conf"}
     - {match: "resolv-file=", line: "resolv-file=/etc/dnsmasq-resolv.conf"}
   register: dnsmasq_configure
