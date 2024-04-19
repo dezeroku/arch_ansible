@@ -5,6 +5,16 @@ theme = "modern"
 [icons]
 icons = "awesome6"
 
+{% if email_client %}
+[[block]]
+block = "maildir"
+interval = 60
+inboxes = [{{ [isync_mail_dir + "/"] | product(email_client.keys()) | map('join') | product(['/Inbox']) | map('join') | map("to_json") | join(", ") }}]
+threshold_warning = 1
+threshold_critical = 10
+display_type = "new"
+{% endif %}
+
 [[block]]
 block = "disk_space"
 path = "/"

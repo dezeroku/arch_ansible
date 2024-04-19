@@ -1,0 +1,3 @@
+---
+dependencies:
+  - {role: isync, when: email_client}
