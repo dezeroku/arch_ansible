@@ -28,6 +28,7 @@
     - {role: gimp, tags: ['gimp', 'desktop-utils']}
     - {role: imv, tags: ['imv', 'desktop-utils']}
     - {role: go, tags: ['go', 'languages']}
+    - {role: gnome_keyring, tags: ['gnome_keyring', 'utils']}
     - {role: gparted, tags: ['gparted', 'desktop-utils']}
     - {role: i3status_rust, tags: ['i3status_rust', 'desktop']}
     - {role: imagemagick, tags: ['imagemagick', 'utils']}

@@ -1,0 +1,2 @@
+exec dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
+exec gnome-keyring-daemon --start --components=secrets

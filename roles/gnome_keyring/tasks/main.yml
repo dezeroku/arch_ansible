@@ -1,0 +1,94 @@
+# Written based on https://wiki.archlinux.org/title/GNOME/Keyring#
+#
+# What we want to achieve?
+# Obtain a "kinda-safe" keyring that will be unlocked on login, so no prompts are
+# ever displayed to user afterwards.
+# At the same time I don't really want to mess with my GPG config.
+# Gnome Keyring is meant to store credentials that are important enough to not be plain-text
+# files, but not important enough to warrant entering a Yubikey PIN every time I want to access them.
+# There's of course https://gitlab.gnome.org/GNOME/gnome-keyring/-/issues/5#note_1876550 ,
+# but let's not worry about it too much considering the importance of the secrets.
+# The at-rest security is additionally assured by the LUKS encrypted hard drive.
+# Main use-case at the moment is the imapnotify + isync email setup
+#
+# One current caveat of this logic, that I don't really care about fixing, is that the initial
+# setup requires few reboots to be performed so the login keyring:
+# 1. can be created
+# 2. can be modified so it uses the same password as the user
+#
+# It "just works" after these few reboots
+# If you can call the `echo -n test | secret-tool store --label=test test test` without getting
+# prompted for password then you are good to go
+---
+- name: Install gnome-keyring and libsecret
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - gnome-keyring
+      - libsecret
+
+- name: Configure PAM auth
+  become: true
+  become_user: root
+  community.general.pamd:
+    name: login
+    type: auth
+    control: include
+    module_path: system-local-login
+    new_type: auth
+    new_control: optional
+    new_module_path: pam_gnome_keyring.so
+    state: after
+
+- name: Configure PAM session
+  become: true
+  become_user: root
+  community.general.pamd:
+    name: login
+    type: session
+    control: include
+    module_path: system-local-login
+    new_type: session
+    new_control: optional
+    new_module_path: pam_gnome_keyring.so
+    module_arguments: 'auto_start'
+    state: after
+
+- name: Configure PAM automatic user password sync
+  become: true
+  become_user: root
+  community.general.pamd:
+    name: passwd
+    type: password
+    control: include
+    module_path: system-auth
+    new_type: password
+    new_control: optional
+    new_module_path: pam_gnome_keyring.so
+    state: after
+
+- name: Make sure that ssh-agent wrapper is disabled
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: false
+    state: stopped
+    scope: user
+    masked: true
+  loop:
+    - gcr-ssh-agent.service
+    - gcr-ssh-agent.socket
+
+- name: Make XDG Portal work in sway
+  become: true
+  become_user: root
+  ansible.builtin.lineinfile:
+    path: /usr/share/xdg-desktop-portal/portals/gnome-keyring.portal
+    regexp: '^UseIn='
+    line: UseIn=gnome;sway
+
+- name: Template sway plugin
+  ansible.builtin.include_role:
+    name: helper_sway_plugin
+  vars:
+    helper_sway_plugin_template_name: gnome-keyring-plugin
