@@ -1,0 +1,46 @@
+---
+- name: Install isync
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - isync
+
+- name: Ensure mailbox directories exist
+  ansible.builtin.file:
+    path: "{{ isync_mail_dir }}/{{ item }}"
+    state: directory
+    mode: 0755
+  loop: "{{ email_client.keys() }}"
+
+- name: Template config file
+  ansible.builtin.template:
+    src: mbsyncrc
+    dest: ~/.mbsyncrc
+    mode: 0600
+
+# In theory this setup is not needed, as
+# goimapnotify is meant to run the sync command on startup
+# but it doesn't work for some reason
+# TODO: investigate the goimapnotify startup sync
+- name: Ensure systemd directory exists
+  ansible.builtin.file:
+    path: ~/.config/systemd/user/
+    state: directory
+    mode: 0755
+
+- name: Copy systemd service and timer
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "~/.config/systemd/user/{{ item }}"
+    mode: 0644
+  loop:
+    - mbsync.service
+    - mbsync.timer
+
+- name: Enable the mbsync service
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: mbsync.timer
+    scope: user
+    enabled: true

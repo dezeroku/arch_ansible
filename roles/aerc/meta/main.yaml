@@ -1,0 +1,5 @@
+---
+dependencies:
+  - role: isync
+  - role: imapnotify
+  - role: msmtp

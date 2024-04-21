@@ -1,0 +1,29 @@
+{% for key, item in email_client.items() %}
+IMAPAccount {{ key }}
+Host {{ item.imap_server }}
+UserCmd "{{ item.username_cmd }}"
+PassCmd "{{ item.password_cmd }}"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore {{ key }}-remote
+Account {{ key }}
+
+MaildirStore {{ key }}-local
+SubFolders Verbatim
+# The trailing "/" is important
+Path {{ isync_mail_dir }}/{{ key }}/
+Inbox {{ isync_mail_dir }}/{{ key }}/Inbox
+
+Channel {{ key }}
+Far :{{ key }}-remote:
+Near :{{ key }}-local:
+Patterns *
+# Automatically create missing mailboxes locally
+# but not on the server
+Create Near
+# Sync the movement of messages between folders and deletions,
+# don't add before making sure the sync works
+Expunge Both
+SyncState *
+{% endfor %}

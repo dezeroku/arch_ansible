@@ -65,3 +65,22 @@ local_machine:
     # TODO: change this to a more general flag
     bluetooth_install_gui: true
     networkmanager_install_gui: true
+
+    # Sets up imapnotify + mbsync + msmtp + aerc
+    # keeping the mailbox in ~/.mail/{{ key }}
+    # While not a requirement, it's recommended to use secret-tool (with gnome_keyring role)
+    # to manage the credentials
+    email_client: {}
+    # email_client:
+    #   mailbox:
+    #     # Default FROM configuration
+    #     from:
+    #       name: "dezeroku"
+    #       email: "dezeroku@example.com"
+    #     aliases: []
+    #     aliases:
+    #       - '"My Alias" <alias@example.com>'
+    #     imap_server: imap.example.com
+    #     smtp_server: smtp.example.com
+    #     username_cmd: secret-tool lookup mail/example_mailbox username
+    #     password_cmd: secret-tool lookup mail/example_mailbox password

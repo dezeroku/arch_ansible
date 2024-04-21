@@ -1,0 +1,49 @@
+---
+- name: Install imapnotify
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - goimapnotify
+
+- name: Ensure directory exists
+  ansible.builtin.file:
+    path: ~/.config/imapnotify
+    state: directory
+    mode: 0755
+
+- name: Template config file
+  ansible.builtin.template:
+    src: concatenated.conf
+    dest: ~/.config/imapnotify/concatenated.conf
+    mode: 0600
+  register: config_file
+
+- name: Ensure systemd override directory exists
+  ansible.builtin.file:
+    path: ~/.config/systemd/user/goimapnotify@.service.d
+    state: directory
+    mode: 0755
+
+- name: Copy systemd override
+  ansible.builtin.copy:
+    src: systemd-override.conf
+    dest: ~/.config/systemd/user/goimapnotify@.service.d/override.conf
+    mode: 0644
+  register: override_file
+
+- name: Activate the systemd service
+  when: email_client
+  ansible.builtin.systemd_service:
+    name: goimapnotify@concatenated.service
+    enabled: true
+    scope: user
+    state: "{{ (config_file.changed or override_file.changed) | ternary('restarted', 'started') }}"
+
+- name: Disable the systemd service
+  when: not email_client
+  ansible.builtin.systemd_service:
+    name: goimapnotify@concatenated.service
+    enabled: false
+    scope: user
+    state: stopped

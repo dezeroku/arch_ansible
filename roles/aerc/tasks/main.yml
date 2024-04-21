@@ -1,0 +1,29 @@
+---
+- name: Install aerc and pandoc
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - aerc
+      - pandoc-cli
+
+- name: Ensure directory exists
+  ansible.builtin.file:
+    path: ~/.config/aerc
+    state: directory
+    mode: 0755
+
+- name: Copy config files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: ~/.config/aerc
+    mode: 0644
+  loop:
+    - aerc.conf
+    - binds.conf
+
+- name: Template accounts file
+  ansible.builtin.template:
+    src: accounts.conf
+    dest: ~/.config/aerc/accounts.conf
+    mode: 0600
