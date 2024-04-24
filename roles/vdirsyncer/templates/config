@@ -1,0 +1,46 @@
+[general]
+status_path = "~/.vdirsyncer/status/"
+
+{% for key, item in email_client.items() %}
+{% if 'carddav' in item %}
+[pair carddav_{{ key }}]
+a = "carddav_{{ key }}_local"
+b = "carddav_{{ key }}_remote"
+collections = ["from a", "from b"]
+metadata = ["displayname"]
+
+[storage carddav_{{ key }}_local]
+type = "filesystem"
+path = "{{ vdirsyncer_contacts_dir }}/{{vdirsyncer_prefix}}{{ key }}"
+fileext = ".vcf"
+
+[storage carddav_{{ key }}_remote]
+type = "carddav"
+
+url = "{{ item.carddav.url }}"
+username.fetch = ["command", {{ item.carddav.username_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+password.fetch = ["command", {{ item.carddav.password_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+
+{% endif %}
+
+{% if 'caldav' in item %}
+[pair caldav_{{ key }}]
+a = "caldav_{{ key }}_local"
+b = "caldav_{{ key }}_remote"
+collections = ["from a", "from b"]
+metadata = ["displayname", "color"]
+
+[storage caldav_{{ key }}_local]
+type = "filesystem"
+path = "{{ vdirsyncer_calendars_dir }}/{{vdirsyncer_prefix}}{{ key }}"
+fileext = ".ics"
+
+[storage caldav_{{ key }}_remote]
+type = "caldav"
+
+url = "{{ item.caldav.url }}"
+username.fetch = ["command", {{ item.caldav.username_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+password.fetch = ["command", {{ item.caldav.password_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+
+{% endif %}
+{% endfor %}

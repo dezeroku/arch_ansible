@@ -1,0 +1,15 @@
+[addressbooks]
+{% for key, item in email_client.items() %}
+{% if 'carddav' in item %}
+{% if 'address_books' in item.carddav %}
+{% for book in item.carddav.address_books %}
+[[{{ key }}-{{ book }}]]
+path = {{ vdirsyncer_contacts_dir }}/{{ key }}-{{ book }}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endfor %}
+
+[general]
+debug = no
+default_action = list

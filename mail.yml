@@ -1,0 +1,26 @@
+---
+- name: Mail
+  hosts: all
+  become: true
+  become_user: "{{ user_name }}"
+  roles:
+    - {role: aerc, tags: ['aerc']}
+    - {role: imapnotify, tags: ['imapnotify']}
+    - {role: isync, tags: ['isync']}
+    - {role: msmtp, tags: ['msmtp']}
+  tags:
+    - mail
+    - never
+
+- name: Mail PMI
+  hosts: all
+  become: true
+  become_user: "{{ user_name }}"
+  roles:
+    - {role: khal, tags: ['khal']}
+    - {role: khard, tags: ['khard']}
+    - {role: todoman, tags: ['todoman']}
+    - {role: vdirsyncer, tags: ['vdirsyncer']}
+  tags:
+    - mail-pmi
+    - never

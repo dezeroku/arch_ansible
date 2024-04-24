@@ -1,0 +1,19 @@
+---
+- name: Install todoman
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - todoman
+
+- name: Ensure config directory exists
+  ansible.builtin.file:
+    path: ~/.config/todoman
+    state: directory
+    mode: 0755
+
+- name: Template config file
+  ansible.builtin.template:
+    src: config
+    dest: ~/.config/todoman/config.py
+    mode: 0644

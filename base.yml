@@ -67,9 +67,11 @@ local_machine:
     networkmanager_install_gui: true
 
     # Sets up imapnotify + mbsync + msmtp + aerc
-    # keeping the mailbox in ~/.mail/{{ key }}
+    # keeping the mailbox in ~/.mail/{{ key }} (`mail` tag)
     # While not a requirement, it's recommended to use secret-tool (with gnome_keyring role)
     # to manage the credentials
+    # Also optionally sets up the vdirsyncer + khal + khard + todoman stack
+    # for V productivity (`mail-pmi` tag)
     email_client: {}
     # email_client:
     #   mailbox:
@@ -84,3 +86,18 @@ local_machine:
     #     smtp_server: smtp.example.com
     #     username_cmd: secret-tool lookup mail/example_mailbox username
     #     password_cmd: secret-tool lookup mail/example_mailbox password
+    #     carddav:
+    #       address_books:
+    #         - Contacts
+    #       url: https://some-mailbox-url/carddav
+    #       username_cmd: secret-tool lookup mail/example_mailbox username
+    #       password_cmd: secret-tool lookup mail/example_mailbox password
+    #     caldav:
+    #       calendars:
+    #         - Calendar
+    #         - Birthdays
+    #       url: https://some-mailbox-url/caldav/
+    #       username_cmd: secret-tool lookup mail/example_mailbox username
+    #       password_cmd: secret-tool lookup mail/example_mailbox password
+    # todoman:
+    #   default_list: mailbox-Tasks

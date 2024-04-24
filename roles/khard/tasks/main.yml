@@ -1,0 +1,19 @@
+---
+- name: Install khard
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - khard
+
+- name: Ensure config directory exists
+  ansible.builtin.file:
+    path: ~/.config/khard
+    state: directory
+    mode: 0755
+
+- name: Template config file
+  ansible.builtin.template:
+    src: config
+    dest: ~/.config/khard/khard.conf
+    mode: 0644

@@ -1,0 +1,5 @@
+path = "{{ vdirsyncer_calendars_dir }}/*"
+default_list = "{{ todoman.default_list }}"
+default_due = 48
+date_format = "%Y-%m-%d"
+time_format = "%H:%M"

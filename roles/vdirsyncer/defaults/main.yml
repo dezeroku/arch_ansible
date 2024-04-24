@@ -1,0 +1,4 @@
+---
+vdirsyncer_calendars_dir: ~/.calendars
+vdirsyncer_contacts_dir: ~/.contacts
+vdirsyncer_prefix: .vdirsyncer-

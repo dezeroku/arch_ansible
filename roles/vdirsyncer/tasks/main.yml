@@ -1,0 +1,105 @@
+---
+- name: Install vdirsyncer
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - vdirsyncer
+
+- name: Ensure config directory exists
+  ansible.builtin.file:
+    path: ~/.config/vdirsyncer
+    state: directory
+    mode: 0755
+
+- name: Template config file
+  ansible.builtin.template:
+    src: config
+    dest: ~/.config/vdirsyncer/config
+    mode: 0644
+  register: config_file
+
+- name: Enable the systemd timer
+  ansible.builtin.systemd:
+    name: vdirsyncer.timer
+    scope: user
+    enabled: true
+    state: started
+
+- name: Initialize collections
+  # We can't really make this a handler, as the logic further below depends on this step
+  when: config_file.changed  # noqa: no-handler
+  block:
+    - name: Discover collections
+      ansible.builtin.shell:
+        cmd: yes | vdirsyncer discover  # noqa: risky-shell-pipe
+        executable: /bin/bash
+      changed_when: true
+
+    - name: Sync metadata
+      ansible.builtin.command:
+        cmd: vdirsyncer metasync
+      changed_when: true
+
+# You may want to scratch your eyes out before reading this, be warned
+# In short, we want to:
+# 1. Find every directory that contains 'displayname' file
+# 2. Map the directory to the file's content
+# 3. Symlink the directory to a directory few levels down, containing the content read above
+#
+# This is done so we don't have to reference collections by IDs, but can
+# instead rely on the "Display Names", the human-readable values
+# that can then be kept in the config. We prefix these with the key from `mail_client` variable
+# to make sure the values are unique.
+# This isn't a great idea in general, as the Display Names can be changed,
+# but I pinky-promise I won't do it.
+# If such a need will ever occur, the easiest way to fix it would be to burn down the whole
+# directory on the disk and re-run the playbook.
+- name: Symlink collections to displayname
+  block:
+    - name: Find the displayname mapping files (calendars)
+      ansible.builtin.find:
+        paths: "{{ vdirsyncer_calendars_dir }}"
+        file_type: file
+        patterns: 'displayname'
+        recurse: true
+      register: collections_mapping_calendars
+
+    - name: Find the displayname mapping files (contacts)
+      ansible.builtin.find:
+        paths: "{{ vdirsyncer_contacts_dir }}"
+        file_type: file
+        patterns: 'displayname'
+        recurse: true
+      register: collections_mapping_contacts
+
+    - name: Create temp variable for the mapping
+      ansible.builtin.set_fact:
+        display_name_mapping_temp: {}
+        display_name_mapping: {}
+
+    - name: Fill the dictionary
+      ansible.builtin.set_fact:
+        display_name_mapping_temp: "{{
+          display_name_mapping_temp | combine({
+            item['path']:
+            lookup('file', item['path']).replace(' ', '_')})
+        }}"
+      loop: "{{ collections_mapping_calendars['files'] + collections_mapping_contacts['files'] }}"
+
+    - name: Transform the dictionary
+      ansible.builtin.set_fact:
+        display_name_mapping: "{{
+          display_name_mapping | combine({
+            item.split('/')[:-1] | join('/'):
+            item.split('/')[:-3] | join('/') + '/' + item.split('/')[-3].split(vdirsyncer_prefix)[1] + '-' + display_name_mapping_temp[item]
+          })
+        }}"
+      loop: "{{ display_name_mapping_temp.keys() }}"
+
+    - name: Symlink the collection to displayname
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ display_name_mapping[item] }}"
+        state: link
+      loop: "{{ display_name_mapping.keys() }}"

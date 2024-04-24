@@ -4,7 +4,6 @@
   become: true
   become_user: "{{ user_name }}"
   roles:
-    - {role: aerc, tags: ['aerc']}
     - {role: fish, tags: ['fish']}
     - {role: bind, tags: ['bind']}
     - {role: fzf, tags: ['fzf']}

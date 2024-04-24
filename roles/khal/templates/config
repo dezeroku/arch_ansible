@@ -1,0 +1,13 @@
+[calendars]
+
+{% for key, item in email_client.items() %}
+{% if 'caldav' in item %}
+{% if 'calendars' in item.caldav %}
+{% for calendar in item.caldav.calendars %}
+[[{{ key }}-{{ calendar }}]]
+path = {{ vdirsyncer_calendars_dir }}/{{ key }}-{{ calendar }}/
+color = "{{ lookup('file', vdirsyncer_calendars_dir + '/' + key + '-' + calendar + '/color') }}"
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endfor %}

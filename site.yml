@@ -11,6 +11,9 @@
 - name: CLI
   ansible.builtin.import_playbook: cli.yml
 
+- name: Mail
+  ansible.builtin.import_playbook: mail.yml
+
 - name: All
   hosts: all
   become: true

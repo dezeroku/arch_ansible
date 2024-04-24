@@ -1,0 +1,19 @@
+---
+- name: Install khal
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - khal
+
+- name: Ensure config directory exists
+  ansible.builtin.file:
+    path: ~/.config/khal
+    state: directory
+    mode: 0755
+
+- name: Template config file
+  ansible.builtin.template:
+    src: config
+    dest: ~/.config/khal/config
+    mode: 0644
