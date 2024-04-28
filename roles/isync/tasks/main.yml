@@ -44,3 +44,4 @@
     name: mbsync.timer
     scope: user
     enabled: true
+    state: started
