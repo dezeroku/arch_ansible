@@ -6,13 +6,13 @@
   hosts: all
 
 - name: Core
-  ansible.builtin.import_playbook: core.yml
+  ansible.builtin.import_playbook: playbooks/core.yml
 
 - name: CLI
-  ansible.builtin.import_playbook: cli.yml
+  ansible.builtin.import_playbook: playbooks/cli.yml
 
 - name: Mail
-  ansible.builtin.import_playbook: mail.yml
+  ansible.builtin.import_playbook: playbooks/mail.yml
 
 - name: All
   hosts: all
@@ -80,4 +80,4 @@
     - install
 
 - name: Unorganized
-  ansible.builtin.import_playbook: unorganized.yml
+  ansible.builtin.import_playbook: playbooks/unorganized.yml
