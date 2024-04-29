@@ -1,32 +1,34 @@
 ## Arch setup roles written in Ansible
 
-In the past, when I was distro-hopping at least once every two months, I've found it that it's not easy to keep track of all dotfiles and applications that I use.
-I've decided to do something with that, first approach was to define my own ["high level package manager"](https://github.com/dezeroku/i3_config) and I got tired with it quite soon (the fact that I was only starting to learn programming at all wasn't helpful).
-Some time later I've stumbled upon Ansible in one of the courses I was taking and it seemed to be just perfect for the job, with all its dependencies management, changing state only when it's required etc., so I've decided to move my config to it.
-Fast-forward till today, this repository contains a bunch of roles that I am using everytime I need to set up an Arch install.
-It's not distro-agnostic, but serves as good starting point when I am experimenting with distros like Gentoo.
+In the past, I have found out that keeping track of all the dotfiles is not easy, especially when multiple devices come into play.
+I have decided to do something with that, first approach was to define my own ["package manager"](https://github.com/dezeroku/i3_config) and
+very soon it became apparent that writing such a thing from scratch is not a great idea
+(the fact that I was a programming newbie was not really helpful).
+
+Later on I have stumbled upon Ansible in one of the courses I was taking and it seemed perfect for the job, with proper dependencies management,
+changing state only when it is required and so on, so I have decided to move my config to it.
+
+Fast-forward till today, this repository contains a bunch of roles that I use when setting up a fresh Arch install.
+It is not distro-agnostic, but most of the config (except for the `pacman` and `AUR` usage) should be usable as-is.
 
 ## What's done
 
 - [x] Small roles that are supposed to set up single functionality (i3 kind of breaks this rule)
 - [x] Dependencies correctly defined between these roles
-- [x] Playbooks for common groups like audio related applications, xorg etc.
-
-Currently I am refactoring most of the roles I've written in the beginning, due to them being very monolithic.
+- [x] Playbooks for common groups like audio related applications, `wayland`, etc.
 
 ## Profiles
 
-At the moment configuration is based global variables, take a look at `base.yml` for more details. The most important ones are:
+At the moment configuration is based on few global variables (and can be fine-tuned with role-specifc ones), take a look at `base.yml` for few examples.
+The most important ones are:
 
 - username
 - ssh key generation options
 - email (to be used in e.g. git commits)
-- shell you're going to use
+- shell you are going to use
 
-There is a single `base.yml` configuration which should be used as a starting point and customized per each machine where it's used, e.g. the `g751` switches should be kept off on non-NVIDIA-Optimus devices (such as `Asus G751JM` for which they were written).
-
-`i3` role supports `1920x1080` (default in the role), `1366x768` and `1280x800` resolutions.
-Using this role on a device with a different resolution may result in a distorted wallpaper/lockscreen images, but shouldn't break anything.
+There is a single `base.yml` configuration which should be used as a starting point and customized per each machine where it is used.
+After all workflows and required tools differ a lot between e.g. laptops and headless servers.
 
 ## Commands
 
@@ -36,61 +38,44 @@ To install the dependencies (roles) run:
 ansible-galaxy install -r requirements.yml
 ```
 
-At the moment there's `site.yml` playbook defined, that contains all roles available (sorted alphabetically).
-It can be used to run single roles, e.g. to set up vim on `base` machine
+The `site.yml` playbook serves as an entry point to the whole system.
+
+It can be used to run single roles, e.g. to set up vim:
 
 ```
 ansible-playbook site.yml --tags vim
 ```
 
-You'll most likely want to override some of the variables depending on your environment (e.g. you want to use a different git email for work and private stuff).
-This can be done with just modifying the whole inventory file or maintaining multiple copies, but your best bet is probably to define an override file like `custom.yml`
-that would only contain the variables that actually differ from the defaults defined in `base.yml`.
-This way it's much easier to update to the newer versions and keep everything tidy.
+or package groups:
 
-Note: Ansible doesn't like to merge the dictionaries from two inventories, the latter one just overrides the former.
-Remember about this when adding new variables.
+```
+ansible-playbook site.yml --tags mail
+```
 
-It can also be used to install all packages listed, if no tags are provided.
+Groups and tags can be checked by looking in the `playbooks/` directory and `site.yml` file.
+
+Device specific customizations should be put in `custom.yml` file.
+Values from it will override the ones from `base.yml`.
+
+Note: Ansible does not like to merge dictionaries from two inventories, the latter one just overrides the former.
+Remember about this, as it requires you to copy the whole dictionary from `base.yml` when you want to modify only a single key.
 
 ### First time
 
-Tip: If you don't have a passwordless sudo set up (and you probably shouldn't) you can add `--ask-become-pass` flag to each call, so Ansible can elevate
-privileges when needed (e.g. for pacman operations).
-Of course this will only work after user with sudo access is actually set up, it's probably best to do the initial setup as root.
+This repository can be run as root on the first boot, it will then take care of creating the user.
 
-If you don't want to install all packages but still want to have a proper setup of specific "groups" you can use few high-level tags tags.
-
-```
-ansible-playbook site.yml --tags core
-ansible-playbook site.yml --tags cli # sets up fzf, fish, etc.
-ansible-playbook site.yml --tags desktop # sets up i3, i3lock and friends
-ansible-playbook site.yml --tags desktop-tools # archiver, doc viewers, etc.
-ansible-playbook site.yml --tags media # VNC, MPV, spotify, etc.
-ansible-playbook site.yml --tags virtualization # qemu, vagrant, virtualbox
-ansible-playbook site.yml --tags social # discord
-ansible-playbook site.yml --tags browser # qutebrowser, firefox
-ansible-playbook site.yml --tags languages # python, golang, rust
-ansible-playbook site.yml --tags editors # vim, nvim, emacs
-ansible-playbook site.yml --tags docker # just docker
-ansible-playbook site.yml --tags utils # stuff that doesn't fall into any category really, but is generally useful
-ansible-playbook site.yml --tags work # work related stuff, e.g. jira CLI (requires work.enabled = true in yaml config)
-ansible-playbook site.yml --tags office # libreoffice, latex
-ansible-playbook site.yml --tags vpn # OpenVPN, wireguard tooling
-```
-
-There are also few specific packages (such as android_studio or intellij_idea) that are not part of any group and need to installed using individual tags.
-Similar for things that are not used by me at the moment, but can be useful in the future, e.g. ZSH setup.
+In subsequent runs it's recommended to add `--ask-become-pass` flag to the call, so Ansible can elevate privileges when needed (e.g. for `pacman`).
 
 To get all the groups and leave out the single packages you can use the `install-common-groups` scriptlet.
+In practice all devices will require different sets of applications to be installed, so this list should be customized.
 
-## Things that require manual setup anyway (pretty much configuration dependent)
+## Things that require manual setup after installation
 
-- autorandr
+- `kanshi` for auto-switching displays
 
 ## Testing
 
-Testing on host is probably the easiest approach, for end-to-end testing the `vagrant` role sets up Vagrant VM in `~/archlinux_vm` which can be used with ansible with minimal effort.
+Testing on host is likely the easiest approach, for end-to-end testing the `vagrant` role sets up a Vagrant VM in `~/archlinux_vm` which can be used with ansible with minimal effort.
 
 Please remember that if the initial `pacman -Syu` updates some components (e.g. kernel) it might be necessary to reboot before continuing with the testing.
 As an example, starting `docker` is not possible after kernel update and without reboot.
@@ -153,7 +138,7 @@ swapon /dev/ArchGroup/swap
 # You'll need to install amd-ucode or intel-ucode as listed above
 # You can run `blkid | grep UUID=` to get UUIDs of the partitions
 # Add the `resume=` param if you want to use the hibernation
-"Boot with microcode updates" "(initrd=\intel-ucode.img or initrd=\amd-ucode.img depending on your CPU) initrd=\initramfs-%v.img cryptdevice=UUID=<LUKS PARTITION UUID>:archlvm root=/dev/ArchGroup/root resume=/dev/ArchGroup/swap
+"Boot with microcode updates" "initrd=\initramfs-%v.img cryptdevice=UUID=<LUKS PARTITION UUID>:archlvm root=/dev/ArchGroup/root resume=/dev/ArchGroup/swap
 ...
 ```
 
