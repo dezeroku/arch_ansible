@@ -48,6 +48,9 @@ local_machine:
     gpg_user_key: 6AC2332BCF8E1A97
     gpg_sign_git_commits: true
 
+    # What msmtp account to use for sending out patches via mail
+    git_sendemail_mailbox: "mailbox"
+
     # Override these if you want the push notifications support via pushover
     # otherwise just leave it as it is
     apprise_pushover_user_key: ""

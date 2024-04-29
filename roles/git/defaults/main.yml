@@ -2,11 +2,7 @@
 git_email: "{{ user_email }}"
 git_username: "{{ ansible_user_id }}"
 git_install_hub: true
-git_smtp_server: smtp.gmail.com
-git_smtp_user: "{{ user_email }}"
-# Follow https://git-send-email.io to find out how to obtain password for GMail
-git_smtp_password: ""
-git_smtp_encryption: tls
-git_smtp_serverport: 587
 git_sendemail_confirm: "always"
-git_sendemail_password_file: "~/.gitconfig_sendemail_password"
+git_sendemail_mailbox: ""
+git_sendemail_from: "{{ ansible_user_id }} <{{ user_email }}>"
+git_sendemail_command: "/usr/bin/msmtp"
