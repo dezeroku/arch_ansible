@@ -44,7 +44,7 @@ local_machine:
     create_user_generate_ssh_key: true
     create_user_ssh_key_type: ed25519
     user_shell: /bin/fish
-    user_email: dezeroku@gmail.com
+    user_email: contact@dezeroku.com
     gpg_user_key: 6AC2332BCF8E1A97
     gpg_sign_git_commits: true
 
