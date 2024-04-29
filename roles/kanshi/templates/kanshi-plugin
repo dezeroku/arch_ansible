@@ -1,1 +1,1 @@
-exec "~/.config/sway/scripts/kanshi/kanshi-wrapper.sh &"
+exec "pkill kanshi; kanshi"

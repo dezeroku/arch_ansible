@@ -29,12 +29,6 @@
     state: directory
     mode: 0755
 
-- name: Template the helper script
-  ansible.builtin.template:
-    src: kanshi-wrapper.sh
-    dest: ~/.config/sway/scripts/kanshi/kanshi-wrapper.sh
-    mode: 0755
-
 - name: Template sway plugin
   ansible.builtin.include_role:
     name: helper_sway_plugin
