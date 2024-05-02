@@ -82,14 +82,24 @@ local_machine:
     #     from:
     #       name: "dezeroku"
     #       email: "dezeroku@example.com"
-    #     aliases: []
+    #     # aliases:
+    #     #   - '"My Alias" <alias@example.com>'
+    #     # Sometimes remapping directories is required.
+    #     # For most common cases, you can use the dir_map list,
+    #     # but few special directories may still require explicit treatment.
+    #     # For example to get rid of the [Gmail]/ prefix, while still putting messages
+    #     # in the existing folders, you would set options as below
+    #     # dir_map:
+    #     #   - "* = [Gmail]/*"
+    #     # archive_dir: "[Gmail]/All Mail"
+    #     # drafts_dir: "[Gmail]/Drafts"
+    #     # sent_dir: "[Gmail]/Sent Mail"
+    #
     #     # If oauth is set to true, you'll need to run `mailctl authorize <service> <email>`
     #     # one-time before using the account
     #     # You'll also have to create an OAuth app or use publicly available credentials
     #     # See configurable variables for the `mailctl` role for more details
     #     oauth: false
-    #     aliases:
-    #       - '"My Alias" <alias@example.com>'
     #     imap_server: imap.example.com
     #     smtp_server: smtp.example.com
     #     username_cmd: secret-tool lookup mail/example_mailbox username

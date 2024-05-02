@@ -7,11 +7,14 @@
       - aerc
       - pandoc-cli
 
-- name: Ensure directory exists
+- name: Ensure directories exist
   ansible.builtin.file:
-    path: ~/.config/aerc
+    path: "{{ item }}"
     state: directory
     mode: 0755
+  loop:
+    - ~/.config/aerc
+    - ~/.config/aerc/folder-map
 
 - name: Copy config files
   ansible.builtin.copy:
@@ -21,6 +24,15 @@
   loop:
     - aerc.conf
     - binds.conf
+
+- name: Create folder-map files
+  ansible.builtin.copy:
+    content: "{{ email_client[key].dir_map | join('\n') }}"
+    dest: ~/.config/aerc/folder-map/{{ key }}
+    mode: 0644
+  loop: "{{ (email_client | dict2items | selectattr('value.dir_map', 'defined') | list | items2dict).keys() }}"
+  loop_control:
+    loop_var: key
 
 - name: Template accounts file
   ansible.builtin.template:
