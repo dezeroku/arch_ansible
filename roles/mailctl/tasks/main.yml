@@ -17,7 +17,7 @@
   kewlfft.aur.aur:
     state: present
     name:
-      - cyrus-sasl-xoauth
+      - cyrus-sasl-xoauth2
 
 - name: Ensure config directory exists
   ansible.builtin.file:

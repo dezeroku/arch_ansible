@@ -3,4 +3,4 @@
 # Or (not recommended) use the publicly available details from Thunderbird
 # https://hg.mozilla.org/comm-central/file/tip/mailnews/base/src/OAuth2Providers.sys.mjs
 mailctl_google_client_id: ""
-mailctl_google_secret_id: ""
+mailctl_google_client_secret: ""
