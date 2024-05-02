@@ -19,8 +19,16 @@ fileext = ".vcf"
 type = "carddav"
 
 url = "{{ item.carddav.url }}"
+{% if 'username_cmd' in item.carddav %}
 username.fetch = ["command", {{ item.carddav.username_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+{% else %}
+username.fetch = ["command", {{ item.username_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+{% endif %}
+{% if 'password_cmd' in item.carddav %}
 password.fetch = ["command", {{ item.carddav.password_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+{% else %}
+password.fetch = ["command", {{ item.password_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+{% endif %}
 {% else %}
 type = "google_contacts"
 
@@ -49,8 +57,16 @@ fileext = ".ics"
 type = "caldav"
 
 url = "{{ item.caldav.url }}"
+{% if 'username_cmd' in item.caldav %}
 username.fetch = ["command", {{ item.caldav.username_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+{% else %}
+username.fetch = ["command", {{ item.username_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+{% endif %}
+{% if 'password_cmd' in item.caldav %}
 password.fetch = ["command", {{ item.caldav.password_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+{% else %}
+password.fetch = ["command", {{ item.password_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+{% endif %}
 {% else %}
 type = "google_calendar"
 

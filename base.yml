@@ -111,14 +111,14 @@ local_machine:
     #       address_books:
     #         - Contacts
     #       url: https://some-mailbox-url/carddav
-    #       username_cmd: secret-tool lookup mail/example_mailbox username
-    #       password_cmd: secret-tool lookup mail/example_mailbox password
+    #       # username_cmd: secret-tool lookup mail/example_mailbox username
+    #       # password_cmd: secret-tool lookup mail/example_mailbox password
     #     caldav:
     #       calendars:
     #         - Calendar
     #         - Birthdays
     #       url: https://some-mailbox-url/caldav/
-    #       username_cmd: secret-tool lookup mail/example_mailbox username
-    #       password_cmd: secret-tool lookup mail/example_mailbox password
+    #       # username_cmd: secret-tool lookup mail/example_mailbox username
+    #       # password_cmd: secret-tool lookup mail/example_mailbox password
     # todoman:
     #   default_list: mailbox-Tasks
