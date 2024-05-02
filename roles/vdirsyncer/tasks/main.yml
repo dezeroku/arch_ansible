@@ -48,6 +48,11 @@
         cmd: vdirsyncer metasync
       changed_when: true
 
+    - name: Perform the initial sync
+      ansible.builtin.command:
+        cmd: vdirsyncer sync
+      changed_when: true
+
 # You may want to scratch your eyes out before reading this, be warned
 # In short, we want to:
 # 1. Find every directory that contains 'displayname' file
