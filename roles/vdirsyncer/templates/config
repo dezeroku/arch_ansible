@@ -15,11 +15,20 @@ path = "{{ vdirsyncer_contacts_dir }}/{{vdirsyncer_prefix}}{{ key }}"
 fileext = ".vcf"
 
 [storage carddav_{{ key }}_remote]
+{% if 'google' not in item or not item.google %}
 type = "carddav"
 
 url = "{{ item.carddav.url }}"
 username.fetch = ["command", {{ item.carddav.username_cmd.split() | map('join') | map("to_json") | join(", ") }}]
 password.fetch = ["command", {{ item.carddav.password_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+{% else %}
+type = "google_contacts"
+
+token_file.fetch = ["command", "~/.config/vdirsyncer/oauth-mailctl.sh", "{{ item.from.email }}"]
+# We provide neither, as the script wrapper takes care of that via mailctl
+client_id = ""
+client_secret = ""
+{% endif %}
 
 {% endif %}
 
@@ -36,11 +45,20 @@ path = "{{ vdirsyncer_calendars_dir }}/{{vdirsyncer_prefix}}{{ key }}"
 fileext = ".ics"
 
 [storage caldav_{{ key }}_remote]
+{% if 'google' not in item or not item.google %}
 type = "caldav"
 
 url = "{{ item.caldav.url }}"
 username.fetch = ["command", {{ item.caldav.username_cmd.split() | map('join') | map("to_json") | join(", ") }}]
 password.fetch = ["command", {{ item.caldav.password_cmd.split() | map('join') | map("to_json") | join(", ") }}]
+{% else %}
+type = "google_calendar"
+
+token_file.fetch = ["command", "~/.config/vdirsyncer/oauth-mailctl.sh", "{{ item.from.email }}"]
+# We provide neither, as the script wrapper takes care of that via mailctl
+client_id = ""
+client_secret = ""
+{% endif %}
 
 {% endif %}
 {% endfor %}

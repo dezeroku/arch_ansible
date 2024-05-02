@@ -5,6 +5,7 @@
   community.general.pacman:
     name:
       - vdirsyncer
+      - python-aiohttp-oauthlib
 
 - name: Ensure config directory exists
   ansible.builtin.file:
@@ -18,6 +19,12 @@
     dest: ~/.config/vdirsyncer/config
     mode: 0644
   register: config_file
+
+- name: Copy the oauth wrapper script
+  ansible.builtin.copy:
+    src: oauth-mailctl.sh
+    dest: ~/.config/vdirsyncer/oauth-mailctl.sh
+    mode: 0755
 
 - name: Enable the systemd timer
   ansible.builtin.systemd:

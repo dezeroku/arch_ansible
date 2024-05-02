@@ -100,6 +100,9 @@ local_machine:
     #     # You'll also have to create an OAuth app or use publicly available credentials
     #     # See configurable variables for the `mailctl` role for more details
     #     oauth: false
+    #     # Set this to true if you are using a GSuite based pim tooling
+    #     # It requires non-standard authentication flow
+    #     google: false
     #     imap_server: imap.example.com
     #     smtp_server: smtp.example.com
     #     username_cmd: secret-tool lookup mail/example_mailbox username
