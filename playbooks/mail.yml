@@ -23,7 +23,7 @@
     - mail-oauth
     - never
 
-- name: Mail PMI
+- name: Mail PIM
   hosts: all
   become: true
   become_user: "{{ user_name }}"
@@ -33,5 +33,5 @@
     - {role: todoman, tags: ['todoman']}
     - {role: vdirsyncer, tags: ['vdirsyncer']}
   tags:
-    - mail-pmi
+    - mail-pim
     - never
