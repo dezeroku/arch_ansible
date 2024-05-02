@@ -83,6 +83,11 @@ local_machine:
     #       name: "dezeroku"
     #       email: "dezeroku@example.com"
     #     aliases: []
+    #     # If oauth is set to true, you'll need to run `mailctl authorize <service> <email>`
+    #     # one-time before using the account
+    #     # You'll also have to create an OAuth app or use publicly available credentials
+    #     # See configurable variables for the `mailctl` role for more details
+    #     oauth: false
     #     aliases:
     #       - '"My Alias" <alias@example.com>'
     #     imap_server: imap.example.com

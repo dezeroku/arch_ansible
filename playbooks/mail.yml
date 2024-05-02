@@ -10,6 +10,17 @@
     - {role: msmtp, tags: ['msmtp']}
   tags:
     - mail
+    - mail-oauth
+    - never
+
+- name: Mail (with XOAUTH2 support)
+  hosts: all
+  become: true
+  become_user: "{{ user_name }}"
+  roles:
+    - {role: mailctl, tags: ['mailctl']}
+  tags:
+    - mail-oauth
     - never
 
 - name: Mail PMI
