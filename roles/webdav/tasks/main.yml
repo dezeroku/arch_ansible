@@ -29,6 +29,16 @@
     state: directory
     mode: 0755
 
+# TODO: this is a WA required because of the sudo call in the wrapper
+# We should get rid of it
+- name: Copy global config file
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: davfs2.conf
+    dest: /etc/davfs2/davfs2.conf
+    mode: 0644
+
 - name: Copy config file
   ansible.builtin.copy:
     src: davfs2.conf

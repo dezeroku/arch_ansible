@@ -43,4 +43,4 @@ PASSWORD="$(${PASSWORD_CMD_MAP[$IDENTIFIER]})"
 # TODO: it should work without sudo with proper groups
 # but I'm getting /etc/fstab related errors for some reason
 # Probably permission related
-echo "$PASSWORD" | sudo mount -t davfs -o username="$USERNAME" "$URL" "$MOUNT_PATH"
+echo "$PASSWORD" | sudo mount -t davfs -o uid="$(id -u)" -o gid="$(id -g)" -o username="$USERNAME" "$URL" "$MOUNT_PATH"
