@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1036,SC1054,SC1056,SC1072,SC1073
+
+set -euo pipefail
+
+if [ -z "${1:-}" ] || [ -z "${2:-}" ]; then
+    echo "davmount IDENTIFIER MOUNT_PATH"
+    exit 1
+fi
+
+IDENTIFIER="$1"
+MOUNT_PATH="$2"
+
+if [ ! -d "${MOUNT_PATH}" ]; then
+    echo "${MOUNT_PATH} is not a directory!"
+    exit 1
+fi
+
+declare -A USERNAME_CMD_MAP
+declare -A PASSWORD_CMD_MAP
+declare -A URL_MAP
+
+{% for key, item in email_client.items() %}
+{% if 'webdav' in item %}
+URL_MAP[{{ key }}]="{{ item.webdav.url }}"
+{% if 'username_cmd' in item.webdav %}
+USERNAME_CMD_MAP[{{ key }}]="{{ item.webdav.username_cmd }}"
+{% else %}
+USERNAME_CMD_MAP[{{ key }}]="{{ item.username_cmd }}"
+{% endif %}
+{% if 'password_cmd' in item.webdav %}
+PASSWORD_CMD_MAP[{{ key }}]="{{ item.webdav.password_cmd }}"
+{% else %}
+PASSWORD_CMD_MAP[{{ key }}]="{{ item.password_cmd }}"
+{% endif %}
+{% endif %}
+{% endfor %}
+
+URL="${URL_MAP[$IDENTIFIER]}"
+USERNAME="$(${USERNAME_CMD_MAP[$IDENTIFIER]})"
+PASSWORD="$(${PASSWORD_CMD_MAP[$IDENTIFIER]})"
+
+# TODO: it should work without sudo with proper groups
+# but I'm getting /etc/fstab related errors for some reason
+# Probably permission related
+echo "$PASSWORD" | sudo mount -t davfs -o username="$USERNAME" "$URL" "$MOUNT_PATH"

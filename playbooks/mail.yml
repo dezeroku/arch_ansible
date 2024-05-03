@@ -22,6 +22,7 @@
     - {role: khard, tags: ['khard']}
     - {role: todoman, tags: ['todoman']}
     - {role: vdirsyncer, tags: ['vdirsyncer']}
+    - {role: webdav, tags: ['webdav'], when: 'email_client | dict2items | selectattr("value.webdav", "defined") | list | items2dict'}
   tags:
     - mail-pim
     - never

@@ -1,0 +1,42 @@
+---
+- name: Install davfs2
+  become: true
+  become_user: aur_builder
+  kewlfft.aur.aur:
+    state: present
+    name:
+      - davfs2
+
+- name: Ensure group davfs2 exists
+  become: true
+  become_user: root
+  ansible.builtin.group:
+    name: davfs2
+    state: present
+
+- name: Add user to davfs2 group
+  become: true
+  become_user: root
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    groups: davfs2
+    state: present
+    append: true
+
+- name: Ensure config directory exists
+  ansible.builtin.file:
+    path: ~/.davfs2
+    state: directory
+    mode: 0755
+
+- name: Copy config file
+  ansible.builtin.copy:
+    src: davfs2.conf
+    dest: ~/.davfs2/davfs2.conf
+    mode: 0644
+
+- name: Template the webdav wrapper
+  ansible.builtin.template:
+    src: davmount
+    dest: ~/bin/davmount
+    mode: 0755

@@ -120,5 +120,9 @@ local_machine:
     #       url: https://some-mailbox-url/caldav/
     #       # username_cmd: secret-tool lookup mail/example_mailbox username
     #       # password_cmd: secret-tool lookup mail/example_mailbox password
+    #     webdav:
+    #       url: https://some-url/webdav
+    #       # username_cmd: secret-tool lookup mail/example_mailbox username
+    #       # password_cmd: secret-tool lookup mail/example_mailbox password
     # todoman:
     #   default_list: mailbox-Tasks
