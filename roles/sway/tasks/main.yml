@@ -7,6 +7,7 @@
       - sway
       - swaybg
       - python-i3ipc
+      - xdg-desktop-portal-wlr
 
 - name: Ensure directory exists
   ansible.builtin.file:
