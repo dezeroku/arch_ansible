@@ -26,14 +26,15 @@
     state: directory
     mode: 0755
 
-- name: Template userscripts
-  ansible.builtin.template:
+- name: Copy userscripts
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: ~/.config/qutebrowser/userscripts/
     mode: 0755
   loop:
     - download_video.sh
     - spawn_mpv.sh
+    - qute-rbw
 
 - name: Ensure greasemonkey directory exists
   ansible.builtin.file:

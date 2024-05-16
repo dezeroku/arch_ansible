@@ -90,6 +90,7 @@ c.colors.webpage.preferred_color_scheme = "dark"
 # c.colors.webpage.darkmode.enabled = True
 
 # Password manager
-config.bind(",p", "spawn --userscript qute-bitwarden")
-config.bind(",P", "spawn --userscript qute-bitwarden --password-only")
-config.bind(",,P", "spawn --userscript qute-bitwarden --totp-only")
+config.bind(",p", "spawn --userscript qute-rbw")
+config.bind(",P", "spawn --userscript qute-rbw --password-only")
+# TODO: implement TOTP support in qute-rbw
+# config.bind(",,P", "spawn --userscript qute-rbw --totp-only")
