@@ -32,8 +32,8 @@ password.fetch = ["command", {{ item.password_cmd.split() | map('join') | map("t
 {% else %}
 type = "google_contacts"
 
-token_file.fetch = ["command", "~/.config/vdirsyncer/oauth-mailctl.sh", "{{ item.from.email }}"]
-# We provide neither, as the script wrapper takes care of that via mailctl
+token_file.fetch = ["command", "~/.config/vdirsyncer/oauth-oama.sh", "{{ item.from.email }}"]
+# We provide neither, as the script wrapper takes care of that via oama
 client_id = ""
 client_secret = ""
 {% endif %}
@@ -70,8 +70,8 @@ password.fetch = ["command", {{ item.password_cmd.split() | map('join') | map("t
 {% else %}
 type = "google_calendar"
 
-token_file.fetch = ["command", "~/.config/vdirsyncer/oauth-mailctl.sh", "{{ item.from.email }}"]
-# We provide neither, as the script wrapper takes care of that via mailctl
+token_file.fetch = ["command", "~/.config/vdirsyncer/oauth-oama.sh", "{{ item.from.email }}"]
+# We provide neither, as the script wrapper takes care of that via oama
 client_id = ""
 client_secret = ""
 {% endif %}

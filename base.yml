@@ -95,10 +95,10 @@ local_machine:
     #     # drafts_dir: "[Gmail]/Drafts"
     #     # sent_dir: "[Gmail]/Sent Mail"
     #
-    #     # If oauth is set to true, you'll need to run `mailctl authorize <service> <email>`
+    #     # If oauth is set to true, you'll need to run `oama authorize <service> <email>`
     #     # one-time before using the account
     #     # You'll also have to create an OAuth app or use publicly available credentials
-    #     # See configurable variables for the `mailctl` role for more details
+    #     # See configurable variables for the `oama` role for more details
     #     oauth: false
     #     # Set this to true if you are using a GSuite based pim tooling
     #     # It requires non-standard authentication flow

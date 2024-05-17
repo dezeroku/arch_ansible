@@ -1,3 +1,3 @@
 ---
 dependencies:
-  - {role: mailctl, when: 'email_client | dict2items | selectattr("value.oauth", "defined") | selectattr("value.oauth", "equalto", true) | list | items2dict'}
+  - {role: oama, when: 'email_client | dict2items | selectattr("value.oauth", "defined") | selectattr("value.oauth", "equalto", true) | list | items2dict'}

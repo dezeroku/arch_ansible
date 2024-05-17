@@ -1,16 +1,29 @@
 ---
-# mailctl-bin SEGFAULTs for me locally,
-# installing the static binary from Github works
-- name: Install mailctl
+- name: Remove mailctl-bin
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - mailctl-bin
+    state: absent
+
+- name: Remove mailctl legacy config files
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    path: ~/.config/mailctl
+    state: absent
+
+- name: Install oama
   become: true
   become_user: aur_builder
   kewlfft.aur.aur:
     state: present
     name:
-      - mailctl-bin
+      - oama-bin
 
 # This probably belongs more in the isync config
-# But we won't really need it anywhere outside the mailctl context
+# But we won't really need it anywhere outside the oama context
 - name: Install XOAUTH2 SASL helper
   become: true
   become_user: aur_builder
@@ -21,15 +34,14 @@
 
 - name: Ensure config directory exists
   ansible.builtin.file:
-    path: ~/.config/mailctl
+    path: ~/.config/oama
     state: directory
     mode: 0755
 
 - name: Template config files
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: ~/.config/mailctl/{{ item }}
+    dest: ~/.config/oama/{{ item }}
     mode: 0600
   loop:
     - config.yaml
-    - services.yaml

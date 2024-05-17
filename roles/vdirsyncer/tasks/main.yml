@@ -22,8 +22,8 @@
 
 - name: Copy the oauth wrapper script
   ansible.builtin.copy:
-    src: oauth-mailctl.sh
-    dest: ~/.config/vdirsyncer/oauth-mailctl.sh
+    src: oauth-oama.sh
+    dest: ~/.config/vdirsyncer/oauth-oama.sh
     mode: 0755
 
 - name: Enable the systemd timer
