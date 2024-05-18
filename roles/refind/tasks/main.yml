@@ -1,0 +1,32 @@
+---
+- name: Install refind
+  community.general.pacman:
+    name:
+      - refind
+  register: refind_pacman
+
+- name: Install refind to boot partition
+  # We can't do this as a handler,
+  # as the following tasks rely on files created in this step
+  when: refind_pacman.changed  # noqa: no-handler
+  changed_when: true
+  ansible.builtin.command:
+    cmd: refind install
+
+- name: Teach refind about Arch kernel version strings
+  ansible.builtin.lineinfile:
+    path: /boot/EFI/refind/refind.conf
+    line: 'extra_kernel_version_strings linux-lts,linux'
+    regexp: '^extra_kernel_version_strings '
+    insertafter: '^#extra_kernel_version_strings'
+
+- name: Sanity check variables
+  when: refind_cryptdevice_container and not refind_cryptdevice_uuid
+  ansible.builtin.fail:
+    msg: "refind_cryptdevice_container is set, while refind_cryptdevice_uuid is empty. Did you forget to set it in custom.yml?"
+
+- name: Template refind_linux.conf
+  ansible.builtin.template:
+    src: refind_linux.conf
+    dest: /boot/refind_linux.conf
+    mode: 0644
