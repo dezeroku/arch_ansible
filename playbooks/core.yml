@@ -14,6 +14,8 @@
     - {role: dns_cache, tags: ['dns_cache']}
     - {role: hardening, tags: ['hardening']}
     - {role: openssh, tags: ['openssh']}
+    # Running this role by default seems fragile, require explicit mention for now
+    - {role: mkinitcpio, tags: ['mkinitcpio', 'never']}
   tags:
     - core
 

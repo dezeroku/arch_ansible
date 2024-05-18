@@ -1,0 +1,17 @@
+---
+- name: Ensure directory exists
+  ansible.builtin.file:
+    path: /etc/mkinitcpio.conf.d
+    state: directory
+    mode: 0755
+  loop:
+    - /etc/mkinitcpio.conf.d
+
+- name: Template drop-in files
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: /etc/mkinitcpio.conf.d/{{ item }}
+    mode: 0644
+  loop:
+    - hooks.conf
+  notify: Regenerate initramfs
