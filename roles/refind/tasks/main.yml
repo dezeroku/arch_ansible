@@ -23,7 +23,7 @@
 - name: Sanity check variables
   when: refind_cryptdevice_container and not refind_cryptdevice_uuid
   ansible.builtin.fail:
-    msg: "refind_cryptdevice_container is set, while refind_cryptdeviceuuid is empty. Did you forget to set it in custom.yml?"
+    msg: "refind_cryptdevice_container is set, while refind_cryptdevice_uuid is empty. Did you forget to set it in custom.yml?"
 
 - name: Template refind_linux.conf
   ansible.builtin.template:
