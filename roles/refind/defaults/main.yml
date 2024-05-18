@@ -1,0 +1,9 @@
+---
+# This setup assumes that the LVM-on-LUKS setup described in README has been followed during the installation
+# Set below variables to '' to not add kernel parameters related to it
+# Use the `blkid` command to find the drive's UUID
+refind_cryptdevice_uuid: ""
+refind_cryptdevice_container: archlvm
+refind_root: /dev/ArchGroup/root
+refind_resume: /dev/ArchGroup/swap
+refind_additional_kernel_params: ""

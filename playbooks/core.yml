@@ -16,6 +16,8 @@
     - {role: openssh, tags: ['openssh']}
     # Running this role by default seems fragile, require explicit mention for now
     - {role: mkinitcpio, tags: ['mkinitcpio', 'never']}
+    # Same reasoning as for the above
+    - {role: refind, tags: ['refind', 'never']}
   tags:
     - core
 
