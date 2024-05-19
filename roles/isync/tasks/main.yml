@@ -19,10 +19,6 @@
     dest: ~/.mbsyncrc
     mode: 0600
 
-# In theory this setup is not needed, as
-# goimapnotify is meant to run the sync command on startup
-# but it doesn't work for some reason
-# TODO: investigate the goimapnotify startup sync
 - name: Ensure systemd directory exists
   ansible.builtin.file:
     path: ~/.config/systemd/user/
