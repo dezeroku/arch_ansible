@@ -1,0 +1,65 @@
+---
+- name: All
+  hosts: all
+  become: true
+  become_user: "{{ user_name }}"
+  roles:
+    - {role: audio_control, tags: ['audio_control', 'desktop-utils', 'audio']}
+    - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: bluetooth_enabled}
+    - {role: discord, tags: ['discord', 'social']}
+    - {role: docker, tags: ['docker', 'docker']}
+    - {role: dunst, tags: ['dunst', 'desktop']}
+    - {role: exfat_utils, tags: ['exfat_utils', 'utils']}
+    - {role: firefox, tags: ['firefox', 'browser']}
+    - {role: fonts, tags: ['fonts', 'desktop']}
+    - {role: fuse, tags: ['fuse', 'utils']}
+    - {role: gimp, tags: ['gimp', 'desktop-utils']}
+    - {role: imv, tags: ['imv', 'desktop-utils']}
+    - {role: go, tags: ['go', 'languages']}
+    - {role: gnome_keyring, tags: ['gnome_keyring', 'utils']}
+    - {role: gparted, tags: ['gparted', 'desktop-utils']}
+    - {role: i3status_rust, tags: ['i3status_rust', 'desktop']}
+    - {role: imagemagick, tags: ['imagemagick', 'utils']}
+    - {role: jira, tags: ['jira', 'work'], when: work_enabled}
+    - {role: latex, tags: ['latex', 'office']}
+    - {role: libreoffice, tags: ['libreoffice', 'office']}
+    - {role: libvirt, tags: ['libvirt']}
+    - {role: mesa, tags: ['mesa', 'desktop']}
+    - {role: misc, tags: ['misc', 'utils']}
+    - {role: mpv, tags: ['mpv', 'media']}
+    - {role: npm, tags: ['npm', 'languages']}
+    - {role: pcmanfm, tags: ['pcmanfm', 'desktop-utils']}
+    - {role: powerline, tags: ['powerline', 'desktop']}
+    - {role: pipewire, tags: ['pipewire', 'desktop', 'audio']}
+    - {role: python3, tags: ['python3', 'languages']}
+    - {role: qemu, tags: ['qemu', 'virtualization']}
+    - {role: qutebrowser, tags: ['qutebrowser', 'browser']}
+    - {role: rofi, tags: ['rofi', 'desktop', 'sway-wm']}
+    - {role: rust, tags: ['rust', 'languages']}
+    - {role: spotify, tags: ['spotify', 'media']}
+    - {role: slack, tags: ['slack', 'work']}
+    - {role: udiskie, tags: ['udiskie', 'desktop']}
+    - {role: vagrant, tags: ['vagrant', 'virtualization']}
+    - {role: vim, tags: ['vim', 'editors']}
+    - {role: vlc, tags: ['vlc', 'media']}
+    - {role: vscode, tags: ['vscode', 'editors']}
+    - {role: vnstat, tags: ['vnstat', 'utils']}
+    - {role: wireguard_tools, tags: ['wireguard_tools', 'vpn']}
+    - {role: xorg, tags: ['xorg', 'desktop']}
+    - {role: yt_dlp, tags: ['yt_dlp', 'media']}
+    - {role: yubikey, tags: ['yubikey', 'desktop-tools']}
+    - {role: zathura, tags: ['zathura', 'desktop-tools']}
+    - {role: hardware_video_acceleration, tags: ['hardware_video_acceleration', 'desktop'], when: setup_hardware_video_acceleration_enabled}
+    - {role: zoom, tags: ['zoom', 'work']}
+    # DEVELOPMENT
+    - {role: sway, tags: ['sway', 'desktop', 'sway-wm']}
+    - {role: swaylock, tags: ['swaylock', 'desktop', 'sway-wm']}
+    - {role: gammastep, tags: ['gammastep', 'desktop', 'sway-wm']}
+    - {role: wayland, tags: ['wayland', 'desktop']}
+    - {role: foot, tags: ['foot', 'desktop']}
+    - {role: grimshot, tags: ['grimshot', 'desktop', 'sway-wm']}
+    - {role: brightnessctl, tags: ['brightnessctl', 'desktop', 'sway-wm']}
+    - {role: kanshi, tags: ['kanshi', 'desktop', 'sway-wm']}
+    - {role: vnc, tags: ['vnc', 'desktop-utils']}
+  tags:
+    - all
