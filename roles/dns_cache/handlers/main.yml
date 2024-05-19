@@ -1,0 +1,9 @@
+---
+- name: Update resolvconf subscribers
+  ansible.builtin.command: resolvconf -u
+  changed_when: true
+
+- name: Restart dnsmasq
+  ansible.builtin.systemd:
+    name: dnsmasq.service
+    state: restarted

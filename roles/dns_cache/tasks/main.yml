@@ -1,63 +1,63 @@
 ---
 - name: Install dnsmasq and openresolv
-  become: true
-  become_user: root
   community.general.pacman:
     name:
       - dnsmasq
       - openresolv
 
 - name: Make sure that systemd-resolvconf is not used
-  become: true
-  become_user: root
   community.general.pacman:
     name:
       - systemd-resolvconf
     state: absent
 
 - name: Copy resolvconf.conf
-  become: true
-  become_user: root
   ansible.builtin.copy:
     src: resolvconf.conf
     dest: /etc/resolvconf.conf
     mode: 0644
-  register: resolvconf_conf_copy
+  notify:
+    - Update resolvconf subscribers
 
-- name: Update subscribers
-  become: true
-  become_user: root
-  ansible.builtin.command: resolvconf -u
-  when: resolvconf_conf_copy.changed  # noqa: no-handler
-  changed_when: true
+- name: Ensure directory exists
+  ansible.builtin.file:
+    path: /etc/dnsmasq.d
+    state: directory
+    mode: 0755
 
-- name: Configure dnsmasq
-  become: true
-  become_user: root
+# This file will be overwritten by handler later on
+# This is just to make sure dnsmasq won't panic on not seeing the file
+- name: Ensure the resolvconf generate file exists
+  ansible.builtin.file:
+    path: /etc/dnsmasq-conf.conf
+    mode: 0644
+    state: touch
+    modification_time: preserve
+    access_time: preserve
+
+- name: Configure dnsmasq to look for the appends
   ansible.builtin.lineinfile:
     dest: /etc/dnsmasq.conf
     state: "present"
     regexp: "^{{ item.match }}"
     insertafter: "^#{{ item.match }}"
     line: "{{ item.line }}"
-    # TODO: validation requires %s and dnsmasq doesn't need and like it
-    # validate: dnsmasq --test
-  with_items:
-    - {match: "listen-address=", line: "listen-address=::1,127.0.0.1"}
-    - {match: "cache-size=", line: "cache-size=1000"}
-    - {match: "bind-interfaces", line: "bind-interfaces"}
-    # Only listen on localhost, we don't serve other machines in the network
-    - {match: "interface=", line: "interface="}
-    - {match: "conf-file=", line: "conf-file=/etc/dnsmasq-conf.conf"}
-    - {match: "resolv-file=", line: "resolv-file=/etc/dnsmasq-resolv.conf"}
-  register: dnsmasq_configure
+    validate: dnsmasq --conf-file=%s --test
+  loop:
+    - {match: "conf-dir=", line: "conf-dir=/etc/dnsmasq.d"}
+
+- name: Template dnsmasq append
+  ansible.builtin.template:
+    src: dnsmasq_append.conf
+    dest: /etc/dnsmasq.d/arch_ansible.conf
+    mode: 0644
+  notify:
+    - Restart dnsmasq
 
 - name: Obtain service facts, to check if systemd-resolved exists
   ansible.builtin.service_facts:
 
 - name: Make sure that systemd-resolved is not running
-  become: true
-  become_user: root
   ansible.builtin.systemd:
     name: systemd-resolved.service
     enabled: false
@@ -65,26 +65,15 @@
   when: '"systemd-resolved.service" in services'
 
 - name: Start and enable dnsmasq
-  become: true
-  become_user: root
   ansible.builtin.systemd:
     name: dnsmasq.service
     enabled: true
-    state: "{{ (dnsmasq_configure.changed or resolvconf_conf_copy.changed) | ternary('restarted', 'started') }}"
+    state: started
 
 - name: Make network manager use the resolvconf
-  become: true
-  become_user: root
   ansible.builtin.template:
     src: nm-rc-manager.conf
     dest: /etc/NetworkManager/conf.d/rc-manager.conf
     mode: 0644
-  register: network_manager_resolvconf
-
-- name: Reload network manager
-  become: true
-  become_user: root
-  ansible.builtin.systemd:
-    name: NetworkManager.service
-    state: reloaded
-  when: network_manager_resolvconf.changed  # noqa: no-handler
+  notify:
+    - Reload networkmanager

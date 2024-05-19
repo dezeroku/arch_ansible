@@ -1,0 +1,5 @@
+---
+- name: Reload networkmanager
+  ansible.builtin.systemd:
+    name: NetworkManager.service
+    state: reloaded
