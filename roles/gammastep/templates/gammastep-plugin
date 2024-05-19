@@ -1,2 +1,1 @@
-# TODO: parametrize with ansible variables
-exec "gammastep-indicator -t 5200:2000 -l 51.10:17.0 &"
+exec "gammastep-indicator -t {{ gammastep_temperature_day }}:{{ gammastep_temperature_night }} {{ "-l " + gammastep_latitude + ":" + gammastep_longitude if gammastep_latitude and gammastep_longitude else '' }} &"
