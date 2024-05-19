@@ -19,12 +19,6 @@
     - {role: mkinitcpio, tags: ['mkinitcpio', 'never']}
     # Same reasoning as for the above
     - {role: refind, tags: ['refind', 'never']}
-  tags:
-    - core
-
-- name: Core (non-root)
-  hosts: all
-  roles:
-    - {role: networkmanager, tags: ['networkmanager', 'desktop-utils']}
+    - {role: networkmanager, tags: ['networkmanager']}
   tags:
     - core

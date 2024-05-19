@@ -27,6 +27,7 @@
     - {role: mesa, tags: ['mesa', 'desktop']}
     - {role: misc, tags: ['misc', 'utils']}
     - {role: mpv, tags: ['mpv', 'media']}
+    - {role: networkmanager_applet, tags: ['networkmanager_applet']}
     - {role: npm, tags: ['npm', 'languages']}
     - {role: opensnitch, tags: ['opensnitch']}
     - {role: pcmanfm, tags: ['pcmanfm', 'desktop-utils']}

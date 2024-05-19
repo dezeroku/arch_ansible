@@ -65,7 +65,6 @@ local_machine:
 
     # TODO: change this to a more general flag
     bluetooth_install_gui: true
-    networkmanager_install_gui: true
 
     # Sets up imapnotify + mbsync + msmtp + aerc
     # keeping the mailbox in ~/.mail/{{ key }} (`mail` tag)
