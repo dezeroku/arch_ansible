@@ -5,7 +5,6 @@
   community.general.pacman:
     name:
       - wayland
-      # TODO: do we want to put it in a better place?
       - qt6-wayland
       # For pinentry-qt
       - kwayland5
