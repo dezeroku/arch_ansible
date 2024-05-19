@@ -9,6 +9,11 @@ echo 'Server = {{ pacoloco_server_url }}/repo/{{ pacoloco_repo }}/$repo/os/$arch
 pacman -Syu ansible --noconfirm
 SCRIPT
 
+$script_ansible = <<-SCRIPT
+cd /arch_ansible
+CI_RUN_MODE=true ./install-common-groups
+SCRIPT
+
 Vagrant.configure("2") do |config|
   config.vm.box = 'archlinux/archlinux'
   if Vagrant.has_plugin?("vagrant-disksize")
@@ -36,15 +41,6 @@ Vagrant.configure("2") do |config|
   # Perform reboot to load (possibly) new kernel
   config.vm.provision 'shell', reboot: true
 
-  # Perform Ansible provisioning
-  config.vm.provision "ansible_local" do |ansible|
-    ansible.install = false
-    ansible.playbook = "site.yml"
-    ansible.inventory_path = "base.yaml"
-    ansible.provisioning_path = "/arch_ansible"
-    ansible.galaxy_role_file = "requirements.yml"
-    ansible.galaxy_roles_path = "/etc/ansible/roles"
-    ansible.galaxy_command = "true"
-    ansible.playbook_command = "CI_RUN_MODE=true ./install-common-groups && \#"
-  end
+  # Run ansible playbooks
+  config.vm.provision "shell", inline: $script_ansible
 end

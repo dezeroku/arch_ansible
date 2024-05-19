@@ -22,5 +22,4 @@ Optionally `vagrant provision` can be used to just call the provisioning without
 refreshing the machine.
 
 It's worth noting that while this setup can be used for development (e.g. `vagrant ssh`
-directly into the VM and test whatever you want there), but still testing on the live
-system is preferred.
+directly into the VM and test whatever you want there) testing on the live system is preferred.
