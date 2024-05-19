@@ -1,16 +1,9 @@
 ---
-- name: Install wayvnc
-  become: true
-  become_user: root
-  community.general.pacman:
-    name:
-      - wayvnc
-
 - name: Ensure directory exists
   become: true
   become_user: aur_builder
   ansible.builtin.file:
-    path: "{{ vnc_wlvncc_build_dir }}"
+    path: "{{ wlvncc_build_dir }}"
     state: directory
     mode: 0755
 
@@ -19,7 +12,7 @@
   become_user: aur_builder
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ vnc_wlvncc_build_dir }}"
+    dest: "{{ wlvncc_build_dir }}"
     mode: 0644
   loop:
     - PKGBUILD
@@ -34,4 +27,4 @@
     state: latest
     name:
       - wlvncc-im-0xea-git
-    local_pkgbuild: "{{ vnc_wlvncc_build_dir }}"
+    local_pkgbuild: "{{ wlvncc_build_dir }}"

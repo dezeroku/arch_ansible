@@ -1,0 +1,7 @@
+---
+- name: Install wayvnc
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - wayvnc

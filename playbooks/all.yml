@@ -62,6 +62,7 @@
     - {role: grimshot, tags: ['grimshot', 'desktop', 'sway-wm']}
     - {role: brightnessctl, tags: ['brightnessctl', 'desktop', 'sway-wm']}
     - {role: kanshi, tags: ['kanshi', 'desktop', 'sway-wm']}
-    - {role: vnc, tags: ['vnc', 'desktop-utils']}
+    - {role: wayvnc, tags: ['wayvnc', 'desktop-utils']}
+    - {role: wlvncc, tags: ['wlvncc', 'desktop-utils']}
   tags:
     - all
