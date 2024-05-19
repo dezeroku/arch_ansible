@@ -1,10 +1,9 @@
 ---
 spotify_email: "{{ user_email }}"
-spotify_spotifyd_password_cmd: "rbw get -f password Spotify"
+spotify_spotifyd_enable: false
+spotify_spotifyd_password_cmd: "rbw get Spotify"
 spotify_spotifyd_device_name: "spotifyd@{{ ansible_hostname }}"
 spotify_spotifyd_bitrate: "160"
-# TODO: better way for obtaining the home directory
-# it must be an absolute path (readlink it?)
-# as spotifyd does not support the placeholders like ~ or $HOME
-spotify_spotifyd_cache_path: "{{ ansible_env.HOME }}/.cache/spotifyd"
+# spotifyd doesn't not expand this variable, thus we need to do it here
+spotify_spotifyd_cache_path: "{{ lookup('env', 'HOME') }}/.cache/spotifyd"
 spotify_spotifyd_cache_size: "10000000000"

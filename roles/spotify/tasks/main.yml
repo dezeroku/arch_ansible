@@ -15,23 +15,33 @@
     name:
       - spotify-launcher
 
-- name: Ensure directory exists
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    mode: 0755
-  loop:
-    - ~/.config/spotifyd
-    - "{{ spotify_spotifyd_cache_path }}"
-
 - name: Template spotify-launcher config
   ansible.builtin.template:
     src: spotify-launcher.conf
     dest: ~/.config/spotify-launcher.conf
     mode: 0644
 
-- name: Template spotifyd config
-  ansible.builtin.template:
-    src: spotifyd.conf
-    dest: ~/.config/spotifyd/spotifyd.conf
-    mode: 0644
+- name: Set up spotifyd
+  when: spotify_spotifyd_enable
+  block:
+    - name: Install spotifyd
+      become: true
+      become_user: root
+      community.general.pacman:
+        name:
+          - spotifyd
+
+    - name: Ensure directory exists
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: 0755
+      loop:
+        - ~/.config/spotifyd
+        - "{{ spotify_spotifyd_cache_path }}"
+
+    - name: Template spotifyd config
+      ansible.builtin.template:
+        src: spotifyd.conf
+        dest: ~/.config/spotifyd/spotifyd.conf
+        mode: 0644
