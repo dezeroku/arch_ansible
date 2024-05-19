@@ -1,4 +1,6 @@
 ---
+# While this restarts the "service",
+# in reality it reloads rules in kernel
 - name: Reload nftables
   become: true
   become_user: root

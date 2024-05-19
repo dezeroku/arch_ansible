@@ -28,6 +28,7 @@
     - {role: misc, tags: ['misc', 'utils']}
     - {role: mpv, tags: ['mpv', 'media']}
     - {role: npm, tags: ['npm', 'languages']}
+    - {role: opensnitch, tags: ['opensnitch']}
     - {role: pcmanfm, tags: ['pcmanfm', 'desktop-utils']}
     - {role: powerline, tags: ['powerline', 'desktop']}
     - {role: pipewire, tags: ['pipewire', 'desktop', 'audio']}

@@ -14,6 +14,7 @@
     - {role: dns_cache, tags: ['dns_cache']}
     - {role: hardening, tags: ['hardening']}
     - {role: openssh, tags: ['openssh']}
+    - {role: nftables, tags: ['nftables']}
     # Running this role by default seems fragile, require explicit mention for now
     - {role: mkinitcpio, tags: ['mkinitcpio', 'never']}
     # Same reasoning as for the above
@@ -25,6 +26,5 @@
   hosts: all
   roles:
     - {role: networkmanager, tags: ['networkmanager', 'desktop-utils']}
-    - {role: firewall, tags: ['firewall', 'desktop-utils']}
   tags:
     - core

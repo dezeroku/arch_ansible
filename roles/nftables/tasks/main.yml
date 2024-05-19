@@ -1,0 +1,32 @@
+---
+- name: Install nftables
+  community.general.pacman:
+    name:
+      - nftables
+
+- name: Enable nftables
+  ansible.builtin.systemd:
+    name: nftables
+    enabled: true
+
+- name: Template nftables.conf
+  ansible.builtin.template:
+    src: base.conf
+    dest: /etc/nftables.conf
+    mode: 0644
+  notify:
+    - Reload nftables
+
+- name: Ensure append directory exists
+  ansible.builtin.file:
+    path: /etc/nftables.d
+    state: directory
+    mode: 0755
+
+- name: Copy nftables counter append
+  ansible.builtin.copy:
+    src: counter.conf
+    dest: /etc/nftables.d/99-counter.conf
+    mode: 0644
+  notify:
+    - Reload nftables

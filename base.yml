@@ -38,8 +38,6 @@ local_machine:
 
     helper_fish_plugin_enabled: true
 
-    firewall_enable_opensnitch: true
-
     user_name: dezeroku
     create_user_generate_ssh_key: true
     create_user_ssh_key_type: ed25519

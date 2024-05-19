@@ -21,12 +21,5 @@
     src: prometheus-node-exporter.conf
     dest: /etc/nftables.d/89-prometheus-node-exporter.conf
     mode: 0644
-  register: nftables_config
-
-- name: Reload nftables configuration
-  become: true
-  become_user: root
-  ansible.builtin.systemd:
-    name: nftables
-    state: started
-  when: nftables_config.changed  # noqa: no-handler
+  notify:
+    - Reload nftables

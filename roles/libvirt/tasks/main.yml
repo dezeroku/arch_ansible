@@ -19,22 +19,15 @@
     state: present
     append: true
 
-- name: Copy nftables config
+- name: Copy nftables append
   become: true
   become_user: root
   ansible.builtin.copy:
     src: libvirt-nft.conf
     dest: /etc/nftables.d/01-libvirt.conf
     mode: 0644
-  register: nftables_config
-
-- name: Reload nftables configuration
-  become: true
-  become_user: root
-  ansible.builtin.systemd:
-    name: nftables
-    state: started
-  when: nftables_config.changed  # noqa: no-handler
+  notify:
+    - Reload nftables
 
 - name: Enable libvirtd
   become: true
