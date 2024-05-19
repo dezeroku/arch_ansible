@@ -2,6 +2,7 @@
 mkinitcpio_microcode_hook: true
 mkinitcpio_kms_hook: true
 mkinitcpio_encrypt_hook: true
+mkinitcpio_encrypt_ssh_hook: false
 mkinitcpio_lvm2_hook: true
 mkinitcpio_resume_hook: true
 # TODO: For some reason these hooks seem to break keyboard support
