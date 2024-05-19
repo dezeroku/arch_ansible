@@ -1,0 +1,15 @@
+---
+- name: Install pinentry
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - pinentry
+
+- name: Copy pinentry wrapper
+  become: true
+  become_user: "root"
+  ansible.builtin.copy:
+    src: smart-pinentry
+    dest: /usr/local/bin/smart-pinentry
+    mode: 0755
