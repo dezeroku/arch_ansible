@@ -4,6 +4,7 @@
   become: true
   become_user: root
   roles:
+    - {role: locale, tags: ['locale']}
     - {role: pacman, tags: ['pacman']}
     - {role: pacoloco, tags: ['pacoloco']}
     - {role: ntp, tags: ['ntp']}

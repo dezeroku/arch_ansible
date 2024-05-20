@@ -1,0 +1,19 @@
+---
+# community.general.locale_gen gave me mixed results for some reason
+# Sticking with the manual generation for now
+- name: Ensure locale is enabled
+  ansible.builtin.lineinfile:
+    dest: /etc/locale.gen
+    state: "present"
+    regexp: "^{{ item }}"
+    insertafter: "^#{{ item }}"
+    line: "{{ item }}"
+  loop: "{{ locale_gen }}"
+  notify:
+    - Generate locale
+
+- name: Set locale
+  ansible.builtin.copy:
+    content: "LANG={{ locale_lang }}"
+    dest: /etc/locale.conf
+    mode: 0644
