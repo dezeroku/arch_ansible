@@ -6,3 +6,6 @@
     name:
       - texlive-latexrecommended
       - texlive-lang
+      - texlive-latexextra
+      - texlive-fontsrecommended
+      - texlive-fontsextra
