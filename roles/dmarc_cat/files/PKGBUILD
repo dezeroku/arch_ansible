@@ -1,0 +1,37 @@
+# https://aur.archlinux.org/packages/dmarc-cat with minor changes
+# Maintainer: Julien Virey <julien.virey@gmail.com>
+pkgname=dmarc-cat-dezeroku
+pkgver=0.15.0
+pkgrel=5
+pkgdesc='Small utility to decode the report sent by various email providers following the DMARC spec'
+arch=('x86_64')
+url='https://github.com/keltia/dmarc-cat'
+license=('BSD')
+conflicts=("dmarc-cat" "dmarc-cat-git")
+makedepends=(go)
+source=("dmarc-cat-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('886bf33ba60d601de74a1e9d437a8e09eea5c03a05b09c0f685fa02d1c174bba')
+
+prepare(){
+    cd "dmarc-cat-$pkgver"
+    export GOPATH="${srcdir}"
+    go mod download
+}
+
+build() {
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  cd "dmarc-cat-$pkgver"
+  export GOPATH="${srcdir}"
+  export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
+
+  go build \
+    -o dmarc-cat
+}
+
+package() {
+  cd "dmarc-cat-$pkgver"
+  install -Dm644 LICENSE.md -t "${pkgdir}"/usr/share/licenses/dmarc-cat/LICENSE
+  install -Dm755 dmarc-cat "$pkgdir"/usr/bin/dmarc-cat
+}
