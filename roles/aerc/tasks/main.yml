@@ -16,8 +16,8 @@
     - ~/.config/aerc
     - ~/.config/aerc/folder-map
 
-- name: Copy config files
-  ansible.builtin.copy:
+- name: Template config files
+  ansible.builtin.template:
     src: "{{ item }}"
     dest: ~/.config/aerc
     mode: 0644

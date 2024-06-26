@@ -3,4 +3,5 @@ dependencies:
   - role: isync
   - role: imapnotify
   - role: msmtp
+  - role: ranger
   - {role: dmarc_cat, when: aerc_provide_dmarc_cat}
