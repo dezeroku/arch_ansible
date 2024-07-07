@@ -8,6 +8,8 @@
       - qt6-wayland
       # For pinentry-qt
       - kwayland5
+      - kwindowsystem
+      - kguiaddons
 
 - name: Enable wayland for Electron (system) apps
   ansible.builtin.copy:
