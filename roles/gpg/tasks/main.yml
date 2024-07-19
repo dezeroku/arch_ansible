@@ -56,6 +56,7 @@
     mode: 0644
   loop:
     - gpg_setup_keyring.sh
+    - gpg_extend_subkeys.sh
     - gpg_yubikey_initial_setup.sh
     - gpg_yubikey_keytocard.sh
 
