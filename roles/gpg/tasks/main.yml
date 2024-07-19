@@ -49,16 +49,22 @@
     state: directory
     mode: 0755
 
+- name: Copy gpg_ lib file
+  ansible.builtin.copy:
+    src: scripts/lib.sh
+    dest: "~/scripts/gpg"
+    mode: 0644
+
 - name: Copy gpg_ scripts
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "~/scripts/gpg"
-    mode: 0644
+    mode: 0755
   loop:
-    - gpg_setup_keyring.sh
-    - gpg_extend_subkeys.sh
-    - gpg_yubikey_initial_setup.sh
-    - gpg_yubikey_keytocard.sh
+    - scripts/gpg_setup_keyring.sh
+    - scripts/gpg_extend_subkeys.sh
+    - scripts/gpg_yubikey_initial_setup.sh
+    - scripts/gpg_yubikey_keytocard.sh
 
 - name: Ensure /usr/local/bin directory exists
   become: true

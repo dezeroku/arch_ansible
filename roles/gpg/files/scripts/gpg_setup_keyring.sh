@@ -1,36 +1,40 @@
 #!/usr/bin/env bash
 
-# This is not executable by default
-# as it's not a common ocurrence setup and running with sh requires more attendance
-#
-# The setup is based on https://github.com/drduh/YubiKey-Guide
-# It's recommended to run this setup in a LUKS encrypted directory
-# preferably on a secured and offline device used only for that purpose
-#
-# It generates ED25519 master key and 3 subkeys, each used for a specific purpose
-#
-# Creating a secure environment and making sure that EXTERNAL_BACKUP_DIR is encrypted
-# is out of scope of this script
-#
-# It also removes the GNUPGHOME at the end, leaving only EXTERNAL_BACKUP_DIR in place
-
 set -euo pipefail
 
-function require_value() {
-    var_name="${1:-}"
-    if [ -z "${!var_name:-}" ]; then
-        echo "${var_name} variable must be defined"
-        return 1
-    fi
+SCRIPTS_DIR="$(readlink -f "$(dirname "$0")")"
+
+# shellcheck source=roles/gpg/files/scripts/lib.sh
+. "$SCRIPTS_DIR/lib.sh"
+
+function usage_doc() {
+    cat << 'HEREDOC'
+This script will generate ED25519 master key and 3 subkeys, each used for a specific purpose
+
+It's recommended to point GNUPGHOME_TARGET to a LUKS encrypted directory
+preferably on a secured and offline device used only for that purpose
+Creating a secure environment is out of scope of this script
+
+Env variables
+GNUPGHOME_TARGET        directory that the keyring will be created in
+REAL_NAME               name to use when creating the key
+REAL_EMAIL              email to use when creating the key
+
+Optional env variables
+SEND_KEYS               if set to 'true' will upload the pubkey to a keyserver
+USE_YUBIKEY_ENTROPY     if set to 'false' Yubikey won't be used for increasing entropy
+                        Use this option when you don't have a Yubikey on hand
+HEREDOC
 }
 
-require_value GNUPGHOME
+require_value GNUPGHOME_TARGET
 require_value REAL_NAME
 require_value REAL_EMAIL
-# It's enough for this to be a separate encrypted container on a safe machine
-require_value EXTERNAL_BACKUP_DIR
-USE_YUBIKEY_ENTROPY="${USE_YUBIKEY_ENTROPY:-true}"
 
+USE_YUBIKEY_ENTROPY="${USE_YUBIKEY_ENTROPY:-true}"
+SEND_KEYS="${SEND_KEYS:-false}"
+
+GNUPGHOME="$GNUPGHOME_TARGET"
 export GNUPGHOME
 
 chown "${USER}:${USER}" "${GNUPGHOME}"
@@ -65,7 +69,7 @@ echo "${MASTER_PASSPHRASE}" > "${GNUPGHOME}/master-passphrase"
 
 # Improved entropy via YubiKey
 if [[ "${USE_YUBIKEY_ENTROPY}" == "true" ]]; then
-    echo "Using Yubikey to increase entropy"
+    echoerr "Using Yubikey to increase entropy"
     echo "SCD RANDOM 512" | gpg-connect-agent | sudo tee /dev/random | hexdump -C
 fi
 
@@ -101,18 +105,14 @@ gpg --export "${MASTER_KEY_ID}" | hokey lint
 gpg --pinentry-mode loopback --passphrase "${MASTER_PASSPHRASE}" --armor --export-secret-keys "${MASTER_KEY_ID}" > "${GNUPGHOME}/to-backup/mastersub.key"
 gpg --pinentry-mode loopback --passphrase "${MASTER_PASSPHRASE}" --armor --export-secret-subkeys "${MASTER_KEY_ID}" > "${GNUPGHOME}/to-backup/sub.key"
 
-echo "Creating a revocation cert"
+echoerr "Creating a revocation cert"
 printf "Y\n0\n\nY\n" | gpg --command-fd 0 --pinentry-mode loopback --passphrase "${MASTER_PASSPHRASE}" --output "${GNUPGHOME}/to-backup/revoke.asc" --gen-revoke "${MASTER_KEY_ID}"
 
-echo "${GNUPGHOME}/to-backup"
+echoerr "${GNUPGHOME}/to-backup"
 ls "${GNUPGHOME}/to-backup"
 
-cp -avi "${GNUPGHOME}/"* "${EXTERNAL_BACKUP_DIR}"
+export_public_key
 
-PUBLIC_KEY_FILE="${HOME}/gpg-${MASTER_KEY_ID}-$(date +%F).asc"
-
-gpg --armor --export "${MASTER_KEY_ID}" | tee "${PUBLIC_KEY_FILE}"
-echo "Public key can be accessed at ${PUBLIC_KEY_FILE}"
-
-echo "Removing the ${GNUPGHOME}"
-rm -rf "${GNUPGHOME}"
+if [[ "$SEND_KEYS" == "true" ]]; then
+    gpg --send-keys "${MASTER_KEY_ID}"
+fi
