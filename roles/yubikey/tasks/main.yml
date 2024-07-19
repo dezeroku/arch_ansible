@@ -49,6 +49,15 @@
     name: polkit
     state: "{{ (polkit_rules.changed) | ternary('restarted', 'started') }}"
 
+- name: Copy gpg_ scripts
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "~/scripts/gpg"
+    mode: 0755
+  loop:
+    - scripts/gpg_yubikey_initial_setup.sh
+    - scripts/gpg_yubikey_keytocard.sh
+
 - name: Template sway plugin
   ansible.builtin.include_role:
     name: helper_sway_plugin

@@ -63,8 +63,6 @@
   loop:
     - scripts/gpg_setup_keyring.sh
     - scripts/gpg_extend_subkeys.sh
-    - scripts/gpg_yubikey_initial_setup.sh
-    - scripts/gpg_yubikey_keytocard.sh
 
 - name: Ensure /usr/local/bin directory exists
   become: true
