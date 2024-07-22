@@ -4,7 +4,7 @@
   become_user: root
   community.general.pacman:
     name: sudo
-    state: latest
+    state: present
   tags:
     - install
 
