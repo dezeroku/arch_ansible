@@ -3,20 +3,29 @@
   ansible.builtin.include_tasks:
     file: flameshot-cleanup.yml
 
-- name: Install the optdepends
+- name: Get rid of grimshot package from AUR
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - grimshot
+    state: absent
+
+- name: Install the optdepends and sway-contrib
   become: true
   become_user: root
   community.general.pacman:
     name:
       - wl-clipboard
+      - sway-contrib
 
-- name: Install grimshot from AUR
+- name: Symlink the grimshot script so it's in PATH
   become: true
-  become_user: aur_builder
-  kewlfft.aur.aur:
-    name:
-      - grimshot
-    state: present
+  become_user: root
+  ansible.builtin.file:
+    src: "/usr/share/sway-contrib/grimshot"
+    dest: "/usr/local/bin/grimshot"
+    state: link
 
 - name: Ensure directory exists
   ansible.builtin.file:
