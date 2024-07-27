@@ -46,7 +46,7 @@
     - {role: vlc, tags: ['vlc', 'media']}
     - {role: vscode, tags: ['vscode', 'editors']}
     - {role: vnstat, tags: ['vnstat', 'utils']}
-    - {role: wireguard_tools, tags: ['wireguard_tools', 'vpn']}
+    - {role: wireguard, tags: ['wireguard', 'vpn']}
     - {role: xorg, tags: ['xorg', 'desktop']}
     - {role: yt_dlp, tags: ['yt_dlp', 'media']}
     - {role: yubikey, tags: ['yubikey', 'desktop-tools']}
