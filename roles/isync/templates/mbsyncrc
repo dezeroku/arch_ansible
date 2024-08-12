@@ -3,7 +3,7 @@ IMAPAccount {{ key }}
 Host {{ item.imap_server }}
 UserCmd "{{ item.username_cmd }}"
 PassCmd "{{ item.password_cmd }}"
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 {% if 'oauth' in item %}
 {% if item.oauth %}
