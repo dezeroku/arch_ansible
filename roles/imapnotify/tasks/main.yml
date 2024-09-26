@@ -19,7 +19,7 @@
 
 - name: Template config file
   ansible.builtin.template:
-    src: concatenated.yaml
+    src: concatenated.yaml.tmpl
     dest: ~/.config/imapnotify/concatenated.yaml
     mode: 0600
   register: config_file
