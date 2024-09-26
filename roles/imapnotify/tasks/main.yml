@@ -12,10 +12,15 @@
     state: directory
     mode: 0755
 
+- name: Remove legacy config file
+  ansible.builtin.file:
+    path: ~/.config/imapnotify/concatenated.conf
+    state: absent
+
 - name: Template config file
   ansible.builtin.template:
-    src: concatenated.conf
-    dest: ~/.config/imapnotify/concatenated.conf
+    src: concatenated.yaml
+    dest: ~/.config/imapnotify/concatenated.yaml
     mode: 0600
   register: config_file
 

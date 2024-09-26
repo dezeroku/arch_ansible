@@ -1,0 +1,27 @@
+{#
+# Instead of following the "mailbox per service" approach
+# we create a single config files to monitor all of the defined mailboxes
+# This also makes life easier when removing mailboxes
+#}
+configurations:
+{% for key, item in email_client.items() %}
+  -
+    host: "{{ item.imap_server }}"
+    port: 993
+    tls: true
+    tlsOptions:
+      rejectUnauthorized: true
+{% if 'oauth' in item %}
+{% if item.oauth %}
+    xoauth2: true
+{% endif %}
+{% endif %}
+    wait: 3
+    usernameCmd: "{{ item.username_cmd }}"
+    passwordCmd: "{{ item.password_cmd }}"
+    boxes:
+      -
+        mailbox : INBOX
+        onNewMail: "mbsync {{ key }}"
+        onNewMailPost: SKIP
+{% endfor %}
