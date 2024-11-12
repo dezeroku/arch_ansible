@@ -84,6 +84,7 @@ c.fonts.statusbar = "{} monospace".format(basic_size)
 c.fileselect.handler = "external"
 c.fileselect.single_file.command = ["foot", "-e", "ranger", "--choosefile={}"]
 c.fileselect.multiple_files.command = ["foot", "-e", "ranger", "--choosefiles={}"]
+c.fileselect.folder.command = ["foot", "-e", "ranger", "--choosedir={}"]
 
 # Dark mode
 c.colors.webpage.preferred_color_scheme = "dark"
