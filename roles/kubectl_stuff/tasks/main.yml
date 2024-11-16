@@ -48,6 +48,7 @@
     - modify-secret
     - resource-capacity
     - pv-migrate
+    - deprecations
   changed_when: not (krew_install_plugin.stderr | regex_search("Skipping plugin .* it is already installed"))
 
 - name: Template fish plugin
