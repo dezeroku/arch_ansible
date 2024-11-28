@@ -60,6 +60,19 @@ custom-commands:
           # otherwise list issues for all project
           {{jira}} list --template table --query "assignee={{args.USER}} ORDER BY priority asc, created"
       fi
+  - name: byUserReported
+    help: look through tickets reported by a user
+    args:
+      - name: USER
+        required: true
+    script: |-
+      if [ -n "$JIRA_PROJECT" ]; then
+          # if `project: ...` configured just list the issues for current project
+          {{jira}} list --template table --query "project = $JIRA_PROJECT and reporter={{args.USER}} ORDER BY priority asc, created"
+      else
+          # otherwise list issues for all project
+          {{jira}} list --template table --query "reporter={{args.USER}} ORDER BY priority asc, created"
+      fi
   - name: byUserComments
     help: look through tickets that user commented on
     args:
