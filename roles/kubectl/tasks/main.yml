@@ -51,11 +51,16 @@
     - deprecations
   changed_when: not (krew_install_plugin.stderr | regex_search("Skipping plugin .* it is already installed"))
 
+- name: Ensure deprecated scriptlets directory is cleaned up
+  ansible.builtin.file:
+    path: ~/.config/fish/ansible/kubectl_stuff
+    state: absent
+
 - name: Template fish plugin
   ansible.builtin.include_role:
     name: helper_fish_plugin
   vars:
-    helper_fish_plugin_directory_name: kubectl_stuff
+    helper_fish_plugin_directory_name: kubectl
     helper_fish_plugin_template_name: kubernetes.fish
 
 - name: Ensure fish completions directory exists
