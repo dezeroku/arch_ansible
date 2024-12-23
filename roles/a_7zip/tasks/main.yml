@@ -1,0 +1,16 @@
+---
+# TODO: for some reason it seems to target the 7zip package too, is there aliasing in place?
+# - name: Make sure p7zip is not installed
+#  become: true
+#  become_user: root
+#  community.general.pacman:
+#    name:
+#      - p7zip
+#    state: absent
+
+- name: Install 7zip
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - 7zip

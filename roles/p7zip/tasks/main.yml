@@ -1,7 +1,0 @@
----
-- name: Install p7zip
-  become: true
-  become_user: root
-  community.general.pacman:
-    name:
-      - p7zip

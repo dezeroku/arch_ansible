@@ -15,7 +15,7 @@
     - {role: ncdu, tags: ['ncdu']}
     - {role: neofetch, tags: ['neofetch']}
     - {role: nmap, tags: ['nmap']}
-    - {role: p7zip, tags: ['p7zip']}
+    - {role: a_7zip, tags: ['a_7zip']}
     - {role: ranger, tags: ['ranger']}
     - {role: scripts, tags: ['scripts']}
     - {role: tldr, tags: ['tldr']}
