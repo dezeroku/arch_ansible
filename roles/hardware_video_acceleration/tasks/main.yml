@@ -13,6 +13,5 @@
   become_user: root
   community.general.pacman:
     name:
-      - libva-mesa-driver
-      - mesa-vdpau
+      - mesa
   when: '"amd" in vars.hardware_video_acceleration_providers'
