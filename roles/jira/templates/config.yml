@@ -24,7 +24,7 @@ custom-commands:
           # otherwise list issues for all project
           {{jira}} list --template table --query "resolution = unresolved and assignee=currentuser() ORDER BY remainingEstimate desc, created"
       fi
-  - name: mineEverything
+  - name: mineAll
     help: display all assigned to me
     script: |-
       if [ -n "$JIRA_PROJECT" ]; then
