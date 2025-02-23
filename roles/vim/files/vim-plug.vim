@@ -33,7 +33,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'JuliaEditorSupport/julia-vim'
 " Markdown
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+Plug 'preservim/vim-markdown'
 " Coloring/Indendation for many languages
 Plug 'sheerun/vim-polyglot'
 " All of your Plugs must be added before the following line
