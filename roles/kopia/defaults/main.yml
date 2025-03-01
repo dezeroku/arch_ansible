@@ -1,0 +1,9 @@
+---
+# Requires gnome-keyring to be setup
+# TODO: add it to the dependencies.
+# Currently it's not trivial as it's tightly coupled with WM,
+# would have to be split first
+kopia_use_keyring: true
+
+kopia_automated_backups_schedule: daily
+kopia_automated_backups_targets: []

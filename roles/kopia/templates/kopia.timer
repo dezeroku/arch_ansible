@@ -1,0 +1,11 @@
+[Unit]
+Description=Backup files
+
+[Timer]
+OnCalendar={{ kopia_automated_backups_schedule }}
+# Catch up on the timer if e.g. the system was turned off when it'd have been triggered
+Persistent=true
+Unit=kopia.service
+
+[Install]
+WantedBy=timers.target

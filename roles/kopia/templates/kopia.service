@@ -1,0 +1,10 @@
+[Unit]
+Description=Backup files
+
+[Service]
+Type=oneshot
+Environment="KOPIA_USE_KEYRING={{ "true" if kopia_use_keyring else "false" }}"
+ExecStart=/usr/bin/kopia snapshot create {{ kopia_automated_backups_targets | join(" ") }}
+
+[Install]
+WantedBy=default.target

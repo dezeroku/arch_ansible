@@ -1,0 +1,54 @@
+---
+- name: Install kopia from AUR
+  become: true
+  become_user: aur_builder
+  kewlfft.aur.aur:
+    name:
+      - kopia-bin
+    state: present
+
+- name: Ensure directory exists
+  ansible.builtin.file:
+    path: ~/.config/kopia
+    state: directory
+    mode: 0755
+
+- name: Ensure systemd directory exists
+  ansible.builtin.file:
+    path: ~/.config/systemd/user/
+    state: directory
+    mode: 0755
+
+- name: Copy systemd service and timer
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "~/.config/systemd/user/{{ item }}"
+    mode: 0644
+  loop:
+    - kopia.service
+    - kopia.timer
+
+- name: Enable the kopia timer
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: kopia.timer
+    scope: user
+    enabled: true
+    state: started
+  when: kopia_automated_backups_targets
+
+- name: Disable the kopia timer
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: kopia.timer
+    scope: user
+    enabled: true
+    state: stopped
+  when: kopia_automated_backups_targets == []
+
+- name: Template fish plugin
+  ansible.builtin.include_role:
+    name: helper_fish_plugin
+  vars:
+    helper_fish_plugin_directory_name: kopia
+    helper_fish_plugin_template_name: kopia.fish
