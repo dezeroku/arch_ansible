@@ -1,9 +1,24 @@
 [Unit]
 Description=Backup files
+Wants=network-online.target
+After=network-online.target nss-lookup.target
+
+# 5 tries in 10 minutes, then stop
+StartLimitIntervalSec=600
+StartLimitBurst=5
 
 [Service]
 Type=oneshot
+
+# Wait 5 seconds before retrying on failure
+Restart=on-failure
+RestartSec=5s
+
 Environment="KOPIA_USE_KEYRING={{ "true" if kopia_use_keyring else "false" }}"
+# Wait 10 seconds for internet to come up, e.g. if the service is triggered after getting out of sleep
+# Relying on network.target might not be enough on its own, as shown in the below thread
+# https://bbs.archlinux.org/viewtopic.php?id=268654
+ExecStartPre=/usr/bin/ping {{ kopia_automated_backups_ping_check }} -q -c 1 -W 5
 ExecStart=/usr/bin/kopia snapshot create {{ kopia_automated_backups_targets | join(" ") }}
 
 [Install]

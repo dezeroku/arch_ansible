@@ -6,4 +6,5 @@
 kopia_use_keyring: true
 
 kopia_automated_backups_schedule: daily
+kopia_automated_backups_ping_check: 1.1.1.1
 kopia_automated_backups_targets: []
