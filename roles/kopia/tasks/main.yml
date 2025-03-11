@@ -42,7 +42,7 @@
     daemon_reload: true
     name: kopia.timer
     scope: user
-    enabled: true
+    enabled: false
     state: stopped
   when: kopia_automated_backups_targets == []
 
