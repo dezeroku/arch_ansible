@@ -10,9 +10,9 @@ StartLimitBurst=5
 [Service]
 Type=oneshot
 
-# Wait 5 seconds before retrying on failure
+# Wait 30 seconds before retrying on failure
 Restart=on-failure
-RestartSec=5s
+RestartSec=30s
 
 Environment="KOPIA_USE_KEYRING={{ "true" if kopia_use_keyring else "false" }}"
 # Wait 10 seconds for internet to come up, e.g. if the service is triggered after getting out of sleep
