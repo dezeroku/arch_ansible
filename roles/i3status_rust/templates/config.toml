@@ -47,8 +47,12 @@ critical_swap = 95
 format = " $icon $mem_avail "
 
 [[block]]
-block = "pacman"
+block = "packages"
 interval = 600
+format = "$icon $pacman"
+format_singular = "$icon $pacman"
+#format_up_to_date = "$icon OK"
+aur_command = "yay -Qua"
 
 [[block]]
 block = "sound"
