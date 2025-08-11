@@ -28,6 +28,6 @@ repos:
       - id: prettier
 
   - repo: https://github.com/ansible/ansible-lint
-    rev: v6.22.1
+    rev: v25.7.0
     hooks:
       - id: ansible-lint
