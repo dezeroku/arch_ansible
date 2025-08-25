@@ -1,6 +1,6 @@
 ---
 encryption:
-  tag: GRING
+  tag: KEYRING
 
 redirect_port: 8080
 
