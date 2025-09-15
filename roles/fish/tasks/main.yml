@@ -43,16 +43,18 @@
   when: var_fish_plugins.changed or var_fundle_script.changed
   changed_when: true
 
-- name: Ensure scriptlets directory is cleaned up
-  ansible.builtin.file:
-    path: ~/.config/fish/ansible/fish
-    state: absent
-
 - name: Template fish blocks
   ansible.builtin.template:
     src: blocks.fish
     dest: ~/.config/fish/blocks.fish
     mode: 0644
+
+- name: Template fish scriptlets plugin
+  ansible.builtin.include_role:
+    name: helper_fish_plugin
+  vars:
+    helper_fish_plugin_directory_name: fish
+    helper_fish_plugin_template_name: scriptlets.fish
 
 - name: Ensure completions directory exists
   ansible.builtin.file:
