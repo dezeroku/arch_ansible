@@ -8,7 +8,6 @@
   become_user: "{{ user_name }}"
   roles:
     - {role: wine, tags: ['wine']}
-    - {role: emacs, tags: ['emacs']}
     - {role: deluge, tags: ['deluge']}
     - {role: openvpn, tags: ['openvpn']}
     - {role: thinkpad, tags: ['thinkpad']}

@@ -1,12 +1,4 @@
 ---
-- name: Get rid of i3 implementation
-  ansible.builtin.include_tasks:
-    file: i3-cleanup.yml
-
-- name: Get rid of dpms implementation
-  ansible.builtin.include_tasks:
-    file: dpms-cleanup.yml
-
 - name: Install swaylock
   become: true
   become_user: root

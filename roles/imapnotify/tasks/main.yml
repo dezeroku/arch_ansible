@@ -22,7 +22,7 @@
     src: concatenated.yaml.tmpl
     dest: ~/.config/imapnotify/concatenated.yaml
     mode: 0600
-  register: config_file
+  register: imapnotify_config_file
 
 - name: Ensure systemd override directory exists
   ansible.builtin.file:
@@ -35,7 +35,7 @@
     src: systemd-override.conf
     dest: ~/.config/systemd/user/goimapnotify@.service.d/override.conf
     mode: 0644
-  register: override_file
+  register: imapnotify_override_file
 
 - name: Activate the systemd service
   when: email_client
@@ -43,7 +43,7 @@
     name: goimapnotify@concatenated.service
     enabled: true
     scope: user
-    state: "{{ (config_file.changed or override_file.changed) | ternary('restarted', 'started') }}"
+    state: "{{ (imapnotify_config_file.changed or imapnotify_override_file.changed) | ternary('restarted', 'started') }}"
 
 - name: Disable the systemd service
   when: not email_client

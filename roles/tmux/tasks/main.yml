@@ -18,7 +18,7 @@
     repo: https://github.com/tmux-plugins/tpm.git
     dest: ~/.tmux/plugins/tpm
     version: v3.1.0
-  register: var_tmux_tpm_git
+  register: tmux_tpm_git
 
 - name: Ensure directory exists
   ansible.builtin.file:
@@ -37,10 +37,10 @@
     src: tmux_plugins.conf
     dest: ~/.tmux_plugins.conf
     mode: 0644
-  register: var_tmux_plugins
+  register: tmux_plugins
 
 - name: Install plugins
   ansible.builtin.shell:
     cmd: tmux start-server && tmux new-session -d install_plugins && ~/.tmux/plugins/tpm/scripts/install_plugins.sh
-  when: var_tmux_plugins.changed or var_tmux_tpm_git.changed
+  when: tmux_plugins.changed or tmux_tpm_git.changed
   changed_when: true

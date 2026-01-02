@@ -23,7 +23,7 @@
     src: plugins.fish
     dest: ~/.config/fish/plugins.fish
     mode: 0644
-  register: var_fish_plugins
+  register: fish_plugins
 
 - name: Ensure directory exists
   ansible.builtin.file:
@@ -36,11 +36,11 @@
     src: fundle.fish
     dest: ~/.config/fish/functions
     mode: 0644
-  register: var_fundle_script
+  register: fish_fundle_script
 
 - name: Get plugins
   ansible.builtin.shell: fish -c "fundle install" && fish -c "fundle update"
-  when: var_fish_plugins.changed or var_fundle_script.changed
+  when: fish_plugins.changed or fish_fundle_script.changed
   changed_when: true
 
 - name: Template fish blocks

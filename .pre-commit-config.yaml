@@ -15,6 +15,7 @@ repos:
     rev: 3.0.0
     hooks:
       - id: shellcheck
+        exclude: ".*/PKGBUILD"
 
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.33.0

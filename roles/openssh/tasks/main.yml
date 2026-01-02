@@ -49,7 +49,7 @@
     src: "{{ item }}"
     dest: "/etc/ssh/sshd_config.d/{{ item }}"
     mode: 0644
-  register: sshd_conf
+  register: openssh_sshd_conf
   when: "item != ''"
   loop:
     - 01-basic-sshd-hardening.conf
@@ -61,7 +61,7 @@
   become_user: root
   ansible.builtin.systemd:
     name: sshd
-    state: "{{ (sshd_conf.changed) | ternary('restarted', 'started') }}"
+    state: "{{ (openssh_sshd_conf.changed) | ternary('restarted', 'started') }}"
   when: openssh_start_server
 
 - name: Enable sshd

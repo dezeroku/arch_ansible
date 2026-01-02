@@ -13,10 +13,10 @@
   ansible.builtin.command:
     cmd: "{{ helper_command_to_file_command }}"
   changed_when: false
-  register: command_result
+  register: helper_command_to_file_command_result
 
 - name: Write to file
   ansible.builtin.copy:
-    content: "{{ command_result.stdout }}"
+    content: "{{ helper_command_to_file_command_result.stdout }}"
     dest: "{{ helper_command_to_file_path }}"
     mode: "{{ helper_command_to_file_mode }}"

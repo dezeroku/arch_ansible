@@ -14,7 +14,6 @@
       - tflint-bin
   become: true
   become_user: aur_builder
-  register: krew_install
 
 - name: Template fish plugin
   ansible.builtin.include_role:

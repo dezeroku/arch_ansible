@@ -21,14 +21,14 @@
     src: vim-plug.vim
     dest: ~/.config/nvim/vim-plug.vim
     mode: 0644
-  register: var_vim_plug
+  register: vim_plug
 
 - name: Copy vim-plug snapshot
   ansible.builtin.copy:
     src: snapshot.vim
     dest: ~/.config/nvim/snapshot.vim
     mode: 0644
-  register: var_vim_plug_snapshot
+  register: vim_plug_snapshot
 
 - name: Template neovim config
   ansible.builtin.template:
@@ -55,9 +55,9 @@
     # This is tag 0.11.0
     url: https://raw.githubusercontent.com/junegunn/vim-plug/e300178a0e2fb04b56de8957281837f13ecf0b27/plug.vim
     mode: 0644
-  register: var_vim_plug_git
+  register: vim_plug_git
 
 - name: Download plugins if something changed
   ansible.builtin.command: nvim -es -u ~/.config/nvim/vim-plug.vim -i NONE -c "PlugInstall" -c "qa"
-  when: var_vim_plug.changed or var_vim_plug_git.changed or var_vim_plug_snapshot.changed
+  when: vim_plug.changed or vim_plug_git.changed or vim_plug_snapshot.changed
   changed_when: true

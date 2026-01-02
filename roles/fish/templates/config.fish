@@ -12,8 +12,6 @@ set theme_color_scheme zenburn
 # ALIASES
 alias ls="ls --color=auto --group-directories-first"
 alias grep="grep --color=auto"
-alias emac="emacsclient -nw"
-alias e="emacsclient -nw"
 alias v="nvim"
 
 function tmp

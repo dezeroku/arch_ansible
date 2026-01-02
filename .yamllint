@@ -7,3 +7,15 @@ ignore:
 
 rules:
   line-length: disable
+
+# Whole section below is added just to satisfy ansible-lint
+comments:
+  min-spaces-from-content: 1
+  indentation: false
+
+braces:
+  max-spaces-inside: 1
+
+octal-values:
+  forbid-implicit-octal: true
+  forbid-explicit-octal: true

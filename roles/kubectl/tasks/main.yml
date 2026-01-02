@@ -23,9 +23,9 @@
   ansible.builtin.command: helm plugin install "{{ item }}"
   with_items:
     - "https://github.com/databus23/helm-diff"
-  register: helm_install_plugin
-  changed_when: helm_install_plugin.rc == 0
-  failed_when: (helm_install_plugin.rc not in [0,1]) or ((helm_install_plugin.rc == 1) and (not (helm_install_plugin.stderr | regex_search("Error.* plugin already exists"))))
+  register: kubectl_helm_install_plugin
+  changed_when: kubectl_helm_install_plugin.rc == 0
+  failed_when: (kubectl_helm_install_plugin.rc not in [0,1]) or ((kubectl_helm_install_plugin.rc == 1) and (not (kubectl_helm_install_plugin.stderr | regex_search("Error.* plugin already exists"))))
 
 - name: Install krew
   kewlfft.aur.aur:
@@ -34,22 +34,22 @@
       - krew-bin
   become: true
   become_user: aur_builder
-  register: krew_install
+  register: kubectl_krew_install
 
 - name: Refresh krew repos
   ansible.builtin.command: kubectl krew update
   changed_when: true
-  when: krew_install.changed  # noqa: no-handler
+  when: kubectl_krew_install.changed  # noqa: no-handler
 
 - name: Install plugins managed by krew
   ansible.builtin.command: kubectl krew install "{{ item }}"
-  register: krew_install_plugin
+  register: kubectl_krew_install_plugin
   with_items:
     - modify-secret
     - resource-capacity
     - pv-migrate
     - deprecations
-  changed_when: not (krew_install_plugin.stderr | regex_search("Skipping plugin .* it is already installed"))
+  changed_when: not (kubectl_krew_install_plugin.stderr | regex_search("Skipping plugin .* it is already installed"))
 
 - name: Ensure deprecated scriptlets directory is cleaned up
   ansible.builtin.file:

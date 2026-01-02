@@ -14,15 +14,9 @@
 
 - name: Install chosen toolchain
   ansible.builtin.command: rustup toolchain install "{{ rust_toolchain_type }}"
-  register: rustup_toolchain_install
   when: rust_install_toolchain
-  changed_when: ("unchanged" not in rustup_toolchain_install.stdout)
-
-- name: Install rls
-  ansible.builtin.command: rustup component add rls --toolchain "{{ rust_toolchain_type }}"
-  register: rustup_rls_install
-  when: rust_install_toolchain and rust_install_rls
-  changed_when: ("is up to date" not in rustup_rls_install.stderr)
+  changed_when: ("unchanged" not in rust_up_toolchain_install.stdout)
+  register: rust_up_toolchain_install
 
 - name: Template fish plugin
   ansible.builtin.include_role:

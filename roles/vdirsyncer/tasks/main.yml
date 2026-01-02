@@ -18,7 +18,7 @@
     src: config
     dest: ~/.config/vdirsyncer/config
     mode: 0644
-  register: config_file
+  register: vdirsyncer_config_file
 
 - name: Copy the oauth wrapper script
   ansible.builtin.copy:
@@ -35,7 +35,7 @@
 
 - name: Initialize collections
   # We can't really make this a handler, as the logic further below depends on this step
-  when: config_file.changed  # noqa: no-handler
+  when: vdirsyncer_config_file.changed  # noqa: no-handler
   block:
     - name: Discover collections
       ansible.builtin.shell:
@@ -75,7 +75,7 @@
         file_type: file
         patterns: 'displayname'
         recurse: true
-      register: collections_mapping_calendars
+      register: vdirsyncer_collections_mapping_calendars
 
     - name: Find the displayname mapping files (contacts)
       ansible.builtin.find:
@@ -83,35 +83,35 @@
         file_type: file
         patterns: 'displayname'
         recurse: true
-      register: collections_mapping_contacts
+      register: vdirsyncer_collections_mapping_contacts
 
     - name: Create temp variable for the mapping
       ansible.builtin.set_fact:
-        display_name_mapping_temp: {}
-        display_name_mapping: {}
+        vdirsyncer_display_name_mapping_temp: {}
+        vdirsyncer_display_name_mapping: {}
 
     - name: Fill the dictionary
       ansible.builtin.set_fact:
-        display_name_mapping_temp: "{{
-          display_name_mapping_temp | combine({
+        vdirsyncer_display_name_mapping_temp: "{{
+          vdirsyncer_display_name_mapping_temp | combine({
             item['path']:
             lookup('file', item['path']).replace(' ', '_')})
         }}"
-      loop: "{{ collections_mapping_calendars['files'] + collections_mapping_contacts['files'] }}"
+      loop: "{{ vdirsyncer_collections_mapping_calendars['files'] + vdirsyncer_collections_mapping_contacts['files'] }}"
 
     - name: Transform the dictionary
       ansible.builtin.set_fact:
-        display_name_mapping: "{{
-          display_name_mapping | combine({
+        vdirsyncer_display_name_mapping: "{{
+          vdirsyncer_display_name_mapping | combine({
             item.split('/')[:-1] | join('/'):
-            item.split('/')[:-3] | join('/') + '/' + item.split('/')[-3].split(vdirsyncer_prefix)[1] + '-' + display_name_mapping_temp[item]
+            item.split('/')[:-3] | join('/') + '/' + item.split('/')[-3].split(vdirsyncer_prefix)[1] + '-' + vdirsyncer_display_name_mapping_temp[item]
           })
         }}"
-      loop: "{{ display_name_mapping_temp.keys() }}"
+      loop: "{{ vdirsyncer_display_name_mapping_temp.keys() }}"
 
     - name: Symlink the collection to displayname
       ansible.builtin.file:
         src: "{{ item }}"
-        dest: "{{ display_name_mapping[item] }}"
+        dest: "{{ vdirsyncer_display_name_mapping[item] }}"
         state: link
-      loop: "{{ display_name_mapping.keys() }}"
+      loop: "{{ vdirsyncer_display_name_mapping.keys() }}"

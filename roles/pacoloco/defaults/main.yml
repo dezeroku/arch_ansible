@@ -1,5 +1,4 @@
 ---
 pacoloco_setup_client: false
-pacoloco_setup_server: false
 pacoloco_server_url: http://pacoloco-server:9129
 pacoloco_repo: archlinux-reflector

@@ -13,7 +13,7 @@
     src: 01-battery-charging.conf
     dest: /etc/tlp.d/01-battery-charging.conf
     mode: 0644
-  register: battery_config
+  register: thinkpad_battery_config
 
 - name: Mask tlp's competition services
   become: true
@@ -31,4 +31,4 @@
   ansible.builtin.systemd:
     name: tlp.service
     enabled: true
-    state: "{{ (battery_config.changed) | ternary('restarted', 'started') }}"
+    state: "{{ (thinkpad_battery_config.changed) | ternary('restarted', 'started') }}"

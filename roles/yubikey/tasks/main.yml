@@ -40,14 +40,14 @@
     src: 99-pcscd.rules
     dest: /etc/polkit-1/rules.d/99-pcscd.rules
     mode: 0644
-  register: polkit_rules
+  register: yubikey_polkit_rules
 
 - name: Restart polkit service
   become: true
   become_user: root
   ansible.builtin.systemd:
     name: polkit
-    state: "{{ (polkit_rules.changed) | ternary('restarted', 'started') }}"
+    state: "{{ (yubikey_polkit_rules.changed) | ternary('restarted', 'started') }}"
 
 - name: Copy gpg_ scripts
   ansible.builtin.copy:
