@@ -34,3 +34,17 @@ function capture_wireshark
 
     ssh $remote "sudo tcpdump -U -n -w - -i any '"$tcpdump_ruleset"'" | wireshark -k -i -
 end
+
+function list_vault_secrets
+    # TODO: add support for recursive (with parametrizable depth) querying
+    if test (count $argv) -lt 1
+        echo "list_vault_secrets PATH"
+        return 1
+    end
+
+    set VAULT_PATH "$argv[1]"
+
+    for key in (vault kv list -format json "$VAULT_PATH" | yq -r '.[]');
+        vault kv get "$VAULT_PATH/$key"
+    end
+end
