@@ -13,6 +13,7 @@ set theme_color_scheme zenburn
 alias ls="ls --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias v="nvim"
+alias claude="npx @anthropic-ai/claude-code"
 
 function tmp
     cd (mktemp -d)
