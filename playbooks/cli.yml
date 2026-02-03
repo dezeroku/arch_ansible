@@ -12,6 +12,7 @@
     - {role: bitwarden, tags: ['bitwarden']}
     - {role: kubectl, tags: ['kubectl']}
     - {role: terraform, tags: ['terraform']}
+    - {role: trash_cli, tags: ['trash_cli']}
     - {role: ncdu, tags: ['ncdu']}
     - {role: neofetch, tags: ['neofetch']}
     - {role: nmap, tags: ['nmap']}
