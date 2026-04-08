@@ -1,0 +1,14 @@
+---
+- name: Install trash-cli
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - trash-cli
+
+- name: Template fish plugin
+  ansible.builtin.include_role:
+    name: helper_fish_plugin
+  vars:
+    helper_fish_plugin_directory_name: trash-cli
+    helper_fish_plugin_template_name: trash-cli.fish
