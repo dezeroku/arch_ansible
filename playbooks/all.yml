@@ -13,6 +13,7 @@
     - {role: firefox, tags: ['firefox', 'browser']}
     - {role: fonts, tags: ['fonts', 'desktop']}
     - {role: fuse, tags: ['fuse', 'utils']}
+    - {role: fuzzel, tags: ['fuzzel', 'desktop', 'sway-wm']}
     - {role: gimp, tags: ['gimp', 'desktop-utils']}
     - {role: imv, tags: ['imv', 'desktop-utils']}
     - {role: go, tags: ['go', 'languages']}
@@ -37,7 +38,6 @@
     - {role: python3, tags: ['python3', 'languages']}
     - {role: qemu, tags: ['qemu', 'virtualization']}
     - {role: qutebrowser, tags: ['qutebrowser', 'browser']}
-    - {role: rofi, tags: ['rofi', 'desktop', 'sway-wm']}
     - {role: rust, tags: ['rust', 'languages']}
     - {role: spotify, tags: ['spotify', 'media']}
     - {role: slack, tags: ['slack', 'work']}

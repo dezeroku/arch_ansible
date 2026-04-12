@@ -6,4 +6,4 @@ dependencies:
   - role: foot
   - role: fonts
   - role: powerline
-  - role: rofi
+  - role: fuzzel

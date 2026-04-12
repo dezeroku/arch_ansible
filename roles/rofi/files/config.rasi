@@ -1,6 +1,0 @@
-configuration {
-	modi: "combi,drun";
-	font: "hack 10";
-	combi-modi: "window,drun,ssh";
-}
-@theme "spotlight-dark"

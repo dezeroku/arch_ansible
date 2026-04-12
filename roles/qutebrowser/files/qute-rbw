@@ -48,7 +48,7 @@ argument_parser.add_argument("--folder", "-f", default=None, help="Specify folde
 argument_parser.add_argument(
     "--dmenu-invocation",
     "-d",
-    default="rofi -dmenu -i -p Bitwarden",
+    default="fuzzel --no-exit-on-keyboard-focus-loss --dmenu -i -p Bitwarden",
     help="Invocation used to execute a dmenu-provider",
 )
 argument_parser.add_argument(

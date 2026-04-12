@@ -8,6 +8,8 @@
       - swaybg
       - python-i3ipc
       - xdg-desktop-portal-wlr
+      # For the alt-tab scriptlet
+      - jq
 
 - name: Ensure directory exists
   ansible.builtin.file:

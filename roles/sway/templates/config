@@ -14,9 +14,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+p exec "~/.config/sway/scripts/mic_passthrough.sh"
 #bindsym XF86AudioMicMute exec "~/.config/sway/scripts/mic_passthrough.sh"
 
-# start rofi (a program launcher)
-bindsym $mod+d exec "rofi -show-icons -show drun"
-bindsym $mod+space exec "rofi -show-icons -show drun"
+# start fuzzel (a program launcher)
+bindsym $mod+d exec "fuzzel --no-exit-on-keyboard-focus-loss"
+bindsym $mod+space exec "fuzzel --no-exit-on-keyboard-focus-loss"
 
 # change focus
 bindsym $mod+h focus left
@@ -153,7 +153,7 @@ workspace_auto_back_and_forth yes
 bindsym $mod+Tab workspace next
 
 # Alt-Tab like behaviour
-bindsym Mod1+Tab exec "rofi -modi combi -combi-modi window -show combi"
+bindsym Mod1+Tab exec "~/.config/sway/scripts/alt_tab.sh"
 
 #tab+shift move to next workspace
 bindsym $mod+Shift+Tab exec "python3 ~/.config/sway/scripts/sway_next_workspace.py"
