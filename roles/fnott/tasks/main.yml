@@ -1,0 +1,20 @@
+---
+- name: Install fnott
+  become: true
+  become_user: root
+  community.general.pacman:
+    name:
+      - fnott
+    state: present
+
+- name: Ensure directory exists
+  ansible.builtin.file:
+    path: ~/.config/fnott
+    state: directory
+    mode: 0755
+
+- name: Template fnott config
+  ansible.builtin.template:
+    src: fnott.ini
+    dest: ~/.config/fnott/fnott.ini
+    mode: 0644

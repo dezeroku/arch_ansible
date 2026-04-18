@@ -8,9 +8,9 @@
     - {role: bluetooth, tags: ['bluetooth', 'desktop-utils', 'audio'], when: bluetooth_enabled}
     - {role: discord, tags: ['discord', 'social']}
     - {role: docker, tags: ['docker', 'docker']}
-    - {role: dunst, tags: ['dunst', 'desktop']}
     - {role: exfat_utils, tags: ['exfat_utils', 'utils']}
     - {role: firefox, tags: ['firefox', 'browser']}
+    - {role: fnott, tags: ['fnott', 'desktop']}
     - {role: fonts, tags: ['fonts', 'desktop']}
     - {role: fuse, tags: ['fuse', 'utils']}
     - {role: fuzzel, tags: ['fuzzel', 'desktop', 'sway-wm']}
