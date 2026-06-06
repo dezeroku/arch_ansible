@@ -210,7 +210,7 @@ font pango:monospace 8
 bindsym $mod+Return exec foot
 
 bar {
-    font pango:DejaVu Sans Mono for Powerline, FontAwesome 8.5
+    font Hack, pango:DejaVu Sans Mono for Powerline, FontAwesome 10
     position top
     tray_output *
     status_command i3status-rs ~/.config/i3status-rust/config.toml
