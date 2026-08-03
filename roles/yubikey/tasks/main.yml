@@ -57,6 +57,8 @@
   loop:
     - scripts/gpg_yubikey_initial_setup.sh
     - scripts/gpg_yubikey_keytocard.sh
+    # It does not have anything to do with GPG really, but let's reuse the lib.sh in it
+    - scripts/fido_yubikey_initial_setup.sh
 
 - name: Template sway plugin
   ansible.builtin.include_role:
